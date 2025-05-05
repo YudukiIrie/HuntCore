@@ -9,6 +9,9 @@ namespace Stage.Player
     /// </summary>
     public class Player : MonoBehaviour
     {
+        [Header("Attack2で動いてしまう腰パーツ")]
+        public GameObject Hip;
+
         // プレイヤー関連のクラス
         public PlayerStateMachine StateMachine {  get; private set; }
         public PlayerAnimation Animation {  get; private set; }
