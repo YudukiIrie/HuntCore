@@ -7,12 +7,10 @@ namespace Stage.Player
 {
     public class PlayerAttack2State : IPlayerState
     {
-        // プレイヤークラス
-        Player _player;
+        Player _player;         // プレイヤークラス
+        float _elapseTime;      // コンボ間猶予経過時間
+        Quaternion _targetRot;  // 視点方向ベクトル
 
-        // コンボ間猶予経過時間
-        float _elapseTime;
-        
         public PlayerAttack2State(Player player)
         {
             _player = player;
@@ -40,11 +38,20 @@ namespace Stage.Player
                 else
                     _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
             }
+
+            // === 回転 ===
+            // 地面に平行な視点方向の取得
+            Vector3 viewV = Camera.main.transform.forward.normalized;
+            viewV = Vector3.ProjectOnPlane(viewV, _player.NormalVector);
+            // 回転値の取得
+            _targetRot = Quaternion.LookRotation(viewV);
         }
 
         public void FixedUpdate()
         {
-
+            // 取得した角度に制限を設けオブジェクトに反映
+            float rotSpeed = PlayerData.Data.Attack2RotSpeed * Time.deltaTime;
+            _player.transform.rotation = Quaternion.RotateTowards(_player.transform.rotation, _targetRot, rotSpeed);
         }
 
         public void Exit()

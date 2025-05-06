@@ -59,6 +59,10 @@ namespace Stage.Player
         [Header("”²“ó‘Ô‚Ì‰ñ“]‘¬“x")]
         [SerializeField] float _drawnRotSpeed;
 
+        public float Attack2RotSpeed => _attack2RotSpeed;
+        [Header("UŒ‚2‚Ì‰ñ“]‘¬“x")]
+        [SerializeField] float _attack2RotSpeed;
+
         public float MagnitudeBorder => _magnitudeBorder;
         [Header("•à‚«‚Æ¬‘–‚è‚ğ‹æ•Ê‚·‚éƒxƒNƒgƒ‹’·‚Ì‹«ŠE")]
         [SerializeField]float _magnitudeBorder;

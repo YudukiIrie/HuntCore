@@ -18,5 +18,6 @@ MonoBehaviour:
   _drawnMoveSpeed: 1.5
   _rotSpeed: 600
   _drawnRotSpeed: 600
+  _attack2RotSpeed: 100
   _magnitudeBorder: 0.8
   _chainTime: 0.3
