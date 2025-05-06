@@ -17,6 +17,7 @@ namespace Stage.Player
         public PlayerMoveState MoveState { get; private set; }
         public PlayerAttack1State Attack1State { get; private set; }
         public PlayerAttack2State Attack2State { get; private set; }
+        public PlayerAttack3State Attack3State { get; private set; }
 
         // コンストラクタ
         public PlayerStateMachine(Player player)
@@ -25,6 +26,7 @@ namespace Stage.Player
             MoveState = new PlayerMoveState(player);
             Attack1State = new PlayerAttack1State(player);
             Attack2State = new PlayerAttack2State(player);
+            Attack3State = new PlayerAttack3State(player);
         }
 
         /// <summary>

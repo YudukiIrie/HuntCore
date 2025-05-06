@@ -7,9 +7,12 @@ namespace Stage.Player
 {
     public class PlayerAttack2State : IPlayerState
     {
-        Player _player;         // プレイヤークラス
-        Vector3 _hipInitPos;    // 腰パーツの移動を制限するための初期位置
+        // プレイヤークラス
+        Player _player;
 
+        // コンボ間猶予経過時間
+        float _elapseTime;
+        
         public PlayerAttack2State(Player player)
         {
             _player = player;
@@ -18,8 +21,6 @@ namespace Stage.Player
         public void Enter()
         {
             _player.Animation.Attack2();
-            _hipInitPos = _player.Hip.transform.localPosition;
-            Debug.Log(_hipInitPos);
         }
 
         public void Update()
@@ -27,11 +28,18 @@ namespace Stage.Player
             // === 状態遷移 ===
             // 待機
             if (_player.Animation.IsAttack2StateFinished())
-                _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
-
-            // アニメーションによる移動の制限
-            _player.Hip.transform.localPosition = _hipInitPos;
-            Debug.Log(_player.Hip.transform.localPosition);
+            {
+                _elapseTime += Time.deltaTime;
+                // 攻撃3
+                if (_elapseTime <= PlayerData.Data.ChainTime)
+                {
+                    if (_player.Action.Player.Attack.IsPressed())
+                        _player.StateMachine.TransitionTo(_player.StateMachine.Attack3State);
+                }
+                // 待機
+                else
+                    _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
+            }
         }
 
         public void FixedUpdate()
@@ -41,7 +49,7 @@ namespace Stage.Player
 
         public void Exit()
         {
-            
+            _elapseTime = 0.0f;
         }
     }
 }

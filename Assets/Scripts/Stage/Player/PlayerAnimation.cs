@@ -119,5 +119,20 @@ namespace Stage.Player
             }
             return false;
         }
+
+        /// <summary>
+        /// 攻撃3ステートアニメーション終了チェック
+        /// </summary>
+        /// <returns>true:再生終了, false:再生中</returns>
+        public bool IsAttack3StateFinished()
+        {
+            if (CheckCurrentState(_hashAttack3))
+            {
+                float time = _currentStateInfo.normalizedTime;
+                if (time >= 1.0f)
+                    return true;
+            }
+            return false;
+        }
     }
 }
