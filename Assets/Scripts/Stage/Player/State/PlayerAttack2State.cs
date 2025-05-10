@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Stage.Player
 {
+    /// <summary>
+    /// プレイヤー攻撃2段目状態
+    /// </summary>
     public class PlayerAttack2State : IPlayerState
     {
         Player _player;         // プレイヤークラス
