@@ -12,17 +12,16 @@ namespace Stage.HitCheck
     /// </summary>
     public class SwordHitboxOBB : MonoBehaviour
     {
-        public GameObject GreatSword => _greatSword;
         [Header("大剣オブジェクト")]
         [SerializeField] GameObject _greatSword;
 
-        public GameObject Enemy => _enemy;
         [Header("敵オブジェクト")]
         [SerializeField] GameObject _enemy;
 
         // 各オブジェクトOBB
         OBB _greatSwordOBB;
         OBB _enemyOBB;
+        public OBB GreatSwordOBB => _greatSwordOBB;
 
         void Start()
         {
@@ -56,12 +55,10 @@ namespace Stage.HitCheck
         /// <param name="obb">武器OBB</param>
         /// <param name="go">obbの元となるオブジェクト</param>
         /// <returns>true:接触、false:非接触</returns>
-        public bool IsCollideBoxOBB(OBB weaponOBB, GameObject weapon)
+        public bool IsCollideBoxOBB(OBB weaponOBB)
         {
             // 中心間の距離の取得
-            Vector3 weaponPos = weapon.transform.position;
-            Vector3 enemyPos  = _enemy.transform.position;
-            Vector3 distance  = weaponPos - enemyPos;
+            Vector3 distance  = weaponOBB.Center - _enemyOBB.Center;
 
             // 検証軸を用いた距離の比較
             // 武器を検証軸とした場合
@@ -129,6 +126,13 @@ namespace Stage.HitCheck
                 return false;
 
             return true;
+        }
+
+        void OnDrawGizmos()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.matrix = _greatSword.transform.localToWorldMatrix;
+            Gizmos.DrawCube(_greatSwordOBB.Center, _greatSwordOBB.Radius);
         }
     }
 }

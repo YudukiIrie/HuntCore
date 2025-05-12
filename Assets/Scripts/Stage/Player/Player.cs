@@ -1,3 +1,4 @@
+using Stage.HitCheck;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,9 @@ namespace Stage.Player
     /// </summary>
     public class Player : MonoBehaviour
     {
+        [Header("当たり判定クラス")]
+        public SwordHitboxOBB HitCheck;
+
         // プレイヤー関連のクラス
         public PlayerStateMachine StateMachine {  get; private set; }
         public PlayerAnimation Animation {  get; private set; }

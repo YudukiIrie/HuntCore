@@ -41,6 +41,12 @@ namespace Stage.Player
                 else
                     _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
             }
+
+            // == “–‚½‚è”»’è ==
+            if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB))
+            {
+                Debug.Log("“–‚½‚Á‚½");
+            }
         }
 
         public void FixedUpdate()

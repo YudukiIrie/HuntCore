@@ -1088,6 +1088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d29e4511996e014f8bbbce1d7bc62c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HitCheck: {fileID: 1973595794}
 --- !u!114 &1788431380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1205,6 +1206,52 @@ Transform:
   - {fileID: 865688016}
   m_Father: {fileID: 1200269094}
   m_LocalEulerAnglesHint: {x: -19.93, y: -95.39, z: 30}
+--- !u!1 &1973595793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1973595795}
+  - component: {fileID: 1973595794}
+  m_Layer: 0
+  m_Name: HitChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1973595794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973595793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbaad4fdb24a6db408cb886b26bb0af6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _greatSword: {fileID: 1899350448}
+  _enemy: {fileID: 552063320}
+--- !u!4 &1973595795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973595793}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.545706, y: 0.88477725, z: -0.4542132}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1215,3 +1262,4 @@ SceneRoots:
   - {fileID: 1788431377}
   - {fileID: 789000611}
   - {fileID: 552063324}
+  - {fileID: 1973595795}
