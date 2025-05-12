@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Stage.Player;
 using Stage.Enemy;
+using Unity.VisualScripting;
 
 namespace Stage.HitCheck
 {
@@ -11,9 +12,11 @@ namespace Stage.HitCheck
     /// </summary>
     public class SwordHitboxOBB : MonoBehaviour
     {
+        public GameObject GreatSword => _greatSword;
         [Header("大剣オブジェクト")]
         [SerializeField] GameObject _greatSword;
 
+        public GameObject Enemy => _enemy;
         [Header("敵オブジェクト")]
         [SerializeField] GameObject _enemy;
 
@@ -43,7 +46,6 @@ namespace Stage.HitCheck
         {
             // 座標の更新
             obb.UpdateCenter(go.transform.position);
-
             // 分離軸の更新
             obb.UpdateAxes(go.transform);
         }
@@ -54,9 +56,77 @@ namespace Stage.HitCheck
         /// <param name="obb">武器OBB</param>
         /// <param name="go">obbの元となるオブジェクト</param>
         /// <returns>true:接触、false:非接触</returns>
-        public bool IsCollideBoxOBB(OBB obb, GameObject go)
+        public bool IsCollideBoxOBB(OBB weaponOBB, GameObject weapon)
         {
+            // 中心間の距離の取得
+            Vector3 weaponPos = weapon.transform.position;
+            Vector3 enemyPos  = _enemy.transform.position;
+            Vector3 distance  = weaponPos - enemyPos;
 
+            // 検証軸を用いた距離の比較
+            // 武器を検証軸とした場合
+            if (!CompareLengthOBB(weaponOBB, _enemyOBB, weaponOBB.AxisX, distance)) return false;
+            if (!CompareLengthOBB(weaponOBB, _enemyOBB, weaponOBB.AxisY, distance)) return false;
+            if (!CompareLengthOBB(weaponOBB, _enemyOBB, weaponOBB.AxisZ, distance)) return false;
+            // 敵を検証軸とした場合
+            if (!CompareLengthOBB(weaponOBB, _enemyOBB, _enemyOBB.AxisX, distance)) return false;
+            if (!CompareLengthOBB(weaponOBB, _enemyOBB, _enemyOBB.AxisY, distance)) return false;
+            if (!CompareLengthOBB(weaponOBB, _enemyOBB, _enemyOBB.AxisZ, distance)) return false;
+
+            // 分離軸同士の外積を用いた距離の比較
+            Vector3 cross = Vector3.zero;
+            // 武器のX軸との比較
+            cross = Vector3.Cross(weaponOBB.AxisX, _enemyOBB.AxisX);
+            if (!CompareLengthOBB(weaponOBB, _enemyOBB, cross, distance)) return false;
+            cross = Vector3.Cross(weaponOBB.AxisX, _enemyOBB.AxisY);
+            if (!CompareLengthOBB(weaponOBB, _enemyOBB, cross, distance)) return false;
+            cross = Vector3.Cross(weaponOBB.AxisX, _enemyOBB.AxisZ);
+            if (!CompareLengthOBB(weaponOBB, _enemyOBB, cross, distance)) return false;
+            // 武器のY軸との比較
+            cross = Vector3.Cross(weaponOBB.AxisY, _enemyOBB.AxisX);
+            if (!CompareLengthOBB(weaponOBB, _enemyOBB, cross, distance)) return false;
+            cross = Vector3.Cross(weaponOBB.AxisY, _enemyOBB.AxisY);
+            if (!CompareLengthOBB(weaponOBB, _enemyOBB, cross, distance)) return false;
+            cross = Vector3.Cross(weaponOBB.AxisY, _enemyOBB.AxisZ);
+            if (!CompareLengthOBB(weaponOBB, _enemyOBB, cross, distance)) return false;
+            // 武器のZ軸との比較
+            cross = Vector3.Cross(weaponOBB.AxisZ, _enemyOBB.AxisX);
+            if (!CompareLengthOBB(weaponOBB, _enemyOBB, cross, distance)) return false;
+            cross = Vector3.Cross(weaponOBB.AxisZ, _enemyOBB.AxisY);
+            if (!CompareLengthOBB(weaponOBB, _enemyOBB, cross, distance)) return false;
+            cross = Vector3.Cross(weaponOBB.AxisZ, _enemyOBB.AxisZ);
+            if (!CompareLengthOBB(weaponOBB, _enemyOBB, cross, distance)) return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// 指定した武器OBBと敵OBBの距離比較
+        /// </summary>
+        /// <param name="separating">指定した分離軸</param>
+        /// <param name="distance">2点間の距離</param>
+        /// <returns></returns>
+        bool CompareLengthOBB(OBB weaponOBB, OBB enemyOBB, Vector3 separating, Vector3 distance)
+        {
+            // 検証軸上の武器と敵の距離
+            // マイナスのベクトルである可能性があるため絶対値化
+            float length = Mathf.Abs(Vector3.Dot(separating, distance));
+
+            // 特定の検証軸上における武器の距離の半分を求める
+            float weaponDist =
+                Mathf.Abs(Vector3.Dot(weaponOBB.AxisX, separating)) * weaponOBB.Radius.x +
+                Mathf.Abs(Vector3.Dot(weaponOBB.AxisY, separating)) * weaponOBB.Radius.y +
+                Mathf.Abs(Vector3.Dot(weaponOBB.AxisZ, separating)) * weaponOBB.Radius.z;
+
+            // 特定の検証軸上における敵の距離の半分を求める
+            float enemyDist =
+                Mathf.Abs(Vector3.Dot(enemyOBB.AxisX, separating)) * enemyOBB.Radius.x +
+                Mathf.Abs(Vector3.Dot(enemyOBB.AxisY, separating)) * enemyOBB.Radius.y +
+                Mathf.Abs(Vector3.Dot(enemyOBB.AxisZ, separating)) * enemyOBB.Radius.z;
+
+            // 武器と敵の距離と、上記の距離の合計を比較
+            if (length > weaponDist + enemyDist)
+                return false;
 
             return true;
         }
