@@ -18,6 +18,16 @@ namespace Stage.HitCheck
         [Header("敵オブジェクト")]
         [SerializeField] GameObject _enemy;
 
+        #region デバッグ用
+        [Header("敵非接触マテリアル")]
+        [SerializeField] Material _noHitMaterial;
+
+        [Header("敵接触マテリアル")]
+        [SerializeField] Material _hitMaterial;
+
+        MeshRenderer _enemyMeshRenderer;
+        #endregion
+
         // 各オブジェクトOBB
         OBB _greatSwordOBB;
         OBB _enemyOBB;
@@ -28,12 +38,24 @@ namespace Stage.HitCheck
             // 各オブジェクトOBB情報の登録と実体の作成
             _greatSwordOBB = new OBB(_greatSword.transform, WeaponData.Data.GreatSwordSize);
             _enemyOBB = new OBB(_enemy.transform, EnemyData.Data.EnemySize);
+
+            #region デバッグ用
+            _enemyMeshRenderer = _enemy.GetComponent<MeshRenderer>();
+            #endregion
         }
 
         void Update()
         {
             UpdateOBBInfo(_greatSwordOBB, _greatSword);
             UpdateOBBInfo(_enemyOBB, _enemy);
+
+            #region デバッグ用
+            _enemyMeshRenderer.material = _noHitMaterial;
+            if (IsCollideBoxOBB(_greatSwordOBB))
+            {
+                _enemyMeshRenderer.material = _hitMaterial;
+            }
+            #endregion
         }
 
         /// <summary>
@@ -126,13 +148,6 @@ namespace Stage.HitCheck
                 return false;
 
             return true;
-        }
-
-        void OnDrawGizmos()
-        {
-            Gizmos.color = Color.green;
-            Gizmos.matrix = _greatSword.transform.localToWorldMatrix;
-            Gizmos.DrawCube(_greatSwordOBB.Center, _greatSwordOBB.Radius);
         }
     }
 }
