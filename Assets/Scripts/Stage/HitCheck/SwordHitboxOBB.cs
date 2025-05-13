@@ -34,7 +34,7 @@ namespace Stage.HitCheck
         public OBB GreatSwordOBB => _greatSwordOBB;
 
         // ”»’èÏ‚İ“GŠi”[—p
-        List<OBB> _hitEnemies = new List<OBB>();
+        HashSet<OBB> _hitEnemies = new HashSet<OBB>();
 
         void Start()
         {
@@ -75,11 +75,8 @@ namespace Stage.HitCheck
         public bool IsCollideBoxOBB(OBB weaponOBB)
         {
             // ”»’èÏ‚İ‚Ì“G‚Í–³‹
-            if (_hitEnemies.Count > 0)
-            {
-                if (_enemyOBB == _hitEnemies[0])
-                    return false;
-            }
+            if (_hitEnemies.Contains(_enemyOBB))
+                return false;
 
             // ’†SŠÔ‚Ì‹——£‚Ìæ“¾
             Vector3 distance  = weaponOBB.Center - _enemyOBB.Center;
