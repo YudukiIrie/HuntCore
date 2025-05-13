@@ -23,6 +23,7 @@ namespace Stage.Player
         public void Enter()
         {
             _player.Animation.Attack1();
+            _player.HitCheck.ResetHitEnemies();
         }
 
         public void Update()
@@ -45,6 +46,7 @@ namespace Stage.Player
             // == “–‚½‚è”»’è ==
             if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB))
             {
+                _player.HitCheck.ChangeEnemyColor();
                 Debug.Log("“–‚½‚Á‚½");
             }
         }
@@ -57,6 +59,7 @@ namespace Stage.Player
         public void Exit()
         {
             _elapseTime = 0.0f;
+            _player.HitCheck.ResetEnemyColor();
         }
     }
 }

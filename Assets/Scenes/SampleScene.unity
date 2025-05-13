@@ -1237,6 +1237,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _greatSword: {fileID: 1899350448}
   _enemy: {fileID: 552063320}
+  _noHitMaterial: {fileID: 2100000, guid: 5f7efd1b386efb04e91c6fc44d89706a, type: 2}
+  _hitMaterial: {fileID: 2100000, guid: b8dce7a662c61fe4bb9b43c2f9e04a22, type: 2}
 --- !u!4 &1973595795
 Transform:
   m_ObjectHideFlags: 0

@@ -33,6 +33,9 @@ namespace Stage.HitCheck
         OBB _enemyOBB;
         public OBB GreatSwordOBB => _greatSwordOBB;
 
+        // 判定済み敵格納用
+        List<OBB> _hitEnemies = new List<OBB>();
+
         void Start()
         {
             // 各オブジェクトOBB情報の登録と実体の作成
@@ -48,14 +51,6 @@ namespace Stage.HitCheck
         {
             UpdateOBBInfo(_greatSwordOBB, _greatSword);
             UpdateOBBInfo(_enemyOBB, _enemy);
-
-            #region デバッグ用
-            _enemyMeshRenderer.material = _noHitMaterial;
-            if (IsCollideBoxOBB(_greatSwordOBB))
-            {
-                _enemyMeshRenderer.material = _hitMaterial;
-            }
-            #endregion
         }
 
         /// <summary>
@@ -79,6 +74,13 @@ namespace Stage.HitCheck
         /// <returns>true:接触、false:非接触</returns>
         public bool IsCollideBoxOBB(OBB weaponOBB)
         {
+            // 判定済みの敵は無視
+            if (_hitEnemies.Count > 0)
+            {
+                if (_enemyOBB == _hitEnemies[0])
+                    return false;
+            }
+
             // 中心間の距離の取得
             Vector3 distance  = weaponOBB.Center - _enemyOBB.Center;
 
@@ -116,6 +118,9 @@ namespace Stage.HitCheck
             cross = Vector3.Cross(weaponOBB.AxisZ, _enemyOBB.AxisZ);
             if (!CompareLengthOBB(weaponOBB, _enemyOBB, cross, distance)) return false;
 
+            // 接触済みの敵を判定Listに格納
+            _hitEnemies.Add(_enemyOBB);
+
             return true;
         }
 
@@ -149,5 +154,25 @@ namespace Stage.HitCheck
 
             return true;
         }
+
+        /// <summary>
+        /// 判定のリセット
+        /// </summary>
+        public void ResetHitEnemies()
+        {
+            _hitEnemies.Clear();
+        }
+
+        #region デバッグ用
+        public void ChangeEnemyColor()
+        {
+            _enemyMeshRenderer.material = _hitMaterial;
+        }
+
+        public void ResetEnemyColor()
+        {
+            _enemyMeshRenderer.material = _noHitMaterial;
+        }
+        #endregion
     }
 }
