@@ -27,22 +27,6 @@ namespace Stage.Player
 
         public void Update()
         {
-            // === ó‘Ô‘JˆÚ ===
-            // ‘Ò‹@
-            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashAttack2))
-            {
-                _elapseTime += Time.deltaTime;
-                // UŒ‚3
-                if (_elapseTime <= PlayerData.Data.ChainTime)
-                {
-                    if (_player.Action.Player.Attack.IsPressed())
-                        _player.StateMachine.TransitionTo(_player.StateMachine.Attack3State);
-                }
-                // ‘Ò‹@
-                else
-                    _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
-            }
-
             // === ‰ñ“] ===
             // ’n–Ê‚É•½s‚È‹“_•ûŒü‚Ìæ“¾
             Vector3 viewV = Camera.main.transform.forward.normalized;
@@ -58,6 +42,21 @@ namespace Stage.Player
                     _player.HitCheck.ChangeEnemyColor();
                     Debug.Log("2“–‚½‚Á‚½");
                 }
+            }
+
+            // === ó‘Ô‘JˆÚ ===
+            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashAttack2))
+            {
+                _elapseTime += Time.deltaTime;
+                // UŒ‚3
+                if (_elapseTime <= PlayerData.Data.ChainTime)
+                {
+                    if (_player.Action.Player.Attack.IsPressed())
+                        _player.StateMachine.TransitionTo(_player.StateMachine.Attack3State);
+                }
+                // ‘Ò‹@
+                else
+                    _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
             }
         }
 

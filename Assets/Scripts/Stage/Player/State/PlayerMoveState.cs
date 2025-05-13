@@ -31,24 +31,8 @@ namespace Stage.Player
 
         public void Update()
         {
-            // == ó‘Ô‘JˆÚ ==
-            // ’Êí
-            if (_player.Action.Player.Move.ReadValue<Vector2>() == Vector2.zero)
-            {
-                _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
-                return;
-            }
-
-            // UŒ‚
-            if (_player.Action.Player.Attack.IsPressed())
-            {
-                _player.StateMachine.TransitionTo(_player.StateMachine.Attack1State);
-                return;
-            }
-
             // == ˆÚ“®ŒvZ ==
             Vector2 input = _player.Action.Player.Move.ReadValue<Vector2>();
-
             // ===== ”²“ó‘Ô‚Ì‚İ‚É‚È‚Á‚½‚½‚ß•s—v =====
             //// •à‚«‚Æ¬‘–‚è‚Ì‹æ•Ê
             //float currentSpeed;
@@ -76,6 +60,14 @@ namespace Stage.Player
             // BlendTree‚ÅƒAƒjƒ[ƒVƒ‡ƒ“‚ğŠÇ—‚·‚é‚½‚ßRunSpeed‚ğ1‚Æ‚µ‚½Š„‡‚ğ”½‰f
             //_player.Animator.SetFloat("Speed", currentSpeed / PlayerData.Data.RunSpeed);
             // ========================================
+
+            // == ó‘Ô‘JˆÚ ==
+            // ’Êí
+            if (_player.Action.Player.Move.ReadValue<Vector2>() == Vector2.zero)
+                _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
+            // UŒ‚
+            else if (_player.Action.Player.Attack.IsPressed())
+                _player.StateMachine.TransitionTo(_player.StateMachine.Attack1State);
         }
 
         public void FixedUpdate()

@@ -25,11 +25,6 @@ namespace Stage.Player
 
         public void Update()
         {
-            // === 状態遷移 ===
-            // 待機
-            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashAttack3))
-                _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
-
             // === 回転 ===
             // 地面に平行な視点方向の取得
             Vector3 viewV = Camera.main.transform.forward.normalized;
@@ -46,6 +41,11 @@ namespace Stage.Player
                     Debug.Log("3当たった");
                 }
             }
+
+            // === 状態遷移 ===
+            // 待機
+            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashAttack3))
+                _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
         }
 
         public void FixedUpdate()

@@ -29,9 +29,8 @@ namespace Stage.Player
             // ˆÚ“®
             if (_player.Action.Player.Move.ReadValue<Vector2>() != Vector2.zero)
                 _player.StateMachine.TransitionTo(_player.StateMachine.MoveState);
-
             // UŒ‚
-            if (_player.Action.Player.Attack.IsPressed())
+            else if (_player.Action.Player.Attack.IsPressed())
                 _player.StateMachine.TransitionTo(_player.StateMachine.Attack1State);
         }
 
