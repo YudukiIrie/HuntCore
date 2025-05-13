@@ -12,10 +12,10 @@ namespace Stage.Player
     {
         // AnimatorのパラメータハッシュID
         // 定数かつ実行時に値が決まるためstatic readonly
-        static readonly int _hashMove = Animator.StringToHash("Move");
-        static readonly int _hashAttack1 = Animator.StringToHash("Attack1");
-        static readonly int _hashAttack2 = Animator.StringToHash("Attack2");
-        static readonly int _hashAttack3 = Animator.StringToHash("Attack3");
+        public static readonly int HashMove = Animator.StringToHash("Move");
+        public static readonly int HashAttack1 = Animator.StringToHash("Attack1");
+        public static readonly int HashAttack2 = Animator.StringToHash("Attack2");
+        public static readonly int HashAttack3 = Animator.StringToHash("Attack3");
 
         // コンポーネント
         Animator _animator;
@@ -33,10 +33,10 @@ namespace Stage.Player
         /// </summary>
         public void ResetAll()
         {
-            _animator.SetBool(_hashMove, false);
-            _animator.SetBool(_hashAttack1, false);
-            _animator.SetBool(_hashAttack2, false);
-            _animator.SetBool(_hashAttack3, false);
+            _animator.SetBool(HashMove, false);
+            _animator.SetBool(HashAttack1, false);
+            _animator.SetBool(HashAttack2, false);
+            _animator.SetBool(HashAttack3, false);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Stage.Player
         public void Move()
         {
             ResetAll();
-            _animator.SetBool(_hashMove, true);
+            _animator.SetBool(HashMove, true);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Stage.Player
         public void Attack1()
         {
             ResetAll();
-            _animator.SetBool(_hashAttack1, true);
+            _animator.SetBool(HashAttack1, true);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Stage.Player
         public void Attack2()
         {
             ResetAll();
-            _animator.SetBool(_hashAttack2, true);
+            _animator.SetBool(HashAttack2, true);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Stage.Player
         public void Attack3()
         {
             ResetAll();
-            _animator.SetBool(_hashAttack3, true);
+            _animator.SetBool(HashAttack3, true);
         }
 
         /// <summary>
@@ -90,12 +90,12 @@ namespace Stage.Player
         }
 
         /// <summary>
-        /// 攻撃1ステートアニメーション終了チェック
+        /// 指定したアニメーションの終了チェック
         /// </summary>
         /// <returns>true:再生終了, false:再生中</returns>
-        public bool IsAttack1StateFinished()
+        public bool IsAnimFinished(int stateHash)
         {
-            if (CheckCurrentState(_hashAttack1))
+            if (CheckCurrentState(stateHash))
             {
                 // アニメーション終了待ち
                 float time = _currentStateInfo.normalizedTime;
@@ -106,33 +106,14 @@ namespace Stage.Player
         }
 
         /// <summary>
-        /// 攻撃2ステートアニメーション終了チェック
+        /// 指定したアニメーション再生時間を0～1の割合に変換した値を返却
         /// </summary>
-        /// <returns>true:再生終了, false:再生中</returns>
-        public bool IsAttack2StateFinished()
+        public float CheckAnimRatio(int stateHash)
         {
-            if (CheckCurrentState(_hashAttack2))
-            {
-                float time = _currentStateInfo.normalizedTime;
-                if (time >= 1.0f)
-                    return true;
-            }
-            return false;
-        }
+            if (CheckCurrentState(stateHash))
+                return _currentStateInfo.normalizedTime;
 
-        /// <summary>
-        /// 攻撃3ステートアニメーション終了チェック
-        /// </summary>
-        /// <returns>true:再生終了, false:再生中</returns>
-        public bool IsAttack3StateFinished()
-        {
-            if (CheckCurrentState(_hashAttack3))
-            {
-                float time = _currentStateInfo.normalizedTime;
-                if (time >= 1.0f)
-                    return true;
-            }
-            return false;
+            return 0.0f;
         }
     }
 }

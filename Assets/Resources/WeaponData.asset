@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: WeaponData
   m_EditorClassIdentifier: 
   _greatSwordSize: {x: 0.13, y: 0.3, z: 1.5}
+  _attack1HitStartRatio: 0.4
+  _attack2HitStartRatio: 0.4
+  _attack3HitStartRatio: 0.33

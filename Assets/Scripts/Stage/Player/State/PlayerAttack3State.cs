@@ -20,13 +20,14 @@ namespace Stage.Player
         public void Enter()
         {
             _player.Animation.Attack3();
+            _player.HitCheck.ResetHitEnemies();
         }
 
         public void Update()
         {
             // === ó‘Ô‘JˆÚ ===
             // ‘Ò‹@
-            if (_player.Animation.IsAttack3StateFinished())
+            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashAttack3))
                 _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
 
             // === ‰ñ“] ===
@@ -35,6 +36,16 @@ namespace Stage.Player
             viewV = Vector3.ProjectOnPlane(viewV, _player.NormalVector);
             // ‰ñ“]’l‚ÌŽæ“¾
             _targetRot = Quaternion.LookRotation(viewV);
+
+            // === “–‚½‚è”»’è ===
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashAttack3) >= WeaponData.Data.Attack3HitStartRatio)
+            {
+                if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB))
+                {
+                    _player.HitCheck.ChangeEnemyColor();
+                    Debug.Log("3“–‚½‚Á‚½");
+                }
+            }
         }
 
         public void FixedUpdate()
@@ -46,7 +57,7 @@ namespace Stage.Player
 
         public void Exit()
         {
-
+            _player.HitCheck.ResetEnemyColor();
         }
     }
 }

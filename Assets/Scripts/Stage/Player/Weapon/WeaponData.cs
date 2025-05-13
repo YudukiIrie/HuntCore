@@ -37,5 +37,17 @@ namespace Stage.Player
         public Vector3 GreatSwordSize => _greatSwordSize;
         [Header("大剣サイズ")]
         [SerializeField] Vector3 _greatSwordSize;
+
+        public float Attack1HitStartRatio => _attack1HitStartRatio;
+        [Header("大剣攻撃1の当たり判定開始割合")]
+        [SerializeField] float _attack1HitStartRatio;
+
+        public float Attack2HitStartRatio => _attack2HitStartRatio;
+        [Header("大剣攻撃2の当たり判定開始割合")]
+        [SerializeField] float _attack2HitStartRatio;
+
+        public float Attack3HitStartRatio => _attack3HitStartRatio;
+        [Header("大剣攻撃3の当たり判定開始割合")]
+        [SerializeField] float _attack3HitStartRatio;
     }
 }

@@ -28,8 +28,8 @@ namespace Stage.Player
 
         public void Update()
         {
-            // == ó‘Ô‘JˆÚ ==
-            if (_player.Animation.IsAttack1StateFinished())
+            // === ó‘Ô‘JˆÚ ===
+            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashAttack1))
             {
                 _elapseTime += Time.deltaTime;
                 // UŒ‚2
@@ -43,11 +43,14 @@ namespace Stage.Player
                     _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
             }
 
-            // == “–‚½‚è”»’è ==
-            if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB))
+            // === “–‚½‚è”»’è ===
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashAttack1) >= WeaponData.Data.Attack1HitStartRatio)
             {
-                _player.HitCheck.ChangeEnemyColor();
-                Debug.Log("“–‚½‚Á‚½");
+                if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB))
+                {
+                    _player.HitCheck.ChangeEnemyColor();
+                    Debug.Log("1“–‚½‚Á‚½");
+                }
             }
         }
 

@@ -22,13 +22,14 @@ namespace Stage.Player
         public void Enter()
         {
             _player.Animation.Attack2();
+            _player.HitCheck.ResetHitEnemies();
         }
 
         public void Update()
         {
             // === ó‘Ô‘JˆÚ ===
             // ‘Ò‹@
-            if (_player.Animation.IsAttack2StateFinished())
+            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashAttack2))
             {
                 _elapseTime += Time.deltaTime;
                 // UŒ‚3
@@ -48,6 +49,16 @@ namespace Stage.Player
             viewV = Vector3.ProjectOnPlane(viewV, _player.NormalVector);
             // ‰ñ“]’l‚ÌŽæ“¾
             _targetRot = Quaternion.LookRotation(viewV);
+
+            // === “–‚½‚è”»’è ===
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashAttack2) >= WeaponData.Data.Attack2HitStartRatio)
+            {
+                if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB))
+                {
+                    _player.HitCheck.ChangeEnemyColor();
+                    Debug.Log("2“–‚½‚Á‚½");
+                }
+            }
         }
 
         public void FixedUpdate()
@@ -60,6 +71,7 @@ namespace Stage.Player
         public void Exit()
         {
             _elapseTime = 0.0f;
+            _player.HitCheck.ResetEnemyColor();
         }
     }
 }
