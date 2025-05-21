@@ -7,7 +7,7 @@ namespace Stage.Player
     /// <summary>
     /// プレイヤー移動状態
     /// </summary>
-    public class PlayerMoveState : IPlayerState
+    public class PlayerMoveState : IState
     {
         // プレイヤークラス
         Player _player;

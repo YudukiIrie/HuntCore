@@ -8,7 +8,7 @@ namespace Stage.Player
     /// <summary>
     /// プレイヤーの通常状態
     /// </summary>
-    public class PlayerIdleState : IPlayerState
+    public class PlayerIdleState : IState
     {
         // プレイヤークラス
         Player _player;

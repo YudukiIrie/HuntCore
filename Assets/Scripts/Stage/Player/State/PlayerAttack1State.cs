@@ -7,7 +7,7 @@ namespace Stage.Player
     /// <summary>
     /// プレイヤー攻撃1段目状態
     /// </summary>
-    public class PlayerAttack1State : IPlayerState
+    public class PlayerAttack1State : IState
     {
         // プレイヤークラス
         Player _player;

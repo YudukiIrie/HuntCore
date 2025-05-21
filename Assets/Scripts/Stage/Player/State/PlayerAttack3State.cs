@@ -7,7 +7,7 @@ namespace Stage.Player
     /// <summary>
     /// プレイヤー攻撃3段目状態
     /// </summary>
-    public class PlayerAttack3State : IPlayerState
+    public class PlayerAttack3State : IState
     {
         Player _player;         // プレイヤークラス
         Quaternion _targetRot;  // 視点方向ベクトル

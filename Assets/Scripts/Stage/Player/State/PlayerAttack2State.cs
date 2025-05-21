@@ -8,7 +8,7 @@ namespace Stage.Player
     /// <summary>
     /// プレイヤー攻撃2段目状態
     /// </summary>
-    public class PlayerAttack2State : IPlayerState
+    public class PlayerAttack2State : IState
     {
         Player _player;         // プレイヤークラス
         float _elapseTime;      // コンボ間猶予経過時間

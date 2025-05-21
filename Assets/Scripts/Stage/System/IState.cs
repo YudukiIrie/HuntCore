@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Stage.Player
+namespace Stage
 {
     /// <summary>
-    /// 各プレイヤーステートの基礎
+    /// 各ステートの基礎
     /// </summary>
-    public interface IPlayerState
+    public interface IState
     {
         void Enter()
         {

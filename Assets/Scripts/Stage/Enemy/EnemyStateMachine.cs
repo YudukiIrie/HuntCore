@@ -2,30 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Stage.Player
+namespace Stage.Enemy
 {
     /// <summary>
-    /// プレイヤーのステートを管理
+    /// 敵のステートを管理
     /// </summary>
-    public class PlayerStateMachine
+    public class EnemyStateMachine
     {
         // 現在のステートを保存
         IState _currentState;
 
         // 各ステート
-        public PlayerIdleState IdleState { get; private set; }
-        public PlayerMoveState MoveState { get; private set; }
-        public PlayerAttack1State Attack1State { get; private set; }
-        public PlayerAttack2State Attack2State { get; private set; }
-        public PlayerAttack3State Attack3State { get; private set; }
+        public EnemyIdleState IdleState { get; private set; }
+        public EnemyWanderState WanderState { get; private set; }
 
-        public PlayerStateMachine(Player player)
+        public EnemyStateMachine(Enemy enemy)
         {
-            IdleState = new PlayerIdleState(player);
-            MoveState = new PlayerMoveState(player);
-            Attack1State = new PlayerAttack1State(player);
-            Attack2State = new PlayerAttack2State(player);
-            Attack3State = new PlayerAttack3State(player);
+            IdleState = new EnemyIdleState(enemy);
+            WanderState = new EnemyWanderState(enemy);
         }
 
         /// <summary>
