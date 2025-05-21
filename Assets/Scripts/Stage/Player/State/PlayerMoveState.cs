@@ -46,9 +46,9 @@ namespace Stage.Player
 
             // 移動方向と速度を合成
             Transform cam = Camera.main.transform;
-            _velocity = ((cam.forward * input.y) + (cam.right * input.x)).normalized * PlayerData.Data.DrawnMoveSpeed;
+            _velocity = ((cam.forward * input.y) + (cam.right * input.x)).normalized;
             // 合成したベクトルを接触中の面に沿うベクトルに変換
-            _velocity = Vector3.ProjectOnPlane(_velocity, _player.NormalVector);
+            _velocity = Vector3.ProjectOnPlane(_velocity, _player.NormalVector).normalized * PlayerData.Data.DrawnMoveSpeed;
 
             // == 回転計算 ==
             // ベクトルの大きさが0の角度は渡したくないため極小の際は計算しない
