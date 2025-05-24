@@ -15,7 +15,7 @@ MonoBehaviour:
   _walkSpeed: 2
   _jogSpeed: 4
   _runSpeed: 7
-  _drawnMoveSpeed: 1.5
+  _drawnMoveSpeed: 2.5
   _rotSpeed: 600
   _drawnRotSpeed: 600
   _attack2RotSpeed: 100

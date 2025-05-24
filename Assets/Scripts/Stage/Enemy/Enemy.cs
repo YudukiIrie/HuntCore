@@ -41,5 +41,15 @@ namespace Stage.Enemy
         {
             StateMachine.FixedUpdate();
         }
+
+        /// <summary>
+        /// ó‘Ô‘JˆÚ‚ÌŠm—¦”»’è
+        /// </summary>
+        /// <param name="percent">Šm—¦(0.0`1.0)</param>
+        /// <returns>true:“–‚½‚è, false:ŠO‚ê</returns>
+        public bool IsTransitionHit(float percent)
+        {
+            return Random.value <= percent;
+        }
     }
 }
