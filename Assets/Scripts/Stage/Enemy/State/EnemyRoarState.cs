@@ -5,17 +5,15 @@ using UnityEngine;
 namespace Stage.Enemies
 {
     /// <summary>
-    /// “G‘Ò‹@ó‘Ô
+    /// “G™ôšKó‘Ô
     /// </summary>
-    public class EnemyIdleState : IState
+    public class EnemyRoarState : IState
     {
         Enemy _enemy;   // “GƒNƒ‰ƒX
-        float _findDistance;
 
-        public EnemyIdleState(Enemy enemy)
+        public EnemyRoarState(Enemy enemy)
         {
             _enemy = enemy;
-            _findDistance = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).FindDistance;
         }
 
         public void Enter()
@@ -25,10 +23,7 @@ namespace Stage.Enemies
 
         public void Update()
         {
-            // === ó‘Ô‘JˆÚ ===
-            // ™ôšK
-            if (_enemy.CheckDistanceToPlayer() <= _findDistance)
-                _enemy.StateMachine.TransitionTo(_enemy.StateMachine.RoarState);
+            
         }
 
         public void FixedUpdate()

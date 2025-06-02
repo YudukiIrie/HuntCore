@@ -53,7 +53,7 @@ namespace Stage.Enemies
         // 敵種類
         public enum Type
         {
-            NormalEnemy, // 雑魚敵
+            BossEnemy, // ボス
         }
 
         public Type EnemyType => _enemyType;
@@ -65,28 +65,8 @@ namespace Stage.Enemies
         [Header("敵サイズ")]
         [SerializeField] Vector3 _enemySize;
 
-        public float IdleToWanderPercent => _idleToWanderPercent;
-        [Header("待機からうろつき遷移確立")]
-        [SerializeField] float _idleToWanderPercent;
-
-        public float WanderToIdlePercent => _wanderToIdlePercent;
-        [Header("うろつきから待機遷移確立")]
-        [SerializeField] float _wanderToIdlePercent;
-
-        public float WanderSpeed => _wanderSpeed;
-        [Header("うろつき速度")]
-        [SerializeField] float _wanderSpeed;
-
-        public float WanderRotSpeed => _wanderRotSpeed;
-        [Header("うろつき回転速度")]
-        [SerializeField] float _wanderRotSpeed;
-
-        public float WanderStoppingDistance => _wanderStoppingDistance;
-        [Header("うろつき時に目標到達とする目標までの距離")]
-        [SerializeField] float _wanderStoppingDistance;
-
-        public float WanderRange => _wanderRange;
-        [Header("うろつき時目標設定範囲")]
-        [SerializeField] float _wanderRange;
+        public float FindDistance => _findDistance;
+        [Header("プレイヤー発見距離")]
+        [SerializeField] float _findDistance;
     }
 }

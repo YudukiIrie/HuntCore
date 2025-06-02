@@ -51,7 +51,7 @@ namespace Stage.Enemies
         /// </summary>
         public float CheckDistanceToPlayer()
         {
-            return 0.0f;
+            return Vector3.Distance(transform.position, _player.transform.position);
         }
 
         /// <summary>

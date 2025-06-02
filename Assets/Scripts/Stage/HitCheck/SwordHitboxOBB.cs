@@ -40,7 +40,7 @@ namespace Stage.HitCheck
         {
             // 各オブジェクトOBB情報の登録と実体の作成
             _greatSwordOBB = new OBB(_greatSword.transform, WeaponData.Data.GreatSwordSize);
-            _enemyOBB = new OBB(_enemy.transform, EnemyDataList.Data.GetData(EnemyData.Type.NormalEnemy).EnemySize);
+            _enemyOBB = new OBB(_enemy.transform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemySize);
 
             #region デバッグ用
             _enemyMeshRenderer = _enemy.GetComponent<MeshRenderer>();
