@@ -18,6 +18,7 @@ namespace Stage.Players
         public PlayerAttack1State Attack1State { get; private set; }
         public PlayerAttack2State Attack2State { get; private set; }
         public PlayerAttack3State Attack3State { get; private set; }
+        public PlayerImpactedState ImpactedState { get; private set; }
 
         public PlayerStateMachine(Player player)
         {
@@ -26,6 +27,7 @@ namespace Stage.Players
             Attack1State = new PlayerAttack1State(player);
             Attack2State = new PlayerAttack2State(player);
             Attack3State = new PlayerAttack3State(player);
+            ImpactedState = new PlayerImpactedState(player);
         }
 
         /// <summary>

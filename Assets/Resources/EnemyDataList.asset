@@ -15,4 +15,5 @@ MonoBehaviour:
   Enemies:
   - _enemyType: 0
     _enemySize: {x: 1, y: 1, z: 1}
-    _idleToWanderPercent: 0.1
+    _findDistance: 10
+    _roarDistance: 15

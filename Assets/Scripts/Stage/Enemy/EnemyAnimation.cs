@@ -8,10 +8,13 @@ namespace Stage.Enemies
     public class EnemyAnimation
     {
         // AnimatorのパラメータハッシュID
-        public static readonly int HashWander = Animator.StringToHash("Wander");
+        public static readonly int HashRoar = Animator.StringToHash("Roar");
 
         // コンポーネント
         Animator _animator;
+
+        // アニメーションステート情報保存用
+        AnimatorStateInfo _currentStateInfo;
 
         public EnemyAnimation(Animator animator)
         {
@@ -23,16 +26,46 @@ namespace Stage.Enemies
         /// </summary>
         public void ResetAll()
         {
-            _animator.SetBool(HashWander, false);
+            _animator.SetBool(HashRoar, false);
         }
 
         /// <summary>
-        /// うろつきアニメーション開始
+        /// 咆哮アニメーション開始
         /// </summary>
-        public void Wander()
+        public void Roar()
         {
             ResetAll();
-            _animator.SetBool(HashWander, true);
+            _animator.SetBool(HashRoar, true);
+        }
+
+        /// <summary>
+        /// 指定したアニメーションステートが再生中かチェック
+        /// </summary>
+        bool CheckCurrentState(int currentStateHash)
+        {
+            // BaseLayerのステート情報を取得
+            _currentStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+
+            // 再生中のステートが指定したステートと同じかチェック
+            bool check = (_currentStateInfo.shortNameHash == currentStateHash);
+
+            return check;
+        }
+
+        /// <summary>
+        /// 指定したアニメーションの終了チェック
+        /// </summary>
+        /// <returns>true:再生終了, false:再生中</returns>
+        public bool IsAnimFinished(int stateHash)
+        {
+            if (CheckCurrentState(stateHash))
+            {
+                // アニメーション終了待ち
+                float time = _currentStateInfo.normalizedTime;
+                if (time >= 1.0f)
+                    return true;
+            }
+            return false;
         }
     }
 }

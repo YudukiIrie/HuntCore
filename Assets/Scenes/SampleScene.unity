@@ -128,6 +128,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 366175167995203695, guid: 280420e3923e86b48a7bd5c1b58927a0, type: 3}
   m_PrefabInstance: {fileID: 1788431377}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &357090787 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 196076, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
+  m_PrefabInstance: {fileID: 961272894}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &357090790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357090787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af369b2f16e11d04186261ffd2f32e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 1788431379}
 --- !u!1 &552063320
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 409426, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 127.560585
+      value: 133.3
       objectReference: {fileID: 0}
     - target: {fileID: 409426, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
       propertyPath: m_LocalPosition.y
@@ -603,7 +621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 409426, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.7116928
+      value: 22.4
       objectReference: {fileID: 0}
     - target: {fileID: 409426, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1540,7 +1558,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 196076, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 357090790}
   m_SourcePrefab: {fileID: 100100000, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
 --- !u!1 &963194225
 GameObject:

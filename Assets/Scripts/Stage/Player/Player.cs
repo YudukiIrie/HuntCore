@@ -58,5 +58,13 @@ namespace Stage.Players
             if (collision.gameObject.CompareTag("Ground"))
                 NormalVector = collision.contacts[0].normal;
         }
+
+        /// <summary>
+        /// è’åÇÇéÛÇØÇÈ
+        /// </summary>
+        public void TakeImpact()
+        {
+            StateMachine.TransitionTo(StateMachine.ImpactedState);
+        }
     }
 }

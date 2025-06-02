@@ -10,20 +10,28 @@ namespace Stage.Enemies
     public class EnemyRoarState : IState
     {
         Enemy _enemy;   // “GƒNƒ‰ƒX
+        float _roarDistance;
 
         public EnemyRoarState(Enemy enemy)
         {
             _enemy = enemy;
+            _roarDistance = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).RoarDistance;
         }
 
         public void Enter()
         {
-            _enemy.Animation.ResetAll();
+            _enemy.Animation.Roar();
+
+            // ƒvƒŒƒCƒ„[‚ÉÕŒ‚‚ğ—^‚¦‚é
+            if (_enemy.CheckDistanceToPlayer() <= _roarDistance)
+                _enemy.Player.TakeImpact();
         }
 
         public void Update()
         {
-            
+            // === ‘JˆÚ ===
+            if (_enemy.Animation.IsAnimFinished(EnemyAnimation.HashRoar))
+                _enemy.StateMachine.TransitionTo(_enemy.StateMachine.IdleState);
         }
 
         public void FixedUpdate()

@@ -68,5 +68,9 @@ namespace Stage.Enemies
         public float FindDistance => _findDistance;
         [Header("ƒvƒŒƒCƒ„[”­Œ©‹——£")]
         [SerializeField] float _findDistance;
+
+        public float RoarDistance => _roarDistance;
+        [Header("™ôšK‹——£")]
+        [SerializeField] float _roarDistance;
     }
 }

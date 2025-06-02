@@ -11,6 +11,7 @@ namespace Stage.Enemies
     /// </summary>
     public class Enemy : MonoBehaviour
     {
+        public Player Player => _player;
         [Header("ƒvƒŒƒCƒ„[")]
         [SerializeField] Player _player;
 
