@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Stage.Player
+namespace Stage.Players
 {
     /// <summary>
     /// プレイヤーの機能を総括

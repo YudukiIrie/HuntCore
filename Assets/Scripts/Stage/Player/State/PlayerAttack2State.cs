@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Stage.Player
+namespace Stage.Players
 {
     /// <summary>
     /// プレイヤー攻撃2段目状態

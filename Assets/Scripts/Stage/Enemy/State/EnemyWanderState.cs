@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Stage.Enemy
+namespace Stage.Enemies
 {
     /// <summary>
     /// “G‚¤‚ë‚Â‚«ó‘Ô

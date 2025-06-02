@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Stage.Player
+namespace Stage.Players
 {
     /// <summary>
     /// ƒvƒŒƒCƒ„[ˆÚ“®ó‘Ô

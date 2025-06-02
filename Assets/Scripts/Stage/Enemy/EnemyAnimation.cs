@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Stage.Enemy
+namespace Stage.Enemies
 {
     /// <summary>
     /// 敵のアニメーションを管理

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Stage.Player
+namespace Stage.Players
 {
     /// <summary>
     /// 武器情報用スクリプタブルオブジェクト

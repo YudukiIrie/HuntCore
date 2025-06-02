@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Stage.Player;
-using Stage.Enemy;
+using Stage.Players;
+using Stage.Enemies;
 using Unity.VisualScripting;
 
 namespace Stage.HitCheck

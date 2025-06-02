@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Stage.Enemy
+namespace Stage.Enemies
 {
     /// <summary>
     /// “G‘Ò‹@ó‘Ô
@@ -23,12 +23,9 @@ namespace Stage.Enemy
 
         public void Update()
         {
-            // ‘Ò‹@‚©‚ç‚¤‚ë‚Â‚«‚Ö‚Ì‘JˆÚŠm—§‚ğæ“¾
-            var percent = EnemyDataList.Data.GetData(EnemyData.Type.NormalEnemy).IdleToWanderPercent;
-
             // === ó‘Ô‘JˆÚ ===
-            if (_enemy.IsTransitionHit(percent))
-                _enemy.StateMachine.TransitionTo(_enemy.StateMachine.WanderState);
+            // ™ôšK
+
         }
 
         public void FixedUpdate()

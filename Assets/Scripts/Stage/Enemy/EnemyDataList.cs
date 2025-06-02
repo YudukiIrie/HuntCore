@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Stage.Enemy
+namespace Stage.Enemies
 {
     /// <summary>
     /// 敵情報用スクリプタブルオブジェクト

@@ -1,4 +1,4 @@
-namespace Stage.Enemy
+namespace Stage.Enemies
 {
     /// <summary>
     /// 敵のステートを管理

@@ -1,15 +1,19 @@
+using Stage.Players;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Stage.Enemy
+namespace Stage.Enemies
 {
     /// <summary>
     /// 敵の機能を総括
     /// </summary>
     public class Enemy : MonoBehaviour
     {
+        [Header("プレイヤー")]
+        [SerializeField] Player _player;
+
         // 敵関連クラス
         public EnemyStateMachine StateMachine { get; private set; }
         public EnemyAnimation Animation { get; private set; }
@@ -40,6 +44,14 @@ namespace Stage.Enemy
         void FixedUpdate()
         {
             StateMachine.FixedUpdate();
+        }
+
+        /// <summary>
+        /// プレイヤーとの距離を返す
+        /// </summary>
+        public float CheckDistanceToPlayer()
+        {
+            return 0.0f;
         }
 
         /// <summary>

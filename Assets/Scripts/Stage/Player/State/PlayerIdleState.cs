@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Stage.Player
+namespace Stage.Players
 {
     /// <summary>
     /// ƒvƒŒƒCƒ„[‚Ì’Êíó‘Ô
