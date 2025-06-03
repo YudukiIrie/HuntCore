@@ -19,12 +19,14 @@ namespace Stage.Players
 
         public void Enter()
         {
-            
+            _player.Animation.Impacted();
         }
 
         public void Update()
         {
-
+            // === ó‘Ô‘JˆÚ ===
+            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashImpacted))
+                _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
         }
 
         public void FixedUpdate()

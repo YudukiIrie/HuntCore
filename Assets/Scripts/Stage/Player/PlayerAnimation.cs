@@ -16,6 +16,7 @@ namespace Stage.Players
         public static readonly int HashAttack1 = Animator.StringToHash("Attack1");
         public static readonly int HashAttack2 = Animator.StringToHash("Attack2");
         public static readonly int HashAttack3 = Animator.StringToHash("Attack3");
+        public static readonly int HashImpacted = Animator.StringToHash("Impacted");
 
         // コンポーネント
         Animator _animator;
@@ -37,6 +38,7 @@ namespace Stage.Players
             _animator.SetBool(HashAttack1, false);
             _animator.SetBool(HashAttack2, false);
             _animator.SetBool(HashAttack3, false);
+            _animator.SetBool(HashImpacted, false);
         }
 
         /// <summary>
@@ -73,6 +75,15 @@ namespace Stage.Players
         {
             ResetAll();
             _animator.SetBool(HashAttack3, true);
+        }
+
+        /// <summary>
+        /// 衝撃アニメーション開始
+        /// </summary>
+        public void Impacted()
+        {
+            ResetAll();
+            _animator.SetBool(HashImpacted, true);
         }
 
         /// <summary>

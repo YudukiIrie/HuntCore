@@ -11,11 +11,13 @@ namespace Stage.Enemies
         // 各ステート
         public EnemyIdleState IdleState { get; private set; }
         public EnemyRoarState RoarState { get; private set; }
+        public EnemyAlertState AlertState { get; private set; }
 
         public EnemyStateMachine(Enemy enemy)
         {
             IdleState = new EnemyIdleState(enemy);
             RoarState = new EnemyRoarState(enemy);
+            AlertState = new EnemyAlertState(enemy);
         }
 
         /// <summary>
