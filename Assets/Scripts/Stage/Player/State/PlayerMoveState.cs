@@ -9,14 +9,9 @@ namespace Stage.Players
     /// </summary>
     public class PlayerMoveState : IState
     {
-        // プレイヤークラス
-        Player _player;
-
-        // 移動方向と速度
-        Vector3 _velocity;
-
-        // 向くべき角度
-        Quaternion _targetRot;
+        Player _player;         // プレイヤークラス
+        Vector3 _velocity;      // 移動方向と速度
+        Quaternion _targetRot;  // 向くべき角度
 
         public PlayerMoveState(Player player)
         {
@@ -80,7 +75,7 @@ namespace Stage.Players
 
             // == 取得した角度をオブジェクトに反映 ==
             // 落ち着きをもって回転してほしいため制限を設ける
-            float rotSpeed = PlayerData.Data.DrawnRotSpeed * Time.deltaTime;
+            float rotSpeed = PlayerData.Data.DrawnRotSpeed;
             _player.transform.rotation = Quaternion.RotateTowards(_player.transform.rotation, _targetRot, rotSpeed);
         }
 

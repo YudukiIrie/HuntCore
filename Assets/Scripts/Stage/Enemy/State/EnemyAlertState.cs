@@ -10,10 +10,12 @@ namespace Stage.Enemies
     public class EnemyAlertState : IState
     {
         Enemy _enemy;   // “GƒNƒ‰ƒX
+        float _attackDistance;
 
         public EnemyAlertState(Enemy enemy)
         {
             _enemy = enemy;
+            _attackDistance = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackDsitance;
         }
 
         public void Enter()
@@ -24,7 +26,8 @@ namespace Stage.Enemies
         public void Update()
         {
             // === ‘JˆÚ ===
-            
+            if (_enemy.CheckDistanceToPlayer() > _attackDistance)
+                _enemy.StateMachine.TransitionTo(_enemy.StateMachine.ChaseState);
         }
 
         public void FixedUpdate()

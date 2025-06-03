@@ -10,6 +10,7 @@ namespace Stage.Enemies
         // AnimatorのパラメータハッシュID
         public static readonly int HashRoar = Animator.StringToHash("Roar");
         public static readonly int HashAlert = Animator.StringToHash("Alert");
+        public static readonly int HashChase = Animator.StringToHash("Chase");
 
         // コンポーネント
         Animator _animator;
@@ -29,6 +30,7 @@ namespace Stage.Enemies
         {
             _animator.SetBool(HashRoar, false);
             _animator.SetBool(HashAlert, false);
+            _animator.SetBool(HashChase, false);
         }
 
         /// <summary>
@@ -47,6 +49,12 @@ namespace Stage.Enemies
         {
             ResetAll();
             _animator.SetBool(HashAlert, true);
+        }
+
+        public void Chase()
+        {
+            ResetAll();
+            _animator.SetBool(HashChase, true);
         }
 
         /// <summary>

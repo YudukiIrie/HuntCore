@@ -20,12 +20,13 @@ namespace Stage.Enemies
         public EnemyAnimation Animation { get; private set; }
 
         // コンポーネント
-        public NavMeshAgent Agent { get; private set; }
+        public Rigidbody Rigidbody { get; private set; }
         public Animator Animator { get; private set; }
+
 
         void Awake()
         {
-            Agent = GetComponent<NavMeshAgent>();
+            Rigidbody = GetComponent<Rigidbody>();
             Animator = GetComponent<Animator>();
 
             StateMachine = new EnemyStateMachine(this);

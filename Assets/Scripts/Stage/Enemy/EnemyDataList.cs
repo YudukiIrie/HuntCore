@@ -72,5 +72,17 @@ namespace Stage.Enemies
         public float RoarDistance => _roarDistance;
         [Header("咆哮距離")]
         [SerializeField] float _roarDistance;
+
+        public float AttackDsitance => _attackDistance;
+        [Header("攻撃をするためのプレイヤーとの距離")]
+        [SerializeField] float _attackDistance;
+
+        public float ChaseSpeed => _chaseSpeed;
+        [Header("追跡速度")]
+        [SerializeField] float _chaseSpeed;
+
+        public float ChaseRotSpeed => _chaseRotSpeed;
+        [Header("追跡時回転速度")]
+        [SerializeField] float _chaseRotSpeed;
     }
 }
