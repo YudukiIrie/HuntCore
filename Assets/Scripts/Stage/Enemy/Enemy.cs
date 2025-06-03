@@ -52,7 +52,17 @@ namespace Stage.Enemies
         /// </summary>
         public float CheckDistanceToPlayer()
         {
-            return Vector3.Distance(transform.position, _player.transform.position);
+            // À•W‚Ìæ“¾
+            var a = transform.position;
+            var b = _player.transform.position;
+
+            // Še¬•ª‚Ì·ˆÙ‚ğæ“¾
+            var x = a.x - b.x;
+            var y = a.y - b.y;
+            var z = a.z - b.z;
+
+            // ‹——£‚ÌZo
+            return Mathf.Sqrt((x * x) + (y * y) + (z * z));
         }
 
         /// <summary>
