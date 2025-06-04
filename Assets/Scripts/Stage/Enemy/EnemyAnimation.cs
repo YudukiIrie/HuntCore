@@ -11,6 +11,7 @@ namespace Stage.Enemies
         public static readonly int HashRoar = Animator.StringToHash("Roar");
         public static readonly int HashAlert = Animator.StringToHash("Alert");
         public static readonly int HashChase = Animator.StringToHash("Chase");
+        public static readonly int HashAttack = Animator.StringToHash("Attack");
 
         // コンポーネント
         Animator _animator;
@@ -31,6 +32,7 @@ namespace Stage.Enemies
             _animator.SetBool(HashRoar, false);
             _animator.SetBool(HashAlert, false);
             _animator.SetBool(HashChase, false);
+            _animator.SetBool(HashAttack, false);
         }
 
         /// <summary>
@@ -51,10 +53,22 @@ namespace Stage.Enemies
             _animator.SetBool(HashAlert, true);
         }
 
+        /// <summary>
+        /// 追跡アニメーション開始
+        /// </summary>
         public void Chase()
         {
             ResetAll();
             _animator.SetBool(HashChase, true);
+        }
+
+        /// <summary>
+        /// 攻撃アニメーション開始
+        /// </summary>
+        public void Attack()
+        {
+            ResetAll();
+            _animator.SetBool(HashAttack, true);
         }
 
         /// <summary>

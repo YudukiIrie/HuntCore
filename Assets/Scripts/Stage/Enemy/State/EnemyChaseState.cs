@@ -14,12 +14,14 @@ namespace Stage.Enemies
         Quaternion _targetRot;  // Œü‚­‚×‚«Šp“x
         float _chaseSpeed;
         float _chaseRotSpeed;
+        float _attackDistance;
 
         public EnemyChaseState(Enemy enemy)
         {
             _enemy = enemy;
             _chaseSpeed = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).ChaseSpeed;
             _chaseRotSpeed = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).ChaseRotSpeed;
+            _attackDistance = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackDistance;
         }
 
         public void Enter()
@@ -41,7 +43,9 @@ namespace Stage.Enemies
                 _targetRot = Quaternion.LookRotation(_velocity);
 
             // === ‘JˆÚ ===
-            
+            // Œx‰ú
+            if (_enemy.CheckDistanceToPlayer() <= _attackDistance)
+                _enemy.StateMachine.TransitionTo(_enemy.StateMachine.AlertState);
         }
 
         public void FixedUpdate()

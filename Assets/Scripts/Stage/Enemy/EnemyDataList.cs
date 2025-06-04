@@ -73,7 +73,7 @@ namespace Stage.Enemies
         [Header("™ôšK‹——£")]
         [SerializeField] float _roarDistance;
 
-        public float AttackDsitance => _attackDistance;
+        public float AttackDistance => _attackDistance;
         [Header("UŒ‚‚ğ‚·‚é‚½‚ß‚ÌƒvƒŒƒCƒ„[‚Æ‚Ì‹——£")]
         [SerializeField] float _attackDistance;
 
@@ -84,5 +84,9 @@ namespace Stage.Enemies
         public float ChaseRotSpeed => _chaseRotSpeed;
         [Header("’ÇÕ‰ñ“]‘¬“x")]
         [SerializeField] float _chaseRotSpeed;
+
+        public float AttackInterval => _attackInterval;
+        [Header("UŒ‚‰Â”\ŠÔŠu")]
+        [SerializeField] float _attackInterval;
     }
 }

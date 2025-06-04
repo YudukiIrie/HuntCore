@@ -15,7 +15,7 @@ namespace Stage.Enemies
         public EnemyAlertState(Enemy enemy)
         {
             _enemy = enemy;
-            _attackDistance = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackDsitance;
+            _attackDistance = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackDistance;
         }
 
         public void Enter()
@@ -26,8 +26,11 @@ namespace Stage.Enemies
         public void Update()
         {
             // === ‘JˆÚ ===
+            // ’ÇÕ
             if (_enemy.CheckDistanceToPlayer() > _attackDistance)
                 _enemy.StateMachine.TransitionTo(_enemy.StateMachine.ChaseState);
+            // UŒ‚
+            else _enemy.StateMachine.TransitionTo(_enemy.StateMachine.AttackState);
         }
 
         public void FixedUpdate()

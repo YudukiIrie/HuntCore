@@ -13,6 +13,7 @@ namespace Stage.Enemies
         public EnemyRoarState RoarState { get; private set; }
         public EnemyAlertState AlertState { get; private set; }
         public EnemyChaseState ChaseState { get; private set; }
+        public EnemyAttackState AttackState { get; private set; }
 
         public EnemyStateMachine(Enemy enemy)
         {
@@ -20,6 +21,7 @@ namespace Stage.Enemies
             RoarState = new EnemyRoarState(enemy);
             AlertState = new EnemyAlertState(enemy);
             ChaseState = new EnemyChaseState(enemy);
+            AttackState = new EnemyAttackState(enemy);
         }
 
         /// <summary>

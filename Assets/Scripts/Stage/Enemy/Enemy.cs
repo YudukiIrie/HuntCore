@@ -23,6 +23,8 @@ namespace Stage.Enemies
         public Rigidbody Rigidbody { get; private set; }
         public Animator Animator { get; private set; }
 
+        float _attackTimer; // 攻撃用タイマー
+        bool _canAttack;    // 攻撃状態フラグ
 
         void Awake()
         {
@@ -67,13 +69,25 @@ namespace Stage.Enemies
         }
 
         /// <summary>
-        /// 状態遷移の確率判定
+        /// 攻撃タイマーの更新
         /// </summary>
-        /// <param name="percent">確率(0.0～1.0)</param>
-        /// <returns>true:当たり, false:外れ</returns>
-        public bool IsTransitionHit(float percent)
+        void UpdateAttackTimer()
         {
-            return Random.value <= percent;
+
+        }
+
+        /// <summary>
+        /// 攻撃状態の確認と切り替え
+        /// </summary>
+        public bool CheckAttackState()
+        {
+            if (_canAttack)
+            {
+                _canAttack = false;
+                return true;
+            }
+
+            return false;
         }
     }
 }
