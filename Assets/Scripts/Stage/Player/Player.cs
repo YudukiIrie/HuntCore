@@ -11,7 +11,7 @@ namespace Stage.Players
     public class Player : MonoBehaviour
     {
         [Header("当たり判定クラス")]
-        public SwordHitboxOBB HitCheck;
+        public OBBHitChecker HitCheck;
 
         // プレイヤー関連のクラス
         public PlayerStateMachine StateMachine {  get; private set; }

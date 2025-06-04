@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemies:
   - _enemyType: 0
-    _enemySize: {x: 1, y: 1, z: 1}
+    _enemySize: {x: 1.8, y: 3, z: 5}
     _findDistance: 10
     _roarDistance: 15
-    _attackDistance: 5
+    _attackDistance: 6
     _chaseSpeed: 5
     _chaseRotSpeed: 10
     _attackInterval: 3

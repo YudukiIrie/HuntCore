@@ -74,5 +74,9 @@ namespace Stage.Players
         public float ChainTime => _chainTime;
         [Header("ƒRƒ“ƒ{ŠÔ—P—\ŽžŠÔ")]
         [SerializeField] float _chainTime;
+
+        public float IdleToOtherDuration => _idleToOtherDuration;
+        [Header("‘Ò‹@‚©‚ç‘JˆÚ‰Â”\‚Ü‚Å‚ÌŽžŠÔ")]
+        [SerializeField] float _idleToOtherDuration;
     }
 }

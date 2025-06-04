@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &101587087
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 101587088}
+  m_Layer: 0
+  m_Name: EnemyPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &101587088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101587087}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.5, z: -0.77}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 357090796}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &181104587 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 366175167995203695, guid: 280420e3923e86b48a7bd5c1b58927a0, type: 3}
@@ -196,6 +227,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!4 &357090796 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 409426, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
+  m_PrefabInstance: {fileID: 961272894}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &552063320
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +331,7 @@ Transform:
   m_GameObject: {fileID: 552063320}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.45106, y: 0.82, z: -3.0496373}
+  m_LocalPosition: {x: 22.1, y: 0.57, z: -5.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1619,7 +1655,10 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 44f6eff62d2175840b5cd6cbca205747, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 409426, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 101587088}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 196076, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
       insertIndex: -1
@@ -2527,7 +2566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _greatSword: {fileID: 1899350448}
-  _enemy: {fileID: 552063320}
+  _enemy: {fileID: 101587087}
   _noHitMaterial: {fileID: 2100000, guid: 5f7efd1b386efb04e91c6fc44d89706a, type: 2}
   _hitMaterial: {fileID: 2100000, guid: b8dce7a662c61fe4bb9b43c2f9e04a22, type: 2}
 --- !u!4 &1973595795

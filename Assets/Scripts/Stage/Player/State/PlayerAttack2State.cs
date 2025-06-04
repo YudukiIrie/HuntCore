@@ -22,7 +22,7 @@ namespace Stage.Players
         public void Enter()
         {
             _player.Animation.Attack2();
-            _player.HitCheck.ResetHitEnemies();
+            _player.HitCheck.ResetHitInfo();
         }
 
         public void Update()
@@ -37,9 +37,9 @@ namespace Stage.Players
             // === “–‚½‚è”»’è ===
             if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashAttack2) >= WeaponData.Data.Attack2HitStartRatio)
             {
-                if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB))
+                if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB, _player.HitCheck.EnemyOBB))
                 {
-                    _player.HitCheck.ChangeEnemyColor();
+                    //_player.HitCheck.ChangeEnemyColor();
                     Debug.Log("2“–‚½‚Á‚½");
                 }
             }
@@ -70,7 +70,6 @@ namespace Stage.Players
         public void Exit()
         {
             _elapseTime = 0.0f;
-            _player.HitCheck.ResetEnemyColor();
         }
     }
 }

@@ -22,3 +22,4 @@ MonoBehaviour:
   _attack3RotSpeed: 100
   _magnitudeBorder: 0.8
   _chainTime: 0.3
+  _idleToOtherDuration: 0.4
