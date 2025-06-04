@@ -23,6 +23,7 @@ namespace Stage.Enemies
         public Rigidbody Rigidbody { get; private set; }
         public Animator Animator { get; private set; }
 
+        float _attackInterval;
         float _attackTimer; // 攻撃用タイマー
         bool _canAttack;    // 攻撃状態フラグ
 
@@ -33,6 +34,8 @@ namespace Stage.Enemies
 
             StateMachine = new EnemyStateMachine(this);
             Animation = new EnemyAnimation(Animator);
+
+            _attackInterval = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackInterval;
         }
 
         void Start()
@@ -42,6 +45,8 @@ namespace Stage.Enemies
 
         void Update()
         {
+            UpdateAttackTimer();
+
             StateMachine.Update();
         }
 
@@ -73,12 +78,21 @@ namespace Stage.Enemies
         /// </summary>
         void UpdateAttackTimer()
         {
-
+            if (!_canAttack)
+            {
+                _attackTimer += Time.deltaTime;
+                if (_attackTimer >= _attackInterval)
+                {
+                    _attackTimer = 0.0f;
+                    _canAttack = true;
+                }
+            }
         }
 
         /// <summary>
         /// 攻撃状態の確認と切り替え
         /// </summary>
+        /// <returns>true:攻撃可, false:攻撃不可</returns>
         public bool CheckAttackState()
         {
             if (_canAttack)

@@ -20,4 +20,4 @@ MonoBehaviour:
     _attackDistance: 5
     _chaseSpeed: 5
     _chaseRotSpeed: 10
-    _attackInterval: 2
+    _attackInterval: 3

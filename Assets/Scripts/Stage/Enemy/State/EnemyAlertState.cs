@@ -30,7 +30,8 @@ namespace Stage.Enemies
             if (_enemy.CheckDistanceToPlayer() > _attackDistance)
                 _enemy.StateMachine.TransitionTo(_enemy.StateMachine.ChaseState);
             // UŒ‚
-            else _enemy.StateMachine.TransitionTo(_enemy.StateMachine.AttackState);
+            else if (_enemy.CheckAttackState())
+                _enemy.StateMachine.TransitionTo(_enemy.StateMachine.AttackState);
         }
 
         public void FixedUpdate()
