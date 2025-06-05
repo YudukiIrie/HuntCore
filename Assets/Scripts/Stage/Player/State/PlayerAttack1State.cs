@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Stage.Players
@@ -9,15 +7,17 @@ namespace Stage.Players
     /// </summary>
     public class PlayerAttack1State : IState
     {
-        // プレイヤークラス
-        Player _player;
+        Player _player;     // プレイヤークラス
+        float _elapseTime;  // コンボ間猶予経過時間
+        float _hitStartRatio;
+        float _chainTime;
 
-        // コンボ間猶予経過時間
-        float _elapseTime;
 
         public PlayerAttack1State(Player player)
         {
             _player = player;
+            _hitStartRatio = WeaponData.Data.Attack1HitStartRatio;
+            _chainTime = PlayerData.Data.ChainTime;
         }
 
         public void Enter()
@@ -29,11 +29,10 @@ namespace Stage.Players
         public void Update()
         {
             // === 当たり判定 ===
-            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashAttack1) >= WeaponData.Data.Attack1HitStartRatio)
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashAttack1) >= _hitStartRatio)
             {
                 if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB, _player.HitCheck.EnemyOBB))
                 {
-                    //_player.HitCheck.ChangeEnemyColor();
                     Debug.Log("1当たった");
                 }
             }
@@ -43,7 +42,7 @@ namespace Stage.Players
             {
                 _elapseTime += Time.deltaTime;
                 // 攻撃2
-                if (_elapseTime <= PlayerData.Data.ChainTime)
+                if (_elapseTime <= _chainTime)
                 {
                     if (_player.Action.Player.Attack.IsPressed())
                         _player.StateMachine.TransitionTo(_player.StateMachine.Attack2State);

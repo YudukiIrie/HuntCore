@@ -177,6 +177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1788431379}
+  _rigidbody: {fileID: 357090794}
+  _animator: {fileID: 357090797}
 --- !u!136 &357090793
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -230,6 +232,11 @@ Rigidbody:
 --- !u!4 &357090796 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 409426, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
+  m_PrefabInstance: {fileID: 961272894}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &357090797 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9569754, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
   m_PrefabInstance: {fileID: 961272894}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &552063320
@@ -2238,6 +2245,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitCheck: {fileID: 1973595794}
+  _rigidbody: {fileID: 1788431383}
+  _animator: {fileID: 1788431385}
 --- !u!114 &1788431380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2323,6 +2332,11 @@ CapsuleCollider:
   m_Height: 1.7795646
   m_Direction: 1
   m_Center: {x: 0, y: 0.877468, z: -0.038021266}
+--- !u!95 &1788431385 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 280420e3923e86b48a7bd5c1b58927a0, type: 3}
+  m_PrefabInstance: {fileID: 1788431377}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1899350448
 GameObject:
   m_ObjectHideFlags: 0
@@ -2567,8 +2581,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _greatSword: {fileID: 1899350448}
   _enemy: {fileID: 101587087}
-  _noHitMaterial: {fileID: 2100000, guid: 5f7efd1b386efb04e91c6fc44d89706a, type: 2}
-  _hitMaterial: {fileID: 2100000, guid: b8dce7a662c61fe4bb9b43c2f9e04a22, type: 2}
 --- !u!4 &1973595795
 Transform:
   m_ObjectHideFlags: 0

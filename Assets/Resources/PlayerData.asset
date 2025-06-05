@@ -18,8 +18,8 @@ MonoBehaviour:
   _drawnMoveSpeed: 2.5
   _rotSpeed: 600
   _drawnRotSpeed: 10
-  _attack2RotSpeed: 100
-  _attack3RotSpeed: 100
+  _attack2RotSpeed: 3
+  _attack3RotSpeed: 3
   _magnitudeBorder: 0.8
   _chainTime: 0.3
   _idleToOtherDuration: 0.4

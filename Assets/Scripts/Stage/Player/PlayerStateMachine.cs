@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Stage.Players
@@ -22,11 +20,11 @@ namespace Stage.Players
 
         public PlayerStateMachine(Player player)
         {
-            IdleState = new PlayerIdleState(player);
-            MoveState = new PlayerMoveState(player);
-            Attack1State = new PlayerAttack1State(player);
-            Attack2State = new PlayerAttack2State(player);
-            Attack3State = new PlayerAttack3State(player);
+            IdleState     = new PlayerIdleState(player);
+            MoveState     = new PlayerMoveState(player);
+            Attack1State  = new PlayerAttack1State(player);
+            Attack2State  = new PlayerAttack2State(player);
+            Attack3State  = new PlayerAttack3State(player);
             ImpactedState = new PlayerImpactedState(player);
         }
 

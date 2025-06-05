@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Stage.Players
 {
@@ -23,7 +20,6 @@ namespace Stage.Players
         public void Enter()
         {
             _player.Animation.ResetAll();
-            Debug.Log("‘Ò‹@");
         }
 
         public void Update()

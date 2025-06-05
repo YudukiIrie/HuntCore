@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Stage.Players;
 using Stage.Enemies;
-using Unity.VisualScripting;
 
 namespace Stage.HitCheck
 {
@@ -145,13 +142,15 @@ namespace Stage.HitCheck
         #region デバッグ用
         void OnDrawGizmos()
         {
-            var position = EnemyOBB.Center;
-            var rotation = _enemy.transform.rotation;
-            var scale = new Vector3(EnemyOBB.Radius.x * 2, EnemyOBB.Radius.y * 2, EnemyOBB.Radius.z * 2);
+            if (EnemyOBB != null)
+            {
+                var position = EnemyOBB.Center;
+                var rotation = _enemy.transform.rotation;
+                var scale = new Vector3(EnemyOBB.Radius.x, EnemyOBB.Radius.y, EnemyOBB.Radius.z);
+                Gizmos.matrix = Matrix4x4.TRS(position, rotation, scale);
 
-            Gizmos.matrix = Matrix4x4.TRS(position, rotation, scale);
-
-            Gizmos.DrawCube(Vector3.zero, Vector3.one);
+                Gizmos.DrawCube(Vector3.zero, Vector3.one);
+            }
         }
         #endregion
     }

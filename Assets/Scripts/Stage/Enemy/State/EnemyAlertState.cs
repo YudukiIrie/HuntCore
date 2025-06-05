@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Stage.Enemies
@@ -25,7 +23,7 @@ namespace Stage.Enemies
 
         public void Update()
         {
-            // === ‘JˆÚ ===
+            // === ó‘Ô‘JˆÚ ===
             // ’ÇÕ
             if (_enemy.CheckDistanceToPlayer() > _attackDistance)
                 _enemy.StateMachine.TransitionTo(_enemy.StateMachine.ChaseState);

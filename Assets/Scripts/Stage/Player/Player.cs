@@ -1,6 +1,4 @@
 using Stage.HitCheck;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Stage.Players
@@ -19,22 +17,23 @@ namespace Stage.Players
         public PlayerAction Action { get; private set; }
 
         // コンポーネント
-        public Rigidbody Rigidbody { get; private set; }
-        public Animator Animator {  get; private set; }
+        public Rigidbody Rigidbody => _rigidbody;
+        [SerializeField] Rigidbody _rigidbody;
+        public Animator Animator => _animator;
+        [SerializeField] Animator _animator;
 
         // 接触中の面に対する法線ベクトル
         public Vector3 NormalVector {  get; private set; }
 
+        // タグ名
+        const string GROUND_TAG = "Ground";
+
         void Awake()
         {
-            // コンポーネント取得
-            Rigidbody = GetComponent<Rigidbody>();
-            Animator = GetComponent<Animator>();
-
-            // 各クラスの作成
             StateMachine = new PlayerStateMachine(this);
-            Animation = new PlayerAnimation(Animator);
+            Animation = new PlayerAnimation(_animator);
             Action = new PlayerAction();
+
             Action.Enable();
         }
 
@@ -55,7 +54,7 @@ namespace Stage.Players
 
         void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Ground"))
+            if (collision.gameObject.CompareTag(GROUND_TAG))
                 NormalVector = collision.contacts[0].normal;
         }
 

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Stage.Enemies
 {
     /// <summary>
@@ -17,10 +19,10 @@ namespace Stage.Enemies
 
         public EnemyStateMachine(Enemy enemy)
         {
-            IdleState = new EnemyIdleState(enemy);
-            RoarState = new EnemyRoarState(enemy);
-            AlertState = new EnemyAlertState(enemy);
-            ChaseState = new EnemyChaseState(enemy);
+            IdleState   = new EnemyIdleState(enemy);
+            RoarState   = new EnemyRoarState(enemy);
+            AlertState  = new EnemyAlertState(enemy);
+            ChaseState  = new EnemyChaseState(enemy);
             AttackState = new EnemyAttackState(enemy);
         }
 

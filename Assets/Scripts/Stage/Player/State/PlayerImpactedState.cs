@@ -1,6 +1,3 @@
-using Stage.Enemies;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Stage.Players
@@ -25,6 +22,7 @@ namespace Stage.Players
         public void Update()
         {
             // === ó‘Ô‘JˆÚ ===
+            // ‘Ò‹@
             if (_player.Animation.IsAnimFinished(PlayerAnimation.HashImpacted))
                 _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
         }

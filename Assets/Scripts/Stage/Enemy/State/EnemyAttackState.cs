@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Stage.Enemies
@@ -23,7 +21,8 @@ namespace Stage.Enemies
 
         public void Update()
         {
-            // === ‘JˆÚ ===
+            // === ó‘Ô‘JˆÚ ===
+            // Œx‰ú
             if (_enemy.Animation.IsAnimFinished(EnemyAnimation.HashAttack))
                 _enemy.StateMachine.TransitionTo(_enemy.StateMachine.AlertState);
         }

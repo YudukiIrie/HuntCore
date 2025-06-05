@@ -1,8 +1,5 @@
 using Stage.Players;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Stage.Enemies
 {
@@ -20,8 +17,10 @@ namespace Stage.Enemies
         public EnemyAnimation Animation { get; private set; }
 
         // コンポーネント
-        public Rigidbody Rigidbody { get; private set; }
-        public Animator Animator { get; private set; }
+        public Rigidbody Rigidbody => _rigidbody;
+        [SerializeField] Rigidbody _rigidbody;
+        public Animator Animator => _animator;
+        [SerializeField] Animator _animator;
 
         float _attackInterval;
         float _attackTimer; // 攻撃用タイマー
@@ -29,11 +28,8 @@ namespace Stage.Enemies
 
         void Awake()
         {
-            Rigidbody = GetComponent<Rigidbody>();
-            Animator = GetComponent<Animator>();
-
             StateMachine = new EnemyStateMachine(this);
-            Animation = new EnemyAnimation(Animator);
+            Animation = new EnemyAnimation(_animator);
 
             _attackInterval = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackInterval;
         }

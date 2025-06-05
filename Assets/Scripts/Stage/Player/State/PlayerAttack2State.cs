@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace Stage.Players
@@ -11,18 +8,25 @@ namespace Stage.Players
     public class PlayerAttack2State : IState
     {
         Player _player;         // プレイヤークラス
-        float _elapseTime;      // コンボ間猶予経過時間
         Quaternion _targetRot;  // 視点方向ベクトル
+        float _elapseTime;      // コンボ間猶予経過時間
+        float _rotSpeed;
+        float _hitStartRatio;
+        float _chainTime;
 
         public PlayerAttack2State(Player player)
         {
             _player = player;
+            _rotSpeed = PlayerData.Data.Attack2RotSpeed;
+            _hitStartRatio = WeaponData.Data.Attack2HitStartRatio;
+            _chainTime = PlayerData.Data.ChainTime;
         }
 
         public void Enter()
         {
             _player.Animation.Attack2();
             _player.HitCheck.ResetHitInfo();
+            _targetRot = _player.transform.rotation;
         }
 
         public void Update()
@@ -35,11 +39,10 @@ namespace Stage.Players
             _targetRot = Quaternion.LookRotation(viewV);
 
             // === 当たり判定 ===
-            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashAttack2) >= WeaponData.Data.Attack2HitStartRatio)
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashAttack2) >= _hitStartRatio)
             {
                 if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB, _player.HitCheck.EnemyOBB))
                 {
-                    //_player.HitCheck.ChangeEnemyColor();
                     Debug.Log("2当たった");
                 }
             }
@@ -49,7 +52,7 @@ namespace Stage.Players
             {
                 _elapseTime += Time.deltaTime;
                 // 攻撃3
-                if (_elapseTime <= PlayerData.Data.ChainTime)
+                if (_elapseTime <= _chainTime)
                 {
                     if (_player.Action.Player.Attack.IsPressed())
                         _player.StateMachine.TransitionTo(_player.StateMachine.Attack3State);
@@ -63,8 +66,7 @@ namespace Stage.Players
         public void FixedUpdate()
         {
             // 取得した角度に制限を設けオブジェクトに反映
-            float rotSpeed = PlayerData.Data.Attack2RotSpeed * Time.deltaTime;
-            _player.transform.rotation = Quaternion.RotateTowards(_player.transform.rotation, _targetRot, rotSpeed);
+            _player.transform.rotation = Quaternion.RotateTowards(_player.transform.rotation, _targetRot, _rotSpeed);
         }
 
         public void Exit()

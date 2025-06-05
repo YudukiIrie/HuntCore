@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Stage.Enemies
@@ -42,7 +40,7 @@ namespace Stage.Enemies
             if (_velocity.magnitude > 0.001f)
                 _targetRot = Quaternion.LookRotation(_velocity);
 
-            // === ‘JˆÚ ===
+            // === ó‘Ô‘JˆÚ ===
             // Œx‰ú
             if (_enemy.CheckDistanceToPlayer() <= _attackDistance)
                 _enemy.StateMachine.TransitionTo(_enemy.StateMachine.AlertState);
