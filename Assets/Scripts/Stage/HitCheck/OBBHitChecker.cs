@@ -142,14 +142,53 @@ namespace Stage.HitCheck
         #region デバッグ用
         void OnDrawGizmos()
         {
+            // 初期マトリックスの保存
+            Matrix4x4 oldMatrix = Gizmos.matrix;
+
+            // 色の作成
+            Color red = new Color(1.0f, 0.0f, 0.0f, 0.5f);
+            Color white = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+
+            // === 敵OBB ===
             if (EnemyOBB != null)
             {
-                var position = EnemyOBB.Center;
+                var obb = EnemyOBB;
+
+                // マトリックス情報の取得
+                var position = obb.Center;
                 var rotation = _enemy.transform.rotation;
-                var scale = new Vector3(EnemyOBB.Radius.x, EnemyOBB.Radius.y, EnemyOBB.Radius.z);
+                var scale = new Vector3(obb.Radius.x, obb.Radius.y, obb.Radius.z) * 2;
+
+                // 色の変更
+                Gizmos.color = obb.IsHit ? red : white;
+
+                // マトリックスの更新
                 Gizmos.matrix = Matrix4x4.TRS(position, rotation, scale);
 
+                // 描画
                 Gizmos.DrawCube(Vector3.zero, Vector3.one);
+                Gizmos.matrix = oldMatrix;
+            }
+
+            // === 大剣OBB ===
+            if (GreatSwordOBB != null)
+            {
+                var obb = GreatSwordOBB;
+
+                // マトリックス情報の取得
+                var position = obb.Center;
+                var rotation = _greatSword.transform.rotation;
+                var scale = new Vector3(obb.Radius.x, obb.Radius.y, obb.Radius.z) * 2;
+
+                // 色の変更
+                Gizmos.color = obb.IsHit ? red : white;
+
+                // マトリックスの更新
+                Gizmos.matrix = Matrix4x4.TRS(position, rotation, scale);
+
+                // 描画
+                Gizmos.DrawCube(Vector3.zero, Vector3.one);
+                Gizmos.matrix = oldMatrix;
             }
         }
         #endregion

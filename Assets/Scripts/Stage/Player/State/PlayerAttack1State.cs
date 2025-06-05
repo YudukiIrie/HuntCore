@@ -23,7 +23,6 @@ namespace Stage.Players
         public void Enter()
         {
             _player.Animation.Attack1();
-            _player.HitCheck.ResetHitInfo();
         }
 
         public void Update()
@@ -61,6 +60,7 @@ namespace Stage.Players
         public void Exit()
         {
             _elapseTime = 0.0f;
+            _player.HitCheck.ResetHitInfo();
         }
     }
 }

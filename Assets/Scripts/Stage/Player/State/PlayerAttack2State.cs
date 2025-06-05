@@ -25,7 +25,6 @@ namespace Stage.Players
         public void Enter()
         {
             _player.Animation.Attack2();
-            _player.HitCheck.ResetHitInfo();
             _targetRot = _player.transform.rotation;
         }
 
@@ -72,6 +71,7 @@ namespace Stage.Players
         public void Exit()
         {
             _elapseTime = 0.0f;
+            _player.HitCheck.ResetHitInfo();
         }
     }
 }
