@@ -8,8 +8,9 @@ namespace Stage.Players
     /// </summary>
     public class Player : MonoBehaviour
     {
+        public OBBHitChecker HitCheck => _hitCheck;
         [Header("当たり判定クラス")]
-        public OBBHitChecker HitCheck;
+        [SerializeField] OBBHitChecker _hitCheck;
 
         // プレイヤー関連のクラス
         public PlayerStateMachine StateMachine {  get; private set; }

@@ -32,7 +32,7 @@ namespace Stage.Players
             {
                 if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB, _player.HitCheck.EnemyOBB))
                 {
-                    Debug.Log("1ìñÇΩÇ¡ÇΩ");
+                    Debug.Log("çUåÇ1ÉqÉbÉg");
                 }
             }
 
