@@ -8,9 +8,15 @@ namespace Stage.Players
     /// </summary>
     public class Player : MonoBehaviour
     {
-        public OBBHitChecker HitCheck => _hitCheck;
-        [Header("当たり判定クラス")]
-        [SerializeField] OBBHitChecker _hitCheck;
+        [field: Header("当たり判定クラス")]
+        [field: SerializeField]public OBBHitChecker HitCheck { get; private set; }
+
+        [field: Header("武器残像生成クラス")]
+        [field: SerializeField] public WeaponAfterImageSpawner Spawner { get; private set; }
+
+        [field: Header("武器ゲームオブジェクト")]
+        [field: SerializeField] public GameObject Weapon { get; private set; }
+
 
         // プレイヤー関連のクラス
         public PlayerStateMachine StateMachine {  get; private set; }

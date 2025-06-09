@@ -36,6 +36,9 @@ namespace Stage.Players
                 }
             }
 
+            // === c‘œ‚Ì¶¬ ===
+            _player.Spawner.Spawn(_player.Weapon.transform);
+
             // === ó‘Ô‘JˆÚ ===
             if (_player.Animation.IsAnimFinished(PlayerAnimation.HashAttack1))
             {
