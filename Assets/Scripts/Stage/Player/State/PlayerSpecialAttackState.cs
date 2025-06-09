@@ -3,25 +3,27 @@ using UnityEngine;
 namespace Stage.Players
 {
     /// <summary>
-    /// プレイヤー攻撃3段目状態
+    /// プレイヤースペシャル攻撃状態
     /// </summary>
-    public class PlayerAttack3State : IState
+    public class PlayerSpecialAttackState : IState
     {
         Player _player;         // プレイヤークラス
         Quaternion _targetRot;  // 視点方向ベクトル
         float _rotSpeed;
         float _hitStartRatio;
+        float _afterImageEndRatio;
 
-        public PlayerAttack3State(Player player)
+        public PlayerSpecialAttackState(Player player)
         {
             _player = player;
-            _rotSpeed = PlayerData.Data.Attack3RotSpeed;
-            _hitStartRatio = WeaponData.Data.Attack3HitStartRatio;
+            _rotSpeed = PlayerData.Data.SpecialAttackRotSpeed;
+            _hitStartRatio = WeaponData.Data.SpecialAttackHitStartRatio;
+            _afterImageEndRatio = WeaponData.Data.AfterImageEndRatio;
         }
 
         public void Enter()
         {
-            _player.Animation.Attack3();
+            _player.Animation.SpecialAttack();
             _targetRot = _player.transform.rotation;
         }
 
@@ -35,17 +37,21 @@ namespace Stage.Players
             _targetRot = Quaternion.LookRotation(viewV);
 
             // === 当たり判定 ===
-            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashAttack3) >= _hitStartRatio)
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) >= _hitStartRatio)
             {
                 if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB, _player.HitCheck.EnemyOBB))
                 {
-                    Debug.Log("攻撃3ヒット");
+                    Debug.Log("スペシャル攻撃ヒット");
                 }
             }
 
+            // === 残像の生成 ===
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) <= _afterImageEndRatio)
+                _player.Spawner.Spawn(_player.Weapon.transform);
+
             // === 状態遷移 ===
             // 待機
-            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashAttack3))
+            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashSpecialAttack))
                 _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
         }
 

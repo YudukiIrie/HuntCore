@@ -56,13 +56,13 @@ namespace Stage.Players
         [Header("抜刀状態の回転速度")]
         [SerializeField] float _drawnRotSpeed;
 
-        public float Attack2RotSpeed => _attack2RotSpeed;
-        [Header("攻撃2の回転速度")]
-        [SerializeField] float _attack2RotSpeed;
+        public float HeavyAttackRotSpeed => _heavyAttackRotSpeed;
+        [Header("ヘビー攻撃の回転速度")]
+        [SerializeField] float _heavyAttackRotSpeed;
 
-        public float Attack3RotSpeed => _attack3RotSpeed;
-        [Header("攻撃2の回転速度")]
-        [SerializeField] float _attack3RotSpeed;
+        public float SpecialAttackRotSpeed => _specialAttackRotSpeed;
+        [Header("スペシャル攻撃の回転速度")]
+        [SerializeField] float _specialAttackRotSpeed;
 
         public float MagnitudeBorder => _magnitudeBorder;
         [Header("歩きと小走りを区別するベクトル長の境界")]

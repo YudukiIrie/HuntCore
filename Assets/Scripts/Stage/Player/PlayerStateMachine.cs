@@ -13,19 +13,19 @@ namespace Stage.Players
         // 各ステート
         public PlayerIdleState IdleState { get; private set; }
         public PlayerMoveState MoveState { get; private set; }
-        public PlayerAttack1State Attack1State { get; private set; }
-        public PlayerAttack2State Attack2State { get; private set; }
-        public PlayerAttack3State Attack3State { get; private set; }
+        public PlayerLightAttackState LightAttackState { get; private set; }
+        public PlayerHeavyAttackState HeavyAttackState { get; private set; }
+        public PlayerSpecialAttackState SpecialAttackState { get; private set; }
         public PlayerImpactedState ImpactedState { get; private set; }
 
         public PlayerStateMachine(Player player)
         {
-            IdleState     = new PlayerIdleState(player);
-            MoveState     = new PlayerMoveState(player);
-            Attack1State  = new PlayerAttack1State(player);
-            Attack2State  = new PlayerAttack2State(player);
-            Attack3State  = new PlayerAttack3State(player);
-            ImpactedState = new PlayerImpactedState(player);
+            IdleState           = new PlayerIdleState(player);
+            MoveState           = new PlayerMoveState(player);
+            LightAttackState    = new PlayerLightAttackState(player);
+            HeavyAttackState    = new PlayerHeavyAttackState(player);
+            SpecialAttackState  = new PlayerSpecialAttackState(player);
+            ImpactedState       = new PlayerImpactedState(player);
         }
 
         /// <summary>

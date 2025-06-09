@@ -30,17 +30,6 @@ namespace Stage.Players
         {
             // === 移動計算 ===
             Vector2 input = _player.Action.Player.Move.ReadValue<Vector2>();
-            // ===== 抜刀状態のみになったため不要 =====
-            //// 歩きと小走りの区別
-            //float currentSpeed;
-            //if (input.magnitude <= PlayerData.Data.MagnitudeBorder)
-            //    currentSpeed = PlayerData.Data.WalkSpeed;
-            //else
-            //    currentSpeed = PlayerData.Data.JogSpeed;
-            //// 走っているかどうかの区別
-            //currentSpeed = _player.Action.Player.Run.IsPressed() ? PlayerData.Data.RunSpeed : currentSpeed;
-            // ========================================
-
             // 移動方向と速度を合成
             Transform cam = Camera.main.transform;
             _velocity = ((cam.forward * input.y) + (cam.right * input.x)).normalized;
@@ -52,19 +41,13 @@ namespace Stage.Players
             if (input.magnitude > 0.001f)
                 _targetRot = Quaternion.LookRotation(_velocity.normalized);
 
-            // ===== 抜刀状態のみになったため不要 =====
-            // == Animatorに移動速度を反映 ==
-            // BlendTreeでアニメーションを管理するためRunSpeedを1とした割合を反映
-            //_player.Animator.SetFloat("Speed", currentSpeed / PlayerData.Data.RunSpeed);
-            // ========================================
-
             // === 状態遷移 ===
             // 通常
             if (_player.Action.Player.Move.ReadValue<Vector2>() == Vector2.zero)
                 _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
-            // 攻撃
+            // ライト攻撃
             else if (_player.Action.Player.Attack.IsPressed())
-                _player.StateMachine.TransitionTo(_player.StateMachine.Attack1State);
+                _player.StateMachine.TransitionTo(_player.StateMachine.LightAttackState);
         }
 
         public void FixedUpdate()

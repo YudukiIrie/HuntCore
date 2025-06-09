@@ -36,17 +36,17 @@ namespace Stage.Players
         [Header("大剣サイズ")]
         [SerializeField] Vector3 _greatSwordSize;
 
-        public float Attack1HitStartRatio => _attack1HitStartRatio;
-        [Header("大剣攻撃1の当たり判定開始割合")]
-        [SerializeField] float _attack1HitStartRatio;
+        public float LightAttackHitStartRatio => _lightAttackHitStartRatio;
+        [Header("ライト攻撃当たり判定開始割合")]
+        [SerializeField] float _lightAttackHitStartRatio;
 
-        public float Attack2HitStartRatio => _attack2HitStartRatio;
-        [Header("大剣攻撃2の当たり判定開始割合")]
-        [SerializeField] float _attack2HitStartRatio;
+        public float HeavyAttackHitStartRatio => _heavyAttackHitStartRatio;
+        [Header("ヘビー攻撃当たり判定開始割合")]
+        [SerializeField] float _heavyAttackHitStartRatio;
 
-        public float Attack3HitStartRatio => _attack3HitStartRatio;
-        [Header("大剣攻撃3の当たり判定開始割合")]
-        [SerializeField] float _attack3HitStartRatio;
+        public float SpecialAttackHitStartRatio => _specialAttackHitStartRatio;
+        [Header("スペシャル攻撃当たり判定開始割合")]
+        [SerializeField] float _specialAttackHitStartRatio;
 
         public int InitialPoolSize => _initialPoolSize;
         [Header("残像用初期プールサイズ")]
@@ -59,5 +59,13 @@ namespace Stage.Players
         public float AfterImageInterval => _afterImageInterval;
         [Header("残像生成間隔")]
         [SerializeField] float _afterImageInterval;
+
+        public float AfterImageDuration => _afterImageDuration;
+        [Header("残像表示時間")]
+        [SerializeField] float _afterImageDuration;
+
+        public float AfterImageEndRatio => _afterImageEndRatio;
+        [Header("アニメーションにおける残像表示終了割合")]
+        [SerializeField] float _afterImageEndRatio;
     }
 }

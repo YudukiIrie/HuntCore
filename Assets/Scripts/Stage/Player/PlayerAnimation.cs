@@ -10,9 +10,9 @@ namespace Stage.Players
         // AnimatorのパラメータハッシュID
         // 定数かつ実行時に値が決まるためstatic readonly
         public static readonly int HashMove = Animator.StringToHash("Move");
-        public static readonly int HashAttack1 = Animator.StringToHash("Attack1");
-        public static readonly int HashAttack2 = Animator.StringToHash("Attack2");
-        public static readonly int HashAttack3 = Animator.StringToHash("Attack3");
+        public static readonly int HashLightAttack = Animator.StringToHash("LightAttack");
+        public static readonly int HashHeavyAttack = Animator.StringToHash("HeavyAttack");
+        public static readonly int HashSpecialAttack = Animator.StringToHash("SpecialAttack");
         public static readonly int HashImpacted = Animator.StringToHash("Impacted");
 
         // コンポーネント
@@ -32,9 +32,9 @@ namespace Stage.Players
         public void ResetAll()
         {
             _animator.SetBool(HashMove, false);
-            _animator.SetBool(HashAttack1, false);
-            _animator.SetBool(HashAttack2, false);
-            _animator.SetBool(HashAttack3, false);
+            _animator.SetBool(HashLightAttack, false);
+            _animator.SetBool(HashHeavyAttack, false);
+            _animator.SetBool(HashSpecialAttack, false);
             _animator.SetBool(HashImpacted, false);
         }
 
@@ -48,30 +48,30 @@ namespace Stage.Players
         }
 
         /// <summary>
-        /// 攻撃アニメーション開始
+        /// ライト攻撃アニメーション開始
         /// </summary>
-        public void Attack1()
+        public void LightAttack()
         {
             ResetAll();
-            _animator.SetBool(HashAttack1, true);
+            _animator.SetBool(HashLightAttack, true);
         }
 
         /// <summary>
-        /// 攻撃2アニメーション開始
+        /// ヘビー攻撃アニメーション開始
         /// </summary>
-        public void Attack2()
+        public void HeavyAttack()
         {
             ResetAll();
-            _animator.SetBool(HashAttack2, true);
+            _animator.SetBool(HashHeavyAttack, true);
         }
 
         /// <summary>
-        /// 攻撃3アニメーション開始
+        /// スペシャル攻撃アニメーション開始
         /// </summary>
-        public void Attack3()
+        public void SpecialAttack()
         {
             ResetAll();
-            _animator.SetBool(HashAttack3, true);
+            _animator.SetBool(HashSpecialAttack, true);
         }
 
         /// <summary>

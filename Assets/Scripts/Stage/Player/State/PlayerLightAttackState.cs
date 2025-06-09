@@ -3,51 +3,54 @@ using UnityEngine;
 namespace Stage.Players
 {
     /// <summary>
-    /// プレイヤー攻撃1段目状態
+    /// プレイヤーライト攻撃状態
     /// </summary>
-    public class PlayerAttack1State : IState
+    public class PlayerLightAttackState : IState
     {
         Player _player;     // プレイヤークラス
         float _elapseTime;  // コンボ間猶予経過時間
         float _hitStartRatio;
         float _chainTime;
+        float _afterImageEndRatio;
 
 
-        public PlayerAttack1State(Player player)
+        public PlayerLightAttackState(Player player)
         {
             _player = player;
-            _hitStartRatio = WeaponData.Data.Attack1HitStartRatio;
+            _hitStartRatio = WeaponData.Data.LightAttackHitStartRatio;
             _chainTime = PlayerData.Data.ChainTime;
+            _afterImageEndRatio = WeaponData.Data.AfterImageEndRatio;
         }
 
         public void Enter()
         {
-            _player.Animation.Attack1();
+            _player.Animation.LightAttack();
         }
 
         public void Update()
         {
             // === 当たり判定 ===
-            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashAttack1) >= _hitStartRatio)
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashLightAttack) >= _hitStartRatio)
             {
                 if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB, _player.HitCheck.EnemyOBB))
                 {
-                    Debug.Log("攻撃1ヒット");
+                    Debug.Log("ライト攻撃ヒット");
                 }
             }
 
             // === 残像の生成 ===
-            _player.Spawner.Spawn(_player.Weapon.transform);
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashLightAttack) <= _afterImageEndRatio)
+                _player.Spawner.Spawn(_player.Weapon.transform);
 
             // === 状態遷移 ===
-            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashAttack1))
+            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashLightAttack))
             {
                 _elapseTime += Time.deltaTime;
-                // 攻撃2
+                // ヘビー攻撃
                 if (_elapseTime <= _chainTime)
                 {
                     if (_player.Action.Player.Attack.IsPressed())
-                        _player.StateMachine.TransitionTo(_player.StateMachine.Attack2State);
+                        _player.StateMachine.TransitionTo(_player.StateMachine.HeavyAttackState);
                 }
                 // 待機
                 else

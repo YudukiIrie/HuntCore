@@ -3,9 +3,9 @@ using UnityEngine;
 namespace Stage.Players
 {
     /// <summary>
-    /// プレイヤー攻撃2段目状態
+    /// プレイヤーヘビー攻撃状態
     /// </summary>
-    public class PlayerAttack2State : IState
+    public class PlayerHeavyAttackState : IState
     {
         Player _player;         // プレイヤークラス
         Quaternion _targetRot;  // 視点方向ベクトル
@@ -13,18 +13,20 @@ namespace Stage.Players
         float _rotSpeed;
         float _hitStartRatio;
         float _chainTime;
+        float _afterImageEndRatio;
 
-        public PlayerAttack2State(Player player)
+        public PlayerHeavyAttackState(Player player)
         {
             _player = player;
-            _rotSpeed = PlayerData.Data.Attack2RotSpeed;
-            _hitStartRatio = WeaponData.Data.Attack2HitStartRatio;
+            _rotSpeed = PlayerData.Data.HeavyAttackRotSpeed;
+            _hitStartRatio = WeaponData.Data.HeavyAttackHitStartRatio;
             _chainTime = PlayerData.Data.ChainTime;
+            _afterImageEndRatio = WeaponData.Data.AfterImageEndRatio;
         }
 
         public void Enter()
         {
-            _player.Animation.Attack2();
+            _player.Animation.HeavyAttack();
             _targetRot = _player.transform.rotation;
         }
 
@@ -38,23 +40,27 @@ namespace Stage.Players
             _targetRot = Quaternion.LookRotation(viewV);
 
             // === 当たり判定 ===
-            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashAttack2) >= _hitStartRatio)
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashHeavyAttack) >= _hitStartRatio)
             {
                 if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB, _player.HitCheck.EnemyOBB))
                 {
-                    Debug.Log("攻撃2ヒット");
+                    Debug.Log("ヘビー攻撃ヒット");
                 }
             }
 
+            // === 残像の生成 ===
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashHeavyAttack) <= _afterImageEndRatio)
+                _player.Spawner.Spawn(_player.Weapon.transform);
+
             // === 状態遷移 ===
-            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashAttack2))
+            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashHeavyAttack))
             {
                 _elapseTime += Time.deltaTime;
-                // 攻撃3
+                // スペシャル攻撃
                 if (_elapseTime <= _chainTime)
                 {
                     if (_player.Action.Player.Attack.IsPressed())
-                        _player.StateMachine.TransitionTo(_player.StateMachine.Attack3State);
+                        _player.StateMachine.TransitionTo(_player.StateMachine.SpecialAttackState);
                 }
                 // 待機
                 else
