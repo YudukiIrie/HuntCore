@@ -62,6 +62,15 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""End"",
+                    ""type"": ""Button"",
+                    ""id"": ""80a32fef-9a5a-4d8e-a0f4-20be78fffc4b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -271,6 +280,28 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8be94437-1e8a-42e2-9ad8-93ce26d76bf7"",
+                    ""path"": ""<Keyboard>/{Cancel}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""End"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fdb61d5b-519c-45bd-9013-4fd8778d7e56"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""End"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -862,6 +893,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_End = m_Player.FindAction("End", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -939,6 +971,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_End;
     public struct PlayerActions
     {
         private @PlayerAction m_Wrapper;
@@ -947,6 +980,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @End => m_Wrapper.m_Player_End;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -968,6 +1002,9 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @End.started += instance.OnEnd;
+            @End.performed += instance.OnEnd;
+            @End.canceled += instance.OnEnd;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -984,6 +1021,9 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @End.started -= instance.OnEnd;
+            @End.performed -= instance.OnEnd;
+            @End.canceled -= instance.OnEnd;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1170,6 +1210,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnEnd(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
