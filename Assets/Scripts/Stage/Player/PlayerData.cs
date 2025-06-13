@@ -75,5 +75,9 @@ namespace Stage.Players
         public float IdleToOtherDuration => _idleToOtherDuration;
         [Header("待機から遷移可能までの時間")]
         [SerializeField] float _idleToOtherDuration;
+
+        public float AnimBlendTime => _animBlendTime;
+        [Header("アニメーションブレンド時間")]
+        [SerializeField] float _animBlendTime;
     }
 }

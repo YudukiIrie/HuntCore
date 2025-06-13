@@ -87,5 +87,9 @@ namespace Stage.Enemies
         public float AttackInterval => _attackInterval;
         [Header("攻撃可能間隔")]
         [SerializeField] float _attackInterval;
+
+        public float AnimBlendTime => _animBlendTime;
+        [Header("アニメーションブレンド時間")]
+        [SerializeField] float _animBlendTime;
     }
 }

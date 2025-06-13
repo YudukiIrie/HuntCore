@@ -22,9 +22,12 @@ namespace Stage.Players
         // アニメーションステート情報保存用
         AnimatorStateInfo _currentStateInfo;
 
+        float _animBlendTime;
+
         public PlayerAnimation(Animator animator)
         {
             _animator = animator;
+            _animBlendTime = PlayerData.Data.AnimBlendTime;
         }
 
         /// <summary>
@@ -32,7 +35,7 @@ namespace Stage.Players
         /// </summary>
         public void Idle()
         {
-            _animator.CrossFade(HashIdle, 0.1f);
+            _animator.CrossFade(HashIdle, _animBlendTime);
         }
 
         /// <summary>
@@ -40,7 +43,7 @@ namespace Stage.Players
         /// </summary>
         public void Move()
         {
-            _animator.CrossFade(HashMove, 0.1f);
+            _animator.CrossFade(HashMove, _animBlendTime);
         }
 
         /// <summary>
@@ -48,7 +51,7 @@ namespace Stage.Players
         /// </summary>
         public void LightAttack()
         {
-            _animator.CrossFade(HashLightAttack, 0.1f);
+            _animator.CrossFade(HashLightAttack, _animBlendTime);
         }
 
         /// <summary>
@@ -56,7 +59,7 @@ namespace Stage.Players
         /// </summary>
         public void HeavyAttack()
         {
-            _animator.CrossFade(HashHeavyAttack, 0.1f);
+            _animator.CrossFade(HashHeavyAttack, _animBlendTime);
         }
 
         /// <summary>
@@ -64,7 +67,7 @@ namespace Stage.Players
         /// </summary>
         public void SpecialAttack()
         {
-            _animator.CrossFade(HashSpecialAttack, 0.1f);
+            _animator.CrossFade(HashSpecialAttack, _animBlendTime);
         }
 
         /// <summary>
@@ -72,7 +75,7 @@ namespace Stage.Players
         /// </summary>
         public void Impacted()
         {
-            _animator.CrossFade(HashImpacted, 0.1f);
+            _animator.CrossFade(HashImpacted, _animBlendTime);
         }
 
         /// <summary>

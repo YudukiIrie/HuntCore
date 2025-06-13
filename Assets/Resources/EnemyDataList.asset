@@ -21,3 +21,4 @@ MonoBehaviour:
     _chaseSpeed: 5
     _chaseRotSpeed: 10
     _attackInterval: 3
+    _animBlendTime: 0.3

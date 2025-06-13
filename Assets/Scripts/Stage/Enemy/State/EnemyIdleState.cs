@@ -18,7 +18,7 @@ namespace Stage.Enemies
 
         public void Enter()
         {
-            _enemy.Animation.ResetAll();
+            _enemy.Animation.Idle();
         }
 
         public void Update()

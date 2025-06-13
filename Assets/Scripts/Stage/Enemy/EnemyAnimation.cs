@@ -8,10 +8,11 @@ namespace Stage.Enemies
     public class EnemyAnimation
     {
         // AnimatorのパラメータハッシュID
-        public static readonly int HashRoar = Animator.StringToHash("Roar");
-        public static readonly int HashAlert = Animator.StringToHash("Alert");
-        public static readonly int HashChase = Animator.StringToHash("Chase");
-        public static readonly int HashAttack = Animator.StringToHash("Attack");
+        public static readonly int HashIdle = Animator.StringToHash("Base Layer.Idle");
+        public static readonly int HashRoar = Animator.StringToHash("Base Layer.Roar");
+        public static readonly int HashAlert = Animator.StringToHash("Base Layer.Alert");
+        public static readonly int HashChase = Animator.StringToHash("Base Layer.Chase");
+        public static readonly int HashAttack = Animator.StringToHash("Base Layer.Attack");
 
         // コンポーネント
         Animator _animator;
@@ -19,20 +20,20 @@ namespace Stage.Enemies
         // アニメーションステート情報保存用
         AnimatorStateInfo _currentStateInfo;
 
+        float _animBlendTime;
+
         public EnemyAnimation(Animator animator)
         {
             _animator = animator;
+            _animBlendTime = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AnimBlendTime;
         }
 
         /// <summary>
-        /// アニメーションリセット
+        /// 待機アニメーション開始
         /// </summary>
-        public void ResetAll()
+        public void Idle()
         {
-            _animator.SetBool(HashRoar, false);
-            _animator.SetBool(HashAlert, false);
-            _animator.SetBool(HashChase, false);
-            _animator.SetBool(HashAttack, false);
+            _animator.CrossFade(HashIdle, _animBlendTime);
         }
 
         /// <summary>
@@ -40,8 +41,7 @@ namespace Stage.Enemies
         /// </summary>
         public void Roar()
         {
-            ResetAll();
-            _animator.SetBool(HashRoar, true);
+            _animator.CrossFade(HashRoar, _animBlendTime);
         }
 
         /// <summary>
@@ -49,8 +49,7 @@ namespace Stage.Enemies
         /// </summary>
         public void Alert()
         {
-            ResetAll();
-            _animator.SetBool(HashAlert, true);
+            _animator.CrossFade(HashAlert, _animBlendTime);
         }
 
         /// <summary>
@@ -58,8 +57,7 @@ namespace Stage.Enemies
         /// </summary>
         public void Chase()
         {
-            ResetAll();
-            _animator.SetBool(HashChase, true);
+            _animator.CrossFade(HashChase, _animBlendTime);
         }
 
         /// <summary>
@@ -67,8 +65,7 @@ namespace Stage.Enemies
         /// </summary>
         public void Attack()
         {
-            ResetAll();
-            _animator.SetBool(HashAttack, true);
+            _animator.CrossFade(HashAttack, _animBlendTime);
         }
 
         /// <summary>
@@ -80,7 +77,7 @@ namespace Stage.Enemies
             _currentStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
 
             // 再生中のステートが指定したステートと同じかチェック
-            bool check = (_currentStateInfo.shortNameHash == currentStateHash);
+            bool check = (_currentStateInfo.fullPathHash == currentStateHash);
 
             return check;
         }

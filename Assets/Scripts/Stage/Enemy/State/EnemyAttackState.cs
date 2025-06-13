@@ -21,6 +21,8 @@ namespace Stage.Enemies
 
         public void Update()
         {
+            // === “–‚½‚è”»’è ===
+
             // === ó‘Ô‘JˆÚ ===
             // Œx‰ú
             if (_enemy.Animation.IsAnimFinished(EnemyAnimation.HashAttack))
