@@ -1,3 +1,4 @@
+using Stage.HitCheck;
 using Stage.Players;
 using UnityEngine;
 
@@ -8,18 +9,18 @@ namespace Stage.Enemies
     /// </summary>
     public class Enemy : MonoBehaviour
     {
-        public Player Player => _player;
-        [Header("プレイヤー")]
-        [SerializeField] Player _player;
+        [field: Header("プレイヤー")]
+        [field: SerializeField] public Player Player { get; private set; }
+
+        [field: Header("当たり判定クラス")]
+        [field: SerializeField] public OBBHitChecker HitChecker { get; private set; }
 
         // 敵関連クラス
         public EnemyStateMachine StateMachine { get; private set; }
         public EnemyAnimation Animation { get; private set; }
 
         // コンポーネント
-        public Rigidbody Rigidbody => _rigidbody;
-        [SerializeField] Rigidbody _rigidbody;
-        public Animator Animator => _animator;
+        [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
         [SerializeField] Animator _animator;
 
         float _attackInterval;
@@ -58,7 +59,7 @@ namespace Stage.Enemies
         {
             // 座標の取得
             var a = transform.position;
-            var b = _player.transform.position;
+            var b = Player.transform.position;
 
             // 各成分の差異を取得
             var x = a.x - b.x;

@@ -42,7 +42,7 @@ namespace Stage.Players
             // === ìñÇΩÇËîªíË ===
             if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashHeavyAttack) >= _hitStartRatio)
             {
-                if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB, _player.HitCheck.EnemyOBB))
+                if (_player.HitChecker.IsCollideBoxOBB(_player.HitChecker.GreatSwordOBB, _player.HitChecker.EnemyOBB))
                 {
                     Debug.Log("ÉwÉrÅ[çUåÇÉqÉbÉg");
                 }
@@ -77,7 +77,7 @@ namespace Stage.Players
         public void Exit()
         {
             _elapseTime = 0.0f;
-            _player.HitCheck.ResetHitInfo();
+            _player.HitChecker.ResetHitInfo();
         }
     }
 }

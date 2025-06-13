@@ -32,7 +32,7 @@ namespace Stage.Players
             // === 当たり判定 ===
             if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashLightAttack) >= _hitStartRatio)
             {
-                if (_player.HitCheck.IsCollideBoxOBB(_player.HitCheck.GreatSwordOBB, _player.HitCheck.EnemyOBB))
+                if (_player.HitChecker.IsCollideBoxOBB(_player.HitChecker.GreatSwordOBB, _player.HitChecker.EnemyOBB))
                 {
                     Debug.Log("ライト攻撃ヒット");
                 }
@@ -66,7 +66,7 @@ namespace Stage.Players
         public void Exit()
         {
             _elapseTime = 0.0f;
-            _player.HitCheck.ResetHitInfo();
+            _player.HitChecker.ResetHitInfo();
         }
     }
 }

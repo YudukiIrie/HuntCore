@@ -64,6 +64,10 @@ namespace Stage.Enemies
         [Header("敵サイズ")]
         [SerializeField] Vector3 _enemySize;
 
+        public Vector3 EnemyHeadSize => _enemyHeadSize;
+        [Header("敵頭サイズ")]
+        [SerializeField] Vector3 _enemyHeadSize;
+
         public float FindDistance => _findDistance;
         [Header("プレイヤー発見距離")]
         [SerializeField] float _findDistance;

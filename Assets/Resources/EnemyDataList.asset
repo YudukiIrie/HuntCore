@@ -15,6 +15,7 @@ MonoBehaviour:
   Enemies:
   - _enemyType: 0
     _enemySize: {x: 1.8, y: 3, z: 5}
+    _enemyHeadSize: {x: 1, y: 1, z: 1}
     _findDistance: 10
     _roarDistance: 15
     _attackDistance: 6

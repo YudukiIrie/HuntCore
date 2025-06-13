@@ -32,6 +32,10 @@ namespace Stage.Players
         }
 
         // プレイヤー数値情報
+        public Vector3 PlayerSize => _playerSize;
+        [Header("プレイヤーサイズ")]
+        [SerializeField] Vector3 _playerSize;
+
         public float WalkSpeed => _walkSpeed;
         [Header("歩き速度")]
         [SerializeField] float _walkSpeed;

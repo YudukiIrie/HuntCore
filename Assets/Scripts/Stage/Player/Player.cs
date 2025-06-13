@@ -9,7 +9,7 @@ namespace Stage.Players
     public class Player : MonoBehaviour
     {
         [field: Header("当たり判定クラス")]
-        [field: SerializeField]public OBBHitChecker HitCheck { get; private set; }
+        [field: SerializeField] public OBBHitChecker HitChecker { get; private set; }
 
         [field: Header("武器残像生成クラス")]
         [field: SerializeField] public WeaponAfterImageSpawner Spawner { get; private set; }

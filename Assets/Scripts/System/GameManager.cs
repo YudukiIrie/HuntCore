@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// ゲーム終了管理クラス
 /// </summary>
-public class GameEndManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     // 保存先パス
     const string PATH = "GameEndManager";
@@ -24,11 +24,22 @@ public class GameEndManager : MonoBehaviour
 
         _action = new PlayerAction();
         _action.Enable();
+
+        LockCursor();
     }
 
     void Update()
     {
         EndGame();
+    }
+
+    /// <summary>
+    /// カーソルロック&非表示
+    /// </summary>
+    void LockCursor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     /// <summary>

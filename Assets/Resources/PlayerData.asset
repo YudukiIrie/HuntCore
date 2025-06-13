@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5676a93c2cb8dd34d99a435731911dbc, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  _playerSize: {x: 0.5, y: 1.5, z: 0.3}
   _walkSpeed: 2
   _jogSpeed: 4
   _runSpeed: 7

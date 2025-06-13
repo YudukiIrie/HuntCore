@@ -22,6 +22,8 @@ namespace Stage.Enemies
         public void Update()
         {
             // === “–‚½‚è”»’è ===
+            //if ()
+            //if (_enemy.HitChecker.IsCollideBoxOBB(_enemy.HitChecker.EnemyHeadOBB, _enemy.HitChecker.PlayerOBB))
 
             // === ó‘Ô‘JˆÚ ===
             // Œx‰ú
