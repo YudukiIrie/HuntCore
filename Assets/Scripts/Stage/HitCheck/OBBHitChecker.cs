@@ -10,20 +10,20 @@ namespace Stage.HitCheck
     /// </summary>
     public class OBBHitChecker : MonoBehaviour
     {
-        [Header("プレイヤーオブジェクト")]
-        [SerializeField] GameObject _player;
+        [field: Header("プレイヤーオブジェクト")]
+        [field: SerializeField] public GameObject Player { get; private set; }
 
-        [Header("大剣オブジェクト")]
-        [SerializeField] GameObject _greatSword;
+        [field: Header("大剣オブジェクト")]
+        [field: SerializeField] public GameObject GreatSword {  get; private set; }
 
-        [Header("敵オブジェクト")]
-        [SerializeField] GameObject _enemy;
+        [field: Header("敵オブジェクト")]
+        [field: SerializeField] public GameObject Enemy {  get; private set; }
 
-        [Header("敵頭オブジェクト")]
-        [SerializeField] GameObject _enemyHead;
+        [field: Header("敵頭オブジェクト")]
+        [field: SerializeField] public GameObject EnemyHead {  get; private set; }
 
-        [Header("ヒット数テキスト")]
-        [SerializeField] Text _hitText;
+        [field: Header("ヒット数テキスト")]
+        [field: SerializeField] Text _hitText;
 
         // 各オブジェクトOBB
         public OBB PlayerOBB { get; private set; }
@@ -33,21 +33,21 @@ namespace Stage.HitCheck
 
         int _hitNum;
         
-        void Start()
+        void Awake()
         {
             // 各オブジェクトOBB情報の登録と実体の作成
-            PlayerOBB     = new OBB(_player.transform, PlayerData.Data.PlayerSize);
-            GreatSwordOBB = new OBB(_greatSword.transform, WeaponData.Data.GreatSwordSize);
-            EnemyOBB      = new OBB(_enemy.transform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemySize);
-            EnemyHeadOBB  = new OBB(_enemyHead.transform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyHeadSize);
+            PlayerOBB     = new OBB(Player.transform, PlayerData.Data.PlayerSize);
+            GreatSwordOBB = new OBB(GreatSword.transform, WeaponData.Data.GreatSwordSize);
+            EnemyOBB      = new OBB(Enemy.transform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemySize);
+            EnemyHeadOBB  = new OBB(EnemyHead.transform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyHeadSize);
         }
 
         void Update()
         {
-            UpdateOBBInfo(PlayerOBB, _player);
-            UpdateOBBInfo(GreatSwordOBB, _greatSword);
-            UpdateOBBInfo(EnemyOBB, _enemy);
-            UpdateOBBInfo(EnemyHeadOBB, _enemyHead);
+            UpdateOBBInfo(PlayerOBB, Player);
+            UpdateOBBInfo(GreatSwordOBB, GreatSword);
+            UpdateOBBInfo(EnemyOBB, Enemy);
+            UpdateOBBInfo(EnemyHeadOBB, EnemyHead);
 
             UpdateUI();
         }
@@ -165,104 +165,104 @@ namespace Stage.HitCheck
             EnemyOBB.ResetHitInfo();
         }
 
-        #region デバッグ用
-        void OnDrawGizmos()
-        {
-            // 初期マトリックスの保存
-            Matrix4x4 oldMatrix = Gizmos.matrix;
+        //#region デバッグ用
+        //void OnDrawGizmos()
+        //{
+        //    // 初期マトリックスの保存
+        //    Matrix4x4 oldMatrix = Gizmos.matrix;
 
-            // 色の作成
-            Color red = new Color(1.0f, 0.0f, 0.0f, 0.5f);
-            Color white = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+        //    // 色の作成
+        //    Color red = new Color(1.0f, 0.0f, 0.0f, 0.5f);
+        //    Color white = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 
-            OBB obb = null;
-            Vector3 pos, scale = Vector3.zero;
-            Quaternion rot = Quaternion.identity;
+        //    OBB obb = null;
+        //    Vector3 pos, scale = Vector3.zero;
+        //    Quaternion rot = Quaternion.identity;
 
-            // === 敵OBB ===
-            if (EnemyOBB != null)
-            {
-                obb = EnemyOBB;
+        //    // === 敵OBB ===
+        //    if (EnemyOBB != null)
+        //    {
+        //        obb = EnemyOBB;
 
-                // マトリックス情報の取得
-                pos = obb.Center;
-                rot = _enemy.transform.rotation;
-                scale = new Vector3(obb.Radius.x, obb.Radius.y, obb.Radius.z) * 2;
+        //        // マトリックス情報の取得
+        //        pos = obb.Center;
+        //        rot = Enemy.transform.rotation;
+        //        scale = new Vector3(obb.Radius.x, obb.Radius.y, obb.Radius.z) * 2;
 
-                // 色の変更
-                Gizmos.color = obb.IsHit ? red : white;
+        //        // 色の変更
+        //        Gizmos.color = obb.IsHit ? red : white;
 
-                // マトリックスの更新
-                Gizmos.matrix = Matrix4x4.TRS(pos, rot, scale);
+        //        // マトリックスの更新
+        //        Gizmos.matrix = Matrix4x4.TRS(pos, rot, scale);
 
-                // 描画
-                Gizmos.DrawCube(Vector3.zero, Vector3.one);
-                Gizmos.matrix = oldMatrix;
-            }
+        //        // 描画
+        //        Gizmos.DrawCube(Vector3.zero, Vector3.one);
+        //        Gizmos.matrix = oldMatrix;
+        //    }
 
-            // === 大剣OBB ===
-            if (GreatSwordOBB != null)
-            {
-                obb = GreatSwordOBB;
+        //    // === 大剣OBB ===
+        //    if (GreatSwordOBB != null)
+        //    {
+        //        obb = GreatSwordOBB;
 
-                // マトリックス情報の取得
-                pos = obb.Center;
-                rot = _greatSword.transform.rotation;
-                scale = new Vector3(obb.Radius.x, obb.Radius.y, obb.Radius.z) * 2;
+        //        // マトリックス情報の取得
+        //        pos = obb.Center;
+        //        rot = GreatSword.transform.rotation;
+        //        scale = new Vector3(obb.Radius.x, obb.Radius.y, obb.Radius.z) * 2;
 
-                // 色の変更
-                Gizmos.color = obb.IsHit ? red : white;
+        //        // 色の変更
+        //        Gizmos.color = obb.IsHit ? red : white;
 
-                // マトリックスの更新
-                Gizmos.matrix = Matrix4x4.TRS(pos, rot, scale);
+        //        // マトリックスの更新
+        //        Gizmos.matrix = Matrix4x4.TRS(pos, rot, scale);
 
-                // 描画
-                Gizmos.DrawCube(Vector3.zero, Vector3.one);
-                Gizmos.matrix = oldMatrix;
-            }
+        //        // 描画
+        //        Gizmos.DrawCube(Vector3.zero, Vector3.one);
+        //        Gizmos.matrix = oldMatrix;
+        //    }
 
-            // === 敵頭OBB ===
-            if (EnemyHeadOBB != null)
-            {
-                obb = EnemyHeadOBB;
+        //    // === 敵頭OBB ===
+        //    if (EnemyHeadOBB != null)
+        //    {
+        //        obb = EnemyHeadOBB;
 
-                // マトリックス情報の取得
-                pos = obb.Center;
-                rot = _enemyHead.transform.rotation;
-                scale = new Vector3(obb.Radius.x, obb.Radius.y, obb.Radius.z) * 2;
+        //        // マトリックス情報の取得
+        //        pos = obb.Center;
+        //        rot = EnemyHead.transform.rotation;
+        //        scale = new Vector3(obb.Radius.x, obb.Radius.y, obb.Radius.z) * 2;
 
-                // 色の変更
-                Gizmos.color = obb.IsHit ? red : white;
+        //        // 色の変更
+        //        Gizmos.color = obb.IsHit ? red : white;
 
-                // マトリックスの更新
-                Gizmos.matrix = Matrix4x4.TRS(pos, rot, scale);
+        //        // マトリックスの更新
+        //        Gizmos.matrix = Matrix4x4.TRS(pos, rot, scale);
 
-                // 描画
-                Gizmos.DrawCube(Vector3.zero, Vector3.one);
-                Gizmos.matrix = oldMatrix;
-            }
+        //        // 描画
+        //        Gizmos.DrawCube(Vector3.zero, Vector3.one);
+        //        Gizmos.matrix = oldMatrix;
+        //    }
 
-            // === プレイヤーOBB ===
-            if (PlayerOBB != null)
-            {
-                obb = PlayerOBB;
+        //    // === プレイヤーOBB ===
+        //    if (PlayerOBB != null)
+        //    {
+        //        obb = PlayerOBB;
 
-                // マトリックス情報の取得
-                pos = obb.Center;
-                rot = _player.transform.rotation;
-                scale = new Vector3(obb.Radius.x, obb.Radius.y, obb.Radius.z) * 2;
+        //        // マトリックス情報の取得
+        //        pos = obb.Center;
+        //        rot = Player.transform.rotation;
+        //        scale = new Vector3(obb.Radius.x, obb.Radius.y, obb.Radius.z) * 2;
 
-                // 色の変更
-                Gizmos.color = obb.IsHit ? red : white;
+        //        // 色の変更
+        //        Gizmos.color = obb.IsHit ? red : white;
 
-                // マトリックスの更新
-                Gizmos.matrix = Matrix4x4.TRS(pos, rot, scale);
+        //        // マトリックスの更新
+        //        Gizmos.matrix = Matrix4x4.TRS(pos, rot, scale);
 
-                // 描画
-                Gizmos.DrawCube(Vector3.zero, Vector3.one);
-                Gizmos.matrix = oldMatrix;
-            }
-        }
-        #endregion
+        //        // 描画
+        //        Gizmos.DrawCube(Vector3.zero, Vector3.one);
+        //        Gizmos.matrix = oldMatrix;
+        //    }
+        //}
+        //#endregion
     }
 }

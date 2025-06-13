@@ -95,5 +95,9 @@ namespace Stage.Enemies
         public float AnimBlendTime => _animBlendTime;
         [Header("アニメーションブレンド時間")]
         [SerializeField] float _animBlendTime;
+
+        public float AttackHitStartRatio => _attackHitStartRatio;
+        [Header("攻撃当たり判定開始位置")]
+        [SerializeField] float _attackHitStartRatio;
     }
 }
