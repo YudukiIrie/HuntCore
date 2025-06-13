@@ -9,11 +9,12 @@ namespace Stage.Players
     {
         // AnimatorのパラメータハッシュID
         // 定数かつ実行時に値が決まるためstatic readonly
-        public static readonly int HashMove = Animator.StringToHash("Move");
-        public static readonly int HashLightAttack = Animator.StringToHash("LightAttack");
-        public static readonly int HashHeavyAttack = Animator.StringToHash("HeavyAttack");
-        public static readonly int HashSpecialAttack = Animator.StringToHash("SpecialAttack");
-        public static readonly int HashImpacted = Animator.StringToHash("Impacted");
+        public static readonly int HashIdle = Animator.StringToHash("Base Layer.Idle");
+        public static readonly int HashMove = Animator.StringToHash("Base Layer.Move");
+        public static readonly int HashLightAttack = Animator.StringToHash("Base Layer.LightAttack");
+        public static readonly int HashHeavyAttack = Animator.StringToHash("Base Layer.HeavyAttack");
+        public static readonly int HashSpecialAttack = Animator.StringToHash("Base Layer.SpecialAttack");
+        public static readonly int HashImpacted = Animator.StringToHash("Base Layer.Impacted");
 
         // コンポーネント
         Animator _animator;
@@ -27,15 +28,11 @@ namespace Stage.Players
         }
 
         /// <summary>
-        /// アニメーションリセット
+        /// 待機アニメーション開始
         /// </summary>
-        public void ResetAll()
+        public void Idle()
         {
-            _animator.SetBool(HashMove, false);
-            _animator.SetBool(HashLightAttack, false);
-            _animator.SetBool(HashHeavyAttack, false);
-            _animator.SetBool(HashSpecialAttack, false);
-            _animator.SetBool(HashImpacted, false);
+            _animator.CrossFade(HashIdle, 0.1f);
         }
 
         /// <summary>
@@ -43,8 +40,7 @@ namespace Stage.Players
         /// </summary>
         public void Move()
         {
-            ResetAll();
-            _animator.SetBool(HashMove, true);
+            _animator.CrossFade(HashMove, 0.1f);
         }
 
         /// <summary>
@@ -52,8 +48,7 @@ namespace Stage.Players
         /// </summary>
         public void LightAttack()
         {
-            ResetAll();
-            _animator.SetBool(HashLightAttack, true);
+            _animator.CrossFade(HashLightAttack, 0.1f);
         }
 
         /// <summary>
@@ -61,8 +56,7 @@ namespace Stage.Players
         /// </summary>
         public void HeavyAttack()
         {
-            ResetAll();
-            _animator.SetBool(HashHeavyAttack, true);
+            _animator.CrossFade(HashHeavyAttack, 0.1f);
         }
 
         /// <summary>
@@ -70,8 +64,7 @@ namespace Stage.Players
         /// </summary>
         public void SpecialAttack()
         {
-            ResetAll();
-            _animator.SetBool(HashSpecialAttack, true);
+            _animator.CrossFade(HashSpecialAttack, 0.1f);
         }
 
         /// <summary>
@@ -79,8 +72,7 @@ namespace Stage.Players
         /// </summary>
         public void Impacted()
         {
-            ResetAll();
-            _animator.SetBool(HashImpacted, true);
+            _animator.CrossFade(HashImpacted, 0.1f);
         }
 
         /// <summary>
@@ -92,8 +84,8 @@ namespace Stage.Players
             _currentStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
 
             // 再生中のステートが指定したステートと同じかチェック
-            bool check = (_currentStateInfo.shortNameHash == currentStateHash);
-            
+            bool check = (_currentStateInfo.fullPathHash == currentStateHash);
+
             return check;
         }
 

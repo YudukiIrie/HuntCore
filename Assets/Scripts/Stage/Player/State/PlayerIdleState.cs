@@ -19,7 +19,7 @@ namespace Stage.Players
 
         public void Enter()
         {
-            _player.Animation.ResetAll();
+            _player.Animation.Idle();
         }
 
         public void Update()
@@ -27,14 +27,14 @@ namespace Stage.Players
             _elapsedTime += Time.deltaTime;
 
             // === 状態遷移 ===
+            // 移動
+            if (_player.Action.Player.Move.ReadValue<Vector2>() != Vector2.zero)
+                _player.StateMachine.TransitionTo(_player.StateMachine.MoveState);
+            // ライト攻撃
             // Animatorと内部処理を同期させるため待機
-            if (_elapsedTime > _toOtherDuration)
+            else if (_player.Action.Player.Attack.IsPressed())
             {
-                // 移動
-                if (_player.Action.Player.Move.ReadValue<Vector2>() != Vector2.zero)
-                    _player.StateMachine.TransitionTo(_player.StateMachine.MoveState);
-                // ライト攻撃
-                else if (_player.Action.Player.Attack.IsPressed())
+                if (_elapsedTime > _toOtherDuration)
                     _player.StateMachine.TransitionTo(_player.StateMachine.LightAttackState);
             }
         }

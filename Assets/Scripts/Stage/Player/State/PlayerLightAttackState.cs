@@ -67,6 +67,7 @@ namespace Stage.Players
         {
             _elapseTime = 0.0f;
             _player.HitCheck.ResetHitInfo();
+            _player.Animator.Play(PlayerAnimation.HashLightAttack, 0, 0);
         }
     }
 }
