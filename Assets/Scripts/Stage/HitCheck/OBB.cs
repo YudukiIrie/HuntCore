@@ -21,6 +21,8 @@ namespace Stage.HitCheck
         // ƒqƒbƒg‚Ì—L–³
         public bool IsHit {  get; private set; }
 
+        public OBBVisualBox VisualBox { get; private set; }
+
         public OBB(Transform transform, Vector3 size)
         {
             Center = transform.position;
@@ -29,11 +31,14 @@ namespace Stage.HitCheck
             AxisZ  = transform.forward;
             Radius = size * 0.5f;
             IsHit  = false;
+
+            VisualBox = new OBBVisualBox(Center, transform.rotation, Radius);
         }
 
         public void UpdateCenter(Vector3 center)
         {
             Center = center;
+            VisualBox.UpdatePosition(center);
         }
 
         public void UpdateAxes(Transform transform)
@@ -41,6 +46,7 @@ namespace Stage.HitCheck
             AxisX = transform.right;
             AxisY = transform.up;
             AxisZ = transform.forward;
+            VisualBox.UpdateRotation(transform.rotation);
         }
 
         public void Hit()
