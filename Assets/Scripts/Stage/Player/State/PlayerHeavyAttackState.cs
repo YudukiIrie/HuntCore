@@ -77,7 +77,8 @@ namespace Stage.Players
         public void Exit()
         {
             _elapseTime = 0.0f;
-            _player.HitChecker.ResetHitInfo();
+            _player.HitChecker.GreatSwordOBB.ResetHitInfo();
+            _player.HitChecker.EnemyOBB.ResetHitInfo();
         }
     }
 }

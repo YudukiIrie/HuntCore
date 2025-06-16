@@ -79,7 +79,7 @@ namespace Stage.HitCheck
         public bool IsCollideBoxOBB(OBB obbA, OBB obbB)
         {
             // 判定済みのOBBは無視
-            if (obbB.IsHit) return false;
+            if (obbA.IsHit) return false;
 
             // 中心間の距離の取得
             Vector3 distance = obbA.Center - obbB.Center;
@@ -119,6 +119,7 @@ namespace Stage.HitCheck
             if (!CompareLengthOBB(obbA, obbB, cross, distance)) return false;
 
             // 接触済みOBBの情報を更新
+            obbA.Hit();
             obbB.Hit();
             _hitNum++;
 
@@ -154,15 +155,6 @@ namespace Stage.HitCheck
                 return false;
 
             return true;
-        }
-
-        /// <summary>
-        /// 判定のリセット
-        /// </summary>
-        public void ResetHitInfo()
-        {
-            GreatSwordOBB.ResetHitInfo();
-            EnemyOBB.ResetHitInfo();
         }
     }
 }

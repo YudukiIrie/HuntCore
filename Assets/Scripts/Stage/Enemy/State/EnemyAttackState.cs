@@ -8,10 +8,12 @@ namespace Stage.Enemies
     public class EnemyAttackState : IState
     {
         Enemy _enemy;   // “GƒNƒ‰ƒX
+        float _hitStartRatio;
         
         public EnemyAttackState(Enemy enemy)
         {
             _enemy = enemy;
+            _hitStartRatio = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackHitStartRatio;
         }
 
         public void Enter()
@@ -22,8 +24,13 @@ namespace Stage.Enemies
         public void Update()
         {
             // === “–‚½‚è”»’è ===
-            //if ()
-            //if (_enemy.HitChecker.IsCollideBoxOBB(_enemy.HitChecker.EnemyHeadOBB, _enemy.HitChecker.PlayerOBB))
+            if (_enemy.Animation.CheckAnimRatio(EnemyAnimation.HashAttack) >= _hitStartRatio)
+            {
+                if (_enemy.HitChecker.IsCollideBoxOBB(_enemy.HitChecker.EnemyHeadOBB, _enemy.HitChecker.PlayerOBB))
+                {
+                    Debug.Log("‚©‚İ‚Â‚«ƒqƒbƒg");
+                }
+            }
 
             // === ó‘Ô‘JˆÚ ===
             // Œx‰ú
@@ -38,7 +45,8 @@ namespace Stage.Enemies
 
         public void Exit()
         {
-
+            _enemy.HitChecker.EnemyHeadOBB.ResetHitInfo();
+            _enemy.HitChecker.PlayerOBB.ResetHitInfo();
         }
     }
 }

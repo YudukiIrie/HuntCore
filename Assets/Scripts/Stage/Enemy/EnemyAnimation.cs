@@ -97,5 +97,16 @@ namespace Stage.Enemies
             }
             return false;
         }
+
+        /// <summary>
+        /// 指定したアニメーション再生時間を0～1の割合に変換した値を返却
+        /// </summary>
+        public float CheckAnimRatio(int stateHash)
+        {
+            if (CheckCurrentState(stateHash))
+                return _currentStateInfo.normalizedTime;
+
+            return 0.0f;
+        }
     }
 }

@@ -97,7 +97,7 @@ namespace Stage.Enemies
         [SerializeField] float _animBlendTime;
 
         public float AttackHitStartRatio => _attackHitStartRatio;
-        [Header("攻撃当たり判定開始位置")]
+        [Header("攻撃当たり判定開始割合")]
         [SerializeField] float _attackHitStartRatio;
     }
 }
