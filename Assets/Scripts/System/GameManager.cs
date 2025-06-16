@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     // 保存先パス
     const string PATH = "GameEndManager";
 
-    PlayerAction _action;
+    public static PlayerAction Action { get; private set; }
 
     // Resourcesからロードする
     [RuntimeInitializeOnLoadMethod]
@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        _action = new PlayerAction();
-        _action.Enable();
+        Action = new PlayerAction();
+        Action.Enable();
 
         LockCursor();
     }
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void EndGame()
     {
-        if (_action.Player.End.IsPressed())
+        if (Action.Player.End.IsPressed())
         {
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;

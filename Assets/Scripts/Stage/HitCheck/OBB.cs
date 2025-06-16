@@ -21,6 +21,7 @@ namespace Stage.HitCheck
         // ヒットの有無
         public bool IsHit {  get; private set; }
 
+        // 可視化用オブジェクト
         public OBBVisualBox VisualBox { get; private set; }
 
         public OBB(Transform transform, Vector3 size)
