@@ -35,6 +35,9 @@ namespace Stage.Players
         // ƒ^ƒO–¼
         const string GROUND_TAG = "Ground";
 
+        // UŒ‚ƒqƒbƒg”
+        public int HitNum {  get; private set; }
+
         void Awake()
         {
             StateMachine = new PlayerStateMachine(this);
@@ -71,6 +74,14 @@ namespace Stage.Players
         public void TakeImpact()
         {
             StateMachine.TransitionTo(StateMachine.ImpactedState);
+        }
+
+        /// <summary>
+        /// UŒ‚ƒqƒbƒg”‚Ì‘‰Á
+        /// </summary>
+        public void IncreaseHitNum()
+        {
+            HitNum++;
         }
     }
 }

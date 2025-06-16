@@ -41,6 +41,7 @@ namespace Stage.Players
             {
                 if (_player.HitChecker.IsCollideBoxOBB(_player.HitChecker.GreatSwordOBB, _player.HitChecker.EnemyOBB))
                 {
+                    _player.IncreaseHitNum();
                     Debug.Log("スペシャル攻撃ヒット");
                 }
             }

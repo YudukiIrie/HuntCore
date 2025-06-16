@@ -23,9 +23,11 @@ namespace Stage.Enemies
         [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
         [SerializeField] Animator _animator;
 
+        // 攻撃関連
         float _attackInterval;
         float _attackTimer; // 攻撃用タイマー
         bool _canAttack;    // 攻撃状態フラグ
+        public int HitNum { get; private set; } // 攻撃ヒット数
 
         void Awake()
         {
@@ -99,6 +101,11 @@ namespace Stage.Enemies
             }
 
             return false;
+        }
+
+        public void IncreaseHitNum()
+        {
+            HitNum++;
         }
     }
 }

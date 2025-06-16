@@ -28,6 +28,7 @@ namespace Stage.Enemies
             {
                 if (_enemy.HitChecker.IsCollideBoxOBB(_enemy.HitChecker.EnemyHeadOBB, _enemy.HitChecker.PlayerOBB))
                 {
+                    _enemy.IncreaseHitNum();
                     Debug.Log("‚©‚Ý‚Â‚«ƒqƒbƒg");
                 }
             }
