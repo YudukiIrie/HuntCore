@@ -28,10 +28,7 @@ namespace Stage.Enemies
             if (_enemy.Animation.CheckAnimRatio(EnemyAnimation.HashAttack) >= _hitStartRatio)
             {
                 if (OBBHitChecker.IsCollideBoxOBB(_enemy.EnemyHeadOBB, _enemy.Player.DamageableOBBs))
-                {
                     _enemy.IncreaseHitNum();
-                    Debug.Log("‚©‚İ‚Â‚«ƒqƒbƒg");
-                }
             }
 
             // === ó‘Ô‘JˆÚ ===

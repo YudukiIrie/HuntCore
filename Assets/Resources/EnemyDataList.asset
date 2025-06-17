@@ -18,7 +18,8 @@ MonoBehaviour:
     _enemyHeadSize: {x: 1, y: 1, z: 1}
     _findDistance: 10
     _roarDistance: 15
-    _attackDistance: 6
+    _stopDistance: 5
+    _attackDistance: 7
     _chaseSpeed: 5
     _chaseRotSpeed: 10
     _attackInterval: 3

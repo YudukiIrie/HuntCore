@@ -76,8 +76,12 @@ namespace Stage.Enemies
         [Header("™ôšK‹——£")]
         [SerializeField] float _roarDistance;
 
+        public float StopDistance => _stopDistance;
+        [Header("’ÇÕ’âŽ~‹——£")]
+        [SerializeField] float _stopDistance;
+
         public float AttackDistance => _attackDistance;
-        [Header("UŒ‚‚ð‚·‚é‚½‚ß‚ÌƒvƒŒƒCƒ„[‚Æ‚Ì‹——£")]
+        [Header("UŒ‚‰Â”\ƒvƒŒƒCƒ„[ŠÔ‹——£")]
         [SerializeField] float _attackDistance;
 
         public float ChaseSpeed => _chaseSpeed;

@@ -44,10 +44,7 @@ namespace Stage.Players
             if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashHeavyAttack) >= _hitStartRatio)
             {
                 if (OBBHitChecker.IsCollideBoxOBB(_player.WeaponOBB, _player.Enemy.DamageableOBBs))
-                {
                     _player.IncreaseHitNum();
-                    Debug.Log("ヘビー攻撃ヒット");
-                }
             }
 
             // === 残像の生成 ===
