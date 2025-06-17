@@ -1,3 +1,4 @@
+using Stage.Enemies;
 using Stage.HitCheck;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,8 +10,8 @@ namespace Stage.Players
     /// </summary>
     public class Player : MonoBehaviour
     {
-        [field: Header("当たり判定クラス")]
-        [field: SerializeField] public OBBHitChecker HitChecker { get; private set; }
+        [field: Header("敵クラス")]
+        [field: SerializeField] public Enemy Enemy { get; private set; }
 
         [field: Header("武器残像生成クラス")]
         [field: SerializeField] public WeaponAfterImageSpawner Spawner { get; private set; }
@@ -23,7 +24,6 @@ namespace Stage.Players
 
         [Header("武器OBB元Transform")]
         [SerializeField] Transform _weaponOBBTransform;
-
 
         // プレイヤー関連のクラス
         public PlayerStateMachine StateMachine {  get; private set; }

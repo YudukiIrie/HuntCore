@@ -1,3 +1,4 @@
+using Stage.HitCheck;
 using UnityEngine;
 
 namespace Stage.Enemies
@@ -26,7 +27,7 @@ namespace Stage.Enemies
             // === “–‚½‚è”»’è ===
             if (_enemy.Animation.CheckAnimRatio(EnemyAnimation.HashAttack) >= _hitStartRatio)
             {
-                if (_enemy.HitChecker.IsCollideBoxOBB(_enemy.EnemyHeadOBB, _enemy.HitChecker.Player.DamageableOBBs))
+                if (OBBHitChecker.IsCollideBoxOBB(_enemy.EnemyHeadOBB, _enemy.Player.DamageableOBBs))
                 {
                     _enemy.IncreaseHitNum();
                     Debug.Log("‚©‚Ý‚Â‚«ƒqƒbƒg");
@@ -46,9 +47,7 @@ namespace Stage.Enemies
 
         public void Exit()
         {
-            //_enemy.HitChecker.EnemyHeadOBB.ResetHitInfo();
-            //_enemy.HitChecker.PlayerOBB.ResetHitInfo();
-            _enemy.HitChecker.ResetHitInfo(_enemy.EnemyHeadOBB, _enemy.HitChecker.Player.DamageableOBBs);
+            OBBHitChecker.ResetHitInfo(_enemy.EnemyHeadOBB, _enemy.Player.DamageableOBBs);
         }
     }
 }

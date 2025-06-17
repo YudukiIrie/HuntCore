@@ -1,6 +1,4 @@
 using UnityEngine;
-using Stage.Players;
-using Stage.Enemies;
 using System.Collections.Generic;
 
 namespace Stage.HitCheck
@@ -8,21 +6,15 @@ namespace Stage.HitCheck
     /// <summary>
     /// OBB同士による当たり判定
     /// </summary>
-    public class OBBHitChecker : MonoBehaviour
+    public static class OBBHitChecker
     {
-        [field: Header("OBB参照用プレイヤークラス")]
-        [field: SerializeField] public Player Player {  get; private set; }
-
-        [field: Header("OBB参照用敵クラス")]
-        [field: SerializeField] public Enemy Enemy { get; private set; }
-
         /// <summary>
         /// 指定したOBB同士の当たり判定
         /// </summary>
         /// <param name="obbA">能動的OBB</param>
         /// <param name="obbBs">受動的OBB</param>
         /// <returns>true:接触、false:非接触</returns>
-        public bool IsCollideBoxOBB(OBB obbA, List<OBB> obbBs)
+        public static bool IsCollideBoxOBB(OBB obbA, List<OBB> obbBs)
         {
             foreach (OBB obbB in obbBs)
             {
@@ -82,7 +74,7 @@ namespace Stage.HitCheck
         /// <param name="separating">指定した分離軸</param>
         /// <param name="distance">2点間の距離</param>
         /// <returns></returns>
-        bool CompareLengthOBB(OBB obbA, OBB obbB, Vector3 separating, Vector3 distance)
+        static bool CompareLengthOBB(OBB obbA, OBB obbB, Vector3 separating, Vector3 distance)
         {
             // 検証軸上の武器と敵の距離
             // マイナスのベクトルである可能性があるため絶対値化
@@ -112,7 +104,7 @@ namespace Stage.HitCheck
         /// </summary>
         /// <param name="obbA">能動的OBB</param>
         /// <param name="obbBs">受動的OBB</param>
-        public void ResetHitInfo(OBB obbA, List<OBB> obbBs)
+        public static void ResetHitInfo(OBB obbA, List<OBB> obbBs)
         {
             obbA.ResetHitInfo();
 

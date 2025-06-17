@@ -239,7 +239,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Player>k__BackingField: {fileID: 1788431379}
-  <HitChecker>k__BackingField: {fileID: 1973595794}
   _enemyOBBTransform: {fileID: 101587088}
   _headOBBTransform: {fileID: 271244134}
   <Rigidbody>k__BackingField: {fileID: 357090794}
@@ -2240,7 +2239,8 @@ MonoBehaviour:
   _obbVisualBox: {fileID: 289606256712297891, guid: cea762ae4ff565c42b59dcb5457672b5, type: 3}
   _obbNoHitImage: {fileID: 2100000, guid: 2a1dfc69c6d14504f9f074221830a829, type: 2}
   _obbHitImage: {fileID: 2100000, guid: 81278a3d809c4544e85f9b251a781530, type: 2}
-  _hitChecker: {fileID: 1973595794}
+  _player: {fileID: 1788431379}
+  _enemy: {fileID: 357090790}
 --- !u!4 &1435259287
 Transform:
   m_ObjectHideFlags: 0
@@ -2594,11 +2594,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d29e4511996e014f8bbbce1d7bc62c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <HitChecker>k__BackingField: {fileID: 1973595794}
+  <Enemy>k__BackingField: {fileID: 357090790}
   <Spawner>k__BackingField: {fileID: 2038927689}
   <Weapon>k__BackingField: {fileID: 1092066581}
-  _playerOBBTransform: {fileID: 0}
-  _weaponOBBTransform: {fileID: 0}
+  _playerOBBTransform: {fileID: 156331711}
+  _weaponOBBTransform: {fileID: 1899350449}
   _rigidbody: {fileID: 1788431383}
   _animator: {fileID: 1788431385}
 --- !u!114 &1788431380
@@ -3020,55 +3020,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1973595793
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1973595795}
-  - component: {fileID: 1973595794}
-  m_Layer: 0
-  m_Name: HitChecker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1973595794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1973595793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbaad4fdb24a6db408cb886b26bb0af6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Player>k__BackingField: {fileID: 156331710}
-  <GreatSword>k__BackingField: {fileID: 1899350448}
-  <Enemy>k__BackingField: {fileID: 101587087}
-  <EnemyHead>k__BackingField: {fileID: 271244133}
-  _hitText: {fileID: 737335554}
---- !u!4 &1973595795
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1973595793}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.545706, y: 0.88477725, z: -0.4542132}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2038927688
 GameObject:
   m_ObjectHideFlags: 0
@@ -3123,7 +3074,6 @@ SceneRoots:
   - {fileID: 789000611}
   - {fileID: 961272894}
   - {fileID: 1936538464}
-  - {fileID: 1973595795}
   - {fileID: 1178877980}
   - {fileID: 552063324}
   - {fileID: 2038927690}

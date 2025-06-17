@@ -10,11 +10,8 @@ namespace Stage.Enemies
     /// </summary>
     public class Enemy : MonoBehaviour
     {
-        [field: Header("プレイヤー")]
+        [field: Header("プレイヤークラス")]
         [field: SerializeField] public Player Player { get; private set; }
-
-        [field: Header("当たり判定クラス")]
-        [field: SerializeField] public OBBHitChecker HitChecker { get; private set; }
 
         [Header("敵OBB元Transform")]
         [SerializeField] Transform _enemyOBBTransform;

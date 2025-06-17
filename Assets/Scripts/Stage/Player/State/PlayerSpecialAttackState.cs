@@ -1,3 +1,4 @@
+using Stage.HitCheck;
 using UnityEngine;
 
 namespace Stage.Players
@@ -39,7 +40,7 @@ namespace Stage.Players
             // === 当たり判定 ===
             if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) >= _hitStartRatio)
             {
-                if (_player.HitChecker.IsCollideBoxOBB(_player.WeaponOBB, _player.HitChecker.Enemy.DamageableOBBs))
+                if (OBBHitChecker.IsCollideBoxOBB(_player.WeaponOBB, _player.Enemy.DamageableOBBs))
                 {
                     _player.IncreaseHitNum();
                     Debug.Log("スペシャル攻撃ヒット");
@@ -64,7 +65,7 @@ namespace Stage.Players
 
         public void Exit()
         {
-            _player.HitChecker.ResetHitInfo(_player.WeaponOBB, _player.HitChecker.Enemy.DamageableOBBs);
+            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.DamageableOBBs);
         }
     }
 }

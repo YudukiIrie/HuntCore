@@ -38,22 +38,13 @@ namespace Stage.HitCheck
 
         public void UpdateInfo(Transform transform)
         {
-            UpdateCenter(transform.position);
-            UpdateAxes(transform);
-        }
+            Center = transform.position;
 
-        void UpdateCenter(Vector3 center)
-        {
-            Center = center;
-            VisualBox.UpdatePosition(center);
-        }
-
-        void UpdateAxes(Transform transform)
-        {
             AxisX = transform.right;
             AxisY = transform.up;
             AxisZ = transform.forward;
-            VisualBox.UpdateRotation(transform.rotation);
+
+            VisualBox.UpdateInfo(transform, IsHit);
         }
 
         public void Hit()

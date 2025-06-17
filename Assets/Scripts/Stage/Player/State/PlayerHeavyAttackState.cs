@@ -1,3 +1,4 @@
+using Stage.HitCheck;
 using UnityEngine;
 
 namespace Stage.Players
@@ -42,7 +43,7 @@ namespace Stage.Players
             // === ìñÇΩÇËîªíË ===
             if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashHeavyAttack) >= _hitStartRatio)
             {
-                if (_player.HitChecker.IsCollideBoxOBB(_player.WeaponOBB, _player.HitChecker.Enemy.DamageableOBBs))
+                if (OBBHitChecker.IsCollideBoxOBB(_player.WeaponOBB, _player.Enemy.DamageableOBBs))
                 {
                     _player.IncreaseHitNum();
                     Debug.Log("ÉwÉrÅ[çUåÇÉqÉbÉg");
@@ -78,7 +79,7 @@ namespace Stage.Players
         public void Exit()
         {
             _elapseTime = 0.0f;
-            _player.HitChecker.ResetHitInfo(_player.WeaponOBB, _player.HitChecker.Enemy.DamageableOBBs);
+            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.DamageableOBBs);
         }
     }
 }
