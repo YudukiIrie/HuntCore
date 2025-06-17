@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 101587088}
   m_Layer: 0
-  m_Name: EnemyPos
+  m_Name: EnemyOBBTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,7 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 156331711}
   m_Layer: 0
-  m_Name: PlayerPos
+  m_Name: PlayerOBBTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 271244134}
   m_Layer: 0
-  m_Name: EnemyHeadPos
+  m_Name: EnemyHeadOBBTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -240,6 +240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Player>k__BackingField: {fileID: 1788431379}
   <HitChecker>k__BackingField: {fileID: 1973595794}
+  _enemyOBBTransform: {fileID: 101587088}
+  _headOBBTransform: {fileID: 271244134}
   <Rigidbody>k__BackingField: {fileID: 357090794}
   _animator: {fileID: 357090797}
 --- !u!136 &357090793
@@ -2595,6 +2597,8 @@ MonoBehaviour:
   <HitChecker>k__BackingField: {fileID: 1973595794}
   <Spawner>k__BackingField: {fileID: 2038927689}
   <Weapon>k__BackingField: {fileID: 1092066581}
+  _playerOBBTransform: {fileID: 0}
+  _weaponOBBTransform: {fileID: 0}
   _rigidbody: {fileID: 1788431383}
   _animator: {fileID: 1788431385}
 --- !u!114 &1788431380
@@ -2702,7 +2706,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1899350449}
   m_Layer: 0
-  m_Name: WeaponPos
+  m_Name: WeaponOBBTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -30,25 +30,25 @@ namespace Stage.HitCheck
         float _switchDisplayTimer;
         bool _isActive = true;
 
-        void Start()
-        {
-            // 各OBB可視化ゲームオブジェクトの作成
-            _playerOBBVisualBox = CreateVisualBox(_hitChecker.PlayerOBB.VisualBox);
-            _swordOBBVisualBox  = CreateVisualBox(_hitChecker.GreatSwordOBB.VisualBox);
-            _enemyOBBVisualBox  = CreateVisualBox(_hitChecker.EnemyOBB.VisualBox);
-            _enemyHeadOBBVisualBox = CreateVisualBox(_hitChecker.EnemyHeadOBB.VisualBox);
-        }
+        //void Start()
+        //{
+        //    // 各OBB可視化ゲームオブジェクトの作成
+        //    _playerOBBVisualBox = CreateVisualBox(_hitChecker.PlayerOBB.VisualBox);
+        //    _swordOBBVisualBox  = CreateVisualBox(_hitChecker.GreatSwordOBB.VisualBox);
+        //    _enemyOBBVisualBox  = CreateVisualBox(_hitChecker.EnemyOBB.VisualBox);
+        //    _enemyHeadOBBVisualBox = CreateVisualBox(_hitChecker.EnemyHeadOBB.VisualBox);
+        //}
 
-        void Update()
-        {
-            SwitchDisplay();
+        //void Update()
+        //{
+        //    SwitchDisplay();
           
-            // 各OBB可視化ゲームオブジェクト情報の更新
-            UpdateVisualBoxInfo(_playerOBBVisualBox, _hitChecker.PlayerOBB);
-            UpdateVisualBoxInfo(_swordOBBVisualBox, _hitChecker.GreatSwordOBB);
-            UpdateVisualBoxInfo(_enemyOBBVisualBox, _hitChecker.EnemyOBB);
-            UpdateVisualBoxInfo(_enemyHeadOBBVisualBox, _hitChecker.EnemyHeadOBB);
-        }
+        //    // 各OBB可視化ゲームオブジェクト情報の更新
+        //    UpdateVisualBoxInfo(_playerOBBVisualBox, _hitChecker.PlayerOBB);
+        //    UpdateVisualBoxInfo(_swordOBBVisualBox, _hitChecker.GreatSwordOBB);
+        //    UpdateVisualBoxInfo(_enemyOBBVisualBox, _hitChecker.EnemyOBB);
+        //    UpdateVisualBoxInfo(_enemyHeadOBBVisualBox, _hitChecker.EnemyHeadOBB);
+        //}
 
         /// <summary>
         /// OBB可視化ゲームオブジェクトの生成

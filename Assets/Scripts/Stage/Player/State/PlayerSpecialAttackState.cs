@@ -39,7 +39,7 @@ namespace Stage.Players
             // === 当たり判定 ===
             if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) >= _hitStartRatio)
             {
-                if (_player.HitChecker.IsCollideBoxOBB(_player.HitChecker.GreatSwordOBB, _player.HitChecker.EnemyOBB))
+                if (_player.HitChecker.IsCollideBoxOBB(_player.WeaponOBB, _player.HitChecker.Enemy.DamageableOBBs))
                 {
                     _player.IncreaseHitNum();
                     Debug.Log("スペシャル攻撃ヒット");
@@ -64,8 +64,7 @@ namespace Stage.Players
 
         public void Exit()
         {
-            _player.HitChecker.GreatSwordOBB.ResetHitInfo();
-            _player.HitChecker.EnemyOBB.ResetHitInfo();
+            _player.HitChecker.ResetHitInfo(_player.WeaponOBB, _player.HitChecker.Enemy.DamageableOBBs);
         }
     }
 }

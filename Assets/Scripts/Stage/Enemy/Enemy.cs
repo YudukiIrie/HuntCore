@@ -1,5 +1,6 @@
 using Stage.HitCheck;
 using Stage.Players;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Stage.Enemies
@@ -15,6 +16,12 @@ namespace Stage.Enemies
         [field: Header("当たり判定クラス")]
         [field: SerializeField] public OBBHitChecker HitChecker { get; private set; }
 
+        [Header("敵OBB元Transform")]
+        [SerializeField] Transform _enemyOBBTransform;
+
+        [Header("敵頭OBB元Transform")]
+        [SerializeField] Transform _headOBBTransform;
+
         // 敵関連クラス
         public EnemyStateMachine StateMachine { get; private set; }
         public EnemyAnimation Animation { get; private set; }
@@ -22,6 +29,12 @@ namespace Stage.Enemies
         // コンポーネント
         [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
         [SerializeField] Animator _animator;
+
+        // OBB
+        public OBB EnemyOBB { get; private set; }
+        public OBB EnemyHeadOBB { get; private set; }
+        // 被攻撃OBB
+        public List<OBB> DamageableOBBs { get; private set; } = new();
 
         // 攻撃関連
         float _attackInterval;
@@ -34,6 +47,12 @@ namespace Stage.Enemies
             StateMachine = new EnemyStateMachine(this);
             Animation = new EnemyAnimation(_animator);
 
+            DamageableOBBs.Add(EnemyOBB = 
+                new OBB(_enemyOBBTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemySize));
+            DamageableOBBs.Add(EnemyHeadOBB = 
+                new OBB(_headOBBTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyHeadSize));
+
+
             _attackInterval = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackInterval;
         }
 
@@ -44,6 +63,8 @@ namespace Stage.Enemies
 
         void Update()
         {
+            UpdateOBBInfo();
+
             UpdateAttackTimer();
 
             StateMachine.Update();
@@ -52,6 +73,15 @@ namespace Stage.Enemies
         void FixedUpdate()
         {
             StateMachine.FixedUpdate();
+        }
+
+        /// <summary>
+        /// OBB情報の更新
+        /// </summary>
+        void UpdateOBBInfo()
+        {
+            EnemyOBB.UpdateInfo(_enemyOBBTransform);
+            EnemyHeadOBB.UpdateInfo(_headOBBTransform);
         }
 
         /// <summary>

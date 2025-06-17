@@ -36,13 +36,19 @@ namespace Stage.HitCheck
             VisualBox = new OBBVisualBox(Center, transform.rotation, Radius);
         }
 
-        public void UpdateCenter(Vector3 center)
+        public void UpdateInfo(Transform transform)
+        {
+            UpdateCenter(transform.position);
+            UpdateAxes(transform);
+        }
+
+        void UpdateCenter(Vector3 center)
         {
             Center = center;
             VisualBox.UpdatePosition(center);
         }
 
-        public void UpdateAxes(Transform transform)
+        void UpdateAxes(Transform transform)
         {
             AxisX = transform.right;
             AxisY = transform.up;

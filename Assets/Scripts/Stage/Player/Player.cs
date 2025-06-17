@@ -1,4 +1,5 @@
 using Stage.HitCheck;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Stage.Players
@@ -17,6 +18,12 @@ namespace Stage.Players
         [field: Header("武器ゲームオブジェクト")]
         [field: SerializeField] public GameObject Weapon { get; private set; }
 
+        [Header("プレイヤーOBB元Transform")]
+        [SerializeField] Transform _playerOBBTransform;
+
+        [Header("武器OBB元Transform")]
+        [SerializeField] Transform _weaponOBBTransform;
+
 
         // プレイヤー関連のクラス
         public PlayerStateMachine StateMachine {  get; private set; }
@@ -28,6 +35,12 @@ namespace Stage.Players
         [SerializeField] Rigidbody _rigidbody;
         public Animator Animator => _animator;
         [SerializeField] Animator _animator;
+
+        // OBB
+        public OBB PlayerOBB { get; private set; }
+        public OBB WeaponOBB { get; private set; }
+        // 被攻撃OBB
+        public List<OBB> DamageableOBBs { get; private set; } = new();
 
         // 接触中の面に対する法線ベクトル
         public Vector3 NormalVector {  get; private set; }
@@ -44,6 +57,9 @@ namespace Stage.Players
             Animation = new PlayerAnimation(_animator);
             Action = new PlayerAction();
 
+            DamageableOBBs.Add(PlayerOBB = new OBB(_playerOBBTransform, PlayerData.Data.PlayerSize));
+            WeaponOBB = new OBB(_weaponOBBTransform, WeaponData.Data.GreatSwordSize);
+
             Action.Enable();
         }
 
@@ -54,6 +70,8 @@ namespace Stage.Players
 
         void Update()
         {
+            UpdateOBBInfo();
+
             StateMachine.Update();
         }
 
@@ -66,6 +84,15 @@ namespace Stage.Players
         {
             if (collision.gameObject.CompareTag(GROUND_TAG))
                 NormalVector = collision.contacts[0].normal;
+        }
+
+        /// <summary>
+        /// OBB情報の更新
+        /// </summary>
+        void UpdateOBBInfo()
+        {
+            PlayerOBB.UpdateInfo(_playerOBBTransform);
+            WeaponOBB.UpdateInfo(_weaponOBBTransform);
         }
 
         /// <summary>
