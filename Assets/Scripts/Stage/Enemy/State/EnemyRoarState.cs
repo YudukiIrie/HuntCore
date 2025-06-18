@@ -21,7 +21,7 @@ namespace Stage.Enemies
             _enemy.Animation.Roar();
 
             // ƒvƒŒƒCƒ„[‚ÉÕŒ‚‚ğ—^‚¦‚é
-            if (_enemy.CheckDistanceToPlayer() <= _roarDistance)
+            if (_enemy.GetDistanceToPlayer() <= _roarDistance)
                 _enemy.Player.TakeImpact();
         }
 

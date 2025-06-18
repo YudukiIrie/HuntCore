@@ -42,6 +42,14 @@ namespace Stage.Players
             if (input.magnitude > 0.001f)
                 _targetRot = Quaternion.LookRotation(_velocity.normalized);
 
+            // === •ûŒü“]Š· ===
+            // ‰ñ“]‘¬“x‚Ìæ“¾
+            float rotSpeed = _rotSpeed * Time.deltaTime;
+            // ‰ñ“]
+            Quaternion rot = _player.transform.rotation;
+            rot = Quaternion.RotateTowards(rot, _targetRot, rotSpeed);
+            _player.transform.rotation = rot;
+
             // === ó‘Ô‘JˆÚ ===
             // ’Êí
             if (_player.Action.Player.Move.ReadValue<Vector2>() == Vector2.zero)
@@ -58,10 +66,6 @@ namespace Stage.Players
             Vector3 vel = _velocity;
             vel.y = _player.Rigidbody.velocity.y;
             _player.Rigidbody.velocity = vel;
-
-            // === æ“¾‚µ‚½Šp“x‚ğƒIƒuƒWƒFƒNƒg‚É”½‰f ===
-            // —‚¿’…‚«‚ğ‚à‚Á‚Ä‰ñ“]‚µ‚Ä‚Ù‚µ‚¢‚½‚ß§ŒÀ‚ğİ‚¯‚é
-            _player.transform.rotation = Quaternion.RotateTowards(_player.transform.rotation, _targetRot, _rotSpeed);
         }
 
         public void Exit()

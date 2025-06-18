@@ -84,7 +84,7 @@ namespace Stage.Enemies
         /// <summary>
         /// プレイヤーとの距離を返す
         /// </summary>
-        public float CheckDistanceToPlayer()
+        public float GetDistanceToPlayer()
         {
             // 座標の取得
             var a = transform.position;
@@ -97,6 +97,28 @@ namespace Stage.Enemies
 
             // 距離の算出
             return Mathf.Sqrt((x * x) + (y * y) + (z * z));
+        }
+
+        /// <summary>
+        /// プレイヤーへの方向ベクトルを返す
+        /// </summary>
+        public Vector3 GetDirectionToPlayer()
+        {
+            return (Player.transform.position - transform.position).normalized;
+        }
+
+        /// <summary>
+        /// 自身の正面とプレイヤーとの角度を返す
+        /// </summary>
+        public float GetAngleToPlayer()
+        {
+            // 正面ベクトルとプレイヤーへの方向ベクトルを内積
+            var v0 = transform.forward;
+            var v1 = GetDirectionToPlayer();
+            var dot = Vector3.Dot(v0, v1);
+
+            // 角度を求め返却(度数法)
+            return Mathf.Acos(dot) * Mathf.Rad2Deg;
         }
 
         /// <summary>

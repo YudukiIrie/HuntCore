@@ -25,7 +25,7 @@ namespace Stage.Enemies
         {
             // === ó‘Ô‘JˆÚ ===
             // ™ôšK
-            if (_enemy.CheckDistanceToPlayer() <= _findDistance)
+            if (_enemy.GetDistanceToPlayer() <= _findDistance)
                 _enemy.StateMachine.TransitionTo(_enemy.StateMachine.RoarState);
         }
 

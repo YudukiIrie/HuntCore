@@ -40,9 +40,17 @@ namespace Stage.Enemies
             if (_velocity.magnitude > 0.001f)
                 _targetRot = Quaternion.LookRotation(_velocity);
 
+            // === •ûŒü“]Š· ===
+            // ‰ñ“]‘¬“x‚Ìæ“¾
+            float rotSpeed = _chaseRotSpeed * Time.deltaTime;
+            // ‰ñ“]
+            Quaternion rot = _enemy.transform.rotation;
+            rot = Quaternion.RotateTowards(rot, _targetRot, rotSpeed);
+            _enemy.transform.rotation = rot;
+
             // === ó‘Ô‘JˆÚ ===
             // Œx‰ú
-            if (_enemy.CheckDistanceToPlayer() <= _stopDistance)
+            if (_enemy.GetDistanceToPlayer() <= _stopDistance)
                 _enemy.StateMachine.TransitionTo(_enemy.StateMachine.AlertState);
         }
 
@@ -52,9 +60,6 @@ namespace Stage.Enemies
             var vel = _velocity;
             vel.y = _enemy.Rigidbody.velocity.y;
             _enemy.Rigidbody.velocity = vel;
-
-            // === ‰ñ“] ===
-            _enemy.transform.rotation = Quaternion.RotateTowards(_enemy.transform.rotation, _targetRot, _chaseRotSpeed);
         }
 
         public void Exit()

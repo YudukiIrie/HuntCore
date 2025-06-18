@@ -14,6 +14,7 @@ namespace Stage.Enemies
         public EnemyAlertState AlertState { get; private set; }
         public EnemyChaseState ChaseState { get; private set; }
         public EnemyAttackState AttackState { get; private set; }
+        public EnemyTurnState TurnState { get; private set; }
 
         public EnemyStateMachine(Enemy enemy)
         {
@@ -22,6 +23,7 @@ namespace Stage.Enemies
             AlertState  = new EnemyAlertState(enemy);
             ChaseState  = new EnemyChaseState(enemy);
             AttackState = new EnemyAttackState(enemy);
+            TurnState   = new EnemyTurnState(enemy);
         }
 
         /// <summary>

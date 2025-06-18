@@ -9,11 +9,13 @@ namespace Stage.Enemies
     {
         Enemy _enemy;   // “GƒNƒ‰ƒX
         float _attackDistance;
+        float _limitAngle;
 
         public EnemyAlertState(Enemy enemy)
         {
             _enemy = enemy;
             _attackDistance = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackDistance;
+            _limitAngle = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).LimitAngle;
         }
 
         public void Enter()
@@ -25,8 +27,11 @@ namespace Stage.Enemies
         {
             // === ó‘Ô‘JˆÚ ===
             // ’ÇÕ
-            if (_enemy.CheckDistanceToPlayer() > _attackDistance)
+            if (_enemy.GetDistanceToPlayer() > _attackDistance)
                 _enemy.StateMachine.TransitionTo(_enemy.StateMachine.ChaseState);
+            // •ûŒü“]Š·
+            else if (_enemy.GetAngleToPlayer() > _limitAngle)
+                _enemy.StateMachine.TransitionTo(_enemy.StateMachine.TurnState);
             // UŒ‚
             else if (_enemy.CheckAttackState())
                 _enemy.StateMachine.TransitionTo(_enemy.StateMachine.AttackState);

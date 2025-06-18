@@ -103,5 +103,17 @@ namespace Stage.Enemies
         public float AttackHitStartRatio => _attackHitStartRatio;
         [Header("UŒ‚“–‚½‚è”»’èŠJnŠ„‡")]
         [SerializeField] float _attackHitStartRatio;
+
+        public float LimitAngle => _limitAngle;
+        [Header("‘ÎÛ‚Æ‚ÌŒÀŠEŠp“x")]
+        [SerializeField] float _limitAngle;
+
+        public float AttackAngle => _attackAngle;
+        [Header("UŒ‚‰Â”\Šp“x")]
+        [SerializeField] float _attackAngle;
+
+        public float TurnSpeed => _turnSpeed;
+        [Header("•ûŒü“]Š·‘¬“x")]
+        [SerializeField] float _turnSpeed;
     }
 }

@@ -21,7 +21,10 @@ MonoBehaviour:
     _stopDistance: 5
     _attackDistance: 7
     _chaseSpeed: 5
-    _chaseRotSpeed: 10
+    _chaseRotSpeed: 300
     _attackInterval: 3
     _animBlendTime: 0.3
     _attackHitStartRatio: 0.3
+    _limitAngle: 60
+    _attackAngle: 10
+    _turnSpeed: 100

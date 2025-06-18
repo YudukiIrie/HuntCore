@@ -13,6 +13,7 @@ namespace Stage.Enemies
         public static readonly int HashAlert = Animator.StringToHash("Base Layer.Alert");
         public static readonly int HashChase = Animator.StringToHash("Base Layer.Chase");
         public static readonly int HashAttack = Animator.StringToHash("Base Layer.Attack");
+        public static readonly int HashWalk = Animator.StringToHash("Base Layer.Walk");
 
         // コンポーネント
         Animator _animator;
@@ -66,6 +67,14 @@ namespace Stage.Enemies
         public void Attack()
         {
             _animator.CrossFade(HashAttack, _animBlendTime);
+        }
+
+        /// <summary>
+        /// 歩きアニメーション開始
+        /// </summary>
+        public void Walk()
+        {
+            _animator.CrossFade(HashWalk, _animBlendTime);
         }
 
         /// <summary>

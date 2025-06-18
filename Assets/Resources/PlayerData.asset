@@ -18,9 +18,9 @@ MonoBehaviour:
   _runSpeed: 7
   _drawnMoveSpeed: 2.5
   _rotSpeed: 600
-  _drawnRotSpeed: 10
-  _heavyAttackRotSpeed: 3
-  _specialAttackRotSpeed: 3
+  _drawnRotSpeed: 400
+  _heavyAttackRotSpeed: 150
+  _specialAttackRotSpeed: 150
   _magnitudeBorder: 0.8
   _chainTime: 0.3
   _idleToOtherDuration: 0.4
