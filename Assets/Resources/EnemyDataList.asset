@@ -16,6 +16,7 @@ MonoBehaviour:
   - _enemyType: 0
     _enemySize: {x: 2.5, y: 2, z: 4}
     _enemyHeadSize: {x: 1, y: 1, z: 1}
+    _enemyWingSize: {x: 2.5, y: 0.8, z: 4}
     _findDistance: 10
     _roarDistance: 15
     _stopDistance: 5
@@ -25,6 +26,6 @@ MonoBehaviour:
     _attackInterval: 3
     _animBlendTime: 0.3
     _attackHitStartRatio: 0.3
-    _limitAngle: 60
+    _limitAngle: 80
     _attackAngle: 10
     _turnSpeed: 100

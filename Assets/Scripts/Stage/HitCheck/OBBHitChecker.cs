@@ -20,7 +20,7 @@ namespace Stage.HitCheck
             {
                 // ”»’èÏ‚İ‚ÌOBB‚Í–³‹
                 if (obbA.IsHit) break;
-
+                
                 // ’†SŠÔ‚Ì‹——£‚Ìæ“¾
                 Vector3 distance = obbA.Center - obbB.Center;
 
@@ -61,7 +61,7 @@ namespace Stage.HitCheck
                 // ÚGÏ‚İOBB‚Ìî•ñ‚ğXV
                 obbA.Hit();
                 obbB.Hit();
-
+      
                 return true;
             }
 

@@ -36,25 +36,9 @@ namespace Stage.Players
         [Header("プレイヤーサイズ")]
         [SerializeField] Vector3 _playerSize;
 
-        public float WalkSpeed => _walkSpeed;
-        [Header("歩き速度")]
-        [SerializeField] float _walkSpeed;
-
-        public float JogSpeed => _jogSpeed;
-        [Header("小走り速度")]
-        [SerializeField] float _jogSpeed;
-
-        public float RunSpeed => _runSpeed;
-        [Header("走り速度")]
-        [SerializeField] float _runSpeed;
-
         public float DrawnMoveSpeed => _drawnMoveSpeed;
         [Header("抜刀状態の移動速度")]
         [SerializeField] float _drawnMoveSpeed;
-
-        public float RotSpeed => _rotSpeed;
-        [Header("回転速度")]
-        [SerializeField] float _rotSpeed;
 
         public float DrawnRotSpeed => _drawnRotSpeed;
         [Header("抜刀状態の回転速度")]
@@ -67,10 +51,6 @@ namespace Stage.Players
         public float SpecialAttackRotSpeed => _specialAttackRotSpeed;
         [Header("スペシャル攻撃の回転速度")]
         [SerializeField] float _specialAttackRotSpeed;
-
-        public float MagnitudeBorder => _magnitudeBorder;
-        [Header("歩きと小走りを区別するベクトル長の境界")]
-        [SerializeField]float _magnitudeBorder;
 
         public float ChainTime => _chainTime;
         [Header("コンボ間猶予時間")]

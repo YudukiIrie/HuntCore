@@ -19,6 +19,12 @@ namespace Stage.Enemies
         [Header("ìGì™OBBå≥Transform")]
         [SerializeField] Transform _headOBBTransform;
 
+        [Header("ìGâEóÉãrOBBå≥Transform")]
+        [SerializeField] Transform _rWingOBBTransform;
+
+        [Header("ìGç∂óÉãrOBBå≥Transform")]
+        [SerializeField] Transform _lWingOBBTransform;
+
         // ìGä÷òAÉNÉâÉX
         public EnemyStateMachine StateMachine { get; private set; }
         public EnemyAnimation Animation { get; private set; }
@@ -30,6 +36,8 @@ namespace Stage.Enemies
         // OBB
         public OBB EnemyOBB { get; private set; }
         public OBB EnemyHeadOBB { get; private set; }
+        public OBB EnemyRWingOBB { get; private set; }
+        public OBB EnemyLWingOBB { get; private set; }
         // îÌçUåÇOBB
         public List<OBB> DamageableOBBs { get; private set; } = new();
 
@@ -44,12 +52,8 @@ namespace Stage.Enemies
             StateMachine = new EnemyStateMachine(this);
             Animation = new EnemyAnimation(_animator);
 
-            DamageableOBBs.Add(EnemyOBB = 
-                new OBB(_enemyOBBTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemySize));
-            DamageableOBBs.Add(EnemyHeadOBB = 
-                new OBB(_headOBBTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyHeadSize));
-
-
+            CreateOBBs();
+            
             _attackInterval = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackInterval;
         }
 
@@ -73,12 +77,29 @@ namespace Stage.Enemies
         }
 
         /// <summary>
+        /// OBBÇÃçÏê¨
+        /// </summary>
+        void CreateOBBs()
+        {
+            DamageableOBBs.Add(EnemyOBB =
+                new OBB(_enemyOBBTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemySize));
+            DamageableOBBs.Add(EnemyHeadOBB =
+                new OBB(_headOBBTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyHeadSize));
+            DamageableOBBs.Add(EnemyRWingOBB =
+                new OBB(_rWingOBBTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyWingSize));
+            DamageableOBBs.Add(EnemyLWingOBB =
+                new OBB(_lWingOBBTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyWingSize));
+        }
+
+        /// <summary>
         /// OBBèÓïÒÇÃçXêV
         /// </summary>
         void UpdateOBBInfo()
         {
             EnemyOBB.UpdateInfo(_enemyOBBTransform);
             EnemyHeadOBB.UpdateInfo(_headOBBTransform);
+            EnemyRWingOBB.UpdateInfo(_rWingOBBTransform);
+            EnemyLWingOBB.UpdateInfo(_lWingOBBTransform);
         }
 
         /// <summary>

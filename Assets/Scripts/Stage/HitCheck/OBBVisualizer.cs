@@ -60,6 +60,12 @@ namespace Stage.HitCheck
 
             _visualBoxes.Add(visualBox = Instantiate(_obbVisualBox, transform));
             _enemy.EnemyHeadOBB.VisualBox.SetGameObjectInfo(visualBox, _obbNoHitImage, _obbHitImage);
+
+            _visualBoxes.Add(visualBox = Instantiate(_obbVisualBox, transform));
+            _enemy.EnemyRWingOBB.VisualBox.SetGameObjectInfo(visualBox, _obbNoHitImage, _obbHitImage);
+
+            _visualBoxes.Add(visualBox = Instantiate(_obbVisualBox, transform));
+            _enemy.EnemyLWingOBB.VisualBox.SetGameObjectInfo(visualBox, _obbNoHitImage, _obbHitImage);
         }
 
         /// <summary>
