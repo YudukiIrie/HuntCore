@@ -1,5 +1,3 @@
-using TMPro;
-using UnityEngine;
 using Stage.HitCheck;
 
 namespace Stage.Players

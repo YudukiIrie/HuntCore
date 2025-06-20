@@ -51,8 +51,9 @@ namespace Stage.Players
         // 攻撃ヒット数
         public int HitNum {  get; private set; }
 
-        // ガード状態の有無
-        bool _isBlocking = false;
+        // ガード関連
+        bool _isBlocking = false;   // ガード状態の有無
+        public int BlockNum {  get; private set; }  // ガード回数
 
         void Awake()
         {
@@ -116,7 +117,10 @@ namespace Stage.Players
         public void TakeImpact()
         {
             if (_isBlocking)
+            {
+                BlockNum++;
                 StateMachine.TransitionTo(StateMachine.BlockedState);
+            }
             else
                 StateMachine.TransitionTo(StateMachine.ImpactedState);
         }
