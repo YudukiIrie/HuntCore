@@ -401,6 +401,8 @@ MonoBehaviour:
   _headOBBTransform: {fileID: 271244134}
   _rWingOBBTransform: {fileID: 1867351047}
   _lWingOBBTransform: {fileID: 2037623234}
+  _rWingRootOBBTransform: {fileID: 996561802}
+  _lWingRootOBBTransform: {fileID: 1880434958}
   <Rigidbody>k__BackingField: {fileID: 357090794}
   _animator: {fileID: 357090797}
 --- !u!136 &357090793
@@ -594,7 +596,7 @@ Transform:
   m_GameObject: {fileID: 552063320}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.3, y: 2.33, z: -3.55}
+  m_LocalPosition: {x: 33.2, y: 2.33, z: -3.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2080,9 +2082,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 495698, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
       insertIndex: -1
       addedObject: {fileID: 271244134}
+    - targetCorrespondingSourceObject: {fileID: 460738, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1880434958}
     - targetCorrespondingSourceObject: {fileID: 433466, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2037623234}
+    - targetCorrespondingSourceObject: {fileID: 473360, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 996561802}
     - targetCorrespondingSourceObject: {fileID: 445002, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1867351047}
@@ -2224,6 +2232,37 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &996561801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 996561802}
+  m_Layer: 0
+  m_Name: EnemyRWingRootOBBTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &996561802
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996561801}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.26070163, y: -0.3106921, z: 0.16935468, w: 0.8982339}
+  m_LocalPosition: {x: -130, y: -28, z: 8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1478127835}
+  m_LocalEulerAnglesHint: {x: 35, y: -35, z: 10}
 --- !u!1 &1092066581 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 63ab21a6830470240a998a3fd20f5eb5, type: 3}
@@ -2674,6 +2713,11 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_ApplyBeforeBody: 0
+--- !u!4 &1478127835 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 473360, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
+  m_PrefabInstance: {fileID: 961272894}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1495909730
 GameObject:
   m_ObjectHideFlags: 0
@@ -3074,6 +3118,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1890286284}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -55}
+--- !u!1 &1880434957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1880434958}
+  m_Layer: 0
+  m_Name: EnemyLWingRootOBBTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1880434958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880434957}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.26070163, y: 0.3106921, z: 0.16935468, w: 0.8982339}
+  m_LocalPosition: {x: -130, y: -28, z: -8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1919552684}
+  m_LocalEulerAnglesHint: {x: -35, y: 35, z: 10}
 --- !u!4 &1890286284 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 445002, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
@@ -3110,6 +3185,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 865688016}
   m_LocalEulerAnglesHint: {x: -19.93, y: -95.39, z: 30}
+--- !u!4 &1919552684 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 460738, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
+  m_PrefabInstance: {fileID: 961272894}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1936538464
 PrefabInstance:
   m_ObjectHideFlags: 0

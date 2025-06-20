@@ -25,6 +25,12 @@ namespace Stage.Enemies
         [Header("ìGç∂óÉãrOBBå≥Transform")]
         [SerializeField] Transform _lWingOBBTransform;
 
+        [Header("ìGâEóÉãrïtÇØç™OBBå≥Transform")]
+        [SerializeField] Transform _rWingRootOBBTransform;
+
+        [Header("ìGç∂óÉãrïtÇØç™OBBå≥Transform")]
+        [SerializeField] Transform _lWingRootOBBTransform;
+
         // ìGä÷òAÉNÉâÉX
         public EnemyStateMachine StateMachine { get; private set; }
         public EnemyAnimation Animation { get; private set; }
@@ -38,6 +44,8 @@ namespace Stage.Enemies
         public OBB EnemyHeadOBB { get; private set; }
         public OBB EnemyRWingOBB { get; private set; }
         public OBB EnemyLWingOBB { get; private set; }
+        public OBB EnemyRWingRootOBB { get; private set; }
+        public OBB EnemyLWingRootOBB { get; private set; }
         // ìGOBBàÍäáä«óùópList
         public List<OBB> EnemyOBBs { get; private set; } = new();
 
@@ -96,6 +104,14 @@ namespace Stage.Enemies
             EnemyOBBs.Add(EnemyLWingOBB =
                 new OBB(_lWingOBBTransform, 
                 EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyWingSize, OBB.OBBType.Body));
+
+            EnemyOBBs.Add(EnemyRWingRootOBB =
+                new OBB(_rWingRootOBBTransform,
+                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyWingRootSize, OBB.OBBType.Body));
+
+            EnemyOBBs.Add(EnemyLWingRootOBB =
+                new OBB(_lWingRootOBBTransform,
+                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyWingRootSize, OBB.OBBType.Body));
         }
 
         /// <summary>
@@ -107,6 +123,8 @@ namespace Stage.Enemies
             EnemyHeadOBB.UpdateInfo(_headOBBTransform);
             EnemyRWingOBB.UpdateInfo(_rWingOBBTransform);
             EnemyLWingOBB.UpdateInfo(_lWingOBBTransform);
+            EnemyRWingRootOBB.UpdateInfo(_rWingRootOBBTransform);
+            EnemyLWingRootOBB.UpdateInfo(_lWingRootOBBTransform);
         }
 
         /// <summary>

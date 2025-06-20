@@ -30,14 +30,14 @@ namespace Stage.Players
             // ガードキャンセル
             if (_player.Action.Player.Guard.WasReleasedThisFrame() && !_isCanceled)
             {
-                _player.Animation.CancelGuard(_player.Animation.CheckAnimRatio(PlayerAnimation.HashGuard));
+                _player.Animation.CancelGuard(_player.Animation.CheckAnimRatio(PlayerAnimation.HashGuardBegin));
                 _isCanceled = true;
             }
             // 待機
             if (_isCanceled)
             {
                 // 逆再生の終了割合 = 0.0f
-                if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashGuard) <= 0.0f)
+                if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashGuardBegin) <= 0.0f)
                     _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
             }
         }

@@ -11,8 +11,8 @@ namespace Stage.Players
         // ’è”‚©‚ÂÀs‚É’l‚ªŒˆ‚Ü‚é‚½‚ßstatic readonly
         public static readonly int HashIdle    = Animator.StringToHash("Base Layer.Idle");
         public static readonly int HashMove    = Animator.StringToHash("Base Layer.Move");
-        public static readonly int HashGuard   = Animator.StringToHash("Base Layer.Guard");
         public static readonly int HashBlocked = Animator.StringToHash("Base Layer.Blocked");
+        public static readonly int HashGuardBegin    = Animator.StringToHash("Base Layer.GuardBegin");
         public static readonly int HashImpacted      = Animator.StringToHash("Base Layer.Impacted");
         public static readonly int HashLightAttack   = Animator.StringToHash("Base Layer.LightAttack");
         public static readonly int HashHeavyAttack   = Animator.StringToHash("Base Layer.HeavyAttack");
@@ -86,7 +86,7 @@ namespace Stage.Players
         /// </summary>
         public void Guard()
         {
-            _animator.CrossFade(HashGuard, _animBlendTime);
+            _animator.CrossFade(HashGuardBegin, _animBlendTime);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Stage.Players
             _animator.SetFloat(HashSpeed, -1);
             // Ä¶ŠÔ‚Í1ˆÈã‚É‚È‚éê‡‚ª‚ ‚é‚½‚ß§ŒÀ‚ğİ‚¯‚é
             float offset = Mathf.Clamp(normalizedTime, 0.0f, 1.0f);
-            _animator.CrossFade(HashGuard, _animBlendTime, 0, offset);
+            _animator.CrossFade(HashGuardBegin, _animBlendTime, 0, offset);
         }
 
         /// <summary>

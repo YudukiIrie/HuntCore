@@ -38,7 +38,7 @@ namespace Stage.Players
                 _elapsedTime += Time.deltaTime;
 
                 // ガードキャンセル終了かつ、Animatorと内部処理を同期させるための待ち
-                if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashGuard) <= 0.0f &&
+                if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashGuardBegin) <= 0.0f &&
                     _elapsedTime > _toOtherDuration)
                     _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
             }
