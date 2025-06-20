@@ -80,6 +80,15 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Guard"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ea6961e-e85d-4a5d-b84f-66caba869a25"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -333,6 +342,28 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SwitchDisplay"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ef3bdd25-5411-455a-aa61-4e30b5aad0ef"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Guard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ca946a1-2976-4ba4-b6aa-c18dec5c60b4"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Guard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -926,6 +957,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_End = m_Player.FindAction("End", throwIfNotFound: true);
         m_Player_SwitchDisplay = m_Player.FindAction("SwitchDisplay", throwIfNotFound: true);
+        m_Player_Guard = m_Player.FindAction("Guard", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1005,6 +1037,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_End;
     private readonly InputAction m_Player_SwitchDisplay;
+    private readonly InputAction m_Player_Guard;
     public struct PlayerActions
     {
         private @PlayerAction m_Wrapper;
@@ -1015,6 +1048,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @End => m_Wrapper.m_Player_End;
         public InputAction @SwitchDisplay => m_Wrapper.m_Player_SwitchDisplay;
+        public InputAction @Guard => m_Wrapper.m_Player_Guard;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1042,6 +1076,9 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @SwitchDisplay.started += instance.OnSwitchDisplay;
             @SwitchDisplay.performed += instance.OnSwitchDisplay;
             @SwitchDisplay.canceled += instance.OnSwitchDisplay;
+            @Guard.started += instance.OnGuard;
+            @Guard.performed += instance.OnGuard;
+            @Guard.canceled += instance.OnGuard;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1064,6 +1101,9 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
             @SwitchDisplay.started -= instance.OnSwitchDisplay;
             @SwitchDisplay.performed -= instance.OnSwitchDisplay;
             @SwitchDisplay.canceled -= instance.OnSwitchDisplay;
+            @Guard.started -= instance.OnGuard;
+            @Guard.performed -= instance.OnGuard;
+            @Guard.canceled -= instance.OnGuard;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1252,6 +1292,7 @@ public partial class @PlayerAction: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnEnd(InputAction.CallbackContext context);
         void OnSwitchDisplay(InputAction.CallbackContext context);
+        void OnGuard(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

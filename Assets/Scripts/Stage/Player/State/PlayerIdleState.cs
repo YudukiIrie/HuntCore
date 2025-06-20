@@ -37,6 +37,9 @@ namespace Stage.Players
                 if (_elapsedTime > _toOtherDuration)
                     _player.StateMachine.TransitionTo(_player.StateMachine.LightAttackState);
             }
+            // ÉKÅ[Éh
+            else if (_player.Action.Player.Guard.IsPressed())
+                _player.StateMachine.TransitionTo(_player.StateMachine.GuardState);
         }
 
         public void FixedUpdate()

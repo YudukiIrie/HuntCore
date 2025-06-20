@@ -15,6 +15,8 @@ namespace Stage.Players
         public PlayerHeavyAttackState HeavyAttackState { get; private set; }
         public PlayerSpecialAttackState SpecialAttackState { get; private set; }
         public PlayerImpactedState ImpactedState { get; private set; }
+        public PlayerGuardState GuardState { get; private set; }
+        public PlayerBlockedState BlockedState { get; private set; }
 
         public PlayerStateMachine(Player player)
         {
@@ -24,6 +26,8 @@ namespace Stage.Players
             HeavyAttackState    = new PlayerHeavyAttackState(player);
             SpecialAttackState  = new PlayerSpecialAttackState(player);
             ImpactedState       = new PlayerImpactedState(player);
+            GuardState          = new PlayerGuardState(player);
+            BlockedState        = new PlayerBlockedState(player);
         }
 
         /// <summary>

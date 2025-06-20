@@ -9,12 +9,15 @@ namespace Stage.Players
     {
         // AnimatorのパラメータハッシュID
         // 定数かつ実行時に値が決まるためstatic readonly
-        public static readonly int HashIdle = Animator.StringToHash("Base Layer.Idle");
-        public static readonly int HashMove = Animator.StringToHash("Base Layer.Move");
-        public static readonly int HashLightAttack = Animator.StringToHash("Base Layer.LightAttack");
-        public static readonly int HashHeavyAttack = Animator.StringToHash("Base Layer.HeavyAttack");
+        public static readonly int HashIdle    = Animator.StringToHash("Base Layer.Idle");
+        public static readonly int HashMove    = Animator.StringToHash("Base Layer.Move");
+        public static readonly int HashGuard   = Animator.StringToHash("Base Layer.Guard");
+        public static readonly int HashBlocked = Animator.StringToHash("Base Layer.Blocked");
+        public static readonly int HashImpacted      = Animator.StringToHash("Base Layer.Impacted");
+        public static readonly int HashLightAttack   = Animator.StringToHash("Base Layer.LightAttack");
+        public static readonly int HashHeavyAttack   = Animator.StringToHash("Base Layer.HeavyAttack");
         public static readonly int HashSpecialAttack = Animator.StringToHash("Base Layer.SpecialAttack");
-        public static readonly int HashImpacted = Animator.StringToHash("Base Layer.Impacted");
+        static readonly int HashSpeed = Animator.StringToHash("Speed");
 
         // コンポーネント
         Animator _animator;
@@ -76,6 +79,41 @@ namespace Stage.Players
         public void Impacted()
         {
             _animator.CrossFade(HashImpacted, _animBlendTime);
+        }
+
+        /// <summary>
+        /// ガードアニメーション開始
+        /// </summary>
+        public void Guard()
+        {
+            _animator.CrossFade(HashGuard, _animBlendTime);
+        }
+
+        /// <summary>
+        /// ガード後アニメーション開始
+        /// </summary>
+        public void Blocked()
+        {
+            _animator.CrossFade(HashBlocked, _animBlendTime);
+        }
+
+        /// <summary>
+        /// ガードキャンセルアニメーション開始
+        /// </summary>
+        /// <param name="normalizedTime">逆再生時開始割合</param>
+        public void CancelGuard(float normalizedTime)
+        {
+            // 再生時間は1以上になる場合があるため制限を設ける
+            _animator.Play(HashGuard, 0, Mathf.Clamp(normalizedTime, 0.0f, 1.0f));
+            _animator.SetFloat(HashSpeed, -1);
+        }
+
+        /// <summary>
+        /// パラメータのリセット
+        /// </summary>
+        public void ResetSpeed()
+        {
+            _animator.SetFloat(HashSpeed, 1);
         }
 
         /// <summary>

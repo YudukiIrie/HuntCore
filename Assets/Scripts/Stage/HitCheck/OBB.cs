@@ -7,6 +7,16 @@ namespace Stage.HitCheck
     /// </summary>
     public class OBB
     {
+        // OBB‚Ìí—Ş
+        public enum OBBType
+        {
+            Body,   // ‘Ì‚Ì•”ˆÊ
+            Weapon, // •Ší‚Ü‚½‚ÍUŒ‚‚Ìˆê•”
+            Guard,  // –hŒäó‘Ô
+            None    // ‚È‚µ
+        }
+        public OBBType Type { get; private set; }
+
         // ’†SÀ•W
         public Vector3 Center { get; private set; }
 
@@ -55,6 +65,11 @@ namespace Stage.HitCheck
         public void ResetHitInfo()
         {
             IsHit = false;
+        }
+
+        public void SetOBBType(OBBType type)
+        {
+            Type = type;
         }
     }
 }

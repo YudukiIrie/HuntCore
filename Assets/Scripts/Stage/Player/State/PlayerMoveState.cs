@@ -57,6 +57,9 @@ namespace Stage.Players
             // ライト攻撃
             else if (_player.Action.Player.Attack.IsPressed())
                 _player.StateMachine.TransitionTo(_player.StateMachine.LightAttackState);
+            // ガード
+            else if (_player.Action.Player.Guard.IsPressed())
+                _player.StateMachine.TransitionTo(_player.StateMachine.GuardState);
         }
 
         public void FixedUpdate()
