@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using Stage.HitCheck;
 
 namespace Stage.Players
 {
@@ -9,7 +10,7 @@ namespace Stage.Players
     public class PlayerGuardState : IState
     {
         Player _player;     // プレイヤークラス
-        bool _isCanceled;   // 状態キャンセルの有無
+        bool _isCanceled = false;   // 状態キャンセルの有無
 
         public PlayerGuardState(Player player)
         {
@@ -18,6 +19,10 @@ namespace Stage.Players
 
         public void Enter()
         {
+            // ガード状態とOBBタイプの切り替え
+            _player.SetGuardState(true);
+            _player.WeaponOBB.SetOBBType(OBB.OBBType.Guard);
+
             _player.Animation.Guard();
         }
 
@@ -33,6 +38,7 @@ namespace Stage.Players
             // 待機
             if (_isCanceled)
             {
+                // 逆再生の終了割合 = 0.0f
                 if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashGuard) <= 0.0f)
                     _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
             }
@@ -46,6 +52,11 @@ namespace Stage.Players
         public void Exit()
         {
             _isCanceled = false;
+
+            // ガード状態とOBBタイプの切り替え
+            _player.SetGuardState(false);
+            _player.WeaponOBB.SetOBBType(OBB.OBBType.Weapon);
+
             _player.Animation.ResetSpeed();
         }
     }

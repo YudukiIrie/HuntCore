@@ -19,8 +19,9 @@ namespace Stage.HitCheck
             foreach (OBB obbB in obbBs)
             {
                 // ”»’èÏ‚İ‚ÌOBB‚Í–³‹
-                if (obbA.IsHit) break;
-                
+                //if (obbA.IsHit) break;
+                if (obbA.HitInfo.isHit || obbB.Type == OBB.OBBType.Weapon) break;
+
                 // ’†SŠÔ‚Ì‹——£‚Ìæ“¾
                 Vector3 distance = obbA.Center - obbB.Center;
 
@@ -59,9 +60,11 @@ namespace Stage.HitCheck
                 if (!CompareLengthOBB(obbA, obbB, cross, distance)) continue;
 
                 // ÚGÏ‚İOBB‚Ìî•ñ‚ğXV
-                obbA.Hit();
-                obbB.Hit();
-      
+                //obbA.Hit();
+                //obbB.Hit();
+                obbA.SetHitInfo(obbB);
+                obbB.SetHitInfo(obbA);
+
                 return true;
             }
 

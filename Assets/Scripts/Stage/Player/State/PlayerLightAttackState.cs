@@ -33,7 +33,7 @@ namespace Stage.Players
             // === “–‚½‚è”»’è ===
             if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashLightAttack) >= _hitStartRatio)
             {
-                if (OBBHitChecker.IsCollideBoxOBB(_player.WeaponOBB, _player.Enemy.DamageableOBBs))
+                if (OBBHitChecker.IsCollideBoxOBB(_player.WeaponOBB, _player.Enemy.EnemyOBBs))
                     _player.IncreaseHitNum();
             }
 
@@ -65,7 +65,7 @@ namespace Stage.Players
         public void Exit()
         {
             _elapseTime = 0.0f;
-            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.DamageableOBBs);
+            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyOBBs);
         }
     }
 }

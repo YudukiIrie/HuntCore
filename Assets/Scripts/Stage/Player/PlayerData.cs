@@ -60,6 +60,10 @@ namespace Stage.Players
         [Header("待機から遷移可能までの時間")]
         [SerializeField] float _idleToOtherDuration;
 
+        public float BlockedToOtherDuration => _blockedToOtherDuration;
+        [Header("ガード後から遷移可能までの時間")]
+        [SerializeField] float _blockedToOtherDuration;
+
         public float AnimBlendTime => _animBlendTime;
         [Header("アニメーションブレンド時間")]
         [SerializeField] float _animBlendTime;

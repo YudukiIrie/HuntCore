@@ -27,8 +27,14 @@ namespace Stage.Enemies
             // === 当たり判定 ===
             if (_enemy.Animation.CheckAnimRatio(EnemyAnimation.HashAttack) >= _hitStartRatio)
             {
-                if (OBBHitChecker.IsCollideBoxOBB(_enemy.EnemyHeadOBB, _enemy.Player.DamageableOBBs))
-                    _enemy.IncreaseHitNum();
+                if (OBBHitChecker.IsCollideBoxOBB(_enemy.EnemyHeadOBB, _enemy.Player.PlayerOBBs))
+                {
+                    // 接触OBBがガード(プレイヤーがガード中)の場合かそうでないかの分岐
+                    if (_enemy.EnemyHeadOBB.HitInfo.targetType == OBB.OBBType.Guard)
+                        _enemy.Player.TakeImpact();
+                    else
+                        _enemy.IncreaseHitNum();
+                }
             }
 
             // === 状態遷移 ===
@@ -44,7 +50,7 @@ namespace Stage.Enemies
 
         public void Exit()
         {
-            OBBHitChecker.ResetHitInfo(_enemy.EnemyHeadOBB, _enemy.Player.DamageableOBBs);
+            OBBHitChecker.ResetHitInfo(_enemy.EnemyHeadOBB, _enemy.Player.PlayerOBBs);
         }
     }
 }

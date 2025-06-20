@@ -37,10 +37,10 @@ namespace Stage.Players
         [SerializeField] Animator _animator;
 
         // OBB
-        public OBB PlayerOBB { get; private set; }
-        public OBB WeaponOBB { get; private set; }
-        // 被攻撃OBB
-        public List<OBB> DamageableOBBs { get; private set; } = new();
+        public OBB PlayerOBB {  get; private set; }
+        public OBB WeaponOBB {  get; private set; }
+        // プレイヤーOBB一括管理用List
+        public List<OBB> PlayerOBBs { get; private set; } = new();
 
         // 接触中の面に対する法線ベクトル
         public Vector3 NormalVector {  get; private set; }
@@ -51,14 +51,20 @@ namespace Stage.Players
         // 攻撃ヒット数
         public int HitNum {  get; private set; }
 
+        // ガード状態の有無
+        bool _isBlocking = false;
+
         void Awake()
         {
             StateMachine = new PlayerStateMachine(this);
             Animation = new PlayerAnimation(_animator);
             Action = new PlayerAction();
 
-            DamageableOBBs.Add(PlayerOBB = new OBB(_playerOBBTransform, PlayerData.Data.PlayerSize));
-            WeaponOBB = new OBB(_weaponOBBTransform, WeaponData.Data.GreatSwordSize);
+            PlayerOBBs.Add(PlayerOBB = 
+                new OBB(_playerOBBTransform, PlayerData.Data.PlayerSize, OBB.OBBType.Body));
+
+            PlayerOBBs.Add(WeaponOBB = 
+                new OBB(_weaponOBBTransform, WeaponData.Data.GreatSwordSize, OBB.OBBType.Weapon));
 
             Action.Enable();
         }
@@ -96,11 +102,23 @@ namespace Stage.Players
         }
 
         /// <summary>
+        /// ガード状態の切り替え
+        /// </summary>
+        /// <param name="isBlocking">切り替え後ガード状態</param>
+        public void SetGuardState(bool isBlocking)
+        {
+            _isBlocking = isBlocking;
+        }
+
+        /// <summary>
         /// 衝撃を受ける
         /// </summary>
         public void TakeImpact()
         {
-            StateMachine.TransitionTo(StateMachine.ImpactedState);
+            if (_isBlocking)
+                StateMachine.TransitionTo(StateMachine.BlockedState);
+            else
+                StateMachine.TransitionTo(StateMachine.ImpactedState);
         }
 
         /// <summary>

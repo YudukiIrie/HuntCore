@@ -48,24 +48,21 @@ namespace Stage.HitCheck
         /// </summary>
         void CreateVisualBoxes()
         {
-            GameObject visualBox;
-            _visualBoxes.Add(visualBox = Instantiate(_obbVisualBox, transform));
-            _player.PlayerOBB.VisualBox.SetGameObjectInfo(visualBox, _obbNoHitImage, _obbHitImage);
+            // ÉvÉåÉCÉÑÅ[VisualBox
+            foreach (var obb in _player.PlayerOBBs)
+            {
+                GameObject visualBox;
+                _visualBoxes.Add(visualBox = Instantiate(_obbVisualBox, transform));
+                obb.VisualBox.SetGameObjectInfo(visualBox, _obbNoHitImage, _obbHitImage);
+            }
 
-            _visualBoxes.Add(visualBox = Instantiate(_obbVisualBox, transform));
-            _player.WeaponOBB.VisualBox.SetGameObjectInfo(visualBox, _obbNoHitImage, _obbHitImage);
-
-            _visualBoxes.Add(visualBox = Instantiate(_obbVisualBox, transform));
-            _enemy.EnemyOBB.VisualBox.SetGameObjectInfo(visualBox, _obbNoHitImage, _obbHitImage);
-
-            _visualBoxes.Add(visualBox = Instantiate(_obbVisualBox, transform));
-            _enemy.EnemyHeadOBB.VisualBox.SetGameObjectInfo(visualBox, _obbNoHitImage, _obbHitImage);
-
-            _visualBoxes.Add(visualBox = Instantiate(_obbVisualBox, transform));
-            _enemy.EnemyRWingOBB.VisualBox.SetGameObjectInfo(visualBox, _obbNoHitImage, _obbHitImage);
-
-            _visualBoxes.Add(visualBox = Instantiate(_obbVisualBox, transform));
-            _enemy.EnemyLWingOBB.VisualBox.SetGameObjectInfo(visualBox, _obbNoHitImage, _obbHitImage);
+            // ìGVisualBox
+            foreach (var obb in _enemy.EnemyOBBs)
+            {
+                GameObject visualBox;
+                _visualBoxes.Add(visualBox = Instantiate(_obbVisualBox, transform));
+                obb.VisualBox.SetGameObjectInfo(visualBox, _obbNoHitImage, _obbHitImage);
+            }
         }
 
         /// <summary>

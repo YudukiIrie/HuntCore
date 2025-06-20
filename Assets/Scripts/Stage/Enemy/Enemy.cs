@@ -34,12 +34,12 @@ namespace Stage.Enemies
         [SerializeField] Animator _animator;
 
         // OBB
-        public OBB EnemyOBB { get; private set; }
+        public OBB EnemyOBB {  get; private set; }
         public OBB EnemyHeadOBB { get; private set; }
         public OBB EnemyRWingOBB { get; private set; }
         public OBB EnemyLWingOBB { get; private set; }
-        // îÌçUåÇOBB
-        public List<OBB> DamageableOBBs { get; private set; } = new();
+        // ìGOBBàÍäáä«óùópList
+        public List<OBB> EnemyOBBs { get; private set; } = new();
 
         // çUåÇä÷òA
         float _attackInterval;
@@ -81,14 +81,21 @@ namespace Stage.Enemies
         /// </summary>
         void CreateOBBs()
         {
-            DamageableOBBs.Add(EnemyOBB =
-                new OBB(_enemyOBBTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemySize));
-            DamageableOBBs.Add(EnemyHeadOBB =
-                new OBB(_headOBBTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyHeadSize));
-            DamageableOBBs.Add(EnemyRWingOBB =
-                new OBB(_rWingOBBTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyWingSize));
-            DamageableOBBs.Add(EnemyLWingOBB =
-                new OBB(_lWingOBBTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyWingSize));
+            EnemyOBBs.Add(EnemyOBB =
+                new OBB(_enemyOBBTransform,
+                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemySize, OBB.OBBType.Body));
+
+            EnemyOBBs.Add(EnemyHeadOBB =
+                new OBB(_headOBBTransform, 
+                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyHeadSize, OBB.OBBType.Body));
+
+            EnemyOBBs.Add(EnemyRWingOBB =
+                new OBB(_rWingOBBTransform, 
+                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyWingSize, OBB.OBBType.Body));
+
+            EnemyOBBs.Add(EnemyLWingOBB =
+                new OBB(_lWingOBBTransform, 
+                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyWingSize, OBB.OBBType.Body));
         }
 
         /// <summary>

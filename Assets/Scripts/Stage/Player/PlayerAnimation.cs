@@ -99,13 +99,15 @@ namespace Stage.Players
 
         /// <summary>
         /// ガードキャンセルアニメーション開始
+        /// 引数未指定の場合は最大割合から(ガード後からの遷移など)
         /// </summary>
         /// <param name="normalizedTime">逆再生時開始割合</param>
-        public void CancelGuard(float normalizedTime)
+        public void CancelGuard(float normalizedTime = 1.0f)
         {
-            // 再生時間は1以上になる場合があるため制限を設ける
-            _animator.Play(HashGuard, 0, Mathf.Clamp(normalizedTime, 0.0f, 1.0f));
             _animator.SetFloat(HashSpeed, -1);
+            // 再生時間は1以上になる場合があるため制限を設ける
+            float offset = Mathf.Clamp(normalizedTime, 0.0f, 1.0f);
+            _animator.CrossFade(HashGuard, _animBlendTime, 0, offset);
         }
 
         /// <summary>

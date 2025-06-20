@@ -19,4 +19,5 @@ MonoBehaviour:
   _specialAttackRotSpeed: 150
   _chainTime: 0.3
   _idleToOtherDuration: 0.4
+  _blockedToOtherDuration: 0.1
   _animBlendTime: 0.1
