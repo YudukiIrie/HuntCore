@@ -52,6 +52,14 @@ namespace Stage.Players
         [Header("スペシャル攻撃の回転速度")]
         [SerializeField] float _specialAttackRotSpeed;
 
+        public float RecoilSpeed => _recoilSpeed;
+        [Header("のけぞり時移動速度")]
+        [SerializeField] float _recoilSpeed;
+
+        public float RecoilDistance => _recoilDistance;
+        [Header("のけぞり時移動距離")]
+        [SerializeField] float _recoilDistance;
+
         public float ChainTime => _chainTime;
         [Header("コンボ間猶予時間")]
         [SerializeField] float _chainTime;
