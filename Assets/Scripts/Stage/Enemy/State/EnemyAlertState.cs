@@ -28,13 +28,13 @@ namespace Stage.Enemies
             // === èÛë‘ëJà⁄ ===
             // í«ê’
             if (_enemy.GetDistanceToPlayer() > _attackDistance)
-                _enemy.StateMachine.TransitionTo(_enemy.StateMachine.ChaseState);
+                _enemy.StateMachine.TransitionTo(EnemyState.Chase);
             // ï˚å¸ì]ä∑
             else if (_enemy.GetAngleToPlayer() > _limitAngle)
-                _enemy.StateMachine.TransitionTo(_enemy.StateMachine.TurnState);
+                _enemy.StateMachine.TransitionTo(EnemyState.Turn);
             // çUåÇ
             else if (_enemy.CheckAttackState())
-                _enemy.StateMachine.TransitionTo(_enemy.StateMachine.AttackState);
+                _enemy.StateMachine.TransitionTo(EnemyState.Attack);
         }
 
         public void FixedUpdate()

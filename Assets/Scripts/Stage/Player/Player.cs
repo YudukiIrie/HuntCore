@@ -68,7 +68,7 @@ namespace Stage.Players
 
         void Start()
         {
-            StateMachine.Initialize(StateMachine.IdleState);   
+            StateMachine.Initialize(PlayerState.Idle);   
         }
 
         void Update()
@@ -129,10 +129,10 @@ namespace Stage.Players
             if (_isBlocking)
             {
                 BlockNum++;
-                StateMachine.TransitionTo(StateMachine.BlockedState);
+                StateMachine.TransitionTo(PlayerState.Blocked);
             }
             else
-                StateMachine.TransitionTo(StateMachine.ImpactedState);
+                StateMachine.TransitionTo(PlayerState.Impacted);
         }
 
         /// <summary>

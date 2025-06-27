@@ -51,7 +51,7 @@ namespace Stage.Enemies
             // === ó‘Ô‘JˆÚ ===
             // Œx‰ú
             if (_enemy.GetDistanceToPlayer() <= _stopDistance)
-                _enemy.StateMachine.TransitionTo(_enemy.StateMachine.AlertState);
+                _enemy.StateMachine.TransitionTo(EnemyState.Alert);
         }
 
         public void FixedUpdate()

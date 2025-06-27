@@ -1,69 +1,98 @@
 namespace Stage.Players
 {
+    //public enum PlayerState
+    //{
+    //    Idle,
+    //    Move
+    //}
+
+    //public abstract class StateMachine<TContext, TState> where TState : Enum
+    //{
+    //    protected readonly Dictionary<TState, IState> states;
+
+    //    protected StateMachine(TContext context, int capacity = 8, IEqualityComparer<TState> comparer = null) 
+    //    {
+    //        states = new Dictionary<TState, IState>(capacity, comparer);
+    //    }
+
+    //    public abstract void TransitionTo(TState key);
+    //}
+
+    //public class HogePlayerStateMachine : StateMachine<Player, PlayerState>
+    //{
+    //    class PlayerStateEqualityComparer : IEqualityComparer<PlayerState>
+    //    {
+    //        public bool Equals(PlayerState x, PlayerState y)
+    //        {
+    //            return (int)x == (int)y;
+    //        }
+
+    //        public int GetHashCode(PlayerState obj)
+    //        {
+    //            return ((int)obj).GetHashCode();
+    //        }
+    //    }
+
+    //    public HogePlayerStateMachine(Player player) : base(player, 24, new PlayerStateEqualityComparer())
+    //    {
+    //        states.Add(PlayerState.Idle, new PlayerIdleState(player));
+    //    }
+
+    //    public override void TransitionTo(PlayerState key)
+    //    {
+          
+    //    }
+    //}
+
+    public enum PlayerState
+    {
+        Idle,
+        Move,
+        Guard,
+        Blocked,
+        Impacted,
+        LightAttack,
+        HeavyAttack,
+        SpecialAttack,
+    }
+
     /// <summary>
     /// プレイヤーのステートを管理
     /// </summary>
-    public class PlayerStateMachine
+    public class PlayerStateMachine : StateMachine<PlayerState>
     {
-        // 現在のステートを保存
-        IState _currentState;
-
-        // 各ステート
-        public PlayerIdleState IdleState { get; private set; }
-        public PlayerMoveState MoveState { get; private set; }
-        public PlayerLightAttackState LightAttackState { get; private set; }
-        public PlayerHeavyAttackState HeavyAttackState { get; private set; }
-        public PlayerSpecialAttackState SpecialAttackState { get; private set; }
-        public PlayerImpactedState ImpactedState { get; private set; }
-        public PlayerGuardState GuardState { get; private set; }
-        public PlayerBlockedState BlockedState { get; private set; }
-
-        public PlayerStateMachine(Player player)
+        public PlayerStateMachine(Player player) : base(10)
         {
-            IdleState           = new PlayerIdleState(player);
-            MoveState           = new PlayerMoveState(player);
-            LightAttackState    = new PlayerLightAttackState(player);
-            HeavyAttackState    = new PlayerHeavyAttackState(player);
-            SpecialAttackState  = new PlayerSpecialAttackState(player);
-            ImpactedState       = new PlayerImpactedState(player);
-            GuardState          = new PlayerGuardState(player);
-            BlockedState        = new PlayerBlockedState(player);
+            _states.Add(PlayerState.Idle, new PlayerIdleState(player));
+            _states.Add(PlayerState.Move, new PlayerMoveState(player));
+            _states.Add(PlayerState.Guard, new PlayerGuardState(player));
+            _states.Add(PlayerState.Blocked, new PlayerBlockedState(player));
+            _states.Add(PlayerState.Impacted, new PlayerImpactedState(player));
+            _states.Add(PlayerState.LightAttack, new PlayerLightAttackState(player));
+            _states.Add(PlayerState.HeavyAttack, new PlayerHeavyAttackState(player));
+            _states.Add(PlayerState.SpecialAttack, new PlayerSpecialAttackState(player));
         }
 
-        /// <summary>
-        /// ステートの初期化
-        /// </summary>
-        /// <param name="state">初期ステート</param>
-        public void Initialize(IState state)
+        public override void Initialize(PlayerState key)
         {
-            _currentState = state;
+            _currentState = _states[key];
             _currentState?.Enter();
         }
 
-        /// <summary>
-        /// 現ステートのUpdate()を実行
-        /// </summary>
-        public void Update()
+        public override void Update()
         {
             _currentState?.Update();
         }
 
-        /// <summary>
-        /// 現ステートのFixedUpdate()を実行
-        /// </summary>
-        public void FixedUpdate()
+        public override void FixedUpdate()
         {
             _currentState?.FixedUpdate();
         }
 
-        /// <summary>
-        /// ステートの更新
-        /// </summary>
-        /// <param name="nextState">次のステート</param>
-        public void TransitionTo(IState nextState)
+        public override void TransitionTo(PlayerState key)
         {
             _currentState?.Exit();
-            _currentState = nextState;
+            _currentState = _states[key];
             _currentState?.Enter();
         }
     }

@@ -67,7 +67,7 @@ namespace Stage.Enemies
 
         void Start()
         {
-            StateMachine.Initialize(StateMachine.IdleState);    
+            StateMachine.Initialize(EnemyState.Idle);    
         }
 
         void Update()

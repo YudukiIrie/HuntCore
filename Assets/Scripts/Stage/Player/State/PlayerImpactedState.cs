@@ -24,7 +24,7 @@ namespace Stage.Players
             // === ó‘Ô‘JˆÚ ===
             // ‘Ò‹@
             if (_player.Animation.IsAnimFinished(PlayerAnimation.HashImpacted))
-                _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
+                _player.StateMachine.TransitionTo(PlayerState.Idle);
         }
 
         public void FixedUpdate()

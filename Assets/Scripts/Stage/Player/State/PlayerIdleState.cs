@@ -29,17 +29,17 @@ namespace Stage.Players
             // === ó‘Ô‘JˆÚ ===
             // ˆÚ“®
             if (_player.Action.Player.Move.ReadValue<Vector2>() != Vector2.zero)
-                _player.StateMachine.TransitionTo(_player.StateMachine.MoveState);
+                _player.StateMachine.TransitionTo(PlayerState.Move);
             // ƒ‰ƒCƒgUŒ‚
             // Animator‚Æ“à•”ˆ—‚ğ“¯Šú‚³‚¹‚é‚½‚ß‘Ò‹@
             else if (_player.Action.Player.Attack.IsPressed())
             {
                 if (_elapsedTime > _toOtherDuration)
-                    _player.StateMachine.TransitionTo(_player.StateMachine.LightAttackState);
+                    _player.StateMachine.TransitionTo(PlayerState.LightAttack);
             }
             // ƒK[ƒh
             else if (_player.Action.Player.Guard.IsPressed())
-                _player.StateMachine.TransitionTo(_player.StateMachine.GuardState);
+                _player.StateMachine.TransitionTo(PlayerState.Guard);
         }
 
         public void FixedUpdate()

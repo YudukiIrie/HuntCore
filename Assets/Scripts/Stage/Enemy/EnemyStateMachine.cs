@@ -1,65 +1,50 @@
 namespace Stage.Enemies
 {
+    public enum EnemyState
+    {
+        Idle,
+        Turn,
+        Roar,
+        Alert,
+        Chase,
+        Attack
+    }
+
     /// <summary>
     /// 敵のステートを管理
     /// </summary>
-    public class EnemyStateMachine
+    public class EnemyStateMachine : StateMachine<EnemyState>
     {
-        // 現在のステートを保存
-        IState _currentState;
-
-        // 各ステート
-        public EnemyIdleState IdleState { get; private set; }
-        public EnemyRoarState RoarState { get; private set; }
-        public EnemyAlertState AlertState { get; private set; }
-        public EnemyChaseState ChaseState { get; private set; }
-        public EnemyAttackState AttackState { get; private set; }
-        public EnemyTurnState TurnState { get; private set; }
-
-        public EnemyStateMachine(Enemy enemy)
+        public EnemyStateMachine(Enemy enemy) : base(10)
         {
-            IdleState   = new EnemyIdleState(enemy);
-            RoarState   = new EnemyRoarState(enemy);
-            AlertState  = new EnemyAlertState(enemy);
-            ChaseState  = new EnemyChaseState(enemy);
-            AttackState = new EnemyAttackState(enemy);
-            TurnState   = new EnemyTurnState(enemy);
+            _states.Add(EnemyState.Idle, new EnemyIdleState(enemy));
+            _states.Add(EnemyState.Turn, new EnemyTurnState(enemy));
+            _states.Add(EnemyState.Roar, new EnemyRoarState(enemy));
+            _states.Add(EnemyState.Alert, new EnemyAlertState(enemy));
+            _states.Add(EnemyState.Chase, new EnemyChaseState(enemy));
+            _states.Add(EnemyState.Attack, new EnemyAttackState(enemy));
         }
 
-        /// <summary>
-        /// ステートの初期化
-        /// </summary>
-        /// <param name="state">初期ステート</param>
-        public void Initialize(IState state)
+        public override void Initialize(EnemyState key)
         {
-            _currentState = state;
+            _currentState = _states[key];
             _currentState?.Enter();
         }
 
-        /// <summary>
-        /// 現ステートのUpdate()を実行
-        /// </summary>
-        public void Update()
+        public override void Update()
         {
             _currentState?.Update();
         }
 
-        /// <summary>
-        /// 現ステートのFixedUpdate()を実行
-        /// </summary>
-        public void FixedUpdate()
+        public override void FixedUpdate()
         {
             _currentState?.FixedUpdate();
         }
 
-        /// <summary>
-        /// ステートの更新
-        /// </summary>
-        /// <param name="nextState">次のステート</param>
-        public void TransitionTo(IState nextState)
+        public override void TransitionTo(EnemyState key)
         {
             _currentState?.Exit();
-            _currentState = nextState;
+            _currentState = _states[key];
             _currentState?.Enter();
         }
     }

@@ -52,13 +52,13 @@ namespace Stage.Players
             // === ó‘Ô‘JˆÚ ===
             // ’Êí
             if (_player.Action.Player.Move.ReadValue<Vector2>() == Vector2.zero)
-                _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
+                _player.StateMachine.TransitionTo(PlayerState.Idle);
             // ƒ‰ƒCƒgUŒ‚
             else if (_player.Action.Player.Attack.IsPressed())
-                _player.StateMachine.TransitionTo(_player.StateMachine.LightAttackState);
+                _player.StateMachine.TransitionTo(PlayerState.LightAttack);
             // ƒK[ƒh
             else if (_player.Action.Player.Guard.IsPressed())
-                _player.StateMachine.TransitionTo(_player.StateMachine.GuardState);
+                _player.StateMachine.TransitionTo(PlayerState.Guard);
         }
 
         public void FixedUpdate()

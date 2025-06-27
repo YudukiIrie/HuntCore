@@ -61,7 +61,7 @@ namespace Stage.Players
                 // ガードキャンセル終了かつ、Animatorと内部処理を同期させるための待ち
                 if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashGuardBegin) <= 0.0f &&
                     _elapsedTime > _toOtherDuration)
-                    _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
+                    _player.StateMachine.TransitionTo(PlayerState.Idle);
             }
         }
 

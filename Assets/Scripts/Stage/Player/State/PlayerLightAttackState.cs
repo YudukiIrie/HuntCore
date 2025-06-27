@@ -54,11 +54,11 @@ namespace Stage.Players
                 if (_elapseTime <= _chainTime)
                 {
                     if (_player.Action.Player.Attack.IsPressed())
-                        _player.StateMachine.TransitionTo(_player.StateMachine.HeavyAttackState);
+                        _player.StateMachine.TransitionTo(PlayerState.HeavyAttack);
                 }
                 // ‘Ò‹@
                 else
-                    _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
+                    _player.StateMachine.TransitionTo(PlayerState.Idle);
             }
         }
 

@@ -38,7 +38,7 @@ namespace Stage.Players
             {
                 // ‹tÄ¶‚ÌI—¹Š„‡ = 0.0f
                 if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashGuardBegin) <= 0.0f)
-                    _player.StateMachine.TransitionTo(_player.StateMachine.IdleState);
+                    _player.StateMachine.TransitionTo(PlayerState.Idle);
             }
         }
 

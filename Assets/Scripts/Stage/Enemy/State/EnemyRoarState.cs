@@ -30,7 +30,7 @@ namespace Stage.Enemies
             // === ó‘Ô‘JˆÚ ===
             // Œx‰ú
             if (_enemy.Animation.IsAnimFinished(EnemyAnimation.HashRoar))
-                _enemy.StateMachine.TransitionTo(_enemy.StateMachine.AlertState);
+                _enemy.StateMachine.TransitionTo(EnemyState.Alert);
         }
 
         public void FixedUpdate()
