@@ -40,13 +40,25 @@ namespace Stage.Players
         [Header("ライト攻撃当たり判定開始割合")]
         [SerializeField] float _lightAttackHitStartRatio;
 
+        public float LightAttackHitEndRatio => _lightAttackHitEndRatio;
+        [Header("ライト攻撃当たり判定終了割合")]
+        [SerializeField] float _lightAttackHitEndRatio;
+
         public float HeavyAttackHitStartRatio => _heavyAttackHitStartRatio;
         [Header("ヘビー攻撃当たり判定開始割合")]
         [SerializeField] float _heavyAttackHitStartRatio;
 
+        public float HeavyAttackHitEndRatio => _heavyAttackHitEndRatio;
+        [Header("ヘビー攻撃当たり判定終了割合")]
+        [SerializeField] float _heavyAttackHitEndRatio;
+
         public float SpecialAttackHitStartRatio => _specialAttackHitStartRatio;
         [Header("スペシャル攻撃当たり判定開始割合")]
         [SerializeField] float _specialAttackHitStartRatio;
+
+        public float SpecialAttackHitEndRatio => _specialAttackHitEndRatio;
+        [Header("スペシャル攻撃当たり判定終了割合")]
+        [SerializeField] float _specialAttackHitEndRatio;
 
         public int InitialPoolSize => _initialPoolSize;
         [Header("残像用初期プールサイズ")]

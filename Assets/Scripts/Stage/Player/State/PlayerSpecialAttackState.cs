@@ -10,15 +10,19 @@ namespace Stage.Players
     {
         Player _player;         // プレイヤークラス
         Quaternion _targetRot;  // 視点方向ベクトル
+
+        // データキャッシュ用
         float _rotSpeed;
         float _hitStartRatio;
+        float _hitEndRatio;
         float _afterImageEndRatio;
 
         public PlayerSpecialAttackState(Player player)
         {
             _player = player;
-            _rotSpeed = PlayerData.Data.SpecialAttackRotSpeed;
+            _rotSpeed      = PlayerData.Data.SpecialAttackRotSpeed;
             _hitStartRatio = WeaponData.Data.SpecialAttackHitStartRatio;
+            _hitEndRatio   = WeaponData.Data.SpecialAttackHitEndRatio;
             _afterImageEndRatio = WeaponData.Data.AfterImageEndRatio;
         }
 
@@ -46,9 +50,10 @@ namespace Stage.Players
             _player.transform.rotation = rot;
 
             // === 当たり判定 ===
-            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) >= _hitStartRatio)
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) >= _hitStartRatio &&
+                _player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) <= _hitEndRatio)
             {
-                if (OBBHitChecker.IsCollideBoxOBB(_player.WeaponOBB, _player.Enemy.EnemyOBBs))
+                if (OBBHitChecker.IsColliding(_player.WeaponOBB, _player.Enemy.EnemyColliders))
                     _player.IncreaseHitNum();
             }
 
@@ -69,7 +74,7 @@ namespace Stage.Players
 
         public void Exit()
         {
-            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyOBBs);
+            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyColliders);
         }
     }
 }

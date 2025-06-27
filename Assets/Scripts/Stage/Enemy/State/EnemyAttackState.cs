@@ -1,4 +1,5 @@
 using Stage.HitCheck;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Stage.Enemies
@@ -9,12 +10,16 @@ namespace Stage.Enemies
     public class EnemyAttackState : IState
     {
         Enemy _enemy;   // 敵クラス
+        
+        // データキャッシュ用
         float _hitStartRatio;
+        float _hitEndRatio;
         
         public EnemyAttackState(Enemy enemy)
         {
             _enemy = enemy;
             _hitStartRatio = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackHitStartRatio;
+            _hitEndRatio = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackHitEndRatio;
         }
 
         public void Enter()
@@ -25,12 +30,13 @@ namespace Stage.Enemies
         public void Update()
         {
             // === 当たり判定 ===
-            if (_enemy.Animation.CheckAnimRatio(EnemyAnimation.HashAttack) >= _hitStartRatio)
+            if (_enemy.Animation.CheckAnimRatio(EnemyAnimation.HashAttack) >= _hitStartRatio &&
+                _enemy.Animation.CheckAnimRatio(EnemyAnimation.HashAttack) <= _hitEndRatio)
             {
-                if (OBBHitChecker.IsCollideBoxOBB(_enemy.EnemyHeadOBB, _enemy.Player.PlayerOBBs))
+                if (OBBHitChecker.IsColliding(_enemy.EnemyHeadSphere, _enemy.Player.PlayerColliders))
                 {
                     // 接触OBBがガード(プレイヤーがガード中)の場合かそうでないかの分岐
-                    if (_enemy.EnemyHeadOBB.HitInfo.targetType == OBB.OBBType.Guard)
+                    if (_enemy.EnemyHeadSphere.HitInfo.targetRole == HitCollider.ColliderRole.Guard)
                         _enemy.Player.TakeImpact();
                     else
                         _enemy.IncreaseHitNum();
@@ -50,7 +56,7 @@ namespace Stage.Enemies
 
         public void Exit()
         {
-            OBBHitChecker.ResetHitInfo(_enemy.EnemyHeadOBB, _enemy.Player.PlayerOBBs);
+            OBBHitChecker.ResetHitInfo(_enemy.EnemyHeadSphere, _enemy.Player.PlayerColliders);
         }
     }
 }

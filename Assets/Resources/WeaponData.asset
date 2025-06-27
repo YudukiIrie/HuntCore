@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _greatSwordSize: {x: 0.13, y: 0.3, z: 1.3}
   _lightAttackHitStartRatio: 0.3
+  _lightAttackHitEndRatio: 0.6
   _heavyAttackHitStartRatio: 0.4
+  _heavyAttackHitEndRatio: 0.8
   _specialAttackHitStartRatio: 0.3
+  _specialAttackHitEndRatio: 0.65
   _initialPoolSize: 10
   _afterImagePrefab: {fileID: 4474153194023993398, guid: b4bf79072a317ac408da550ffe6aaa7f, type: 3}
   _afterImageInterval: 0.01

@@ -11,13 +11,16 @@ namespace Stage.HitCheck
     public class OBBVisualizer : MonoBehaviour
     {
         [Header("OBB可視化用ゲームオブジェクト")]
-        [SerializeField] GameObject _obbVisualBox;
+        [SerializeField] GameObject _visualOBB;
 
-        [Header("OBB非接触マテリアル")]
-        [SerializeField] Material _obbNoHitImage;
+        [Header("HitSphere可視化用ゲームオブジェクト")]
+        [SerializeField] GameObject _visualSphere;
 
-        [Header("OBB接触マテリアル")]
-        [SerializeField] Material _obbHitImage;
+        [Header("非接触マテリアル")]
+        [SerializeField] Material _noHitImage;
+
+        [Header("接触マテリアル")]
+        [SerializeField] Material _hitImage;
 
         [Header("プレイヤークラス")]
         [SerializeField] Player _player;
@@ -26,7 +29,7 @@ namespace Stage.HitCheck
         [SerializeField] Enemy _enemy;
 
         // 可視化ゲームオブジェクトをListで保持
-        List<GameObject> _visualBoxes = new();
+        List<GameObject> _visualColliders = new();
 
         // 表示切替関連
         const float SWITCH_DISPLAY_INTERVAL = 0.3f;
@@ -35,7 +38,7 @@ namespace Stage.HitCheck
 
         void Start()
         {
-            CreateVisualBoxes();
+            CreateVisualColliders();
         }
 
         void Update()
@@ -46,27 +49,35 @@ namespace Stage.HitCheck
         /// <summary>
         /// 可視化ゲームオブジェクトの作成
         /// </summary>
-        void CreateVisualBoxes()
+        void CreateVisualColliders()
         {
-            // プレイヤーVisualBox
-            foreach (var obb in _player.PlayerOBBs)
+            // === プレイヤーVisualCollider ===
+            foreach (var collider in _player.PlayerColliders)
             {
-                GameObject visualBox;
-                _visualBoxes.Add(visualBox = Instantiate(_obbVisualBox, transform));
-                obb.VisualBox.SetGameObjectInfo(visualBox, _obbNoHitImage, _obbHitImage);
+                GameObject visualGO;
+                _visualColliders.Add(visualGO = Instantiate(_visualOBB, transform));
+                collider.CreateVisualCollider(visualGO, _noHitImage, _hitImage);
             }
 
-            // 敵VisualBox
-            foreach (var obb in _enemy.EnemyOBBs)
+            // === 敵VisualCollider ===
+            foreach (var collider in _enemy.EnemyColliders)
             {
                 GameObject visualBox;
-                _visualBoxes.Add(visualBox = Instantiate(_obbVisualBox, transform));
-                obb.VisualBox.SetGameObjectInfo(visualBox, _obbNoHitImage, _obbHitImage);
+                if (collider.Shape == HitCollider.ColliderShape.OBB)
+                {
+                    _visualColliders.Add(visualBox = Instantiate(_visualOBB, transform));
+                    collider.CreateVisualCollider(visualBox, _noHitImage, _hitImage);
+                }
+                else
+                {
+                    _visualColliders.Add(visualBox = Instantiate(_visualSphere, transform));
+                    collider.CreateVisualCollider(visualBox, _noHitImage, _hitImage);
+                }
             }
         }
 
         /// <summary>
-        /// OBB可視化ゲームオブジェクトの表示切替
+        /// 可視化ゲームオブジェクトの表示切替
         /// </summary>
         void SwitchDisplay()
         {
@@ -77,7 +88,7 @@ namespace Stage.HitCheck
                 if (GameManager.Action.Player.SwitchDisplay.IsPressed())
                 {
                     _isActive = !_isActive;
-                    foreach (GameObject visualBox in _visualBoxes)
+                    foreach (GameObject visualBox in _visualColliders)
                         visualBox.SetActive(_isActive);
 
                     _switchDisplayTimer = 0.0f;

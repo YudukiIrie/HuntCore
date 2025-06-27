@@ -10,7 +10,10 @@ namespace Stage.Players
     {
         Player _player;     // プレイヤークラス
         float _elapseTime;  // コンボ間猶予経過時間
+
+        // データキャッシュ用
         float _hitStartRatio;
+        float _hitEndRatio;
         float _chainTime;
         float _afterImageEndRatio;
 
@@ -19,7 +22,8 @@ namespace Stage.Players
         {
             _player = player;
             _hitStartRatio = WeaponData.Data.LightAttackHitStartRatio;
-            _chainTime = PlayerData.Data.ChainTime;
+            _hitEndRatio   = WeaponData.Data.LightAttackHitEndRatio;
+            _chainTime     = PlayerData.Data.ChainTime;
             _afterImageEndRatio = WeaponData.Data.AfterImageEndRatio;
         }
 
@@ -31,9 +35,10 @@ namespace Stage.Players
         public void Update()
         {
             // === 当たり判定 ===
-            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashLightAttack) >= _hitStartRatio)
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashLightAttack) >= _hitStartRatio &&
+                _player.Animation.CheckAnimRatio(PlayerAnimation.HashLightAttack) <= _hitEndRatio)
             {
-                if (OBBHitChecker.IsCollideBoxOBB(_player.WeaponOBB, _player.Enemy.EnemyOBBs))
+                if (OBBHitChecker.IsColliding(_player.WeaponOBB, _player.Enemy.EnemyColliders))
                     _player.IncreaseHitNum();
             }
 
@@ -65,7 +70,7 @@ namespace Stage.Players
         public void Exit()
         {
             _elapseTime = 0.0f;
-            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyOBBs);
+            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyColliders);
         }
     }
 }

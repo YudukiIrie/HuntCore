@@ -68,6 +68,10 @@ namespace Stage.Enemies
         [Header("“G“ªƒTƒCƒY")]
         [SerializeField] Vector3 _enemyHeadSize;
 
+        public float EnemyHeadRadius => _enemyHeadRadius;
+        [Header("“G“ª”¼Œa")]
+        [SerializeField] float _enemyHeadRadius;
+
         public Vector3 EnemyWingSize => _enemyWingSize;
         [Header("“G—ƒƒTƒCƒY")]
         [SerializeField] Vector3 _enemyWingSize;
@@ -111,6 +115,10 @@ namespace Stage.Enemies
         public float AttackHitStartRatio => _attackHitStartRatio;
         [Header("UŒ‚“–‚½‚è”»’èŠJnŠ„‡")]
         [SerializeField] float _attackHitStartRatio;
+
+        public float AttackHitEndRatio => _attackHitEndRatio;
+        [Header("UŒ‚“–‚½‚è”»’èI—¹Š„‡")]
+        [SerializeField] float _attackHitEndRatio;
 
         public float LimitAngle => _limitAngle;
         [Header("‘ÎÛ‚Æ‚ÌŒÀŠEŠp“x")]

@@ -36,11 +36,11 @@ namespace Stage.Players
         public Animator Animator => _animator;
         [SerializeField] Animator _animator;
 
-        // OBB
+        // 当たり判定関連
         public OBB PlayerOBB {  get; private set; }
         public OBB WeaponOBB {  get; private set; }
-        // プレイヤーOBB一括管理用List
-        public List<OBB> PlayerOBBs { get; private set; } = new();
+        // プレイヤーコライダー一括管理用List
+        public List<HitCollider> PlayerColliders { get; private set; } = new();
 
         // 接触中の面に対する法線ベクトル
         public Vector3 NormalVector {  get; private set; }
@@ -61,11 +61,7 @@ namespace Stage.Players
             Animation = new PlayerAnimation(_animator);
             Action = new PlayerAction();
 
-            PlayerOBBs.Add(PlayerOBB = 
-                new OBB(_playerOBBTransform, PlayerData.Data.PlayerSize, OBB.OBBType.Body));
-
-            PlayerOBBs.Add(WeaponOBB = 
-                new OBB(_weaponOBBTransform, WeaponData.Data.GreatSwordSize, OBB.OBBType.Weapon));
+            CreateColliders();
 
             Action.Enable();
         }
@@ -77,7 +73,7 @@ namespace Stage.Players
 
         void Update()
         {
-            UpdateOBBInfo();
+            UpdateColliderInfo();
 
             StateMachine.Update();
         }
@@ -94,9 +90,23 @@ namespace Stage.Players
         }
 
         /// <summary>
-        /// OBB情報の更新
+        /// コライダーの作成
         /// </summary>
-        void UpdateOBBInfo()
+        void CreateColliders()
+        {
+            PlayerColliders.Add(PlayerOBB = new OBB(
+                _playerOBBTransform, PlayerData.Data.PlayerSize,
+                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
+
+            PlayerColliders.Add(WeaponOBB = new OBB(
+                _weaponOBBTransform, WeaponData.Data.GreatSwordSize,
+                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Weapon));
+        }
+
+        /// <summary>
+        /// コライダー情報の更新
+        /// </summary>
+        void UpdateColliderInfo()
         {
             PlayerOBB.UpdateInfo(_playerOBBTransform);
             WeaponOBB.UpdateInfo(_weaponOBBTransform);

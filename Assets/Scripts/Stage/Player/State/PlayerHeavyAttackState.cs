@@ -11,17 +11,21 @@ namespace Stage.Players
         Player _player;         // プレイヤークラス
         Quaternion _targetRot;  // 視点方向ベクトル
         float _elapseTime;      // コンボ間猶予経過時間
+
+        // データキャッシュ用
         float _rotSpeed;
         float _hitStartRatio;
+        float _hitEndRatio;
         float _chainTime;
         float _afterImageEndRatio;
 
         public PlayerHeavyAttackState(Player player)
         {
             _player = player;
-            _rotSpeed = PlayerData.Data.HeavyAttackRotSpeed;
+            _rotSpeed      = PlayerData.Data.HeavyAttackRotSpeed;
             _hitStartRatio = WeaponData.Data.HeavyAttackHitStartRatio;
-            _chainTime = PlayerData.Data.ChainTime;
+            _hitEndRatio   = WeaponData.Data.HeavyAttackHitEndRatio;
+            _chainTime     = PlayerData.Data.ChainTime;
             _afterImageEndRatio = WeaponData.Data.AfterImageEndRatio;
         }
 
@@ -49,9 +53,10 @@ namespace Stage.Players
             _player.transform.rotation = rot;
 
             // === 当たり判定 ===
-            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashHeavyAttack) >= _hitStartRatio)
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashHeavyAttack) >= _hitStartRatio &&
+                _player.Animation.CheckAnimRatio(PlayerAnimation.HashHeavyAttack) <= _hitEndRatio)
             {
-                if (OBBHitChecker.IsCollideBoxOBB(_player.WeaponOBB, _player.Enemy.EnemyOBBs))
+                if (OBBHitChecker.IsColliding(_player.WeaponOBB, _player.Enemy.EnemyColliders))
                     _player.IncreaseHitNum();
             }
 
@@ -83,7 +88,7 @@ namespace Stage.Players
         public void Exit()
         {
             _elapseTime = 0.0f;
-            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyOBBs);
+            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyColliders);
         }
     }
 }
