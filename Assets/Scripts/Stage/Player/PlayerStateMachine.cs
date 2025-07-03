@@ -1,49 +1,5 @@
 namespace Stage.Players
 {
-    //public enum PlayerState
-    //{
-    //    Idle,
-    //    Move
-    //}
-
-    //public abstract class StateMachine<TContext, TState> where TState : Enum
-    //{
-    //    protected readonly Dictionary<TState, IState> states;
-
-    //    protected StateMachine(TContext context, int capacity = 8, IEqualityComparer<TState> comparer = null) 
-    //    {
-    //        states = new Dictionary<TState, IState>(capacity, comparer);
-    //    }
-
-    //    public abstract void TransitionTo(TState key);
-    //}
-
-    //public class HogePlayerStateMachine : StateMachine<Player, PlayerState>
-    //{
-    //    class PlayerStateEqualityComparer : IEqualityComparer<PlayerState>
-    //    {
-    //        public bool Equals(PlayerState x, PlayerState y)
-    //        {
-    //            return (int)x == (int)y;
-    //        }
-
-    //        public int GetHashCode(PlayerState obj)
-    //        {
-    //            return ((int)obj).GetHashCode();
-    //        }
-    //    }
-
-    //    public HogePlayerStateMachine(Player player) : base(player, 24, new PlayerStateEqualityComparer())
-    //    {
-    //        states.Add(PlayerState.Idle, new PlayerIdleState(player));
-    //    }
-
-    //    public override void TransitionTo(PlayerState key)
-    //    {
-          
-    //    }
-    //}
-
     public enum PlayerState
     {
         Idle,
