@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
-/// ゲーム終了管理クラス
+/// ゲーム管理クラス
+/// 役割：カーソルの削除
+/// 　　　シーンの再読み込み
+/// 　　　ゲーム終了
 /// </summary>
 public class GameManager : MonoBehaviour
 {
@@ -30,6 +34,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        ResetGame();
+
         EndGame();
     }
 
@@ -40,6 +46,15 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    /// <summary>
+    /// ゲームリセット処理
+    /// </summary>
+    void ResetGame()
+    {
+        if (Action.Player.Reset.IsPressed())
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>
