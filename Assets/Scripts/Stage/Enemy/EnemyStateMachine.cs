@@ -7,7 +7,8 @@ namespace Stage.Enemies
         Roar,
         Alert,
         Chase,
-        Attack
+        Attack,
+        GetHit,
     }
 
     /// <summary>
@@ -23,6 +24,7 @@ namespace Stage.Enemies
             _states.Add(EnemyState.Alert, new EnemyAlertState(enemy));
             _states.Add(EnemyState.Chase, new EnemyChaseState(enemy));
             _states.Add(EnemyState.Attack, new EnemyAttackState(enemy));
+            _states.Add(EnemyState.GetHit, new EnemyGetHitState(enemy));
         }
 
         public override void Initialize(EnemyState key)

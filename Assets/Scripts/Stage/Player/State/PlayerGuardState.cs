@@ -1,4 +1,5 @@
 using Stage.HitCheck;
+using UnityEngine;
 
 namespace Stage.Players
 {
@@ -8,6 +9,7 @@ namespace Stage.Players
     public class PlayerGuardState : IState
     {
         Player _player;     // プレイヤークラス
+        float _elapsedTime; // 経過時間
         bool _isCanceled = false;   // 状態キャンセルの有無
 
         public PlayerGuardState(Player player)
@@ -19,13 +21,18 @@ namespace Stage.Players
         {
             // ガード状態とOBBタイプの切り替え
             _player.SetGuardState(true);
-            _player.WeaponOBB.SetColliderRole(HitCollider.ColliderRole.Guard);
+            _player.WeaponOBB.SetColliderRole(HitCollider.ColliderRole.Parry);
 
             _player.Animation.Guard();
         }
 
         public void Update()
         {
+            // === 武器属性の切り替え ===
+            _elapsedTime += Time.deltaTime;
+            if (_elapsedTime > PlayerData.Data.ParryableTime)
+                _player.WeaponOBB.SetColliderRole(HitCollider.ColliderRole.Guard);
+
             // === 状態遷移 ===
             // ガードキャンセル
             if (_player.Action.Player.Guard.WasReleasedThisFrame() && !_isCanceled)
@@ -49,6 +56,7 @@ namespace Stage.Players
 
         public void Exit()
         {
+            _elapsedTime = 0.0f;
             _isCanceled = false;
 
             // ガード状態とOBBタイプの切り替え

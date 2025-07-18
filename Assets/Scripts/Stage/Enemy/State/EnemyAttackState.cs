@@ -35,9 +35,15 @@ namespace Stage.Enemies
             {
                 if (OBBHitChecker.IsColliding(_enemy.EnemyHeadSphere, _enemy.Player.PlayerColliders))
                 {
-                    // 接触OBBがガード(プレイヤーがガード中)の場合かそうでないかの分岐
+                    // 接触OBBの状態による分岐
+                    // ガード
                     if (_enemy.EnemyHeadSphere.HitInfo.targetRole == HitCollider.ColliderRole.Guard)
                         _enemy.Player.TakeImpact();
+                    // パリィ
+                    else if (_enemy.EnemyHeadSphere.HitInfo.targetRole == HitCollider.ColliderRole.Parry)
+                    {
+
+                    }
                     else
                         _enemy.IncreaseHitNum();
                 }

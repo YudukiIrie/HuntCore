@@ -44,9 +44,6 @@ Shader "Custom/OBBNoHitImage"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // float alpha = _MainColor.a * _FadeAmount;
-                // return fixed4(_MainColor.rgb, alpha);
-
                 float4 col = _MainColor;
                 col *= float4(0.5f, 0.5f, 0.5f, _FadeAmount);
                 return col;

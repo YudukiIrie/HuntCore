@@ -17,6 +17,7 @@ MonoBehaviour:
   _drawnRotSpeed: 400
   _heavyAttackRotSpeed: 150
   _specialAttackRotSpeed: 150
+  _parryableTime: 0.2
   _recoilSpeed: 10
   _recoilDistance: 2
   _chainTime: 0.3

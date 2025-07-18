@@ -5,7 +5,7 @@ namespace Stage.Players
     /// <summary>
     /// プレイヤーのアニメーションを管理
     /// </summary>
-    public class PlayerAnimation
+    public class PlayerAnimation : Animation
     {
         // AnimatorのパラメータハッシュID
         // 定数かつ実行時に値が決まるためstatic readonly
@@ -19,17 +19,10 @@ namespace Stage.Players
         public static readonly int HashSpecialAttack = Animator.StringToHash("Base Layer.SpecialAttack");
         static readonly int HashSpeed = Animator.StringToHash("Speed");
 
-        // コンポーネント
-        Animator _animator;
-
-        // アニメーションステート情報保存用
-        AnimatorStateInfo _currentStateInfo;
-
         float _animBlendTime;
 
-        public PlayerAnimation(Animator animator)
+        public PlayerAnimation(Animator animator) : base(animator)
         {
-            _animator = animator;
             _animBlendTime = PlayerData.Data.AnimBlendTime;
         }
 
@@ -116,47 +109,6 @@ namespace Stage.Players
         public void ResetSpeed()
         {
             _animator.SetFloat(HashSpeed, 1);
-        }
-
-        /// <summary>
-        /// 指定したアニメーションステートが再生中かチェック
-        /// </summary>
-        bool CheckCurrentState(int currentStateHash)
-        {
-            // BaseLayerのステート情報を取得
-            _currentStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
-
-            // 再生中のステートが指定したステートと同じかチェック
-            bool check = (_currentStateInfo.fullPathHash == currentStateHash);
-
-            return check;
-        }
-
-        /// <summary>
-        /// 指定したアニメーションの終了チェック
-        /// </summary>
-        /// <returns>true:再生終了, false:再生中</returns>
-        public bool IsAnimFinished(int stateHash)
-        {
-            if (CheckCurrentState(stateHash))
-            {
-                // アニメーション終了待ち
-                float time = _currentStateInfo.normalizedTime;
-                if (time >= 1.0f)
-                    return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// 指定したアニメーション再生時間を0～1の割合に変換した値を返却
-        /// </summary>
-        public float CheckAnimRatio(int stateHash)
-        {
-            if (CheckCurrentState(stateHash))
-                return _currentStateInfo.normalizedTime;
-
-            return 0.0f;
         }
     }
 }

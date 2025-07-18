@@ -21,6 +21,7 @@ namespace Stage.HitCheck
             Body,   // ‘Ì‚Ì•”ˆÊ
             Weapon, // •Ší‚Ü‚½‚ÍUŒ‚‚Ìˆê•”
             Guard,  // –hŒäó‘Ô
+            Parry,  // ƒpƒŠƒB‰Â”\ó‘Ô
             None
         }
         public ColliderRole Role { get; private set; }
