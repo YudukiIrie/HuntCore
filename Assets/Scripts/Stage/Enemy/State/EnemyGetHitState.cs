@@ -13,12 +13,15 @@ namespace Stage.Enemies
 
         public void Enter()
         {
-
+            _enemy.Animation.GetHit();
         }
 
         public void Update()
         {
-
+            // === ó‘Ô‘JˆÚ ===
+            // Œx‰ú
+            if (_enemy.Animation.IsAnimFinished(EnemyAnimation.HashGetHit))
+                _enemy.StateMachine.TransitionTo(EnemyState.Alert);
         }
 
         public void FixedUpdate()

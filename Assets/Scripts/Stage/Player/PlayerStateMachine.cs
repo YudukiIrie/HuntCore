@@ -5,6 +5,7 @@ namespace Stage.Players
         Idle,
         Move,
         Guard,
+        Parry,
         Blocked,
         Impacted,
         LightAttack,
@@ -22,6 +23,7 @@ namespace Stage.Players
             _states.Add(PlayerState.Idle, new PlayerIdleState(player));
             _states.Add(PlayerState.Move, new PlayerMoveState(player));
             _states.Add(PlayerState.Guard, new PlayerGuardState(player));
+            _states.Add(PlayerState.Parry, new PlayerParryState(player));
             _states.Add(PlayerState.Blocked, new PlayerBlockedState(player));
             _states.Add(PlayerState.Impacted, new PlayerImpactedState(player));
             _states.Add(PlayerState.LightAttack, new PlayerLightAttackState(player));

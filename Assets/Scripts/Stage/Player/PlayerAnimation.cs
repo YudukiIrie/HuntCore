@@ -11,6 +11,7 @@ namespace Stage.Players
         // 定数かつ実行時に値が決まるためstatic readonly
         public static readonly int HashIdle    = Animator.StringToHash("Base Layer.Idle");
         public static readonly int HashMove    = Animator.StringToHash("Base Layer.Move");
+        public static readonly int HashParry   = Animator.StringToHash("Base Layer.Parry");
         public static readonly int HashBlocked = Animator.StringToHash("Base Layer.Blocked");
         public static readonly int HashGuardBegin    = Animator.StringToHash("Base Layer.GuardBegin");
         public static readonly int HashImpacted      = Animator.StringToHash("Base Layer.Impacted");
@@ -101,6 +102,14 @@ namespace Stage.Players
             // 再生時間は1以上になる場合があるため制限を設ける
             float offset = Mathf.Clamp(normalizedTime, 0.0f, 1.0f);
             _animator.CrossFade(HashGuardBegin, _animBlendTime, 0, offset);
+        }
+
+        /// <summary>
+        /// パリィアニメーション開始
+        /// </summary>
+        public void Parry()
+        {
+            _animator.CrossFade(HashParry, _animBlendTime);
         }
 
         /// <summary>

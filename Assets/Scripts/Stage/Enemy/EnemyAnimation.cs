@@ -10,10 +10,11 @@ namespace Stage.Enemies
         // AnimatorのパラメータハッシュID
         public static readonly int HashIdle = Animator.StringToHash("Base Layer.Idle");
         public static readonly int HashRoar = Animator.StringToHash("Base Layer.Roar");
+        public static readonly int HashWalk = Animator.StringToHash("Base Layer.Walk");
         public static readonly int HashAlert = Animator.StringToHash("Base Layer.Alert");
         public static readonly int HashChase = Animator.StringToHash("Base Layer.Chase");
         public static readonly int HashAttack = Animator.StringToHash("Base Layer.Attack");
-        public static readonly int HashWalk = Animator.StringToHash("Base Layer.Walk");
+        public static readonly int HashGetHit = Animator.StringToHash("Base Layer.GetHit");
 
         float _animBlendTime;
 
@@ -68,6 +69,14 @@ namespace Stage.Enemies
         public void Walk()
         {
             _animator.CrossFade(HashWalk, _animBlendTime);
+        }
+
+        /// <summary>
+        /// 被攻撃アニメーション開始
+        /// </summary>
+        public void GetHit()
+        {
+            _animator.CrossFade(HashGetHit, _animBlendTime);
         }
     }
 }

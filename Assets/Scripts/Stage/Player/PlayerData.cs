@@ -56,6 +56,14 @@ namespace Stage.Players
         [Header("パリィ可能な時間")]
         [SerializeField] float _parryableTime;
 
+        public float MoveSpeedOfParry => _moveSpeedOfParry;
+        [Header("パリィ時移動速度")]
+        [SerializeField] float _moveSpeedOfParry;
+
+        public float RotSpeedOfParry => _rotSpeedOfParry;
+        [Header("パリィ時回転速度")]
+        [SerializeField] float _rotSpeedOfParry;
+
         public float RecoilSpeed => _recoilSpeed;
         [Header("のけぞり時移動速度")]
         [SerializeField] float _recoilSpeed;

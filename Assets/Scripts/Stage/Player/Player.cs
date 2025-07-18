@@ -136,6 +136,14 @@ namespace Stage.Players
         }
 
         /// <summary>
+        /// ƒpƒŠƒB‚Ö‚Ì‘JˆÚ
+        /// </summary>
+        public void Parry()
+        {
+            StateMachine.TransitionTo(PlayerState.Parry);
+        }
+
+        /// <summary>
         /// UŒ‚ƒqƒbƒg”‚Ì‘‰Á
         /// </summary>
         public void IncreaseHitNum()

@@ -42,7 +42,8 @@ namespace Stage.Enemies
                     // ƒpƒŠƒB
                     else if (_enemy.EnemyHeadSphere.HitInfo.targetRole == HitCollider.ColliderRole.Parry)
                     {
-
+                        _enemy.StateMachine.TransitionTo(EnemyState.GetHit);
+                        _enemy.Player.Parry();
                     }
                     else
                         _enemy.IncreaseHitNum();
