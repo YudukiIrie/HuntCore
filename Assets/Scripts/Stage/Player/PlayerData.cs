@@ -56,13 +56,17 @@ namespace Stage.Players
         [Header("パリィ可能な時間")]
         [SerializeField] float _parryableTime;
 
-        public float MoveSpeedOfParry => _moveSpeedOfParry;
+        public float ParryMoveSpd => _parryMoveSpd;
         [Header("パリィ時移動速度")]
-        [SerializeField] float _moveSpeedOfParry;
+        [SerializeField] float _parryMoveSpd;
 
-        public float RotSpeedOfParry => _rotSpeedOfParry;
+        public float ParryRotSpd => _parryRotSpd;
         [Header("パリィ時回転速度")]
-        [SerializeField] float _rotSpeedOfParry;
+        [SerializeField] float _parryRotSpd;
+
+        public Vector2 ParryMoveWindow => _parryMoveWindow;
+        [Header("パリィ中移動有効区間(X:開始, Y:終了)")]
+        [SerializeField] Vector2 _parryMoveWindow;
 
         public float RecoilSpeed => _recoilSpeed;
         [Header("のけぞり時移動速度")]

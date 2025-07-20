@@ -18,6 +18,9 @@ MonoBehaviour:
   _heavyAttackRotSpeed: 150
   _specialAttackRotSpeed: 150
   _parryableTime: 0.2
+  _parryMoveSpd: 6
+  _parryRotSpd: 150
+  _parryMoveWindow: {x: 0.3, y: 0.45}
   _recoilSpeed: 10
   _recoilDistance: 2
   _chainTime: 0.3
