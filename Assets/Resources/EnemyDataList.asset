@@ -32,3 +32,4 @@ MonoBehaviour:
     _limitAngle: 80
     _attackAngle: 10
     _turnSpeed: 100
+    _downDuration: 5

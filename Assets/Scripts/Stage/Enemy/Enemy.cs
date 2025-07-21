@@ -209,6 +209,14 @@ namespace Stage.Enemies
             return false;
         }
 
+        /// <summary>
+        /// ÕŒ‚‚ğó‚¯‚é
+        /// </summary>
+        public void TakeImpact()
+        {
+            StateMachine.TransitionTo(EnemyState.Down);
+        }
+
         public void IncreaseHitNum()
         {
             HitNum++;

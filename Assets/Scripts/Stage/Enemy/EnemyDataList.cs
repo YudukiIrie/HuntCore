@@ -131,5 +131,9 @@ namespace Stage.Enemies
         public float TurnSpeed => _turnSpeed;
         [Header("•ûŒü“]Š·‘¬“x")]
         [SerializeField] float _turnSpeed;
+
+        public float DownDuration => _downDuration;
+        [Header("ƒ_ƒEƒ“ŠÔ")]
+        [SerializeField] float _downDuration;
     }
 }

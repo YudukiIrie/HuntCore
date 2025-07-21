@@ -5,6 +5,7 @@ namespace Stage.Enemies
         Idle,
         Turn,
         Roar,
+        Down,
         Alert,
         Chase,
         Attack,
@@ -21,6 +22,7 @@ namespace Stage.Enemies
             _states.Add(EnemyState.Idle, new EnemyIdleState(enemy));
             _states.Add(EnemyState.Turn, new EnemyTurnState(enemy));
             _states.Add(EnemyState.Roar, new EnemyRoarState(enemy));
+            _states.Add(EnemyState.Down, new EnemyDownState(enemy));
             _states.Add(EnemyState.Alert, new EnemyAlertState(enemy));
             _states.Add(EnemyState.Chase, new EnemyChaseState(enemy));
             _states.Add(EnemyState.Attack, new EnemyAttackState(enemy));

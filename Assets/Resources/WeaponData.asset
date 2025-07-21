@@ -19,6 +19,7 @@ MonoBehaviour:
   _heavyAttackHitEndRatio: 0.8
   _specialAttackHitStartRatio: 0.3
   _specialAttackHitEndRatio: 0.65
+  _parryHitWindow: {x: 0.43, y: 0.7}
   _initialPoolSize: 10
   _afterImagePrefab: {fileID: 4474153194023993398, guid: b4bf79072a317ac408da550ffe6aaa7f, type: 3}
   _afterImageInterval: 0.01

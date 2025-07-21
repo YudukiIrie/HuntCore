@@ -60,6 +60,10 @@ namespace Stage.Players
         [Header("スペシャル攻撃当たり判定終了割合")]
         [SerializeField] float _specialAttackHitEndRatio;
 
+        public Vector2 ParryHitWindow => _parryHitWindow;
+        [Header("パリィ当たり判定有効区間")]
+        [SerializeField] Vector2 _parryHitWindow;
+
         public int InitialPoolSize => _initialPoolSize;
         [Header("残像用初期プールサイズ")]
         [SerializeField] int _initialPoolSize;

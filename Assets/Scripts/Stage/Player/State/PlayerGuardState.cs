@@ -62,8 +62,6 @@ namespace Stage.Players
             // ガード状態とOBBタイプの切り替え
             _player.SetGuardState(false);
             _player.WeaponOBB.SetColliderRole(HitCollider.ColliderRole.Weapon);
-
-            _player.Animation.ResetSpeed();
         }
     }
 }

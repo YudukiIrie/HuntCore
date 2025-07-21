@@ -32,6 +32,7 @@ namespace Stage.Players
         /// </summary>
         public void Idle()
         {
+            ResetParam();
             _animator.CrossFade(HashIdle, _animBlendTime);
         }
 
@@ -40,6 +41,7 @@ namespace Stage.Players
         /// </summary>
         public void Move()
         {
+            ResetParam();
             _animator.CrossFade(HashMove, _animBlendTime);
         }
 
@@ -48,6 +50,7 @@ namespace Stage.Players
         /// </summary>
         public void LightAttack()
         {
+            ResetParam();
             _animator.CrossFade(HashLightAttack, _animBlendTime);
         }
 
@@ -56,6 +59,7 @@ namespace Stage.Players
         /// </summary>
         public void HeavyAttack()
         {
+            ResetParam();
             _animator.CrossFade(HashHeavyAttack, _animBlendTime);
         }
 
@@ -64,6 +68,7 @@ namespace Stage.Players
         /// </summary>
         public void SpecialAttack()
         {
+            ResetParam();
             _animator.CrossFade(HashSpecialAttack, _animBlendTime);
         }
 
@@ -72,6 +77,7 @@ namespace Stage.Players
         /// </summary>
         public void Impacted()
         {
+            ResetParam();
             _animator.CrossFade(HashImpacted, _animBlendTime);
         }
 
@@ -80,6 +86,7 @@ namespace Stage.Players
         /// </summary>
         public void Guard()
         {
+            ResetParam();
             _animator.CrossFade(HashGuardBegin, _animBlendTime);
         }
 
@@ -88,6 +95,7 @@ namespace Stage.Players
         /// </summary>
         public void Blocked()
         {
+            ResetParam();
             _animator.CrossFade(HashBlocked, _animBlendTime);
         }
 
@@ -98,6 +106,7 @@ namespace Stage.Players
         /// <param name="normalizedTime">逆再生時開始割合</param>
         public void CancelGuard(float normalizedTime = 1.0f)
         {
+            ResetParam();
             _animator.SetFloat(HashSpeed, -1);
             // 再生時間は1以上になる場合があるため制限を設ける
             float offset = Mathf.Clamp(normalizedTime, 0.0f, 1.0f);
@@ -109,13 +118,14 @@ namespace Stage.Players
         /// </summary>
         public void Parry()
         {
+            ResetParam();
             _animator.CrossFade(HashParry, _animBlendTime);
         }
 
         /// <summary>
         /// パラメータのリセット
         /// </summary>
-        public void ResetSpeed()
+        void ResetParam()
         {
             _animator.SetFloat(HashSpeed, 1);
         }

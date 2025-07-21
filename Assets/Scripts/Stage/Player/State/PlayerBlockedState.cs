@@ -82,7 +82,6 @@ namespace Stage.Players
             _moveDist = 0.0f;
             _isCanceled = false;
             _elapsedTime = 0.0f;
-            _player.Animation.ResetSpeed();
         }
     }
 }

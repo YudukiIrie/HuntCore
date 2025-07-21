@@ -1,7 +1,11 @@
+using Stage.HitCheck;
 using UnityEngine;
 
 namespace Stage.Players
 {
+    /// <summary>
+    /// プレイヤーパリィ状態
+    /// </summary>
     public class PlayerParryState : IState
     {
         Player _player;
@@ -11,14 +15,16 @@ namespace Stage.Players
         float _moveSpeed;
         float _rotSpeed;
         Vector2 _moveWindow;
+        Vector2 _hitWindow;
 
         public PlayerParryState(Player player)
         {
             _player = player;
 
-            _moveSpeed = PlayerData.Data.ParryMoveSpd;
-            _rotSpeed = PlayerData.Data.ParryRotSpd;
+            _moveSpeed  = PlayerData.Data.ParryMoveSpd;
+            _rotSpeed   = PlayerData.Data.ParryRotSpd;
             _moveWindow = PlayerData.Data.ParryMoveWindow;
+            _hitWindow  = WeaponData.Data.ParryHitWindow;
         }
 
         public void Enter()
@@ -46,6 +52,19 @@ namespace Stage.Players
                 _player.transform.rotation = 
                 Quaternion.RotateTowards(_player.transform.rotation, targetRot, rotSpeed);
 
+            // === 当たり判定 ===
+            float progress = _player.Animation.CheckAnimRatio(PlayerAnimation.HashParry);
+            float start = _hitWindow.x;
+            float end = _hitWindow.y;
+            if (progress >= start && progress <= end)
+            {
+                if (OBBHitChecker.IsColliding(_player.WeaponOBB, _player.Enemy.EnemyColliders))
+                {
+                    _player.Enemy.TakeImpact();
+                    _player.IncreaseHitNum();
+                }
+            }
+
             // === 状態遷移 ===
             // 待機
             if (_player.Animation.IsAnimFinished(PlayerAnimation.HashParry))
@@ -61,7 +80,7 @@ namespace Stage.Players
 
         public void Exit()
         {
-
+            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyColliders);
         }
 
         /// <summary>
