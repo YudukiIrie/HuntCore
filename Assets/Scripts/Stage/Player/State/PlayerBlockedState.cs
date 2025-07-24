@@ -18,6 +18,7 @@ namespace Stage.Players
         float _elapsedTime; // 経過時間
         bool _isCanceled = false;   // 状態キャンセルの有無
 
+        // データキャッシュ用
         float _recoilSpeed;
         float _recoilDist;
         float _toOtherDuration;
@@ -25,6 +26,7 @@ namespace Stage.Players
         public PlayerBlockedState(Player player)
         {
             _player = player;
+
             _recoilSpeed = PlayerData.Data.RecoilSpeed;
             _recoilDist  = PlayerData.Data.RecoilDistance;
             _toOtherDuration = PlayerData.Data.BlockedToOtherDuration;
@@ -38,15 +40,55 @@ namespace Stage.Players
 
         public void Update()
         {
-            // === のけぞり計算 ===
+            RecoilUpdate();
+
+            Transition();
+        }
+
+        public void FixedUpdate()
+        {
+            RecoilFixedUpdate();
+        }
+
+        public void Exit()
+        {
+            _moveDist = 0.0f;
+            _isCanceled = false;
+            _elapsedTime = 0.0f;
+        }
+
+        /// <summary>
+        /// Update()用のけぞり処理
+        /// </summary>
+        void RecoilUpdate()
+        {
             // プレイヤーの背中側のベクトルを取得
             _velocity = (_player.transform.forward * -1.0f) * _recoilSpeed;
             // のけぞり時移動距離の取得
             float dist = Vector3.Distance(_oldPos, _player.transform.position);
             _moveDist += dist;
             _oldPos = _player.transform.position;
+        }
 
-            // === 状態遷移 ===
+        /// <summary>
+        /// FixedUpdate用のけぞり処理
+        /// </summary>
+        void RecoilFixedUpdate()
+        {
+            // 総移動距離が一定になるまでのけぞる
+            if (_moveDist < _recoilDist)
+            {
+                Vector3 vel = _velocity;
+                vel.y = _player.Rigidbody.velocity.y;
+                _player.Rigidbody.velocity = vel;
+            }
+        }
+
+        /// <summary>
+        /// 状態遷移
+        /// </summary>
+        void Transition()
+        {
             // ガードキャンセル
             if (_player.Animation.IsAnimFinished(PlayerAnimation.HashBlocked) && !_isCanceled)
             {
@@ -63,25 +105,6 @@ namespace Stage.Players
                     _elapsedTime > _toOtherDuration)
                     _player.StateMachine.TransitionTo(PlayerState.Idle);
             }
-        }
-
-        public void FixedUpdate()
-        {
-            // === のけぞり ===
-            // 総移動距離が一定になるまでのけぞる
-            if (_moveDist < _recoilDist)
-            {
-                Vector3 vel = _velocity;
-                vel.y = _player.Rigidbody.velocity.y;
-                _player.Rigidbody.velocity = vel;
-            }
-        }
-
-        public void Exit()
-        {
-            _moveDist = 0.0f;
-            _isCanceled = false;
-            _elapsedTime = 0.0f;
         }
     }
 }

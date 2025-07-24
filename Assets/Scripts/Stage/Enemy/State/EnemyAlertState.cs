@@ -25,16 +25,7 @@ namespace Stage.Enemies
 
         public void Update()
         {
-            // === ó‘Ô‘JˆÚ ===
-            // ’ÇÕ
-            if (_enemy.GetDistanceToPlayer() > _attackDistance)
-                _enemy.StateMachine.TransitionTo(EnemyState.Chase);
-            // •ûŒü“]Š·
-            else if (_enemy.GetAngleToPlayer() > _limitAngle)
-                _enemy.StateMachine.TransitionTo(EnemyState.Turn);
-            // UŒ‚
-            else if (_enemy.CheckAttackState())
-                _enemy.StateMachine.TransitionTo(EnemyState.Attack);
+            Transition();
         }
 
         public void FixedUpdate()
@@ -45,6 +36,22 @@ namespace Stage.Enemies
         public void Exit()
         {
 
+        }
+
+        /// <summary>
+        /// ó‘Ô‘JˆÚ
+        /// </summary>
+        void Transition()
+        {
+            // ’ÇÕ
+            if (_enemy.GetDistanceToPlayer() > _attackDistance)
+                _enemy.StateMachine.TransitionTo(EnemyState.Chase);
+            // •ûŒü“]Š·
+            else if (_enemy.GetAngleToPlayer() > _limitAngle)
+                _enemy.StateMachine.TransitionTo(EnemyState.Turn);
+            // UŒ‚
+            else if (_enemy.CheckAttackState())
+                _enemy.StateMachine.TransitionTo(EnemyState.Attack);
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Stage.Enemies
         public EnemyAttackState(Enemy enemy)
         {
             _enemy = enemy;
+
             _hitStartRatio = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackHitStartRatio;
             _hitEndRatio = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackHitEndRatio;
         }
@@ -29,7 +30,26 @@ namespace Stage.Enemies
 
         public void Update()
         {
-            // === “–‚½‚è”»’è ===
+            DetectHit();
+
+            Transition();
+        }
+
+        public void FixedUpdate()
+        {
+
+        }
+
+        public void Exit()
+        {
+            OBBHitChecker.ResetHitInfo(_enemy.EnemyHeadSphere, _enemy.Player.PlayerColliders);
+        }
+
+        /// <summary>
+        /// “–‚½‚è”»’è
+        /// </summary>
+        void DetectHit()
+        {
             if (_enemy.Animation.CheckAnimRatio(EnemyAnimation.HashAttack) >= _hitStartRatio &&
                 _enemy.Animation.CheckAnimRatio(EnemyAnimation.HashAttack) <= _hitEndRatio)
             {
@@ -49,21 +69,13 @@ namespace Stage.Enemies
                         _enemy.IncreaseHitNum();
                 }
             }
+        }
 
-            // === ó‘Ô‘JˆÚ ===
+        void Transition()
+        {
             // Œx‰ú
             if (_enemy.Animation.IsAnimFinished(EnemyAnimation.HashAttack))
                 _enemy.StateMachine.TransitionTo(EnemyState.Alert);
-        }
-
-        public void FixedUpdate()
-        {
-
-        }
-
-        public void Exit()
-        {
-            OBBHitChecker.ResetHitInfo(_enemy.EnemyHeadSphere, _enemy.Player.PlayerColliders);
         }
     }
 }

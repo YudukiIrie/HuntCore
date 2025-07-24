@@ -31,7 +31,22 @@ namespace Stage.Enemies
         {
             _downTimer += Time.deltaTime;
 
-            // === ó‘Ô‘JˆÚ ===
+            Transition();
+        }
+
+        public void FixedUpdate()
+        {
+
+        }
+
+        public void Exit()
+        {
+            _downTimer = 0.0f;
+            _isDowned = false;
+        }
+
+        void Transition()
+        {
             // ‹N‚«ã‚ª‚è
             if (_downTimer >= _downDuration && _isDowned)
             {
@@ -45,17 +60,6 @@ namespace Stage.Enemies
                 if (_enemy.Animation.CheckAnimRatio(EnemyAnimation.HashDown) <= 0.0f)
                     _enemy.StateMachine.TransitionTo(EnemyState.Alert);
             }
-        }
-
-        public void FixedUpdate()
-        {
-
-        }
-
-        public void Exit()
-        {
-            _downTimer = 0.0f;
-            _isDowned = false;
         }
     }
 }

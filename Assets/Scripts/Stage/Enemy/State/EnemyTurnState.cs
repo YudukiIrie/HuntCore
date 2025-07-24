@@ -9,12 +9,15 @@ namespace Stage.Enemies
     {
         Enemy _enemy;           // “GƒNƒ‰ƒX
         Quaternion _targetRot;  // Œü‚­‚×‚«Šp“x   
+
+        // ƒf[ƒ^ƒLƒƒƒbƒVƒ…—p
         float _turnSpeed;
         float _attackAngle;
 
         public EnemyTurnState(Enemy enemy)
         {
             _enemy = enemy;
+
             _turnSpeed = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).TurnSpeed;
             _attackAngle = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackAngle;
         }
@@ -29,20 +32,9 @@ namespace Stage.Enemies
 
         public void Update()
         {
-            // === •ûŒü“]Š· ===
-            // ƒ^[ƒQƒbƒgŠp“x‚Ìæ“¾
-            _targetRot = Quaternion.LookRotation(_enemy.GetDirectionToPlayer());
-            // ‰ñ“]‘¬“x‚Ìæ“¾
-            float rotSpeed = _turnSpeed * Time.deltaTime;
-            // ‰ñ“]
-            Quaternion rot = _enemy.transform.rotation;
-            rot = Quaternion.RotateTowards(rot, _targetRot, rotSpeed);
-            _enemy.transform.rotation = rot;
+            Rotate();
 
-            // === ó‘Ô‘JˆÚ ===
-            // Œx‰ú
-            if (_enemy.GetAngleToPlayer() <= _attackAngle)
-                _enemy.StateMachine.TransitionTo(EnemyState.Alert);
+            Transition();
         }
 
         public void FixedUpdate()
@@ -53,6 +45,31 @@ namespace Stage.Enemies
         public void Exit()
         {
 
+        }
+
+        /// <summary>
+        /// ‰ñ“]
+        /// </summary>
+        void Rotate()
+        {
+            // ƒ^[ƒQƒbƒgŠp“x‚Ìæ“¾
+            _targetRot = Quaternion.LookRotation(_enemy.GetDirectionToPlayer());
+            // ‰ñ“]‘¬“x‚Ìæ“¾
+            float rotSpeed = _turnSpeed * Time.deltaTime;
+            // ‰ñ“]
+            Quaternion rot = _enemy.transform.rotation;
+            rot = Quaternion.RotateTowards(rot, _targetRot, rotSpeed);
+            _enemy.transform.rotation = rot;
+        }
+
+        /// <summary>
+        /// ó‘Ô‘JˆÚ
+        /// </summary>
+        void Transition()
+        {
+            // Œx‰ú
+            if (_enemy.GetAngleToPlayer() <= _attackAngle)
+                _enemy.StateMachine.TransitionTo(EnemyState.Alert);
         }
     }
 }

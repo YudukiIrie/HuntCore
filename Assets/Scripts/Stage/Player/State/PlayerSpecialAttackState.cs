@@ -20,6 +20,7 @@ namespace Stage.Players
         public PlayerSpecialAttackState(Player player)
         {
             _player = player;
+
             _rotSpeed      = PlayerData.Data.SpecialAttackRotSpeed;
             _hitStartRatio = WeaponData.Data.SpecialAttackHitStartRatio;
             _hitEndRatio   = WeaponData.Data.SpecialAttackHitEndRatio;
@@ -34,37 +35,13 @@ namespace Stage.Players
 
         public void Update()
         {
-            // === ‰ñ“]ŒvZ ===
-            // ’n–Ê‚É•½s‚È‹“_•ûŒü‚Ìæ“¾
-            Vector3 viewV = Camera.main.transform.forward.normalized;
-            viewV = Vector3.ProjectOnPlane(viewV, _player.NormalVector);
-            // ‰ñ“]’l‚Ìæ“¾
-            _targetRot = Quaternion.LookRotation(viewV);
+            Rotate();
 
-            // === •ûŒü“]Š· ===
-            // ‰ñ“]‘¬“x‚Ìæ“¾
-            float rotSpeed = _rotSpeed * Time.deltaTime;
-            // ‰ñ“]
-            Quaternion rot = _player.transform.rotation;
-            rot = Quaternion.RotateTowards(rot, _targetRot, rotSpeed);
-            _player.transform.rotation = rot;
+            HitDetect();
 
-            // === “–‚½‚è”»’è ===
-            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) >= _hitStartRatio &&
-                _player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) <= _hitEndRatio)
-            {
-                if (OBBHitChecker.IsColliding(_player.WeaponOBB, _player.Enemy.EnemyColliders))
-                    _player.IncreaseHitNum();
-            }
+            SpawnAfterImage();
 
-            // === c‘œ‚Ì¶¬ ===
-            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) <= _afterImageEndRatio)
-                _player.Spawner.Spawn(_player.Weapon.transform);
-
-            // === ó‘Ô‘JˆÚ ===
-            // ‘Ò‹@
-            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashSpecialAttack))
-                _player.StateMachine.TransitionTo(PlayerState.Idle);
+            Transition();
         }
 
         public void FixedUpdate()
@@ -75,6 +52,56 @@ namespace Stage.Players
         public void Exit()
         {
             OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyColliders);
+        }
+
+        /// <summary>
+        /// ‰ñ“]
+        /// </summary>
+        void Rotate()
+        {
+            // ’n–Ê‚É•½s‚È‹“_•ûŒü‚Ìæ“¾
+            Vector3 viewV = Camera.main.transform.forward.normalized;
+            viewV = Vector3.ProjectOnPlane(viewV, _player.NormalVector);
+            // ‰ñ“]’l‚Ìæ“¾
+            _targetRot = Quaternion.LookRotation(viewV);
+            // ‰ñ“]‘¬“x‚Ìæ“¾
+            float rotSpeed = _rotSpeed * Time.deltaTime;
+            // ‰ñ“]
+            Quaternion rot = _player.transform.rotation;
+            rot = Quaternion.RotateTowards(rot, _targetRot, rotSpeed);
+            _player.transform.rotation = rot;
+        }
+
+        /// <summary>
+        /// “–‚½‚è”»’è
+        /// </summary>
+        void HitDetect()
+        {
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) >= _hitStartRatio &&
+                _player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) <= _hitEndRatio)
+            {
+                if (OBBHitChecker.IsColliding(_player.WeaponOBB, _player.Enemy.EnemyColliders))
+                    _player.IncreaseHitNum();
+            }
+        }
+
+        /// <summary>
+        /// c‘œ‚Ì¶¬
+        /// </summary>
+        void SpawnAfterImage()
+        {
+            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) <= _afterImageEndRatio)
+                _player.Spawner.Spawn(_player.Weapon.transform);
+        }
+
+        /// <summary>
+        /// ó‘Ô‘JˆÚ
+        /// </summary>
+        void Transition()
+        {
+            // ‘Ò‹@
+            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashSpecialAttack))
+                _player.StateMachine.TransitionTo(PlayerState.Idle);
         }
     }
 }

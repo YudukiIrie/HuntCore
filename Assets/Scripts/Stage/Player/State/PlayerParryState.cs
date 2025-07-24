@@ -34,10 +34,38 @@ namespace Stage.Players
 
         public void Update()
         {
-            // === ˆÚ“®ŒvZ ===
-            _velocity = _player.transform.forward * _moveSpeed;
+            MoveUpdate();
 
-            // === ‰ñ“] ===
+            Rotate();
+
+            DetectHit();
+
+            Transition();
+        }
+
+        public void FixedUpdate()
+        {
+            MoveFixedUpdate();
+        }
+
+        public void Exit()
+        {
+            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyColliders);
+        }
+
+        /// <summary>
+        /// Update()—pˆÚ“®ˆ—
+        /// </summary>
+        void MoveUpdate()
+        {
+            _velocity = _player.transform.forward * _moveSpeed;
+        }
+
+        /// <summary>
+        /// ‰ñ“]
+        /// </summary>
+        void Rotate()
+        {
             // ƒJƒƒ‰‚©‚çŒ©‚½‚Æ‚«‚Ìù‰ñ•ûŒü‚ğæ“¾
             Vector2 input = _player.Action.Player.Move.ReadValue<Vector2>();
             Transform cam = Camera.main.transform;
@@ -49,10 +77,15 @@ namespace Stage.Players
                 targetRot = Quaternion.LookRotation(direction);
             float rotSpeed = _rotSpeed * Time.deltaTime;
             if (IsInMoveWindow())
-                _player.transform.rotation = 
+                _player.transform.rotation =
                 Quaternion.RotateTowards(_player.transform.rotation, targetRot, rotSpeed);
+        }
 
-            // === “–‚½‚è”»’è ===
+        /// <summary>
+        /// “–‚½‚è”»’è
+        /// </summary>
+        void DetectHit()
+        {
             float progress = _player.Animation.CheckAnimRatio(PlayerAnimation.HashParry);
             float start = _hitWindow.x;
             float end = _hitWindow.y;
@@ -64,23 +97,25 @@ namespace Stage.Players
                     _player.IncreaseHitNum();
                 }
             }
+        }
 
-            // === ó‘Ô‘JˆÚ ===
+        /// <summary>
+        /// ó‘Ô‘JˆÚ
+        /// </summary>
+        void Transition()
+        {
             // ‘Ò‹@
             if (_player.Animation.IsAnimFinished(PlayerAnimation.HashParry))
                 _player.StateMachine.TransitionTo(PlayerState.Idle);
         }
 
-        public void FixedUpdate()
+        /// <summary>
+        /// FixedUpdate()—pˆÚ“®ˆ—
+        /// </summary>
+        void MoveFixedUpdate()
         {
-            // === ˆÚ“® ===
             if (IsInMoveWindow())
                 _player.Rigidbody.velocity = _velocity;
-        }
-
-        public void Exit()
-        {
-            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyColliders);
         }
 
         /// <summary>

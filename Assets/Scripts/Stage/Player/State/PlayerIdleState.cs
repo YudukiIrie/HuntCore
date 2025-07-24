@@ -26,7 +26,24 @@ namespace Stage.Players
         {
             _elapsedTime += Time.deltaTime;
 
-            // === ó‘Ô‘JˆÚ ===
+            Transition();
+        }
+
+        public void FixedUpdate()
+        {
+
+        }
+
+        public void Exit()
+        {
+            _elapsedTime = 0.0f;
+        }
+
+        /// <summary>
+        /// ó‘Ô‘JˆÚ
+        /// </summary>
+        void Transition()
+        {
             // ˆÚ“®
             if (_player.Action.Player.Move.ReadValue<Vector2>() != Vector2.zero)
                 _player.StateMachine.TransitionTo(PlayerState.Move);
@@ -40,16 +57,6 @@ namespace Stage.Players
             // ƒK[ƒh
             else if (_player.Action.Player.Guard.IsPressed())
                 _player.StateMachine.TransitionTo(PlayerState.Guard);
-        }
-
-        public void FixedUpdate()
-        {
-
-        }
-
-        public void Exit()
-        {
-            _elapsedTime = 0.0f;
         }
     }
 }

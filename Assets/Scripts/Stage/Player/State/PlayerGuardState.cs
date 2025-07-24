@@ -28,25 +28,11 @@ namespace Stage.Players
 
         public void Update()
         {
-            // === 武器属性の切り替え ===
             _elapsedTime += Time.deltaTime;
-            if (_elapsedTime > PlayerData.Data.ParryableTime)
-                _player.WeaponOBB.SetColliderRole(HitCollider.ColliderRole.Guard);
 
-            // === 状態遷移 ===
-            // ガードキャンセル
-            if (_player.Action.Player.Guard.WasReleasedThisFrame() && !_isCanceled)
-            {
-                _player.Animation.CancelGuard(_player.Animation.CheckAnimRatio(PlayerAnimation.HashGuardBegin));
-                _isCanceled = true;
-            }
-            // 待機
-            if (_isCanceled)
-            {
-                // 逆再生の終了割合 = 0.0f
-                if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashGuardBegin) <= 0.0f)
-                    _player.StateMachine.TransitionTo(PlayerState.Idle);
-            }
+            SwitchColliderRole();
+
+            Transition();
         }
 
         public void FixedUpdate()
@@ -62,6 +48,35 @@ namespace Stage.Players
             // ガード状態とOBBタイプの切り替え
             _player.SetGuardState(false);
             _player.WeaponOBB.SetColliderRole(HitCollider.ColliderRole.Weapon);
+        }
+
+        /// <summary>
+        /// 武器コライダーの属性切り替え
+        /// </summary>
+        void SwitchColliderRole()
+        {
+            if (_elapsedTime > PlayerData.Data.ParryableTime)
+                _player.WeaponOBB.SetColliderRole(HitCollider.ColliderRole.Guard);
+        }
+
+        /// <summary>
+        /// 状態遷移
+        /// </summary>
+        void Transition()
+        {
+            // ガードキャンセル
+            if (_player.Action.Player.Guard.WasReleasedThisFrame() && !_isCanceled)
+            {
+                _player.Animation.CancelGuard(_player.Animation.CheckAnimRatio(PlayerAnimation.HashGuardBegin));
+                _isCanceled = true;
+            }
+            // 待機
+            if (_isCanceled)
+            {
+                // 逆再生の終了割合 = 0.0f
+                if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashGuardBegin) <= 0.0f)
+                    _player.StateMachine.TransitionTo(PlayerState.Idle);
+            }
         }
     }
 }

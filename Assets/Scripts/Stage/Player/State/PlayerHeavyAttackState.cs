@@ -22,6 +22,7 @@ namespace Stage.Players
         public PlayerHeavyAttackState(Player player)
         {
             _player = player;
+
             _rotSpeed      = PlayerData.Data.HeavyAttackRotSpeed;
             _hitStartRatio = WeaponData.Data.HeavyAttackHitStartRatio;
             _hitEndRatio   = WeaponData.Data.HeavyAttackHitEndRatio;
@@ -37,34 +38,71 @@ namespace Stage.Players
 
         public void Update()
         {
-            // === ‰ñ“]ŒvZ ===
+            Rotate();
+
+            DetectHit();
+
+            SpawnAfterImage();
+
+            Transition();
+        }
+
+        public void FixedUpdate()
+        {
+
+        }
+
+        public void Exit()
+        {
+            _elapseTime = 0.0f;
+            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyColliders);
+        }
+
+        /// <summary>
+        /// ‰ñ“]
+        /// </summary>
+        void Rotate()
+        {
             // ’n–Ê‚É•½s‚È‹“_•ûŒü‚Ìæ“¾
             Vector3 viewV = Camera.main.transform.forward.normalized;
             viewV = Vector3.ProjectOnPlane(viewV, _player.NormalVector);
             // ‰ñ“]’l‚Ìæ“¾
             _targetRot = Quaternion.LookRotation(viewV);
-
-            // === •ûŒü“]Š· ===
             // ‰ñ“]‘¬“x‚Ìæ“¾
             float rotSpeed = _rotSpeed * Time.deltaTime;
             // ‰ñ“]
             Quaternion rot = _player.transform.rotation;
             rot = Quaternion.RotateTowards(rot, _targetRot, rotSpeed);
             _player.transform.rotation = rot;
+        }
 
-            // === “–‚½‚è”»’è ===
+        /// <summary>
+        /// “–‚½‚è”»’è
+        /// </summary>
+        void DetectHit()
+        {
             if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashHeavyAttack) >= _hitStartRatio &&
                 _player.Animation.CheckAnimRatio(PlayerAnimation.HashHeavyAttack) <= _hitEndRatio)
             {
                 if (OBBHitChecker.IsColliding(_player.WeaponOBB, _player.Enemy.EnemyColliders))
                     _player.IncreaseHitNum();
             }
+        }
 
-            // === c‘œ‚Ì¶¬ ===
+        /// <summary>
+        /// c‘œ‚Ì¶¬
+        /// </summary>
+        void SpawnAfterImage()
+        {
             if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashHeavyAttack) <= _afterImageEndRatio)
                 _player.Spawner.Spawn(_player.Weapon.transform);
+        }
 
-            // === ó‘Ô‘JˆÚ ===
+        /// <summary>
+        /// ó‘Ô‘JˆÚ
+        /// </summary>
+        void Transition()
+        {
             if (_player.Animation.IsAnimFinished(PlayerAnimation.HashHeavyAttack))
             {
                 _elapseTime += Time.deltaTime;
@@ -78,17 +116,6 @@ namespace Stage.Players
                 else
                     _player.StateMachine.TransitionTo(PlayerState.Idle);
             }
-        }
-
-        public void FixedUpdate()
-        {
-
-        }
-
-        public void Exit()
-        {
-            _elapseTime = 0.0f;
-            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyColliders);
         }
     }
 }
