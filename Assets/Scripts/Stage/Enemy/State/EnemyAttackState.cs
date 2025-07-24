@@ -10,17 +10,15 @@ namespace Stage.Enemies
     public class EnemyAttackState : IState
     {
         Enemy _enemy;   // 敵クラス
-        
+
         // データキャッシュ用
-        float _hitStartRatio;
-        float _hitEndRatio;
+        Vector2 _hitWindow;
         
         public EnemyAttackState(Enemy enemy)
         {
             _enemy = enemy;
 
-            _hitStartRatio = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackHitStartRatio;
-            _hitEndRatio = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackHitEndRatio;
+            _hitWindow = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackHitWindow;
         }
 
         public void Enter()
@@ -50,8 +48,10 @@ namespace Stage.Enemies
         /// </summary>
         void DetectHit()
         {
-            if (_enemy.Animation.CheckAnimRatio(EnemyAnimation.HashAttack) >= _hitStartRatio &&
-                _enemy.Animation.CheckAnimRatio(EnemyAnimation.HashAttack) <= _hitEndRatio)
+            var start = _hitWindow.x;
+            var end   = _hitWindow.y;
+            var progress = _enemy.Animation.CheckAnimRatio(EnemyAnimation.HashAttack);
+            if (progress >= start && progress <= end)
             {
                 if (OBBHitChecker.IsColliding(_enemy.EnemyHeadSphere, _enemy.Player.PlayerColliders))
                 {

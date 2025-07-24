@@ -12,18 +12,16 @@ namespace Stage.Players
         Quaternion _targetRot;  // 視点方向ベクトル
 
         // データキャッシュ用
+        Vector2 _hitWindow;
         float _rotSpeed;
-        float _hitStartRatio;
-        float _hitEndRatio;
         float _afterImageEndRatio;
 
         public PlayerSpecialAttackState(Player player)
         {
             _player = player;
 
-            _rotSpeed      = PlayerData.Data.SpecialAttackRotSpeed;
-            _hitStartRatio = WeaponData.Data.SpecialAttackHitStartRatio;
-            _hitEndRatio   = WeaponData.Data.SpecialAttackHitEndRatio;
+            _hitWindow = WeaponData.Data.SpecialAttackHitWindow;
+            _rotSpeed  = PlayerData.Data.SpecialAttackRotSpeed;
             _afterImageEndRatio = WeaponData.Data.AfterImageEndRatio;
         }
 
@@ -77,8 +75,10 @@ namespace Stage.Players
         /// </summary>
         void HitDetect()
         {
-            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) >= _hitStartRatio &&
-                _player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) <= _hitEndRatio)
+            var start = _hitWindow.x;
+            var end   = _hitWindow.y;
+            var progress = _player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack);
+            if (progress >= start && progress <= end)
             {
                 if (OBBHitChecker.IsColliding(_player.WeaponOBB, _player.Enemy.EnemyColliders))
                     _player.IncreaseHitNum();

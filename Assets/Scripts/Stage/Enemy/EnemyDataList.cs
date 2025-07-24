@@ -112,13 +112,9 @@ namespace Stage.Enemies
         [Header("アニメーションブレンド時間")]
         [SerializeField] float _animBlendTime;
 
-        public float AttackHitStartRatio => _attackHitStartRatio;
-        [Header("攻撃当たり判定開始割合")]
-        [SerializeField] float _attackHitStartRatio;
-
-        public float AttackHitEndRatio => _attackHitEndRatio;
-        [Header("攻撃当たり判定終了割合")]
-        [SerializeField] float _attackHitEndRatio;
+        public Vector2 AttackHitWindow => _attackHitWindow;
+        [Header("攻撃当たり判定有効区間(X:開始, Y:終了)")]
+        [SerializeField] Vector2 _attackHitWindow;
 
         public float LimitAngle => _limitAngle;
         [Header("対象との限界角度")]

@@ -27,8 +27,7 @@ MonoBehaviour:
     _chaseRotSpeed: 300
     _attackInterval: 3
     _animBlendTime: 0.3
-    _attackHitStartRatio: 0.3
-    _attackHitEndRatio: 0.5
+    _attackHitWindow: {x: 0.3, y: 0.5}
     _limitAngle: 80
     _attackAngle: 10
     _turnSpeed: 100

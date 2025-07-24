@@ -12,8 +12,7 @@ namespace Stage.Players
         float _elapseTime;  // コンボ間猶予経過時間
 
         // データキャッシュ用
-        float _hitStartRatio;
-        float _hitEndRatio;
+        Vector2 _hitWindow;
         float _chainTime;
         float _afterImageEndRatio;
 
@@ -22,9 +21,8 @@ namespace Stage.Players
         {
             _player = player;
 
-            _hitStartRatio = WeaponData.Data.LightAttackHitStartRatio;
-            _hitEndRatio   = WeaponData.Data.LightAttackHitEndRatio;
-            _chainTime     = PlayerData.Data.ChainTime;
+            _hitWindow = WeaponData.Data.LightAttackHitWindow;
+            _chainTime = PlayerData.Data.ChainTime;
             _afterImageEndRatio = WeaponData.Data.AfterImageEndRatio;
         }
 
@@ -58,8 +56,10 @@ namespace Stage.Players
         /// </summary>
         void DetectHit()
         {
-            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashLightAttack) >= _hitStartRatio &&
-                _player.Animation.CheckAnimRatio(PlayerAnimation.HashLightAttack) <= _hitEndRatio)
+            var start = _hitWindow.x;
+            var end   = _hitWindow.y;
+            var progress = _player.Animation.CheckAnimRatio(PlayerAnimation.HashLightAttack);
+            if (progress >= start && progress <= end)
             {
                 if (OBBHitChecker.IsColliding(_player.WeaponOBB, _player.Enemy.EnemyColliders))
                     _player.IncreaseHitNum();

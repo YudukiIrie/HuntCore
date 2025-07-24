@@ -36,32 +36,20 @@ namespace Stage.Players
         [Header("大剣サイズ")]
         [SerializeField] Vector3 _greatSwordSize;
 
-        public float LightAttackHitStartRatio => _lightAttackHitStartRatio;
-        [Header("ライト攻撃当たり判定開始割合")]
-        [SerializeField] float _lightAttackHitStartRatio;
+        public Vector2 LightAttackHitWindow => _lightAttackHitWindow;
+        [Header("ライト攻撃当たり判定有効区間(X:開始, Y:終了)")]
+        [SerializeField] Vector2 _lightAttackHitWindow;
 
-        public float LightAttackHitEndRatio => _lightAttackHitEndRatio;
-        [Header("ライト攻撃当たり判定終了割合")]
-        [SerializeField] float _lightAttackHitEndRatio;
+        public Vector2 HeavyAttackHitWindow => _heavyAttackHitWindow;
+        [Header("ヘビー攻撃当たり判定有効区間(X:開始, Y:終了)")]
+        [SerializeField] Vector2 _heavyAttackHitWindow;
 
-        public float HeavyAttackHitStartRatio => _heavyAttackHitStartRatio;
-        [Header("ヘビー攻撃当たり判定開始割合")]
-        [SerializeField] float _heavyAttackHitStartRatio;
-
-        public float HeavyAttackHitEndRatio => _heavyAttackHitEndRatio;
-        [Header("ヘビー攻撃当たり判定終了割合")]
-        [SerializeField] float _heavyAttackHitEndRatio;
-
-        public float SpecialAttackHitStartRatio => _specialAttackHitStartRatio;
-        [Header("スペシャル攻撃当たり判定開始割合")]
-        [SerializeField] float _specialAttackHitStartRatio;
-
-        public float SpecialAttackHitEndRatio => _specialAttackHitEndRatio;
-        [Header("スペシャル攻撃当たり判定終了割合")]
-        [SerializeField] float _specialAttackHitEndRatio;
+        public Vector2 SpecialAttackHitWindow => _specialAttackHitWindow;
+        [Header("スペシャル攻撃当たり判定有効区間(X:開始, Y:終了)")]
+        [SerializeField] Vector2 _specialAttackHitWindow;
 
         public Vector2 ParryHitWindow => _parryHitWindow;
-        [Header("パリィ当たり判定有効区間")]
+        [Header("パリィ当たり判定有効区間(X:開始, Y:終了)")]
         [SerializeField] Vector2 _parryHitWindow;
 
         public int InitialPoolSize => _initialPoolSize;
