@@ -44,13 +44,25 @@ namespace Stage.Players
         [Header("抜刀状態の回転速度")]
         [SerializeField] float _drawnRotSpeed;
 
+        public float LightAttackTransRatio => _lightAttackTransRatio;
+        [Header("ライト攻撃時遷移可能割合")]
+        [SerializeField] float _lightAttackTransRatio;
+
         public float HeavyAttackRotSpeed => _heavyAttackRotSpeed;
         [Header("ヘビー攻撃の回転速度")]
         [SerializeField] float _heavyAttackRotSpeed;
 
+        public float HeavyAttackTransRatio => _heavyAttackTransRatio;
+        [Header("ヘビー攻撃時遷移可能割合")]
+        [SerializeField] float _heavyAttackTransRatio;
+
         public float SpecialAttackRotSpeed => _specialAttackRotSpeed;
         [Header("スペシャル攻撃の回転速度")]
         [SerializeField] float _specialAttackRotSpeed;
+
+        public float SpecialAttackTransRatio => _specialAttackTransRatio;
+        [Header("スペシャル攻撃時遷移可能割合")]
+        [SerializeField] float _specialAttackTransRatio;
 
         public float ParryableTime => _parryableTime;
         [Header("パリィ可能な時間")]

@@ -1,5 +1,6 @@
 using Stage.HitCheck;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Stage.Players
 {
@@ -17,6 +18,7 @@ namespace Stage.Players
         // ƒf[ƒ^ƒLƒƒƒbƒVƒ…—p
         Vector2 _hitWindow;
         float _chainTime;
+        float _transRatio;
         float _afterImageEndRatio;
 
 
@@ -26,11 +28,14 @@ namespace Stage.Players
 
             _hitWindow = WeaponData.Data.LightAttackHitWindow;
             _chainTime = PlayerData.Data.ChainTime;
+            _transRatio = PlayerData.Data.LightAttackTransRatio;
             _afterImageEndRatio = WeaponData.Data.AfterImageEndRatio;
         }
 
         public void Enter()
         {
+            Rotate();
+
             _player.Animation.LightAttack();
         }
 
@@ -57,6 +62,21 @@ namespace Stage.Players
             _chainDuration = 0.0f;
             _isAnimFinished = false;
             OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyColliders);
+        }
+
+        /// <summary>
+        /// ‰ñ“]
+        /// </summary>
+        void Rotate()
+        {
+            // ‰ñ“]•ûŒüæ“¾
+            Vector2 input = _player.Action.Player.Move.ReadValue<Vector2>();
+            Transform cam = Camera.main.transform;
+            Vector3 direction = (cam.forward * input.y) + (cam.right * input.x);
+            direction = Vector3.ProjectOnPlane(direction, _player.NormalVector).normalized;
+            // ‰ñ“]
+            if (direction.magnitude > 0.001f)
+                _player.transform.rotation = Quaternion.LookRotation(direction);
         }
 
         /// <summary>
@@ -88,7 +108,8 @@ namespace Stage.Players
         /// </summary>
         void Transition()
         {
-            // // _elapsedTime‚Æ_exitTime‚ÌŠÖŒW‚ÍPlayerRollState‚ğQÆ
+            // === I—¹Œã‘JˆÚ ===
+            // _elapsedTime‚Æ_exitTime‚ÌŠÖŒW‚ÍPlayerRollState‚ğQÆ
             if (_elapsedTime >= _exitTime)
             {
                 if (_player.Animation.CheckEndAnim(PlayerAnimation.HashLightAttack))
@@ -108,6 +129,20 @@ namespace Stage.Players
                     else
                         _player.StateMachine.TransitionTo(PlayerState.Idle);
                 }
+            }
+            // === “r’†‘JˆÚ ===
+            else if(_player.Animation.CompareAnimRatio(
+                PlayerAnimation.HashLightAttack, _transRatio))
+            {
+                // ƒwƒr[UŒ‚
+                if (_player.Action.Player.Attack.IsPressed())
+                    _player.StateMachine.TransitionTo(PlayerState.HeavyAttack);
+                // ƒK[ƒh
+                else if (_player.Action.Player.Guard.IsPressed())
+                    _player.StateMachine.TransitionTo(PlayerState.Guard);
+                // ‰ñ”ğ
+                else if (_player.Action.Player.Roll.IsPressed())
+                    _player.StateMachine.TransitionTo(PlayerState.Roll);
             }
         }
     }

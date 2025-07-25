@@ -14,6 +14,7 @@ namespace Stage.Players
         // データキャッシュ用
         Vector2 _hitWindow;
         float _rotSpeed;
+        float _transRatio;
         float _afterImageEndRatio;
 
         public PlayerSpecialAttackState(Player player)
@@ -22,6 +23,7 @@ namespace Stage.Players
 
             _hitWindow = WeaponData.Data.SpecialAttackHitWindow;
             _rotSpeed  = PlayerData.Data.SpecialAttackRotSpeed;
+            _transRatio = PlayerData.Data.SpecialAttackTransRatio;
             _afterImageEndRatio = WeaponData.Data.AfterImageEndRatio;
         }
 
@@ -33,7 +35,7 @@ namespace Stage.Players
 
         public void Update()
         {
-            Rotate();
+            //Rotate();
 
             HitDetect();
 
@@ -99,9 +101,23 @@ namespace Stage.Players
         /// </summary>
         void Transition()
         {
-            // 待機
+            // === 終了後遷移 ===
             if (_player.Animation.CheckEndAnim(PlayerAnimation.HashSpecialAttack))
+            {
+                // 待機
                 _player.StateMachine.TransitionTo(PlayerState.Idle);
+            }
+            // === 途中遷移 ===
+            else if (_player.Animation.CompareAnimRatio(
+                PlayerAnimation.HashSpecialAttack, _transRatio))
+            {
+                // ガード
+                if (_player.Action.Player.Guard.IsPressed())
+                    _player.StateMachine.TransitionTo(PlayerState.Guard);
+                // 回避
+                else if (_player.Action.Player.Roll.IsPressed())
+                    _player.StateMachine.TransitionTo(PlayerState.Roll);
+            }
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Stage.Players
         Vector2 _hitWindow;
         float _rotSpeed;
         float _chainTime;
+        float _transRatio;
         float _afterImageEndRatio;
 
         public PlayerHeavyAttackState(Player player)
@@ -25,18 +26,20 @@ namespace Stage.Players
             _hitWindow = WeaponData.Data.HeavyAttackHitWindow;
             _rotSpeed  = PlayerData.Data.HeavyAttackRotSpeed;
             _chainTime = PlayerData.Data.ChainTime;
+            _transRatio = PlayerData.Data.HeavyAttackTransRatio;
             _afterImageEndRatio = WeaponData.Data.AfterImageEndRatio;
         }
 
         public void Enter()
         {
+            Rotate();
             _player.Animation.HeavyAttack();
             _targetRot = _player.transform.rotation;
         }
 
         public void Update()
         {
-            Rotate();
+            //Rotate();
 
             DetectHit();
 
@@ -61,17 +64,30 @@ namespace Stage.Players
         /// </summary>
         void Rotate()
         {
-            // ’n–Ê‚É•½s‚È‹“_•ûŒü‚Ìæ“¾
-            Vector3 viewV = Camera.main.transform.forward.normalized;
-            viewV = Vector3.ProjectOnPlane(viewV, _player.NormalVector);
-            // ‰ñ“]’l‚Ìæ“¾
-            _targetRot = Quaternion.LookRotation(viewV);
-            // ‰ñ“]‘¬“x‚Ìæ“¾
-            float rotSpeed = _rotSpeed * Time.deltaTime;
+            //// ’n–Ê‚É•½s‚È‹“_•ûŒü‚Ìæ“¾
+            //Vector3 viewV = Camera.main.transform.forward.normalized;
+            //viewV = Vector3.ProjectOnPlane(viewV, _player.NormalVector);
+            //// ‰ñ“]’l‚Ìæ“¾
+            //_targetRot = Quaternion.LookRotation(viewV);
+            //// ‰ñ“]‘¬“x‚Ìæ“¾
+            //float rotSpeed = _rotSpeed * Time.deltaTime;
+            //// ‰ñ“]
+            //Quaternion rot = _player.transform.rotation;
+            //rot = Quaternion.RotateTowards(rot, _targetRot, rotSpeed);
+            //_player.transform.rotation = rot;
+
+            // ‰ñ“]•ûŒüæ“¾
+            Vector2 input = _player.Action.Player.Move.ReadValue<Vector2>();
+            Transform cam = Camera.main.transform;
+            Vector3 direction = (cam.forward * input.y) + (cam.right * input.x);
+            direction = Vector3.ProjectOnPlane(direction, _player.NormalVector).normalized;
+            Quaternion targetRot;
+            if (direction.magnitude > 0.001f)
+                targetRot = Quaternion.LookRotation(direction);
             // ‰ñ“]
-            Quaternion rot = _player.transform.rotation;
-            rot = Quaternion.RotateTowards(rot, _targetRot, rotSpeed);
-            _player.transform.rotation = rot;
+            float rotSpeed = _rotSpeed * Time.deltaTime;
+            targetRot = Quaternion.RotateTowards(_player.transform.rotation, _targetRot, rotSpeed);
+            _player.transform.rotation = targetRot;
         }
 
         /// <summary>
@@ -103,6 +119,7 @@ namespace Stage.Players
         /// </summary>
         void Transition()
         {
+            // === I—¹Œã‘JˆÚ ===
             if (_player.Animation.CheckEndAnim(PlayerAnimation.HashHeavyAttack))
             {
                 _chainDuration += Time.deltaTime;
@@ -115,6 +132,20 @@ namespace Stage.Players
                 // ‘Ò‹@
                 else
                     _player.StateMachine.TransitionTo(PlayerState.Idle);
+            }
+            // === “r’†‘JˆÚ ===
+            else if (_player.Animation.CompareAnimRatio(
+                PlayerAnimation.HashHeavyAttack, _transRatio))
+            {
+                // ƒXƒyƒVƒƒƒ‹UŒ‚
+                if (_player.Action.Player.Attack.IsPressed())
+                    _player.StateMachine.TransitionTo(PlayerState.SpecialAttack);
+                // ƒK[ƒh
+                else if (_player.Action.Player.Guard.IsPressed())
+                    _player.StateMachine.TransitionTo(PlayerState.Guard);
+                // ‰ñ”ğ
+                else if (_player.Action.Player.Roll.IsPressed())
+                    _player.StateMachine.TransitionTo(PlayerState.Roll);
             }
         }
     }

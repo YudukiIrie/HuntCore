@@ -56,4 +56,18 @@ public class Animation
 
         return 0.0f;
     }
+    
+    /// <summary>
+    /// 再生中のアニメーション再生割合と
+    /// 指定した割合との比較
+    /// </summary>
+    /// <param name="ratio">指定割合</param>
+    /// <returns>true:指定割合以上, false:指定割合未満</returns>
+    public bool CompareAnimRatio(int stateHash, float ratio)
+    {
+        if (CheckCurrentState(stateHash))
+            return _currentStateInfo.normalizedTime >= ratio;
+
+        return false;
+    }
 }

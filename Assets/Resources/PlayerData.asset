@@ -15,8 +15,11 @@ MonoBehaviour:
   _playerSize: {x: 0.5, y: 1.5, z: 0.3}
   _drawnMoveSpeed: 2.5
   _drawnRotSpeed: 400
+  _lightAttackTransRatio: 0.68
   _heavyAttackRotSpeed: 150
+  _heavyAttackTransRatio: 0.67
   _specialAttackRotSpeed: 150
+  _specialAttackTransRatio: 0.58
   _parryableTime: 0.2
   _parryMoveSpd: 6
   _parryRotSpd: 150

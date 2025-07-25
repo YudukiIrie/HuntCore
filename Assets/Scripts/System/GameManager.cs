@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     // •Û‘¶æƒpƒX
-    const string PATH = "GameEndManager";
+    const string PATH = "GameManager";
 
     public static PlayerAction Action { get; private set; }
 
