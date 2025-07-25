@@ -1,3 +1,4 @@
+using Stage.Enemies;
 using Stage.HitCheck;
 using UnityEngine;
 
@@ -93,8 +94,8 @@ namespace Stage.Players
             {
                 if (OBBHitChecker.IsColliding(_player.WeaponOBB, _player.Enemy.EnemyColliders))
                 {
-                    _player.Enemy.TakeImpact();
-                    _player.IncreaseHitNum();
+                    _player.Enemy.TakeImpact(EnemyState.Down);
+                    _player.Enemy.IncreaseHitNum();
                 }
             }
         }

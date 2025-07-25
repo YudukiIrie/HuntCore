@@ -85,7 +85,7 @@ namespace Stage.Players
             if (progress >= start && progress <= end)
             {
                 if (OBBHitChecker.IsColliding(_player.WeaponOBB, _player.Enemy.EnemyColliders))
-                    _player.IncreaseHitNum();
+                    _player.Enemy.IncreaseHitNum();
             }
         }
 

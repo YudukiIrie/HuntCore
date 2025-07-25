@@ -21,7 +21,7 @@ namespace Stage.HitCheck
             var a = oneself;
             foreach (var b in other)
             {
-                // 能動側が判定済み、またはOBBが武器の場合は無視
+                // 能動側が判定済み、またはコライダーが武器の場合は無視
                 if (a.HitInfo.didHit || b.Role == HitCollider.ColliderRole.Weapon)
                     return false;
 

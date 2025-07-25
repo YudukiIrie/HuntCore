@@ -212,9 +212,10 @@ namespace Stage.Enemies
         /// <summary>
         /// 衝撃を受ける
         /// </summary>
-        public void TakeImpact()
+        /// <param name="nextState">遷移後ステート</param>
+        public void TakeImpact(EnemyState nextState)
         {
-            StateMachine.TransitionTo(EnemyState.Down);
+            StateMachine.TransitionTo(nextState);
         }
 
         public void IncreaseHitNum()

@@ -55,22 +55,15 @@ namespace Stage.Enemies
             {
                 if (OBBHitChecker.IsColliding(_enemy.EnemyHeadSphere, _enemy.Player.PlayerColliders))
                 {
-                    // ÚGOBB‚Ìó‘Ô‚É‚æ‚é•ªŠò
-                    // ƒK[ƒh
-                    if (_enemy.EnemyHeadSphere.HitInfo.targetRole == HitCollider.ColliderRole.Guard)
-                        _enemy.Player.TakeImpact();
-                    // ƒpƒŠƒB
-                    else if (_enemy.EnemyHeadSphere.HitInfo.targetRole == HitCollider.ColliderRole.Parry)
-                    {
-                        _enemy.StateMachine.TransitionTo(EnemyState.GetHit);
-                        _enemy.Player.Parry();
-                    }
-                    else
-                        _enemy.IncreaseHitNum();
+                    HitCollider other = _enemy.EnemyHeadSphere.HitInfo.other;
+                    _enemy.Player.HitReaction.ReactToHit(other);
                 }
             }
         }
 
+        /// <summary>
+        /// ó‘Ô‘JˆÚ
+        /// </summary>
         void Transition()
         {
             // Œx‰ú

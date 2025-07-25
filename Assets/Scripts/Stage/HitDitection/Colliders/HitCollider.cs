@@ -31,13 +31,13 @@ namespace Stage.HitCheck
         {
             public bool didHit;              // ヒットさせたかどうか
             public bool wasHit;              // ヒットさせられたかどうか
-            public ColliderRole targetRole;  // 接触相手のColliderType
+            public HitCollider other;        // 接触相手のコライダー
 
-            public HitInformation(bool didHit, bool wasHit, ColliderRole role)
+            public HitInformation(bool didHit, bool wasHit)
             {
                 this.didHit = didHit;
                 this.wasHit = wasHit;
-                this.targetRole = role;
+                other = null;
             }
 
             /// <summary>
@@ -47,7 +47,7 @@ namespace Stage.HitCheck
             public void RegisterHit(HitCollider other)
             {
                 didHit = true;
-                targetRole = other.Role;
+                this.other = other;
             }
 
             /// <summary>
@@ -64,7 +64,8 @@ namespace Stage.HitCheck
             public void ResetHitRecords()
             {
                 didHit = false;
-                targetRole = ColliderRole.None;
+                //targetRole = ColliderRole.None;
+                other = null;
             }
 
             /// <summary>
@@ -86,7 +87,7 @@ namespace Stage.HitCheck
         {
             Shape = shape;
             Role  = type;
-            HitInfo = new HitInformation(false, false, ColliderRole.None);
+            HitInfo = new HitInformation(false, false);
             _scale = scale;
         }
 

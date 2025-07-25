@@ -27,6 +27,7 @@ namespace Stage.Players
 
         // プレイヤー関連のクラス
         public PlayerStateMachine StateMachine {  get; private set; }
+        public PlayerHitRaction HitReaction { get; private set; }
         public PlayerAnimation Animation {  get; private set; }
         public PlayerAction Action { get; private set; }
 
@@ -58,6 +59,7 @@ namespace Stage.Players
         void Awake()
         {
             StateMachine = new PlayerStateMachine(this);
+            HitReaction = new PlayerHitRaction(this, 5);
             Animation = new PlayerAnimation(_animator);
             Action = new PlayerAction();
 
