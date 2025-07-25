@@ -29,7 +29,7 @@ namespace Stage.Enemies
         {
             // === ó‘Ô‘JˆÚ ===
             // Œx‰ú
-            if (_enemy.Animation.IsAnimFinished(EnemyAnimation.HashRoar))
+            if (_enemy.Animation.CheckEndAnim(EnemyAnimation.HashRoar))
                 _enemy.StateMachine.TransitionTo(EnemyState.Alert);
         }
 

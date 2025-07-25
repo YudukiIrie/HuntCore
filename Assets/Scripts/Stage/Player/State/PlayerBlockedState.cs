@@ -90,7 +90,7 @@ namespace Stage.Players
         void Transition()
         {
             // ガードキャンセル
-            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashBlocked) && !_isCanceled)
+            if (_player.Animation.CheckEndAnim(PlayerAnimation.HashBlocked) && !_isCanceled)
             {
                 _player.Animation.CancelGuard();
                 _isCanceled = true;

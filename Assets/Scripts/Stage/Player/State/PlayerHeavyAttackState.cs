@@ -10,7 +10,7 @@ namespace Stage.Players
     {
         Player _player;         // プレイヤークラス
         Quaternion _targetRot;  // 視点方向ベクトル
-        float _elapseTime;      // コンボ間猶予経過時間
+        float _chainDuration;   // コンボ間猶予経過時間
 
         // データキャッシュ用
         Vector2 _hitWindow;
@@ -52,7 +52,7 @@ namespace Stage.Players
 
         public void Exit()
         {
-            _elapseTime = 0.0f;
+            _chainDuration = 0.0f;
             OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyColliders);
         }
 
@@ -103,11 +103,11 @@ namespace Stage.Players
         /// </summary>
         void Transition()
         {
-            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashHeavyAttack))
+            if (_player.Animation.CheckEndAnim(PlayerAnimation.HashHeavyAttack))
             {
-                _elapseTime += Time.deltaTime;
+                _chainDuration += Time.deltaTime;
                 // スペシャル攻撃
-                if (_elapseTime <= _chainTime)
+                if (_chainDuration <= _chainTime)
                 {
                     if (_player.Action.Player.Attack.IsPressed())
                         _player.StateMachine.TransitionTo(PlayerState.SpecialAttack);

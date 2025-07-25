@@ -20,7 +20,7 @@ namespace Stage.Enemies
         {
             // === ó‘Ô‘JˆÚ ===
             // Œx‰ú
-            if (_enemy.Animation.IsAnimFinished(EnemyAnimation.HashGetHit))
+            if (_enemy.Animation.CheckEndAnim(EnemyAnimation.HashGetHit))
                 _enemy.StateMachine.TransitionTo(EnemyState.Alert);
         }
 

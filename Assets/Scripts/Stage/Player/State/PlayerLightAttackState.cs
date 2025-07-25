@@ -9,7 +9,10 @@ namespace Stage.Players
     public class PlayerLightAttackState : IState
     {
         Player _player;     // プレイヤークラス
-        float _elapseTime;  // コンボ間猶予経過時間
+        float _elapsedTime; // 経過時間
+        float _exitTime;    // 退出時間
+        float _chainDuration;   // コンボ間猶予経過時間
+        bool _isAnimFinished = false;   // アニメーション終了フラグ
 
         // データキャッシュ用
         Vector2 _hitWindow;
@@ -33,6 +36,9 @@ namespace Stage.Players
 
         public void Update()
         {
+            if (!_isAnimFinished)
+                _elapsedTime += Time.deltaTime;
+
             DetectHit();
 
             SpawnAferImage();
@@ -47,7 +53,9 @@ namespace Stage.Players
 
         public void Exit()
         {
-            _elapseTime = 0.0f;
+            _elapsedTime = 0.0f;
+            _chainDuration = 0.0f;
+            _isAnimFinished = false;
             OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyColliders);
         }
 
@@ -80,18 +88,26 @@ namespace Stage.Players
         /// </summary>
         void Transition()
         {
-            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashLightAttack))
+            // // _elapsedTimeと_exitTimeの関係はPlayerRollStateを参照
+            if (_elapsedTime >= _exitTime)
             {
-                _elapseTime += Time.deltaTime;
-                // ヘビー攻撃
-                if (_elapseTime <= _chainTime)
+                if (_player.Animation.CheckEndAnim(PlayerAnimation.HashLightAttack))
                 {
-                    if (_player.Action.Player.Attack.IsPressed())
-                        _player.StateMachine.TransitionTo(PlayerState.HeavyAttack);
+                    _isAnimFinished = true;
+                    // アニメーション終了時間を記録
+                    _exitTime = _elapsedTime;
+
+                    _chainDuration += Time.deltaTime;
+                    // ヘビー攻撃
+                    if (_chainDuration <= _chainTime)
+                    {
+                        if (_player.Action.Player.Attack.IsPressed())
+                            _player.StateMachine.TransitionTo(PlayerState.HeavyAttack);
+                    }
+                    // 待機
+                    else
+                        _player.StateMachine.TransitionTo(PlayerState.Idle);
                 }
-                // 待機
-                else
-                    _player.StateMachine.TransitionTo(PlayerState.Idle);
             }
         }
     }

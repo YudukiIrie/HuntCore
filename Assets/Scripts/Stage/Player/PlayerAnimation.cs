@@ -11,6 +11,7 @@ namespace Stage.Players
         // 定数かつ実行時に値が決まるためstatic readonly
         public static readonly int HashIdle    = Animator.StringToHash("Base Layer.Idle");
         public static readonly int HashMove    = Animator.StringToHash("Base Layer.Move");
+        public static readonly int HashRoll    = Animator.StringToHash("Base Layer.Roll");
         public static readonly int HashParry   = Animator.StringToHash("Base Layer.Parry");
         public static readonly int HashBlocked = Animator.StringToHash("Base Layer.Blocked");
         public static readonly int HashGuardBegin    = Animator.StringToHash("Base Layer.GuardBegin");
@@ -120,6 +121,15 @@ namespace Stage.Players
         {
             ResetParam();
             _animator.CrossFade(HashParry, _animBlendTime);
+        }
+
+        /// <summary>
+        /// 回避アニメーション開始
+        /// </summary>
+        public void Roll()
+        {
+            ResetParam();
+            _animator.CrossFade(HashRoll, _animBlendTime);
         }
 
         /// <summary>

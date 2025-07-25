@@ -106,7 +106,7 @@ namespace Stage.Players
         void Transition()
         {
             // ‘Ò‹@
-            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashParry))
+            if (_player.Animation.CheckEndAnim(PlayerAnimation.HashParry))
                 _player.StateMachine.TransitionTo(PlayerState.Idle);
         }
 

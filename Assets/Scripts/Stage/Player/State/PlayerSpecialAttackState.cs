@@ -100,7 +100,7 @@ namespace Stage.Players
         void Transition()
         {
             // ‘Ò‹@
-            if (_player.Animation.IsAnimFinished(PlayerAnimation.HashSpecialAttack))
+            if (_player.Animation.CheckEndAnim(PlayerAnimation.HashSpecialAttack))
                 _player.StateMachine.TransitionTo(PlayerState.Idle);
         }
     }

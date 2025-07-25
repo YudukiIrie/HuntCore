@@ -67,7 +67,7 @@ namespace Stage.Enemies
         void Transition()
         {
             // Œx‰ú
-            if (_enemy.Animation.IsAnimFinished(EnemyAnimation.HashAttack))
+            if (_enemy.Animation.CheckEndAnim(EnemyAnimation.HashAttack))
                 _enemy.StateMachine.TransitionTo(EnemyState.Alert);
         }
     }

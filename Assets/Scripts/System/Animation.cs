@@ -34,7 +34,7 @@ public class Animation
     /// 指定したアニメーションの終了チェック
     /// </summary>
     /// <returns>true:再生終了, false:再生中</returns>
-    public bool IsAnimFinished(int stateHash)
+    public bool CheckEndAnim(int stateHash)
     {
         if (CheckCurrentState(stateHash))
         {

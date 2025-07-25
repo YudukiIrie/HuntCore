@@ -40,11 +40,7 @@ namespace Stage.Players
 
         public void FixedUpdate()
         {
-            // === 取得した方向と速度を使い移動 ===
-            // Y軸方向の移動を考慮しYのみ分離
-            Vector3 vel = _velocity;
-            vel.y = _player.Rigidbody.velocity.y;
-            _player.Rigidbody.velocity = vel;
+            MoveFixedUpdate();
         }
 
         public void Exit()
@@ -95,6 +91,20 @@ namespace Stage.Players
             // ガード
             else if (_player.Action.Player.Guard.IsPressed())
                 _player.StateMachine.TransitionTo(PlayerState.Guard);
+            // 回避
+            else if (_player.Action.Player.Roll.IsPressed())
+                _player.StateMachine.TransitionTo(PlayerState.Roll);
+        }
+
+        /// <summary>
+        /// FixedUpdate()用移動処理
+        /// </summary>
+        void MoveFixedUpdate()
+        {
+            // Y軸方向の移動を考慮しYのみ分離
+            Vector3 vel = _velocity;
+            vel.y = _player.Rigidbody.velocity.y;
+            _player.Rigidbody.velocity = vel;
         }
     }
 }

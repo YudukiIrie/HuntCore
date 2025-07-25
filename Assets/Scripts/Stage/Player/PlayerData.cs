@@ -76,6 +76,10 @@ namespace Stage.Players
         [Header("‚Ì‚¯‚¼‚èˆÚ“®‹——£")]
         [SerializeField] float _recoilDistance;
 
+        public float RollSpd => _rollSpd;
+        [Header("‰ñ”ğˆÚ“®‘¬“x")]
+        [SerializeField] float _rollSpd;
+
         public float ChainTime => _chainTime;
         [Header("ƒRƒ“ƒ{ŠÔ—P—\ŠÔ")]
         [SerializeField] float _chainTime;
