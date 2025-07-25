@@ -24,6 +24,8 @@ namespace Stage.Players
 
         public void Enter()
         {
+            Rotate();
+
             _player.Animation.Roll();
         }
 
@@ -44,6 +46,21 @@ namespace Stage.Players
         public void Exit()
         {
             _elapsedTime = 0.0f;
+        }
+
+        /// <summary>
+        /// ‰ñ“]
+        /// </summary>
+        void Rotate()
+        {
+            // ‰ñ“]•ûŒü‚ÌŽæ“¾
+            Vector2 input = _player.Action.Player.Move.ReadValue<Vector2>();
+            Transform cam = Camera.main.transform;
+            Vector3 direction = (cam.forward * input.y) + (cam.right * input.x);
+            direction = Vector3.ProjectOnPlane(direction, _player.NormalVector).normalized;
+            // ‰ñ“]
+            if (direction.magnitude > 0.001f)
+                _player.transform.rotation = Quaternion.LookRotation(direction);
         }
 
         /// <summary>
