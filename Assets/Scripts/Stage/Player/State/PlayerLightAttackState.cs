@@ -109,10 +109,10 @@ namespace Stage.Players
         void Transition()
         {
             // === I—¹Œã‘JˆÚ ===
-            // _elapsedTime‚Æ_exitTime‚ÌŠÖŒW‚ÍPlayerRollState‚ğQÆ
-            if (_elapsedTime >= _exitTime)
+            if (_player.Animation.CheckEndAnim(PlayerAnimation.HashLightAttack))
             {
-                if (_player.Animation.CheckEndAnim(PlayerAnimation.HashLightAttack))
+                // _elapsedTime‚Æ_exitTime‚ÌŠÖŒW‚ÍPlayerRollState‚ğQÆ
+                if (_elapsedTime >= _exitTime)
                 {
                     _isAnimFinished = true;
                     // ƒAƒjƒ[ƒVƒ‡ƒ“I—¹ŠÔ‚ğ‹L˜^
@@ -131,7 +131,7 @@ namespace Stage.Players
                 }
             }
             // === “r’†‘JˆÚ ===
-            else if(_player.Animation.CompareAnimRatio(
+            else if (_player.Animation.CompareAnimRatio(
                 PlayerAnimation.HashLightAttack, _transRatio))
             {
                 // ƒwƒr[UŒ‚

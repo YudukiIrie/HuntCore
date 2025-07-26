@@ -19,7 +19,8 @@ MonoBehaviour:
   _heavyAttackRotSpeed: 150
   _heavyAttackTransRatio: 0.67
   _specialAttackRotSpeed: 150
-  _specialAttackTransRatio: 0.58
+  _specialAttackTransRatio: 0.5
+  _attackRotLimit: 60
   _parryableTime: 0.2
   _parryMoveSpd: 6
   _parryRotSpd: 150

@@ -64,6 +64,10 @@ namespace Stage.Players
         [Header("ƒXƒyƒVƒƒƒ‹UŒ‚‘JˆÚ‰Â”\Š„‡")]
         [SerializeField] float _specialAttackTransRatio;
 
+        public float AttackRotLimit => _attackRotLimit;
+        [Header("UŒ‚‰ñ“]ŒÀŠEŠp“x")]
+        [SerializeField] float _attackRotLimit;
+
         public float ParryableTime => _parryableTime;
         [Header("ƒpƒŠƒB‰Â”\‚ÈŠÔ")]
         [SerializeField] float _parryableTime;

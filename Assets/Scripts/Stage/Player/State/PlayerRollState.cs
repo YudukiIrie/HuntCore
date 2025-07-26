@@ -76,16 +76,16 @@ namespace Stage.Players
         /// </summary>
         void Transition()
         {
-            // Animatorの更新にラグがあるため
-            // 実際のアニメーション終了時間を計測し
-            // 条件を強固にすることで確実にアニメーション終了を待つ
-            if (_elapsedTime >= _exitTime)
+            if (_player.Animation.CheckEndAnim(PlayerAnimation.HashRoll))
             {
-                // 通常
-                if (_player.Animation.CheckEndAnim(PlayerAnimation.HashRoll))
+                // Animatorの更新にラグがあるため
+                // 実際のアニメーション終了時間を計測し
+                // 条件を強固にすることで確実にアニメーション終了を待つ
+                if (_elapsedTime >= _exitTime)
                 {
                     // アニメーション終了時間の記録
                     _exitTime = _elapsedTime;
+                    // 通常
                     _player.StateMachine.TransitionTo(PlayerState.Idle);
                 }
             }

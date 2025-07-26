@@ -9,12 +9,11 @@ namespace Stage.Players
     public class PlayerHeavyAttackState : IState
     {
         Player _player;         // プレイヤークラス
-        Quaternion _targetRot;  // 視点方向ベクトル
         float _chainDuration;   // コンボ間猶予経過時間
 
         // データキャッシュ用
         Vector2 _hitWindow;
-        float _rotSpeed;
+        float _rotLimit;
         float _chainTime;
         float _transRatio;
         float _afterImageEndRatio;
@@ -24,7 +23,7 @@ namespace Stage.Players
             _player = player;
 
             _hitWindow = WeaponData.Data.HeavyAttackHitWindow;
-            _rotSpeed  = PlayerData.Data.HeavyAttackRotSpeed;
+            _rotLimit  = PlayerData.Data.AttackRotLimit;
             _chainTime = PlayerData.Data.ChainTime;
             _transRatio = PlayerData.Data.HeavyAttackTransRatio;
             _afterImageEndRatio = WeaponData.Data.AfterImageEndRatio;
@@ -33,14 +32,12 @@ namespace Stage.Players
         public void Enter()
         {
             Rotate();
+
             _player.Animation.HeavyAttack();
-            _targetRot = _player.transform.rotation;
         }
 
         public void Update()
         {
-            //Rotate();
-
             DetectHit();
 
             SpawnAfterImage();
@@ -64,30 +61,29 @@ namespace Stage.Players
         /// </summary>
         void Rotate()
         {
-            //// 地面に平行な視点方向の取得
-            //Vector3 viewV = Camera.main.transform.forward.normalized;
-            //viewV = Vector3.ProjectOnPlane(viewV, _player.NormalVector);
-            //// 回転値の取得
-            //_targetRot = Quaternion.LookRotation(viewV);
-            //// 回転速度の取得
-            //float rotSpeed = _rotSpeed * Time.deltaTime;
-            //// 回転
-            //Quaternion rot = _player.transform.rotation;
-            //rot = Quaternion.RotateTowards(rot, _targetRot, rotSpeed);
-            //_player.transform.rotation = rot;
-
-            // 回転方向取得
+            // === カメラに対する入力方向を取得(非入力時は無視) ===
+            // 入力値の取得
             Vector2 input = _player.Action.Player.Move.ReadValue<Vector2>();
+            if (input.magnitude < 0.001f) return;
+            // カメラに対するベクトルへ変換
             Transform cam = Camera.main.transform;
             Vector3 direction = (cam.forward * input.y) + (cam.right * input.x);
             direction = Vector3.ProjectOnPlane(direction, _player.NormalVector).normalized;
-            Quaternion targetRot;
-            if (direction.magnitude > 0.001f)
-                targetRot = Quaternion.LookRotation(direction);
-            // 回転
-            float rotSpeed = _rotSpeed * Time.deltaTime;
-            targetRot = Quaternion.RotateTowards(_player.transform.rotation, _targetRot, rotSpeed);
-            _player.transform.rotation = targetRot;
+
+            // === 入力に応じた角度をプレイヤーに反映 ===
+            Transform transform = _player.transform;
+            // 内積により角度(度数法)を取得
+            float dot = Vector3.Dot(transform.forward, direction);
+            float angle = Mathf.Acos(dot) * Mathf.Rad2Deg;
+            // 外積により回転する向きを決定
+            Vector3 cross = Vector3.Cross(transform.forward, direction);
+            if (cross.y < 0.0f)
+                angle = -angle;
+            // 角度に制限を設けた後反映
+            angle = Mathf.Clamp(angle, -_rotLimit, _rotLimit);
+            Quaternion rot =
+                Quaternion.AngleAxis(angle, transform.up) * _player.transform.rotation;
+            _player.transform.rotation = rot;
         }
 
         /// <summary>
