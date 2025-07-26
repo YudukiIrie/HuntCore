@@ -28,6 +28,7 @@ MonoBehaviour:
   _recoilSpeed: 10
   _recoilDistance: 2
   _rollSpd: 5
+  _invincibleTime: 0.15
   _chainTime: 0.3
   _idleToOtherDuration: 0.4
   _blockedToOtherDuration: 0.1

@@ -96,6 +96,10 @@ namespace Stage.Players
         [Header("‰ñ”ğˆÚ“®‘¬“x")]
         [SerializeField] float _rollSpd;
 
+        public float InvincibleTime => _invincibleTime;
+        [Header("‰ñ”ğ‚Ì–³“GŠÔ")]
+        [SerializeField] float _invincibleTime;
+
         public float ChainTime => _chainTime;
         [Header("ƒRƒ“ƒ{ŠÔ—P—\ŠÔ")]
         [SerializeField] float _chainTime;

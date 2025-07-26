@@ -1,3 +1,4 @@
+using Stage.HitCheck;
 using UnityEngine;
 
 namespace Stage.Players
@@ -14,17 +15,21 @@ namespace Stage.Players
 
         // データキャッシュ用
         float _rollSpd;
+        float _iTime;
 
         public PlayerRollState(Player player)
         {
             _player = player;
 
             _rollSpd = PlayerData.Data.RollSpd;
+            _iTime   = PlayerData.Data.InvincibleTime;
         }
 
         public void Enter()
         {
             Rotate();
+
+            _player.PlayerOBB.SetColliderRole(HitCollider.ColliderRole.Roll);
 
             _player.Animation.Roll();
         }
@@ -34,6 +39,8 @@ namespace Stage.Players
             _elapsedTime += Time.deltaTime;
 
             MoveUpdate();
+
+            SwitchColliderRole();
 
             Transition();
         }
@@ -46,6 +53,7 @@ namespace Stage.Players
         public void Exit()
         {
             _elapsedTime = 0.0f;
+            _player.PlayerOBB.SetColliderRole(HitCollider.ColliderRole.Body);
         }
 
         /// <summary>
@@ -69,6 +77,15 @@ namespace Stage.Players
         void MoveUpdate()
         {
             _velocity = _player.transform.forward * _rollSpd;
+        }
+
+        /// <summary>
+        /// コライダー属性の切り替え
+        /// </summary>
+        void SwitchColliderRole()
+        {
+            if (_elapsedTime >= _iTime)
+                _player.PlayerOBB.SetColliderRole(HitCollider.ColliderRole.Body);
         }
 
         /// <summary>

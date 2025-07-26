@@ -21,6 +21,7 @@ namespace Stage.Players
                 new Dictionary<HitCollider.ColliderRole, Action>(capacity);
 
             _reactions.Add(HitCollider.ColliderRole.Body, BodyReaction);
+            //_reactions.Add(HitCollider.ColliderRole.Roll, RollReaction);
             _reactions.Add(HitCollider.ColliderRole.Guard, GuradReaction);
             _reactions.Add(HitCollider.ColliderRole.Parry, ParryReaction);
         }
@@ -46,6 +47,14 @@ namespace Stage.Players
         {
             _player.IncreaseHitNum();
         }
+
+        /// <summary>
+        /// 回避時リアクション
+        /// </summary>
+        //void RollReaction()
+        //{
+        //    // 無敵のためリアクションなし
+        //}
 
         /// <summary>
         /// ガード時リアクション
