@@ -76,7 +76,7 @@ namespace Stage.Players
         /// </summary>
         void Transition()
         {
-            if (_player.Animation.CheckEndAnim(PlayerAnimation.HashRoll))
+            if (_player.Animation.CheckEnd(PlayerAnimation.HashRoll))
             {
                 // Animatorの更新にラグがあるため
                 // 実際のアニメーション終了時間を計測し

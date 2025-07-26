@@ -90,7 +90,7 @@ namespace Stage.Players
         void Transition()
         {
             // ガードキャンセル
-            if (_player.Animation.CheckEndAnim(PlayerAnimation.HashBlocked) && !_isCanceled)
+            if (_player.Animation.CheckEnd(PlayerAnimation.HashBlocked) && !_isCanceled)
             {
                 _player.Animation.CancelGuard();
                 _isCanceled = true;
@@ -101,7 +101,7 @@ namespace Stage.Players
                 _elapsedTime += Time.deltaTime;
 
                 // ガードキャンセル終了かつ、Animatorと内部処理を同期させるための待ち
-                if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashGuardBegin) <= 0.0f &&
+                if (_player.Animation.CheckRatio(PlayerAnimation.HashGuardBegin) <= 0.0f &&
                     _elapsedTime > _toOtherDuration)
                     _player.StateMachine.TransitionTo(PlayerState.Idle);
             }

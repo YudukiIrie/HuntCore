@@ -34,7 +34,7 @@ public class Animation
     /// 指定したアニメーションの終了チェック
     /// </summary>
     /// <returns>true:再生終了, false:再生中</returns>
-    public bool CheckEndAnim(int stateHash)
+    public bool CheckEnd(int stateHash)
     {
         if (CheckCurrentState(stateHash))
         {
@@ -49,7 +49,7 @@ public class Animation
     /// <summary>
     /// 指定したアニメーション再生時間を0～1の割合に変換した値を返却
     /// </summary>
-    public float CheckAnimRatio(int stateHash)
+    public float CheckRatio(int stateHash)
     {
         if (CheckCurrentState(stateHash))
             return _currentStateInfo.normalizedTime;
@@ -63,7 +63,7 @@ public class Animation
     /// </summary>
     /// <param name="ratio">指定割合</param>
     /// <returns>true:指定割合以上, false:指定割合未満</returns>
-    public bool CompareAnimRatio(int stateHash, float ratio)
+    public bool CompareRatio(int stateHash, float ratio)
     {
         if (CheckCurrentState(stateHash))
             return _currentStateInfo.normalizedTime >= ratio;

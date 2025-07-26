@@ -50,7 +50,7 @@ namespace Stage.Enemies
         {
             var start = _hitWindow.x;
             var end   = _hitWindow.y;
-            var progress = _enemy.Animation.CheckAnimRatio(EnemyAnimation.HashAttack);
+            var progress = _enemy.Animation.CheckRatio(EnemyAnimation.HashAttack);
             if (progress >= start && progress <= end)
             {
                 if (OBBHitChecker.IsColliding(_enemy.EnemyHeadSphere, _enemy.Player.PlayerColliders))
@@ -67,7 +67,7 @@ namespace Stage.Enemies
         void Transition()
         {
             // Œx‰ú
-            if (_enemy.Animation.CheckEndAnim(EnemyAnimation.HashAttack))
+            if (_enemy.Animation.CheckEnd(EnemyAnimation.HashAttack))
                 _enemy.StateMachine.TransitionTo(EnemyState.Alert);
         }
     }

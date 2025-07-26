@@ -57,7 +57,7 @@ namespace Stage.Enemies
             if (!_isDowned)
             {
                 // ‹tÄ¶‚ÌI—¹ = 0.0f
-                if (_enemy.Animation.CheckAnimRatio(EnemyAnimation.HashDown) <= 0.0f)
+                if (_enemy.Animation.CheckRatio(EnemyAnimation.HashDown) <= 0.0f)
                     _enemy.StateMachine.TransitionTo(EnemyState.Alert);
             }
         }

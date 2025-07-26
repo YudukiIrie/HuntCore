@@ -23,7 +23,7 @@ namespace Stage.Players
         {
             // === ó‘Ô‘JˆÚ ===
             // ‘Ò‹@
-            if (_player.Animation.CheckEndAnim(PlayerAnimation.HashImpacted))
+            if (_player.Animation.CheckEnd(PlayerAnimation.HashImpacted))
                 _player.StateMachine.TransitionTo(PlayerState.Idle);
         }
 

@@ -89,7 +89,7 @@ namespace Stage.Players
         {
             var start = _hitWindow.x;
             var end   = _hitWindow.y;
-            var progress = _player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack);
+            var progress = _player.Animation.CheckRatio(PlayerAnimation.HashSpecialAttack);
             if (progress >= start && progress <= end)
             {
                 if (OBBHitChecker.IsColliding(_player.WeaponOBB, _player.Enemy.EnemyColliders))
@@ -102,7 +102,8 @@ namespace Stage.Players
         /// </summary>
         void SpawnAfterImage()
         {
-            if (_player.Animation.CheckAnimRatio(PlayerAnimation.HashSpecialAttack) <= _afterImageEndRatio)
+            if (!_player.Animation.CompareRatio(
+                PlayerAnimation.HashSpecialAttack, _afterImageEndRatio))
                 _player.Spawner.Spawn(_player.Weapon.transform);
         }
 
@@ -112,13 +113,13 @@ namespace Stage.Players
         void Transition()
         {
             // === I—¹Œã‘JˆÚ ===
-            if (_player.Animation.CheckEndAnim(PlayerAnimation.HashSpecialAttack))
+            if (_player.Animation.CheckEnd(PlayerAnimation.HashSpecialAttack))
             {
                 // ‘Ò‹@
                 _player.StateMachine.TransitionTo(PlayerState.Idle);
             }
             // === “r’†‘JˆÚ ===
-            else if (_player.Animation.CompareAnimRatio(
+            else if (_player.Animation.CompareRatio(
                 PlayerAnimation.HashSpecialAttack, _transRatio))
             {
                 // ƒK[ƒh

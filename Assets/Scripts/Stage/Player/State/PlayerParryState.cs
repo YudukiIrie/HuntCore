@@ -15,6 +15,7 @@ namespace Stage.Players
         // データキャッシュ用
         float _moveSpeed;
         float _rotSpeed;
+        float _afterImageEndRatio;
         Vector2 _moveWindow;
         Vector2 _hitWindow;
 
@@ -26,6 +27,7 @@ namespace Stage.Players
             _rotSpeed   = PlayerData.Data.ParryRotSpd;
             _moveWindow = PlayerData.Data.ParryMoveWindow;
             _hitWindow  = WeaponData.Data.ParryHitWindow;
+            _afterImageEndRatio = WeaponData.Data.AfterImageEndRatio;
         }
 
         public void Enter()
@@ -40,6 +42,8 @@ namespace Stage.Players
             Rotate();
 
             DetectHit();
+
+            SpawnAfterImage();
 
             Transition();
         }
@@ -87,7 +91,7 @@ namespace Stage.Players
         /// </summary>
         void DetectHit()
         {
-            float progress = _player.Animation.CheckAnimRatio(PlayerAnimation.HashParry);
+            float progress = _player.Animation.CheckRatio(PlayerAnimation.HashParry);
             float start = _hitWindow.x;
             float end = _hitWindow.y;
             if (progress >= start && progress <= end)
@@ -101,12 +105,22 @@ namespace Stage.Players
         }
 
         /// <summary>
+        /// 残像の生成
+        /// </summary>
+        void SpawnAfterImage()
+        {
+            if (!_player.Animation.CompareRatio(
+                PlayerAnimation.HashParry, _afterImageEndRatio))
+                _player.Spawner.Spawn(_player.Weapon.transform);
+        }
+
+        /// <summary>
         /// 状態遷移
         /// </summary>
         void Transition()
         {
             // 待機
-            if (_player.Animation.CheckEndAnim(PlayerAnimation.HashParry))
+            if (_player.Animation.CheckEnd(PlayerAnimation.HashParry))
                 _player.StateMachine.TransitionTo(PlayerState.Idle);
         }
 
@@ -128,7 +142,7 @@ namespace Stage.Players
         {
             float start = _moveWindow.x;
             float end = _moveWindow.y;
-            float progress = _player.Animation.CheckAnimRatio(PlayerAnimation.HashParry);
+            float progress = _player.Animation.CheckRatio(PlayerAnimation.HashParry);
 
             return progress >= start && progress <= end;
         }
