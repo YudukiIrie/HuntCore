@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Stage.HitCheck
+namespace Stage.HitDetection
 {
     /// <summary>
     /// 当たり判定コライダー親クラス
@@ -12,6 +12,7 @@ namespace Stage.HitCheck
         {
             OBB,    // Oriented Bounding Box
             Sphere, // 球体
+            Capsule // カプセル
         }
         public ColliderShape Shape {  get; private set; }
 
@@ -84,10 +85,10 @@ namespace Stage.HitCheck
         // 可視化コライダーサイズ
         Vector3 _scale;
 
-        public HitCollider(ColliderShape shape, ColliderRole type, Vector3 scale)
+        public HitCollider(ColliderShape shape, ColliderRole role, Vector3 scale)
         {
             Shape = shape;
-            Role  = type;
+            Role  = role;
             HitInfo = new HitInformation(false, false);
             _scale = scale;
         }

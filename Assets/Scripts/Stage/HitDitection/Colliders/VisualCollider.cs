@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Stage.HitCheck
+namespace Stage.HitDetection
 {
     /// <summary>
     /// 可視化コライダー

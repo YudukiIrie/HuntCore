@@ -3,7 +3,7 @@ using Stage.Players;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Stage.HitCheck
+namespace Stage.HitDetection
 {
     /// <summary>
     /// OBB可視化用クラス
@@ -15,6 +15,9 @@ namespace Stage.HitCheck
 
         [Header("HitSphere可視化用ゲームオブジェクト")]
         [SerializeField] GameObject _visualSphere;
+
+        [Header("HitCapsule可視化用ゲームオブジェクト")]
+        [SerializeField] GameObject _visualCapsule;
 
         [Header("非接触マテリアル")]
         [SerializeField] Material _noHitImage;
@@ -55,8 +58,16 @@ namespace Stage.HitCheck
             foreach (var collider in _player.PlayerColliders)
             {
                 GameObject visualGO;
-                _visualColliders.Add(visualGO = Instantiate(_visualOBB, transform));
-                collider.CreateVisualCollider(visualGO, _noHitImage, _hitImage);
+                if (collider.Shape == HitCollider.ColliderShape.OBB)
+                {
+                    _visualColliders.Add(visualGO = Instantiate(_visualOBB, transform));
+                    collider.CreateVisualCollider(visualGO, _noHitImage, _hitImage);
+                }
+                else
+                {
+                    _visualColliders.Add(visualGO = Instantiate(_visualCapsule, transform));
+                    collider.CreateVisualCollider(visualGO, _noHitImage, _hitImage);
+                }
             }
 
             // === 敵VisualCollider ===

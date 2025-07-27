@@ -1,4 +1,4 @@
-using Stage.HitCheck;
+using Stage.HitDetection;
 using System.Collections.Generic;
 using UnityEngine;
 

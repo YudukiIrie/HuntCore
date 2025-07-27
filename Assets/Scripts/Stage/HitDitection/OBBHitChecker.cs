@@ -2,7 +2,7 @@ using System.IO;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace Stage.HitCheck
+namespace Stage.HitDetection
 {
     /// <summary>
     /// OBB‚É‚æ‚é“–‚½‚è”»’è

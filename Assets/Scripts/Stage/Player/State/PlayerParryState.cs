@@ -1,5 +1,5 @@
 using Stage.Enemies;
-using Stage.HitCheck;
+using Stage.HitDetection;
 using UnityEngine;
 
 namespace Stage.Players

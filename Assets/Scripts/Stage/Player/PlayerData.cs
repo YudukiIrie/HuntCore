@@ -36,6 +36,14 @@ namespace Stage.Players
         [Header("プレイヤーサイズ")]
         [SerializeField] Vector3 _playerSize;
 
+        public float Height => _height;
+        [Header("カプセルコライダー高さ")]
+        [SerializeField] float _height;
+
+        public float Radius => _radius;
+        [Header("カプセルコライダー半径")]
+        [SerializeField] float _radius;
+
         public float DrawnMoveSpeed => _drawnMoveSpeed;
         [Header("抜刀状態の移動速度")]
         [SerializeField] float _drawnMoveSpeed;

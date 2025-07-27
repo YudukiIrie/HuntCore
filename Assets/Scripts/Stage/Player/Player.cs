@@ -1,5 +1,5 @@
 using Stage.Enemies;
-using Stage.HitCheck;
+using Stage.HitDetection;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,7 +38,8 @@ namespace Stage.Players
         [SerializeField] Animator _animator;
 
         // 当たり判定関連
-        public OBB PlayerOBB {  get; private set; }
+        //public OBB PlayerOBB {  get; private set; }
+        public HitCapsule PlayerOBB { get; private set; }
         public OBB WeaponOBB {  get; private set; }
         // プレイヤーコライダー一括管理用List
         public List<HitCollider> PlayerColliders { get; private set; } = new();
@@ -96,9 +97,13 @@ namespace Stage.Players
         /// </summary>
         void CreateColliders()
         {
-            PlayerColliders.Add(PlayerOBB = new OBB(
-                _playerOBBTransform, PlayerData.Data.PlayerSize,
-                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
+            //PlayerColliders.Add(PlayerOBB = new OBB(
+            //    _playerOBBTransform, PlayerData.Data.PlayerSize,
+            //    HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
+
+            PlayerColliders.Add(PlayerOBB = new HitCapsule(
+                _playerOBBTransform, PlayerData.Data.Height, PlayerData.Data.Radius,
+                HitCollider.ColliderShape.Capsule, HitCollider.ColliderRole.Body));
 
             PlayerColliders.Add(WeaponOBB = new OBB(
                 _weaponOBBTransform, WeaponData.Data.GreatSwordSize,

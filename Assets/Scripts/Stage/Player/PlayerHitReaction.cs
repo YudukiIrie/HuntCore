@@ -1,5 +1,5 @@
 using Stage.Enemies;
-using Stage.HitCheck;
+using Stage.HitDetection;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

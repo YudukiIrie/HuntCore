@@ -1,4 +1,4 @@
-using Stage.HitCheck;
+using Stage.HitDetection;
 using UnityEngine;
 using UnityEngine.UIElements;
 
