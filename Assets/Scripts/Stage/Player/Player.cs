@@ -19,8 +19,8 @@ namespace Stage.Players
         [field: Header("武器ゲームオブジェクト")]
         [field: SerializeField] public GameObject Weapon { get; private set; }
 
-        [Header("プレイヤーOBB元Transform")]
-        [SerializeField] Transform _playerOBBTransform;
+        [Header("プレイヤーCapsule元Transform")]
+        [SerializeField] Transform _playerCapsuleTransform;
 
         [Header("武器OBB元Transform")]
         [SerializeField] Transform _weaponOBBTransform;
@@ -39,7 +39,7 @@ namespace Stage.Players
 
         // 当たり判定関連
         //public OBB PlayerOBB {  get; private set; }
-        public HitCapsule PlayerOBB { get; private set; }
+        public HitCapsule PlayerCapsule { get; private set; }
         public OBB WeaponOBB {  get; private set; }
         // プレイヤーコライダー一括管理用List
         public List<HitCollider> PlayerColliders { get; private set; } = new();
@@ -101,8 +101,8 @@ namespace Stage.Players
             //    _playerOBBTransform, PlayerData.Data.PlayerSize,
             //    HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
 
-            PlayerColliders.Add(PlayerOBB = new HitCapsule(
-                _playerOBBTransform, PlayerData.Data.Height, PlayerData.Data.Radius,
+            PlayerColliders.Add(PlayerCapsule = new HitCapsule(
+                _playerCapsuleTransform, PlayerData.Data.Height, PlayerData.Data.Radius,
                 HitCollider.ColliderShape.Capsule, HitCollider.ColliderRole.Body));
 
             PlayerColliders.Add(WeaponOBB = new OBB(
@@ -115,7 +115,7 @@ namespace Stage.Players
         /// </summary>
         void UpdateColliderInfo()
         {
-            PlayerOBB.UpdateInfo(_playerOBBTransform);
+            PlayerCapsule.UpdateInfo(_playerCapsuleTransform);
             WeaponOBB.UpdateInfo(_weaponOBBTransform);
         }
 

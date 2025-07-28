@@ -11,7 +11,7 @@ namespace Stage.HitDetection
         float _height;  // çÇÇ≥
 
         // ç≈â∫à ì_
-        public Vector3 ButtomPoint {  get; private set; }
+        public Vector3 BottomPoint {  get; private set; }
 
         // ç≈è„à ì_
         public Vector3 TopPoint { get; private set; }
@@ -22,18 +22,18 @@ namespace Stage.HitDetection
         public HitCapsule(
             Transform transform, float height, float radius,
             ColliderShape shpae, ColliderRole role) 
-            : base(shpae, role, new Vector3(radius, height, radius))
+            : base(shpae, role, new Vector3(radius * 2, height / 2, radius * 2))
         {
             _height = height;
-            ButtomPoint = transform.up * -(height / 2);
-            TopPoint = transform.up * (height / 2);
+            BottomPoint = transform.position - (transform.up * (height / 2 - radius));
+            TopPoint = transform.position + (transform.up * (height / 2 - radius));
             Radius = radius;
         }
 
         public void UpdateInfo(Transform transform)
         {
-            ButtomPoint = transform.up * -(_height / 2);
-            TopPoint = transform.up * (_height / 2);
+            BottomPoint = transform.position - (transform.up * (_height / 2 - Radius));
+            TopPoint = transform.position + (transform.up * (_height / 2 - Radius));
 
             _visualCollider.UpdateInfo(transform, HitInfo.wasHit);
         }

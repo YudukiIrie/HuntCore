@@ -1,3 +1,4 @@
+using Stage.HitDetection;
 using UnityEngine;
 
 namespace Stage.Players
@@ -45,7 +46,7 @@ namespace Stage.Players
 
         public void Exit()
         {
-
+            
         }
 
         /// <summary>

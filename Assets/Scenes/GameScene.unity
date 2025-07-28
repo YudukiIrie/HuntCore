@@ -243,7 +243,7 @@ GameObject:
   m_Component:
   - component: {fileID: 156331711}
   m_Layer: 0
-  m_Name: PlayerOBBTransform
+  m_Name: PlayerCapsuelTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -378,6 +378,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1531283259}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &355952966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 355952967}
+  m_Layer: 0
+  m_Name: Empty
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &355952967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355952966}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 127.87, y: 1.56, z: -21.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &357090787 stripped
 GameObject:
@@ -2816,8 +2847,8 @@ Transform:
   m_GameObject: {fileID: 1462643288}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 139.44, y: 0.87, z: -18.45}
-  m_LocalScale: {x: 0.6, y: 0.9, z: 0.6}
+  m_LocalPosition: {x: 134.603, y: 1.68, z: -18.32}
+  m_LocalScale: {x: 0.6, y: 0.8, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3097,7 +3128,7 @@ MonoBehaviour:
   <Enemy>k__BackingField: {fileID: 357090790}
   <Spawner>k__BackingField: {fileID: 2038927689}
   <Weapon>k__BackingField: {fileID: 1092066581}
-  _playerOBBTransform: {fileID: 156331711}
+  _playerCapsuleTransform: {fileID: 156331711}
   _weaponOBBTransform: {fileID: 1899350449}
   _rigidbody: {fileID: 1788431383}
   _animator: {fileID: 1788431385}
@@ -3683,3 +3714,4 @@ SceneRoots:
   - {fileID: 1178877980}
   - {fileID: 552063324}
   - {fileID: 1462643292}
+  - {fileID: 355952967}

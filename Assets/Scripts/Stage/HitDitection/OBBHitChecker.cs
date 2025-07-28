@@ -22,7 +22,7 @@ namespace Stage.HitDetection
             foreach (var b in other)
             {
                 // 能動側が判定済み、またはコライダーが武器の場合は無視
-                if (a.HitInfo.didHit ||
+                if (/*a.HitInfo.didHit ||*/
                     b.Role == HitCollider.ColliderRole.Weapon ||
                     b.Role == HitCollider.ColliderRole.Roll)
                     return false;
@@ -33,7 +33,7 @@ namespace Stage.HitDetection
                     // 相手がOBBの場合
                     if (b.Shape == HitCollider.ColliderShape.OBB)
                     {
-                        if (IsCollideBoxOBB((OBB)a, (OBB)b))
+                        if (IntersectOBBs((OBB)a, (OBB)b))
                         {
                             a.RegisterHit(b);
                             b.ReceiveHit();
@@ -43,7 +43,7 @@ namespace Stage.HitDetection
                     // 相手が球体の場合
                     else if (b.Shape == HitCollider.ColliderShape.Sphere)
                     {
-                        if (IsSphereIntersectingOBB((HitSphere)b, (OBB)a))
+                        if (IntersectSphereOBB((HitSphere)b, (OBB)a))
                         {
                             a.RegisterHit(b);
                             b.ReceiveHit();
@@ -58,7 +58,22 @@ namespace Stage.HitDetection
                     // 相手がOBBの場合
                     if (b.Shape == HitCollider.ColliderShape.OBB)
                     {
-                        if (IsSphereIntersectingOBB((HitSphere)a, (OBB)b))
+                        if (IntersectSphereOBB((HitSphere)a, (OBB)b))
+                        {
+                            a.RegisterHit(b);
+                            b.ReceiveHit();
+                            return true;
+                        }
+                    }
+                }
+
+                // === 自身がカプセルの場合 ===
+                else if (a.Shape == HitCollider.ColliderShape.Capsule)
+                {
+                    // 相手がカプセルの場合
+                    if (b.Shape == HitCollider.ColliderShape.Capsule)
+                    {
+                        if (CapsuleHitChecker.IntersectCapsules((HitCapsule)a, (HitCapsule)b))
                         {
                             a.RegisterHit(b);
                             b.ReceiveHit();
@@ -77,7 +92,7 @@ namespace Stage.HitDetection
         /// <param name="obbA">判定対象OBB</param>
         /// <param name="obbB">判定対象OBB</param>
         /// <returns>true:接触、false:非接触</returns>
-        static bool IsCollideBoxOBB(OBB obbA, OBB obbB)
+        static bool IntersectOBBs(OBB obbA, OBB obbB)
         {
             // 中心間の距離の取得
             Vector3 distance = obbA.Center - obbB.Center;
@@ -156,7 +171,7 @@ namespace Stage.HitDetection
         /// <param name="sphere">判定対象球体</param>
         /// <param name="obbs">判定対象OBB</param>
         /// <returns>true:接触, false:非接触</returns>
-        static bool IsSphereIntersectingOBB(HitSphere sphere, OBB obb)
+        static bool IntersectSphereOBB(HitSphere sphere, OBB obb)
         {
             // 内積の際に使用するベクトルの取得
             Vector3 direction = sphere.Center - obb.Center;
