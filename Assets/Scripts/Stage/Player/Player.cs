@@ -43,7 +43,7 @@ namespace Stage.Players
         // 当たり判定関連
         public HitCapsule PlayerCapsule { get; private set; }
         public OBB WeaponOBB {  get; private set; }
-        public OBB Test { get; private set; }   // テスト用
+        public HitSphere Test { get; private set; }   // テスト用
         // プレイヤーコライダー一括管理用List
         public List<HitCollider> PlayerColliders { get; private set; } = new();
         public List<HitCollider> TestColliders { get; private set; } = new();   // テスト用
@@ -110,9 +110,9 @@ namespace Stage.Players
                 HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Weapon));
 
             // テスト用
-            TestColliders.Add(Test = new OBB(
-                _testTransform, WeaponData.Data.GreatSwordSize,
-                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
+            TestColliders.Add(Test = new HitSphere(
+                _testTransform.position, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).HeadRadius,
+                HitCollider.ColliderShape.Sphere, HitCollider.ColliderRole.Body));
         }
 
         /// <summary>

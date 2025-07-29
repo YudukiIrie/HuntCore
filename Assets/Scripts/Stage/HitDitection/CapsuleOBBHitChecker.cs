@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Stage.HitDetection
 {
+    /// <summary>
+    /// ƒJƒvƒZƒ‹‚ÆOBB‚Ì“–‚½‚è”»’è
+    /// </summary>
     public static class CapsuleOBBHitChecker
     {
         /// <summary>

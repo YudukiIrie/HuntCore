@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemies:
   - _enemyType: 0
-    _enemySize: {x: 2.5, y: 2, z: 4}
-    _enemyHeadSize: {x: 1, y: 1, z: 1}
-    _enemyHeadRadius: 0.6
-    _enemyWingSize: {x: 2.5, y: 0.8, z: 4}
-    _enemyWingRootSize: {x: 1.5, y: 0.7, z: 2}
+    _size: {x: 1.9, y: 2, z: 3}
+    _headRadius: 0.6
+    _wingSize: {x: 1.7, y: 0.5, z: 4}
+    _wingRootSize: {x: 1.5, y: 0.5, z: 1.5}
     _findDistance: 10
     _roarDistance: 15
     _stopDistance: 5

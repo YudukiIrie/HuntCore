@@ -65,6 +65,17 @@ namespace Stage.HitDetection
                             return true;
                         }
                     }
+
+                    // 相手がカプセルの場合
+                    if (b.Shape == HitCollider.ColliderShape.Capsule)
+                    {
+                        if (SphereCapsuleHitChecker.IntersectSphereCapsule((HitSphere)a, (HitCapsule)b))
+                        {
+                            a.RegisterHit(b);
+                            b.ReceiveHit();
+                            return true;
+                        }
+                    }
                 }
 
                 // === 自身がカプセルの場合 ===
@@ -82,9 +93,21 @@ namespace Stage.HitDetection
                     }
 
                     // 相手がカプセルの場合
-                    if (b.Shape == HitCollider.ColliderShape.Capsule)
+                    else if (b.Shape == HitCollider.ColliderShape.Capsule)
                     {
                         if (CapsuleHitChecker.IntersectCapsules((HitCapsule)a, (HitCapsule)b))
+                        {
+                            a.RegisterHit(b);
+                            b.ReceiveHit();
+                            return true;
+                        }
+                    }
+
+                    // テスト用
+                    // 相手がカプセルの場合
+                    else if (b.Shape == HitCollider.ColliderShape.Sphere)
+                    {
+                        if (SphereCapsuleHitChecker.IntersectSphereCapsule((HitSphere)b, (HitCapsule)a))
                         {
                             a.RegisterHit(b);
                             b.ReceiveHit();

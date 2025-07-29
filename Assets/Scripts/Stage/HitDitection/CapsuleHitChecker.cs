@@ -114,7 +114,7 @@ namespace Stage.HitDetection
         /// <param name="h">垂線の線分側の足(戻り値)</param>
         /// <param name="t">線分側のベクトル係数(戻り値)</param>
         /// <returns>点と線分の最短距離</returns>
-        static float CalcPointSegmentDist(
+        public static float CalcPointSegmentDist(
             Vector3 point, Vector3 segTop, Vector3 segBottom,
             out Vector3 h, out float t)
         {

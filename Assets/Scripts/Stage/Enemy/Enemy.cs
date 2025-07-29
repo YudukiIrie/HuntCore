@@ -92,33 +92,33 @@ namespace Stage.Enemies
             // === OBB ===
             EnemyColliders.Add(EnemyOBB = new OBB(
                 _enemyOBBTransform,
-                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemySize, 
+                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).Size, 
                 HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
 
             EnemyColliders.Add(EnemyRWingOBB = new OBB(
                 _rWingOBBTransform, 
-                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyWingSize,
+                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).WingSize,
                 HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
 
             EnemyColliders.Add(EnemyLWingOBB = new OBB(
                 _lWingOBBTransform, 
-                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyWingSize,
+                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).WingSize,
                 HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
 
             EnemyColliders.Add(EnemyRWingRootOBB = new OBB(
                 _rWingRootOBBTransform,
-                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyWingRootSize, 
+                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).WingRootSize, 
                 HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
 
             EnemyColliders.Add(EnemyLWingRootOBB = new OBB(
                 _lWingRootOBBTransform,
-                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyWingRootSize,
+                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).WingRootSize,
                 HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
 
             // === HitSphere ===
             EnemyColliders.Add(EnemyHeadSphere = new HitSphere(
                 _headSphereTransform.position,
-                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).EnemyHeadRadius,
+                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).HeadRadius,
                 HitCollider.ColliderShape.Sphere, HitCollider.ColliderRole.Body));
         }
 
