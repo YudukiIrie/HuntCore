@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Stage.HitDetection
 {
     /// <summary>
-    /// 球体とカプセルの当たり判定
+    /// 球体とカプセルの当たり判定計算クラス
     /// </summary>
     public static class SphereCapsuleHitChecker
     {

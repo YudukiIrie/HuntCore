@@ -21,7 +21,7 @@ namespace Stage.Players
         {
             // ガード状態とOBBタイプの切り替え
             _player.SetGuardState(true);
-            _player.WeaponOBB.SetColliderRole(HitCollider.ColliderRole.Parry);
+            _player.Collider.Weapon.SetColliderRole(HitCollider.ColliderRole.Parry);
 
             _player.Animation.Guard();
         }
@@ -47,7 +47,7 @@ namespace Stage.Players
 
             // ガード状態とOBBタイプの切り替え
             _player.SetGuardState(false);
-            _player.WeaponOBB.SetColliderRole(HitCollider.ColliderRole.Weapon);
+            _player.Collider.Weapon.SetColliderRole(HitCollider.ColliderRole.Weapon);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Stage.Players
         void SwitchColliderRole()
         {
             if (_elapsedTime > PlayerData.Data.ParryableTime)
-                _player.WeaponOBB.SetColliderRole(HitCollider.ColliderRole.Guard);
+                _player.Collider.Weapon.SetColliderRole(HitCollider.ColliderRole.Guard);
         }
 
         /// <summary>

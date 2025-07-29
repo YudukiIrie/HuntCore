@@ -22,7 +22,7 @@ namespace Stage.HitDetection
             Radius = radius;
         }
 
-        public void UpdateInfo(Transform transform)
+        public override void UpdateInfo(Transform transform)
         {
             Center = transform.position;
 

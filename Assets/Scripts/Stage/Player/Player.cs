@@ -16,17 +16,11 @@ namespace Stage.Players
         [field: Header("武器残像生成クラス")]
         [field: SerializeField] public WeaponAfterImageSpawner Spawner { get; private set; }
 
+        [field: Header("コライダー管理クラス")]
+        [field: SerializeField] public PlayerCollider Collider { get; private set; }
+
         [field: Header("武器ゲームオブジェクト")]
         [field: SerializeField] public GameObject Weapon { get; private set; }
-
-        [Header("プレイヤーCapsule元Transform")]
-        [SerializeField] Transform _playerCapsuleTransform;
-
-        [Header("武器OBB元Transform")]
-        [SerializeField] Transform _weaponOBBTransform;
-
-        [Header("テスト元Transform")]
-        [SerializeField] Transform _testTransform;
 
         // プレイヤー関連のクラス
         public PlayerStateMachine StateMachine {  get; private set; }
@@ -39,14 +33,6 @@ namespace Stage.Players
         [SerializeField] Rigidbody _rigidbody;
         public Animator Animator => _animator;
         [SerializeField] Animator _animator;
-
-        // 当たり判定関連
-        public HitCapsule PlayerCapsule { get; private set; }
-        public OBB WeaponOBB {  get; private set; }
-        public HitSphere Test { get; private set; }   // テスト用
-        // プレイヤーコライダー一括管理用List
-        public List<HitCollider> PlayerColliders { get; private set; } = new();
-        public List<HitCollider> TestColliders { get; private set; } = new();   // テスト用
 
         // 接触中の面に対する法線ベクトル
         public Vector3 NormalVector {  get; private set; }
@@ -68,8 +54,6 @@ namespace Stage.Players
             Animation = new PlayerAnimation(_animator);
             Action = new PlayerAction();
 
-            CreateColliders();
-
             Action.Enable();
         }
 
@@ -80,8 +64,6 @@ namespace Stage.Players
 
         void Update()
         {
-            UpdateColliderInfo();
-
             StateMachine.Update();
         }
 
@@ -94,36 +76,6 @@ namespace Stage.Players
         {
             if (collision.gameObject.CompareTag(GROUND_TAG))
                 NormalVector = collision.contacts[0].normal;
-        }
-
-        /// <summary>
-        /// コライダーの作成
-        /// </summary>
-        void CreateColliders()
-        {
-            PlayerColliders.Add(PlayerCapsule = new HitCapsule(
-                _playerCapsuleTransform, PlayerData.Data.Height, PlayerData.Data.Radius,
-                HitCollider.ColliderShape.Capsule, HitCollider.ColliderRole.Body));
-
-            PlayerColliders.Add(WeaponOBB = new OBB(
-                _weaponOBBTransform, WeaponData.Data.GreatSwordSize,
-                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Weapon));
-
-            // テスト用
-            TestColliders.Add(Test = new HitSphere(
-                _testTransform.position, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).HeadRadius,
-                HitCollider.ColliderShape.Sphere, HitCollider.ColliderRole.Body));
-        }
-
-        /// <summary>
-        /// コライダー情報の更新
-        /// </summary>
-        void UpdateColliderInfo()
-        {
-            PlayerCapsule.UpdateInfo(_playerCapsuleTransform);
-            WeaponOBB.UpdateInfo(_weaponOBBTransform);
-            // テスト用
-            Test.UpdateInfo(_testTransform);
         }
 
         /// <summary>

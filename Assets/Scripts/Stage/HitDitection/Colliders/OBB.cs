@@ -33,7 +33,7 @@ namespace Stage.HitDetection
             Radius   = size * 0.5f;
         }
 
-        public void UpdateInfo(Transform transform)
+        public override void UpdateInfo(Transform transform)
         {
             Center = transform.position;
             Rotation = transform.rotation;

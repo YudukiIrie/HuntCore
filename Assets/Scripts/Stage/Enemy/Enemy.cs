@@ -1,3 +1,4 @@
+using Stage.enemies;
 using Stage.HitDetection;
 using Stage.Players;
 using System.Collections.Generic;
@@ -13,23 +14,8 @@ namespace Stage.Enemies
         [field: Header("プレイヤークラス")]
         [field: SerializeField] public Player Player { get; private set; }
 
-        [Header("敵OBB元Transform")]
-        [SerializeField] Transform _enemyOBBTransform;
-
-        [Header("敵頭Sphere元Transform")]
-        [SerializeField] Transform _headSphereTransform;
-
-        [Header("敵右翼脚OBB元Transform")]
-        [SerializeField] Transform _rWingOBBTransform;
-
-        [Header("敵左翼脚OBB元Transform")]
-        [SerializeField] Transform _lWingOBBTransform;
-
-        [Header("敵右翼脚付け根OBB元Transform")]
-        [SerializeField] Transform _rWingRootOBBTransform;
-
-        [Header("敵左翼脚付け根OBB元Transform")]
-        [SerializeField] Transform _lWingRootOBBTransform;
+        [field: Header("コライダー管理クラス")]
+        [field: SerializeField] public EnemyCollider Collider { get; private set; }
 
         // 敵関連クラス
         public EnemyStateMachine StateMachine { get; private set; }
@@ -38,16 +24,6 @@ namespace Stage.Enemies
         // コンポーネント
         [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
         [SerializeField] Animator _animator;
-
-        // 当たり判定関連
-        public OBB EnemyOBB {  get; private set; }
-        public OBB EnemyRWingOBB { get; private set; }
-        public OBB EnemyLWingOBB { get; private set; }
-        public OBB EnemyRWingRootOBB { get; private set; }
-        public OBB EnemyLWingRootOBB { get; private set; }
-        public HitSphere EnemyHeadSphere { get; private set; }
-        // 敵コライダー一括管理用List
-        public List<HitCollider> EnemyColliders { get; private set; } = new();
 
         // 攻撃関連
         float _attackInterval;
@@ -60,8 +36,6 @@ namespace Stage.Enemies
             StateMachine = new EnemyStateMachine(this);
             Animation = new EnemyAnimation(_animator);
 
-            CreateColliders();
-            
             _attackInterval = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackInterval;
         }
 
@@ -72,8 +46,6 @@ namespace Stage.Enemies
 
         void Update()
         {
-            UpdateColliderInfo();
-
             UpdateAttackTimer();
 
             StateMachine.Update();
@@ -82,60 +54,6 @@ namespace Stage.Enemies
         void FixedUpdate()
         {
             StateMachine.FixedUpdate();
-        }
-
-        /// <summary>
-        /// コライダーの作成
-        /// </summary>
-        void CreateColliders()
-        {
-            // === OBB ===
-            EnemyColliders.Add(EnemyOBB = new OBB(
-                _enemyOBBTransform,
-                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).Size, 
-                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
-
-            EnemyColliders.Add(EnemyRWingOBB = new OBB(
-                _rWingOBBTransform, 
-                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).WingSize,
-                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
-
-            EnemyColliders.Add(EnemyLWingOBB = new OBB(
-                _lWingOBBTransform, 
-                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).WingSize,
-                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
-
-            EnemyColliders.Add(EnemyRWingRootOBB = new OBB(
-                _rWingRootOBBTransform,
-                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).WingRootSize, 
-                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
-
-            EnemyColliders.Add(EnemyLWingRootOBB = new OBB(
-                _lWingRootOBBTransform,
-                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).WingRootSize,
-                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
-
-            // === HitSphere ===
-            EnemyColliders.Add(EnemyHeadSphere = new HitSphere(
-                _headSphereTransform.position,
-                EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).HeadRadius,
-                HitCollider.ColliderShape.Sphere, HitCollider.ColliderRole.Body));
-        }
-
-        /// <summary>
-        /// コライダー情報の更新
-        /// </summary>
-        void UpdateColliderInfo()
-        {
-            // === OBB ===
-            EnemyOBB.UpdateInfo(_enemyOBBTransform);
-            EnemyRWingOBB.UpdateInfo(_rWingOBBTransform);
-            EnemyLWingOBB.UpdateInfo(_lWingOBBTransform);
-            EnemyRWingRootOBB.UpdateInfo(_rWingRootOBBTransform);
-            EnemyLWingRootOBB.UpdateInfo(_lWingRootOBBTransform);
-
-            // === HitSphere ===
-            EnemyHeadSphere.UpdateInfo(_headSphereTransform);
         }
 
         /// <summary>

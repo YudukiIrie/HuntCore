@@ -53,7 +53,7 @@ namespace Stage.Players
         public void Exit()
         {
             _chainDuration = 0.0f;
-            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyColliders);
+            HitChecker.ResetHitInfo(_player.Collider.Weapon, _player.Enemy.Collider.Colliders);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Stage.Players
             var progress = _player.Animation.CheckRatio(PlayerAnimation.HashHeavyAttack);
             if (progress >= start && progress <= end)
             {
-                if (OBBHitChecker.IsColliding(_player.WeaponOBB, _player.Enemy.EnemyColliders))
+                if (HitChecker.IsColliding(_player.Collider.Weapon, _player.Enemy.Collider.Colliders))
                     _player.Enemy.IncreaseHitNum();
             }
         }

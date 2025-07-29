@@ -130,5 +130,11 @@ namespace Stage.HitDetection
             info.ResetHitReceived();
             HitInfo = info;
         }
+
+        /// <summary>
+        /// 情報の更新
+        /// </summary>
+        /// <param name="transform">更新元Transform</param>
+        public virtual void UpdateInfo(Transform transform) { }
     }
 }

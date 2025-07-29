@@ -40,7 +40,7 @@ namespace Stage.Enemies
 
         public void Exit()
         {
-            OBBHitChecker.ResetHitInfo(_enemy.EnemyHeadSphere, _enemy.Player.PlayerColliders);
+            HitChecker.ResetHitInfo(_enemy.Collider.Head, _enemy.Player.Collider.Colliders);
         }
 
         /// <summary>
@@ -53,9 +53,9 @@ namespace Stage.Enemies
             var progress = _enemy.Animation.CheckRatio(EnemyAnimation.HashAttack);
             if (progress >= start && progress <= end)
             {
-                if (OBBHitChecker.IsColliding(_enemy.EnemyHeadSphere, _enemy.Player.PlayerColliders))
+                if (HitChecker.IsColliding(_enemy.Collider.Head, _enemy.Player.Collider.Colliders))
                 {
-                    HitCollider other = _enemy.EnemyHeadSphere.HitInfo.other;
+                    HitCollider other = _enemy.Collider.Head.HitInfo.other;
                     _enemy.Player.HitReaction.ReactToHit(other);
                 }
             }

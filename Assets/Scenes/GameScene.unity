@@ -212,7 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 101587088}
   m_Layer: 0
-  m_Name: EnemyOBBTransform
+  m_Name: EnemyTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -243,7 +243,7 @@ GameObject:
   m_Component:
   - component: {fileID: 156331711}
   m_Layer: 0
-  m_Name: PlayerCapsuelTransform
+  m_Name: PlayerTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -358,7 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 271244134}
   m_Layer: 0
-  m_Name: EnemyHeadSphereTransform
+  m_Name: EnemyHeadTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -428,12 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Player>k__BackingField: {fileID: 1788431379}
-  _enemyOBBTransform: {fileID: 101587088}
-  _headSphereTransform: {fileID: 271244134}
-  _rWingOBBTransform: {fileID: 1867351047}
-  _lWingOBBTransform: {fileID: 2037623234}
-  _rWingRootOBBTransform: {fileID: 996561802}
-  _lWingRootOBBTransform: {fileID: 1880434958}
+  <Collider>k__BackingField: {fileID: 357090799}
   <Rigidbody>k__BackingField: {fileID: 357090794}
   _animator: {fileID: 357090797}
 --- !u!136 &357090793
@@ -491,6 +486,24 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 9569754, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
   m_PrefabInstance: {fileID: 961272894}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &357090799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357090787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7224befdd961cf4cbb0620e889298d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyTransform: {fileID: 101587088}
+  _headTransform: {fileID: 271244134}
+  _rWingTransform: {fileID: 1867351047}
+  _lWingTransform: {fileID: 2037623234}
+  _rWingRootTransform: {fileID: 996561802}
+  _lWingRootTransform: {fileID: 1880434958}
 --- !u!1 &415577620
 GameObject:
   m_ObjectHideFlags: 0
@@ -2131,6 +2144,9 @@ PrefabInstance:
       addedObject: {fileID: 357090790}
     - targetCorrespondingSourceObject: {fileID: 196076, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 357090799}
+    - targetCorrespondingSourceObject: {fileID: 196076, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 357090794}
     - targetCorrespondingSourceObject: {fileID: 196076, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
       insertIndex: -1
@@ -2273,7 +2289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 996561802}
   m_Layer: 0
-  m_Name: EnemyRWingRootOBBTransform
+  m_Name: EnemyRWingRootTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2555,7 +2571,7 @@ GameObject:
   - component: {fileID: 1435259287}
   - component: {fileID: 1435259286}
   m_Layer: 0
-  m_Name: OBBVisualizer
+  m_Name: ColliderVisualizer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2993,6 +3009,9 @@ PrefabInstance:
       addedObject: {fileID: 1788431379}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 280420e3923e86b48a7bd5c1b58927a0, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1788431386}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 280420e3923e86b48a7bd5c1b58927a0, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1788431380}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 280420e3923e86b48a7bd5c1b58927a0, type: 3}
       insertIndex: -1
@@ -3020,10 +3039,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Enemy>k__BackingField: {fileID: 357090790}
   <Spawner>k__BackingField: {fileID: 2038927689}
+  <Collider>k__BackingField: {fileID: 1788431386}
   <Weapon>k__BackingField: {fileID: 1092066581}
-  _playerCapsuleTransform: {fileID: 156331711}
-  _weaponOBBTransform: {fileID: 1899350449}
-  _testTransform: {fileID: 355952967}
   _rigidbody: {fileID: 1788431383}
   _animator: {fileID: 1788431385}
 --- !u!114 &1788431380
@@ -3116,6 +3133,20 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 280420e3923e86b48a7bd5c1b58927a0, type: 3}
   m_PrefabInstance: {fileID: 1788431377}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1788431386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788431378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af02a151fc47314185ad6eaa9c7f722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerTransform: {fileID: 156331711}
+  _weaponTransform: {fileID: 1899350449}
 --- !u!4 &1789839043 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 439658, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
@@ -3131,7 +3162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1867351047}
   m_Layer: 0
-  m_Name: EnemyRWingOBBTransform
+  m_Name: EnemyRWingTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3162,7 +3193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1880434958}
   m_Layer: 0
-  m_Name: EnemyLWingRootOBBTransform
+  m_Name: EnemyLWingRootTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3198,7 +3229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1899350449}
   m_Layer: 0
-  m_Name: WeaponOBBTransform
+  m_Name: WeaponTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3526,7 +3557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2037623234}
   m_Layer: 0
-  m_Name: EnemyLWingOBBTransform
+  m_Name: EnemyLWingTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

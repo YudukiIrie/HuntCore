@@ -61,7 +61,7 @@ namespace Stage.Players
             _elapsedTime = 0.0f;
             _chainDuration = 0.0f;
             _isAnimFinished = false;
-            OBBHitChecker.ResetHitInfo(_player.WeaponOBB, _player.Enemy.EnemyColliders);
+            HitChecker.ResetHitInfo(_player.Collider.Weapon, _player.Enemy.Collider.Colliders);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Stage.Players
             var progress = _player.Animation.CheckRatio(PlayerAnimation.HashLightAttack);
             if (progress >= start && progress <= end)
             {
-                if (OBBHitChecker.IsColliding(_player.WeaponOBB, _player.Enemy.EnemyColliders))
+                if (HitChecker.IsColliding(_player.Collider.Weapon, _player.Enemy.Collider.Colliders))
                     _player.Enemy.IncreaseHitNum();
             }
         }

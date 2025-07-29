@@ -8,7 +8,7 @@ namespace Stage.HitDetection
     /// <summary>
     /// OBB可視化用クラス
     /// </summary>
-    public class OBBVisualizer : MonoBehaviour
+    public class ColliderVisualizer : MonoBehaviour
     {
         [Header("OBB可視化用ゲームオブジェクト")]
         [SerializeField] GameObject _visualOBB;
@@ -55,7 +55,7 @@ namespace Stage.HitDetection
         void CreateVisualColliders()
         {
             // === プレイヤーVisualCollider ===
-            foreach (var collider in _player.PlayerColliders)
+            foreach (var collider in _player.Collider.Colliders)
             {
                 GameObject visualGO;
                 if (collider.Shape == HitCollider.ColliderShape.OBB)
@@ -71,23 +71,7 @@ namespace Stage.HitDetection
             }
 
             // === 敵VisualCollider ===
-            foreach (var collider in _enemy.EnemyColliders)
-            {
-                GameObject visualCollider;
-                if (collider.Shape == HitCollider.ColliderShape.OBB)
-                {
-                    _visualColliders.Add(visualCollider = Instantiate(_visualOBB, transform));
-                    collider.CreateVisualCollider(visualCollider, _noHitImage, _hitImage);
-                }
-                else
-                {
-                    _visualColliders.Add(visualCollider = Instantiate(_visualSphere, transform));
-                    collider.CreateVisualCollider(visualCollider, _noHitImage, _hitImage);
-                }
-            }
-
-            // テスト用
-            foreach (var collider in _player.TestColliders)
+            foreach (var collider in _enemy.Collider.Colliders)
             {
                 GameObject visualCollider;
                 if (collider.Shape == HitCollider.ColliderShape.OBB)

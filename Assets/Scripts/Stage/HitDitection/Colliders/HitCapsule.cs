@@ -30,7 +30,7 @@ namespace Stage.HitDetection
             Radius = radius;
         }
 
-        public void UpdateInfo(Transform transform)
+        public override void UpdateInfo(Transform transform)
         {
             BottomPoint = transform.position - (transform.up * (_height / 2 - Radius));
             TopPoint = transform.position + (transform.up * (_height / 2 - Radius));

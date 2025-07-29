@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Stage.HitDetection
 {
     /// <summary>
-    /// カプセルとOBBの当たり判定
+    /// カプセルとOBBの当たり判定計算クラス
     /// </summary>
     public static class CapsuleOBBHitChecker
     {
