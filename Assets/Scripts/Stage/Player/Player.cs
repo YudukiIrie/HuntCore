@@ -25,6 +25,9 @@ namespace Stage.Players
         [Header("武器OBB元Transform")]
         [SerializeField] Transform _weaponOBBTransform;
 
+        [Header("テスト元Transform")]
+        [SerializeField] Transform _testTransform;
+
         // プレイヤー関連のクラス
         public PlayerStateMachine StateMachine {  get; private set; }
         public PlayerHitRaction HitReaction { get; private set; }
@@ -38,11 +41,12 @@ namespace Stage.Players
         [SerializeField] Animator _animator;
 
         // 当たり判定関連
-        //public OBB PlayerOBB {  get; private set; }
         public HitCapsule PlayerCapsule { get; private set; }
         public OBB WeaponOBB {  get; private set; }
+        public OBB Test { get; private set; }   // テスト用
         // プレイヤーコライダー一括管理用List
         public List<HitCollider> PlayerColliders { get; private set; } = new();
+        public List<HitCollider> TestColliders { get; private set; } = new();   // テスト用
 
         // 接触中の面に対する法線ベクトル
         public Vector3 NormalVector {  get; private set; }
@@ -97,10 +101,6 @@ namespace Stage.Players
         /// </summary>
         void CreateColliders()
         {
-            //PlayerColliders.Add(PlayerOBB = new OBB(
-            //    _playerOBBTransform, PlayerData.Data.PlayerSize,
-            //    HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
-
             PlayerColliders.Add(PlayerCapsule = new HitCapsule(
                 _playerCapsuleTransform, PlayerData.Data.Height, PlayerData.Data.Radius,
                 HitCollider.ColliderShape.Capsule, HitCollider.ColliderRole.Body));
@@ -108,6 +108,11 @@ namespace Stage.Players
             PlayerColliders.Add(WeaponOBB = new OBB(
                 _weaponOBBTransform, WeaponData.Data.GreatSwordSize,
                 HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Weapon));
+
+            // テスト用
+            TestColliders.Add(Test = new OBB(
+                _testTransform, WeaponData.Data.GreatSwordSize,
+                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
         }
 
         /// <summary>
@@ -117,6 +122,8 @@ namespace Stage.Players
         {
             PlayerCapsule.UpdateInfo(_playerCapsuleTransform);
             WeaponOBB.UpdateInfo(_weaponOBBTransform);
+            // テスト用
+            Test.UpdateInfo(_testTransform);
         }
 
         /// <summary>

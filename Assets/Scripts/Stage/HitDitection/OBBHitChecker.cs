@@ -70,6 +70,17 @@ namespace Stage.HitDetection
                 // === 自身がカプセルの場合 ===
                 else if (a.Shape == HitCollider.ColliderShape.Capsule)
                 {
+                    // 相手がOBBの場合
+                    if (b.Shape == HitCollider.ColliderShape.OBB)
+                    {
+                        if (CapsuleOBBHitChecker.IntersectCapsuleOBB((HitCapsule)a, (OBB)b))
+                        {
+                            a.RegisterHit(b);
+                            b.ReceiveHit();
+                            return true;
+                        }
+                    }
+
                     // 相手がカプセルの場合
                     if (b.Shape == HitCollider.ColliderShape.Capsule)
                     {
@@ -82,6 +93,9 @@ namespace Stage.HitDetection
                     }
                 }
             }
+
+            // テスト用
+            ResetHitInfo(oneself, other);
 
             return false;
         }

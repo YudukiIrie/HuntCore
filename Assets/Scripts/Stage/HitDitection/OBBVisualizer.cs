@@ -73,16 +73,32 @@ namespace Stage.HitDetection
             // === 敵VisualCollider ===
             foreach (var collider in _enemy.EnemyColliders)
             {
-                GameObject visualBox;
+                GameObject visualCollider;
                 if (collider.Shape == HitCollider.ColliderShape.OBB)
                 {
-                    _visualColliders.Add(visualBox = Instantiate(_visualOBB, transform));
-                    collider.CreateVisualCollider(visualBox, _noHitImage, _hitImage);
+                    _visualColliders.Add(visualCollider = Instantiate(_visualOBB, transform));
+                    collider.CreateVisualCollider(visualCollider, _noHitImage, _hitImage);
                 }
                 else
                 {
-                    _visualColliders.Add(visualBox = Instantiate(_visualSphere, transform));
-                    collider.CreateVisualCollider(visualBox, _noHitImage, _hitImage);
+                    _visualColliders.Add(visualCollider = Instantiate(_visualSphere, transform));
+                    collider.CreateVisualCollider(visualCollider, _noHitImage, _hitImage);
+                }
+            }
+
+            // テスト用
+            foreach (var collider in _player.TestColliders)
+            {
+                GameObject visualCollider;
+                if (collider.Shape == HitCollider.ColliderShape.OBB)
+                {
+                    _visualColliders.Add(visualCollider = Instantiate(_visualOBB, transform));
+                    collider.CreateVisualCollider(visualCollider, _noHitImage, _hitImage);
+                }
+                else
+                {
+                    _visualColliders.Add(visualCollider = Instantiate(_visualSphere, transform));
+                    collider.CreateVisualCollider(visualCollider, _noHitImage, _hitImage);
                 }
             }
         }

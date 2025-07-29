@@ -36,6 +36,12 @@ namespace Stage.Players
 
             Rotate();
 
+            // テスト用当たり判定
+            if (OBBHitChecker.IsColliding(_player.PlayerCapsule, _player.TestColliders))
+            {
+
+            }
+
             Transition();
         }
 

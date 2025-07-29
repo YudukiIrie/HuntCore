@@ -389,7 +389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 355952967}
   m_Layer: 0
-  m_Name: Empty
+  m_Name: TestColliderTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -404,7 +404,7 @@ Transform:
   m_GameObject: {fileID: 355952966}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 127.87, y: 1.56, z: -21.8}
+  m_LocalPosition: {x: 127.87, y: 0.7, z: -21.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3130,6 +3130,7 @@ MonoBehaviour:
   <Weapon>k__BackingField: {fileID: 1092066581}
   _playerCapsuleTransform: {fileID: 156331711}
   _weaponOBBTransform: {fileID: 1899350449}
+  _testTransform: {fileID: 355952967}
   _rigidbody: {fileID: 1788431383}
   _animator: {fileID: 1788431385}
 --- !u!114 &1788431380

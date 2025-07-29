@@ -27,6 +27,12 @@ namespace Stage.Players
         {
             _elapsedTime += Time.deltaTime;
 
+            // テスト用当たり判定
+            if (OBBHitChecker.IsColliding(_player.PlayerCapsule, _player.TestColliders))
+            {
+
+            }
+
             Transition();
         }
 
