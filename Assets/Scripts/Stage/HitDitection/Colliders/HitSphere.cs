@@ -13,10 +13,10 @@ namespace Stage.HitDetection
         // ”¼Œa
         public float Radius { get; private set; }
 
-        public HitSphere(
+        public HitSphere(HitInfo owner,
             Vector3 center, float radius, 
             ColliderShape shape, ColliderRole type) 
-            : base(shape, type, new Vector3(radius,radius,radius) * 2)
+            : base(owner, shape, type, new Vector3(radius,radius,radius) * 2)
         {
             Center = center;
             Radius = radius;

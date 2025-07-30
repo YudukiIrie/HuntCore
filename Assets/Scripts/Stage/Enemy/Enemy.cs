@@ -140,5 +140,25 @@ namespace Stage.Enemies
         {
             HitNum++;
         }
+
+        /// <summary>
+        /// 確率判定
+        /// </summary>
+        /// <param name="percent">確率(0f～100f)</param>
+        /// <returns>true:当選, false:落選</returns>
+        public bool Probability(float percent)
+        {
+            percent = Mathf.Clamp(percent, 0.0f, 100.0f);
+
+            // 100%の近似値の場合無条件で当選
+            if (Mathf.Approximately(percent, 100.0f))
+                return true;
+            // 0%の近似値の場合無条件で落選
+            else if (Mathf.Approximately(percent, 0.0f))
+                return false;
+
+            float rate = Random.value * 100.0f;
+            return rate <= percent;
+        }
     }
 }

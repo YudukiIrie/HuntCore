@@ -18,6 +18,7 @@ MonoBehaviour:
     _headRadius: 0.6
     _wingSize: {x: 1.7, y: 0.5, z: 4}
     _wingRootSize: {x: 1.5, y: 0.5, z: 1.5}
+    _clawSize: {x: 0.25, y: 1.2}
     _findDistance: 10
     _roarDistance: 15
     _stopDistance: 5
@@ -25,6 +26,7 @@ MonoBehaviour:
     _chaseSpeed: 5
     _chaseRotSpeed: 300
     _attackInterval: 3
+    _attackProb: 50
     _animBlendTime: 0.3
     _attackHitWindow: {x: 0.3, y: 0.5}
     _limitAngle: 80

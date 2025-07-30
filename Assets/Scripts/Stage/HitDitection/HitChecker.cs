@@ -19,8 +19,9 @@ namespace Stage.HitDetection
             var a = oneself;
             foreach (var b in other)
             {
-                // 能動側が判定済み、またはコライダーが武器の場合は無視
-                if (a.HitInfo.didHit ||
+                // 受動側の所有者が判定済み、
+                // またはコライダーが武器・回避の場合は無視
+                if (b.Owner.WasHit ||
                     b.Role == HitCollider.ColliderRole.Weapon ||
                     b.Role == HitCollider.ColliderRole.Roll)
                     return false;

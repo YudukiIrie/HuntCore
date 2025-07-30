@@ -19,10 +19,10 @@ namespace Stage.HitDetection
         // ”¼Œa
         public float Radius { get; private set; }
 
-        public HitCapsule(
+        public HitCapsule(HitInfo owner,
             Transform transform, float height, float radius,
             ColliderShape shpae, ColliderRole role) 
-            : base(shpae, role, new Vector3(radius * 2, height / 2, radius * 2))
+            : base(owner, shpae, role, new Vector3(radius * 2, height / 2, radius * 2))
         {
             _height = height;
             BottomPoint = transform.position - (transform.up * (height / 2 - radius));

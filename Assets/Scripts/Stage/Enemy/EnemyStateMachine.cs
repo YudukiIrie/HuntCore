@@ -10,6 +10,7 @@ namespace Stage.Enemies
         Chase,
         Attack,
         GetHit,
+        ClawAttack,
     }
 
     /// <summary>
@@ -27,6 +28,7 @@ namespace Stage.Enemies
             _states.Add(EnemyState.Chase, new EnemyChaseState(enemy));
             _states.Add(EnemyState.Attack, new EnemyAttackState(enemy));
             _states.Add(EnemyState.GetHit, new EnemyGetHitState(enemy));
+            _states.Add(EnemyState.ClawAttack, new EnemyClawAttackState(enemy));
         }
 
         public override void Initialize(EnemyState key)

@@ -16,6 +16,7 @@ namespace Stage.Enemies
         public static readonly int HashChase = Animator.StringToHash("Base Layer.Chase");
         public static readonly int HashAttack = Animator.StringToHash("Base Layer.Attack");
         public static readonly int HashGetHit = Animator.StringToHash("Base Layer.GetHit");
+        public static readonly int HashClawAttack = Animator.StringToHash("Base Layer.ClawAttack");
         static readonly int HashSpeed = Animator.StringToHash("Speed");
 
         float _animBlendTime;
@@ -107,6 +108,15 @@ namespace Stage.Enemies
             // ダウンアニメーションを逆再生
             _animator.SetFloat(HashSpeed, -1);
             _animator.CrossFade(HashDown, _animBlendTime, 0, 1);
+        }
+
+        /// <summary>
+        /// 爪攻撃アニメーション開始
+        /// </summary>
+        public void ClawAttack()
+        {
+            ResetParam();
+            _animator.CrossFade(HashClawAttack, _animBlendTime);
         }
 
         /// <summary>

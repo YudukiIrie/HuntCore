@@ -76,6 +76,10 @@ namespace Stage.Enemies
         [Header("敵翼付け根サイズ")]
         [SerializeField] Vector3 _wingRootSize;
 
+        public Vector2 ClawSize => _clawSize;
+        [Header("爪サイズ(X:半径, Y:高さ)")]
+        [SerializeField] Vector2 _clawSize;
+
         public float FindDistance => _findDistance;
         [Header("プレイヤー発見距離")]
         [SerializeField] float _findDistance;
@@ -103,6 +107,10 @@ namespace Stage.Enemies
         public float AttackInterval => _attackInterval;
         [Header("攻撃可能間隔")]
         [SerializeField] float _attackInterval;
+
+        public float AttackProb => _attackProb;
+        [Header("通常攻撃使用確率")]
+        [SerializeField] float _attackProb;
 
         public float AnimBlendTime => _animBlendTime;
         [Header("アニメーションブレンド時間")]

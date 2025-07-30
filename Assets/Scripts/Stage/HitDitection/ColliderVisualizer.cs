@@ -79,9 +79,14 @@ namespace Stage.HitDetection
                     _visualColliders.Add(visualCollider = Instantiate(_visualOBB, transform));
                     collider.CreateVisualCollider(visualCollider, _noHitImage, _hitImage);
                 }
-                else
+                else if (collider.Shape == HitCollider.ColliderShape.Sphere)
                 {
                     _visualColliders.Add(visualCollider = Instantiate(_visualSphere, transform));
+                    collider.CreateVisualCollider(visualCollider, _noHitImage, _hitImage);
+                }
+                else if (collider.Shape == HitCollider.ColliderShape.Capsule)
+                {
+                    _visualColliders.Add(visualCollider = Instantiate(_visualCapsule, transform));
                     collider.CreateVisualCollider(visualCollider, _noHitImage, _hitImage);
                 }
             }

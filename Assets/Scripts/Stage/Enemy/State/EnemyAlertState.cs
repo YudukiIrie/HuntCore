@@ -8,14 +8,19 @@ namespace Stage.Enemies
     public class EnemyAlertState : IState
     {
         Enemy _enemy;   // 敵クラス
+
+        // データキャッシュ用
         float _attackDistance;
         float _limitAngle;
+        float _attackProb;
 
         public EnemyAlertState(Enemy enemy)
         {
             _enemy = enemy;
+
             _attackDistance = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackDistance;
             _limitAngle = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).LimitAngle;
+            _attackProb = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackProb;
         }
 
         public void Enter()
@@ -51,7 +56,14 @@ namespace Stage.Enemies
                 _enemy.StateMachine.TransitionTo(EnemyState.Turn);
             // 攻撃
             else if (_enemy.CheckAttackState())
-                _enemy.StateMachine.TransitionTo(EnemyState.Attack);
+            {
+                // 通常攻撃
+                if (_enemy.Probability(_attackProb))
+                    _enemy.StateMachine.TransitionTo(EnemyState.Attack);
+                // 爪攻撃
+                else
+                    _enemy.StateMachine.TransitionTo(EnemyState.ClawAttack);
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Buffers;
 using UnityEngine;
 
 namespace Stage.HitDetection
@@ -5,8 +6,11 @@ namespace Stage.HitDetection
     /// <summary>
     /// 当たり判定コライダー親クラス
     /// </summary>
-    public class HitCollider
+    public abstract class HitCollider
     {
+        // コライダーの所有者
+        public HitInfo Owner {  get; private set; }
+
         // コライダーの形状
         public enum ColliderShape
         {
@@ -31,13 +35,11 @@ namespace Stage.HitDetection
         // ヒット情報
         public struct HitInformation
         {
-            public bool didHit;              // ヒットさせたかどうか
             public bool wasHit;              // ヒットさせられたかどうか
             public HitCollider other;        // 接触相手のコライダー
 
             public HitInformation(bool didHit, bool wasHit)
             {
-                this.didHit = didHit;
                 this.wasHit = wasHit;
                 other = null;
             }
@@ -48,7 +50,6 @@ namespace Stage.HitDetection
             /// <param name="other">相手コライダー</param>
             public void RegisterHit(HitCollider other)
             {
-                didHit = true;
                 this.other = other;
             }
 
@@ -65,8 +66,6 @@ namespace Stage.HitDetection
             /// </summary>
             public void ResetHitRecords()
             {
-                didHit = false;
-                //targetRole = ColliderRole.None;
                 other = null;
             }
 
@@ -85,8 +84,9 @@ namespace Stage.HitDetection
         // 可視化コライダーサイズ
         Vector3 _scale;
 
-        public HitCollider(ColliderShape shape, ColliderRole role, Vector3 scale)
+        public HitCollider(HitInfo owner, ColliderShape shape, ColliderRole role, Vector3 scale)
         {
+            Owner = owner;
             Shape = shape;
             Role  = role;
             HitInfo = new HitInformation(false, false);
@@ -115,6 +115,8 @@ namespace Stage.HitDetection
             HitInformation info = HitInfo;
             info.ReceiveHit();
             HitInfo = info;
+
+            Owner.ReceiveHit();
         }
 
         public void ResetHitRecords()
@@ -129,12 +131,14 @@ namespace Stage.HitDetection
             HitInformation info = HitInfo;
             info.ResetHitReceived();
             HitInfo = info;
+
+            Owner.ResetHitReceived();
         }
 
         /// <summary>
         /// 情報の更新
         /// </summary>
         /// <param name="transform">更新元Transform</param>
-        public virtual void UpdateInfo(Transform transform) { }
+        public abstract void UpdateInfo(Transform transform);
     }
 }

@@ -21,9 +21,9 @@ namespace Stage.HitDetection
         // íÜêSÇ©ÇÁXYZïΩñ Ç‹Ç≈ÇÃí∑Ç≥(îºåa)
         public Vector3 Radius { get; private set; }
 
-        public OBB(
+        public OBB(HitInfo owner,
             Transform transform, Vector3 size,
-            ColliderShape shape, ColliderRole type) : base(shape, type, size)
+            ColliderShape shape, ColliderRole type) : base(owner, shape, type, size)
         {
             Center   = transform.position;
             Rotation = transform.rotation;
