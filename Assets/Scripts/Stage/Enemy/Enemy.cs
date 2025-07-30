@@ -1,7 +1,5 @@
 using Stage.enemies;
-using Stage.HitDetection;
 using Stage.Players;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Stage.Enemies

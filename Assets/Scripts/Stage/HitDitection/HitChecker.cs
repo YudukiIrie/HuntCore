@@ -49,6 +49,16 @@ namespace Stage.HitDetection
                             return true;
                         }
                     }
+                    // 相手がカプセルの場合
+                    else if (b.Shape == HitCollider.ColliderShape.Capsule)
+                    {
+                        if (CapsuleOBBHitChecker.IntersectCapsuleOBB((HitCapsule)b, (OBB)a))
+                        {
+                            a.RegisterHit(b);
+                            b.ReceiveHit();
+                            return true;
+                        }
+                    }
                 }
 
                 // === 自身が球体の場合 ===

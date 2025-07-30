@@ -1,4 +1,5 @@
 using Stage.HitDetection;
+using UnityEngine;
 
 namespace Stage.Enemies
 {
@@ -9,9 +10,14 @@ namespace Stage.Enemies
     {
         Enemy _enemy;
 
+        // データキャッシュ用
+        Vector2 _hitWindow;
+
         public EnemyClawAttackState(Enemy enemy)
         {
             _enemy = enemy;
+
+            _hitWindow = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).ClawHitWindow;
         }
         
         public void Enter()
@@ -42,15 +48,21 @@ namespace Stage.Enemies
         /// </summary>
         void DetectHit()
         {
-            if (HitChecker.IsColliding(_enemy.Collider.RClaw, _enemy.Player.Collider.Colliders))
+            float start = _hitWindow.x;
+            float end   = _hitWindow.y;
+            float progress = _enemy.Animation.CheckRatio(EnemyAnimation.HashClawAttack);
+            if (start <= progress && progress <= end)
             {
-                HitCollider other = _enemy.Collider.RClaw.HitInfo.other;
-                _enemy.Player.HitReaction.ReactToHit(other);
-            }
-            else if (HitChecker.IsColliding(_enemy.Collider.LClaw, _enemy.Player.Collider.Colliders))
-            {
-                HitCollider other = _enemy.Collider.LClaw.HitInfo.other;
-                _enemy.Player.HitReaction.ReactToHit(other);
+                if (HitChecker.IsColliding(_enemy.Collider.RClaw, _enemy.Player.Collider.Colliders))
+                {
+                    HitCollider other = _enemy.Collider.RClaw.HitInfo.other;
+                    _enemy.Player.HitReaction.ReactToHit(other);
+                }
+                else if (HitChecker.IsColliding(_enemy.Collider.LClaw, _enemy.Player.Collider.Colliders))
+                {
+                    HitCollider other = _enemy.Collider.LClaw.HitInfo.other;
+                    _enemy.Player.HitReaction.ReactToHit(other);
+                }
             }
         }
 

@@ -1,6 +1,5 @@
 using Stage.HitDetection;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Stage.Players
 {

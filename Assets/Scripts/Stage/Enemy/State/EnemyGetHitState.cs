@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Stage.Enemies
 {
     public class EnemyGetHitState : IState

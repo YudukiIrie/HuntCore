@@ -46,7 +46,7 @@ namespace Stage.Players
 
             // プレイヤーコライダー
             Colliders.Add(Player = new HitCapsule(this,
-                _playerTransform, PlayerData.Data.Height, PlayerData.Data.Radius, 
+                _playerTransform, PlayerData.Data.Size.y, PlayerData.Data.Size.x, 
                 HitCollider.ColliderShape.Capsule, HitCollider.ColliderRole.Body));
             _transforms[Colliders.Count - 1] = _playerTransform;
 

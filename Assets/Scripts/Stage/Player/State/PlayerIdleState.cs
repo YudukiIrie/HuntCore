@@ -1,4 +1,3 @@
-using Stage.HitDetection;
 using UnityEngine;
 
 namespace Stage.Players

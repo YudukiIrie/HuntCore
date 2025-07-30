@@ -80,6 +80,14 @@ namespace Stage.Enemies
         [Header("爪サイズ(X:半径, Y:高さ)")]
         [SerializeField] Vector2 _clawSize;
 
+        public Vector2 NeckSize => _neckSize;
+        [Header("首サイズ(X:半径, Y:高さ)")]
+        [SerializeField] Vector2 _neckSize;
+
+        public Vector2 LegSize => _legSize;
+        [Header("前足サイズ(X:半径, Y:高さ)")]
+        [SerializeField] Vector2 _legSize;
+
         public float FindDistance => _findDistance;
         [Header("プレイヤー発見距離")]
         [SerializeField] float _findDistance;
@@ -117,8 +125,12 @@ namespace Stage.Enemies
         [SerializeField] float _animBlendTime;
 
         public Vector2 AttackHitWindow => _attackHitWindow;
-        [Header("攻撃当たり判定有効区間(X:開始, Y:終了)")]
+        [Header("通常攻撃当たり判定有効区間(X:開始, Y:終了)")]
         [SerializeField] Vector2 _attackHitWindow;
+
+        public Vector2 ClawHitWindow => _clawHitWindow;
+        [Header("爪攻撃当たり判定有効区間(X:開始, Y:終了)")]
+        [SerializeField] Vector2 _clawHitWindow;
 
         public float LimitAngle => _limitAngle;
         [Header("対象との限界角度")]

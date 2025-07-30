@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Stage.Enemies
 {
     /// <summary>
