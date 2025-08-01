@@ -88,21 +88,29 @@ namespace Stage.Enemies
         [Header("前足サイズ(X:半径, Y:高さ)")]
         [SerializeField] Vector2 _legSize;
 
-        public float FindDistance => _findDistance;
+        public float FindDist => _findDist;
         [Header("プレイヤー発見距離")]
-        [SerializeField] float _findDistance;
+        [SerializeField] float _findDist;
 
-        public float RoarDistance => _roarDistance;
+        public float RoarDist => _roarDist;
         [Header("咆哮距離")]
-        [SerializeField] float _roarDistance;
+        [SerializeField] float _roarDist;
 
-        public float StopDistance => _stopDistance;
+        public float StopDist => _stopDist;
         [Header("追跡停止距離")]
-        [SerializeField] float _stopDistance;
+        [SerializeField] float _stopDist;
 
-        public float AttackDistance => _attackDistance;
-        [Header("攻撃可能プレイヤー間距離")]
-        [SerializeField] float _attackDistance;
+        public float ActionDist => _actionDist;
+        [Header("プレイヤーへ行動を起こす距離")]
+        [SerializeField] float _actionDist;
+
+        public float AttackDist => _attackDist;
+        [Header("通常攻撃可能距離")]
+        [SerializeField] float _attackDist;
+
+        public float ClawAttackDist => _clawAttackDist;
+        [Header("爪攻撃可能距離")]
+        [SerializeField] float _clawAttackDist;
 
         public float ChaseSpeed => _chaseSpeed;
         [Header("追跡速度")]

@@ -14,7 +14,7 @@ namespace Stage.Enemies
         // データキャッシュ用
         float _chaseSpeed;
         float _chaseRotSpeed;
-        float _stopDistance;
+        float _stopDist;
 
         public EnemyChaseState(Enemy enemy)
         {
@@ -22,7 +22,7 @@ namespace Stage.Enemies
 
             _chaseSpeed = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).ChaseSpeed;
             _chaseRotSpeed = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).ChaseRotSpeed;
-            _stopDistance = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).StopDistance;
+            _stopDist = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).StopDist;
         }
 
         public void Enter()
@@ -47,7 +47,8 @@ namespace Stage.Enemies
 
         public void Exit()
         {
-
+            // 遷移後に動いてほしくないため、加えた力をリセット
+            _enemy.Rigidbody.velocity = Vector3.zero;
         }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace Stage.Enemies
         void Transition()
         {
             // 警戒
-            if (_enemy.GetDistanceToPlayer() <= _stopDistance)
+            if (_enemy.GetDistanceToPlayer() <= _stopDist)
                 _enemy.StateMachine.TransitionTo(EnemyState.Alert);
         }
 

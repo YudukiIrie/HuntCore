@@ -10,17 +10,19 @@ namespace Stage.Enemies
         Enemy _enemy;   // 敵クラス
 
         // データキャッシュ用
-        float _attackDistance;
+        float _actionkDist;
         float _limitAngle;
         float _attackProb;
+        float _attackDist;
 
         public EnemyAlertState(Enemy enemy)
         {
             _enemy = enemy;
 
-            _attackDistance = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackDistance;
+            _actionkDist = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).ActionDist;
             _limitAngle = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).LimitAngle;
             _attackProb = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackProb;
+            _attackDist = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackDist;
         }
 
         public void Enter()
@@ -49,7 +51,7 @@ namespace Stage.Enemies
         void Transition()
         {
             // 追跡
-            if (_enemy.GetDistanceToPlayer() > _attackDistance)
+            if (_enemy.GetDistanceToPlayer() > _actionkDist)
                 _enemy.StateMachine.TransitionTo(EnemyState.Chase);
             // 方向転換
             else if (_enemy.GetAngleToPlayer() > _limitAngle)
@@ -58,7 +60,7 @@ namespace Stage.Enemies
             else if (_enemy.CheckAttackState())
             {
                 // 通常攻撃
-                if (_enemy.Probability(_attackProb))
+                if (_enemy.GetDistanceToPlayer() <= _attackDist)
                     _enemy.StateMachine.TransitionTo(EnemyState.Attack);
                 // 爪攻撃
                 else

@@ -11,7 +11,7 @@ namespace Stage.Enemies
         public EnemyRoarState(Enemy enemy)
         {
             _enemy = enemy;
-            _roarDistance = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).RoarDistance;
+            _roarDistance = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).RoarDist;
         }
 
         public void Enter()

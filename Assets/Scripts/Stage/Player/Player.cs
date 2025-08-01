@@ -43,8 +43,7 @@ namespace Stage.Players
 
         // ガード関連
         bool _isBlocking = false;   // ガード状態の有無
-        public int BlockNum {  get; private set; }  // ガード回数
-
+        
         void Awake()
         {
             StateMachine = new PlayerStateMachine(this);
@@ -91,10 +90,7 @@ namespace Stage.Players
         public void TakeImpact()
         {
             if (_isBlocking)
-            {
-                BlockNum++;
                 StateMachine.TransitionTo(PlayerState.Blocked);
-            }
             else
                 StateMachine.TransitionTo(PlayerState.Impacted);
         }

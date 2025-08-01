@@ -16,9 +16,6 @@ namespace Stage.UI
         [Header("敵ヒット数テキスト")]
         [SerializeField] Text _enemyHitText;
 
-        [Header("ブロック数テキスト")]
-        [SerializeField] Text _blockNumText;
-
         [Header("プレイヤークラス")]
         [SerializeField] Player _player;
 
@@ -28,8 +25,6 @@ namespace Stage.UI
         void LateUpdate()
         {
             UpdateHitUI();
-
-            UpdateGuardUI();
         }
 
         /// <summary>
@@ -39,14 +34,6 @@ namespace Stage.UI
         {
             _playerHitText.text = _player.HitNum.ToString();
             _enemyHitText.text = _enemy.HitNum.ToString();
-        }
-
-        /// <summary>
-        /// ガードUIの更新
-        /// </summary>
-        void UpdateGuardUI()
-        {
-            _blockNumText.text = _player.BlockNum.ToString();
         }
     }
 }

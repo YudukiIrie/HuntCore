@@ -11,7 +11,7 @@ namespace Stage.Enemies
         public EnemyIdleState(Enemy enemy)
         {
             _enemy = enemy;
-            _findDistance = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).FindDistance;
+            _findDistance = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).FindDist;
         }
 
         public void Enter()

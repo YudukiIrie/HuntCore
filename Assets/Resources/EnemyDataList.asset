@@ -18,13 +18,15 @@ MonoBehaviour:
     _headRadius: 0.6
     _wingSize: {x: 1.7, y: 0.5, z: 4}
     _wingRootSize: {x: 1.5, y: 0.5, z: 1.7}
-    _clawSize: {x: 0.25, y: 1.2}
+    _clawSize: {x: 0.3, y: 1.4}
     _neckSize: {x: 0.6, y: 1.8}
     _legSize: {x: 0.5, y: 1.4}
-    _findDistance: 10
-    _roarDistance: 15
-    _stopDistance: 5
-    _attackDistance: 7
+    _findDist: 10
+    _roarDist: 15
+    _stopDist: 3.3
+    _actionDist: 4.8
+    _attackDist: 3.25
+    _clawAttackDist: 4.8
     _chaseSpeed: 5
     _chaseRotSpeed: 300
     _attackInterval: 3
