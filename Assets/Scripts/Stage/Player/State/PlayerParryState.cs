@@ -98,6 +98,7 @@ namespace Stage.Players
             {
                 if (HitChecker.IsColliding(_player.Collider.Weapon, _player.Enemy.Collider.Colliders))
                 {
+                    _player.FreezeFrame();
                     _player.Enemy.TakeImpact(EnemyState.Down);
                     _player.Enemy.IncreaseHitNum();
                 }

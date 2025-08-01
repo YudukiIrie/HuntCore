@@ -41,8 +41,13 @@ namespace Stage.Players
         // 攻撃ヒット数
         public int HitNum {  get; private set; }
 
-        // ガード関連
-        bool _isBlocking = false;   // ガード状態の有無
+        // ガード状態の有無
+        bool _isBlocking = false;
+
+        // ヒットストップ関連
+        bool _isFreezed;    // ヒットストップの有無
+        float _freezeTimer; // ヒットストップタイマー
+        float _freezeDuration;
         
         void Awake()
         {
@@ -52,6 +57,8 @@ namespace Stage.Players
             Action = new PlayerAction();
 
             Action.Enable();
+
+            _freezeDuration = WeaponData.Data.FreezeDuration;
         }
 
         void Start()
@@ -62,6 +69,8 @@ namespace Stage.Players
         void Update()
         {
             StateMachine.Update();
+
+            UpdateFreezeTimer();
         }
 
         void FixedUpdate()
@@ -109,6 +118,32 @@ namespace Stage.Players
         public void IncreaseHitNum()
         {
             HitNum++;
+        }
+
+        /// <summary>
+        /// ヒットストップ開始
+        /// </summary>
+        public void FreezeFrame()
+        {
+            _isFreezed = true;
+            Animation.Stop();
+        }
+
+        /// <summary>
+        ///  ヒットストップタイマーの更新
+        /// </summary>
+        void UpdateFreezeTimer()
+        {
+            if (_isFreezed)
+            {
+                _freezeTimer += Time.deltaTime;
+                if (_freezeTimer >= _freezeDuration)
+                {
+                    _isFreezed = false;
+                    _freezeTimer = 0.0f;
+                    Animation.ResetParam();
+                }
+            }
         }
     }
 }

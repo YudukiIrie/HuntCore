@@ -133,10 +133,19 @@ namespace Stage.Players
         }
 
         /// <summary>
+        /// アニメーションストップ
+        /// </summary>
+        public void Stop()
+        {
+            _animator.speed = 0.0f;
+        }
+
+        /// <summary>
         /// パラメータのリセット
         /// </summary>
-        void ResetParam()
+        public void ResetParam()
         {
+            _animator.speed = 1.0f;
             _animator.SetFloat(HashSpeed, 1);
         }
     }

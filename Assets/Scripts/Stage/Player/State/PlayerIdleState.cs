@@ -8,13 +8,10 @@ namespace Stage.Players
     public class PlayerIdleState : IState
     {
         Player _player;     // プレイヤークラス
-        float _elapsedTime; // 経過時間
-        float _toOtherDuration;
-
+        
         public PlayerIdleState(Player player)
         {
             _player = player;
-            _toOtherDuration = PlayerData.Data.IdleToOtherDuration;
         }
 
         public void Enter()
@@ -24,8 +21,6 @@ namespace Stage.Players
 
         public void Update()
         {
-            _elapsedTime += Time.deltaTime;
-
             Transition();
         }
 
@@ -36,7 +31,7 @@ namespace Stage.Players
 
         public void Exit()
         {
-            _elapsedTime = 0.0f;
+
         }
 
         /// <summary>

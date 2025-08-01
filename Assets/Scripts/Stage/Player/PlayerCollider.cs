@@ -63,9 +63,7 @@ namespace Stage.Players
         void UpdateColliders()
         {
             for (int i = 0; i < Colliders.Count; ++i)
-            {
                 Colliders[i].UpdateInfo(_transforms[i]);
-            }
         }
     }
 }

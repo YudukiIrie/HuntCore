@@ -89,7 +89,10 @@ namespace Stage.Players
             if (progress >= start && progress <= end)
             {
                 if (HitChecker.IsColliding(_player.Collider.Weapon, _player.Enemy.Collider.Colliders))
+                {
+                    _player.FreezeFrame();
                     _player.Enemy.IncreaseHitNum();
+                }
             }
         }
 

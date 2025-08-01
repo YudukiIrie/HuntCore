@@ -52,6 +52,10 @@ namespace Stage.Players
         [Header("パリィ当たり判定有効区間(X:開始, Y:終了)")]
         [SerializeField] Vector2 _parryHitWindow;
 
+        public float FreezeDuration => _freezeDuration;
+        [Header("ヒットストップ継続時間")]
+        [SerializeField] float _freezeDuration;
+
         public int InitialPoolSize => _initialPoolSize;
         [Header("残像用初期プールサイズ")]
         [SerializeField] int _initialPoolSize;
