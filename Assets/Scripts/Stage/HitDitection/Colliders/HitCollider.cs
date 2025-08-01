@@ -2,6 +2,25 @@ using UnityEngine;
 
 namespace Stage.HitDetection
 {
+    // コライダーの形状
+    public enum ColliderShape
+    {
+        OBB,    // Oriented Bounding Box
+        Sphere, // 球体
+        Capsule // カプセル
+    }
+
+    // コライダーの役割
+    public enum ColliderRole
+    {
+        Body,   // 体の部位
+        Weapon, // 武器または攻撃の一部
+        Guard,  // 防御状態
+        Parry,  // パリィ可能状態
+        Roll,   // 回避状態
+        None
+    }
+
     /// <summary>
     /// 当たり判定コライダー親クラス
     /// </summary>
@@ -10,76 +29,21 @@ namespace Stage.HitDetection
         // コライダーの所有者
         public HitInfo Owner {  get; private set; }
 
-        // コライダーの形状
-        public enum ColliderShape
-        {
-            OBB,    // Oriented Bounding Box
-            Sphere, // 球体
-            Capsule // カプセル
-        }
+        // 形状
         public ColliderShape Shape {  get; private set; }
 
-        // コライダーの役割
-        public enum ColliderRole
-        {
-            Body,   // 体の部位
-            Weapon, // 武器または攻撃の一部
-            Guard,  // 防御状態
-            Parry,  // パリィ可能状態
-            Roll,   // 回避状態
-            None
-        }
+        // 属性
         public ColliderRole Role { get; private set; }
 
-        // ヒット情報
-        public struct HitInformation
-        {
-            public bool wasHit;              // ヒットさせられたかどうか
-            public HitCollider other;        // 接触相手のコライダー
+        // 被攻撃の有無
+        public bool WasHit {  get; private set; }
 
-            public HitInformation(bool didHit, bool wasHit)
-            {
-                this.wasHit = wasHit;
-                other = null;
-            }
-
-            /// <summary>
-            /// ヒット情報の登録(能動側)
-            /// </summary>
-            /// <param name="other">相手コライダー</param>
-            public void RegisterHit(HitCollider other)
-            {
-                this.other = other;
-            }
-
-            /// <summary>
-            /// ヒット情報の受け取り(受動側)
-            /// </summary>
-            public void ReceiveHit()
-            {
-                wasHit = true;
-            }
-
-            /// <summary>
-            /// ヒット情報のリセット(能動側)
-            /// </summary>
-            public void ResetHitRecords()
-            {
-                other = null;
-            }
-
-            /// <summary>
-            /// ヒット情報のリセット(受動側)
-            /// </summary>
-            public void ResetHitReceived()
-            {
-                wasHit = false;
-            }
-        }
-        public HitInformation HitInfo { get; private set; }
+        // 接触相手コライダー
+        public HitCollider Other {  get; private set; }
 
         // 可視化用オブジェクト
         protected VisualCollider _visualCollider;
+
         // 可視化コライダーサイズ
         Vector3 _scale;
 
@@ -88,7 +52,8 @@ namespace Stage.HitDetection
             Owner = owner;
             Shape = shape;
             Role  = role;
-            HitInfo = new HitInformation(false, false);
+            WasHit = false;
+            Other  = null;
             _scale = scale;
         }
 
@@ -104,33 +69,23 @@ namespace Stage.HitDetection
 
         public void RegisterHit(HitCollider other)
         {
-            HitInformation info = HitInfo;
-            info.RegisterHit(other);
-            HitInfo = info;
+            Other = other;
         }
 
         public void ReceiveHit()
         {
-            HitInformation info = HitInfo;
-            info.ReceiveHit();
-            HitInfo = info;
-
+            WasHit = true;
             Owner.ReceiveHit();
         }
 
         public void ResetHitRecords()
         {
-            HitInformation info = HitInfo;
-            info.ResetHitRecords();
-            HitInfo = info;
+            Other = null;
         }
 
         public void ResetHitReceived()
         {
-            HitInformation info = HitInfo;
-            info.ResetHitReceived();
-            HitInfo = info;
-
+            WasHit = false;
             Owner.ResetHitReceived();
         }
 

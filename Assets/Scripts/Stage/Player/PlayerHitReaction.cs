@@ -12,18 +12,17 @@ namespace Stage.Players
     public class PlayerHitRaction
     {
         Player _player;
-        Dictionary<HitCollider.ColliderRole, Action> _reactions;
+        Dictionary<ColliderRole, Action> _reactions;
 
         public PlayerHitRaction(Player player, int capacity)
         {
             _player = player;
             _reactions = 
-                new Dictionary<HitCollider.ColliderRole, Action>(capacity);
+                new Dictionary<ColliderRole, Action>(capacity);
 
-            _reactions.Add(HitCollider.ColliderRole.Body, BodyReaction);
-            //_reactions.Add(HitCollider.ColliderRole.Roll, RollReaction);
-            _reactions.Add(HitCollider.ColliderRole.Guard, GuradReaction);
-            _reactions.Add(HitCollider.ColliderRole.Parry, ParryReaction);
+            _reactions.Add(ColliderRole.Body, BodyReaction);
+            _reactions.Add(ColliderRole.Guard, GuradReaction);
+            _reactions.Add(ColliderRole.Parry, ParryReaction);
         }
 
         /// <summary>
@@ -32,7 +31,7 @@ namespace Stage.Players
         /// <param name="own">判別用コライダー属性</param>
         public void ReactToHit(HitCollider own)
         {
-            HitCollider.ColliderRole role = own.Role;
+            ColliderRole role = own.Role;
 
             if (_reactions.TryGetValue(role, out Action action))
                 action();
@@ -47,14 +46,6 @@ namespace Stage.Players
         {
             _player.IncreaseHitNum();
         }
-
-        /// <summary>
-        /// 回避時リアクション
-        /// </summary>
-        //void RollReaction()
-        //{
-        //    // 無敵のためリアクションなし
-        //}
 
         /// <summary>
         /// ガード時リアクション

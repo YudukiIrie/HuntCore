@@ -42,7 +42,7 @@ namespace Stage.HitDetection
             AxisY = transform.up;
             AxisZ = transform.forward;
 
-            _visualCollider.UpdateInfo(transform, HitInfo.wasHit);
+            _visualCollider.UpdateInfo(transform, WasHit);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Stage.HitDetection
         {
             Center = transform.position;
 
-            _visualCollider.UpdateInfo(transform, HitInfo.wasHit);
+            _visualCollider.UpdateInfo(transform, WasHit);
         }
     }
 }

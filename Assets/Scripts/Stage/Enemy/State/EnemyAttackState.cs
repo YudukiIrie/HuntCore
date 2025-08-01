@@ -54,7 +54,7 @@ namespace Stage.Enemies
             {
                 if (HitChecker.IsColliding(_enemy.Collider.Head, _enemy.Player.Collider.Colliders))
                 {
-                    HitCollider other = _enemy.Collider.Head.HitInfo.other;
+                    HitCollider other = _enemy.Collider.Head.Other;
                     _enemy.Player.HitReaction.ReactToHit(other);
                 }
             }

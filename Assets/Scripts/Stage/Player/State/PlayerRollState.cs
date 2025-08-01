@@ -29,7 +29,7 @@ namespace Stage.Players
         {
             Rotate();
 
-            _player.Collider.Player.SetColliderRole(HitCollider.ColliderRole.Roll);
+            _player.Collider.Player.SetColliderRole(ColliderRole.Roll);
 
             _player.Animation.Roll();
         }
@@ -53,7 +53,7 @@ namespace Stage.Players
         public void Exit()
         {
             _elapsedTime = 0.0f;
-            _player.Collider.Player.SetColliderRole(HitCollider.ColliderRole.Body);
+            _player.Collider.Player.SetColliderRole(ColliderRole.Body);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Stage.Players
         void SwitchColliderRole()
         {
             if (_elapsedTime >= _iTime)
-                _player.Collider.Player.SetColliderRole(HitCollider.ColliderRole.Body);
+                _player.Collider.Player.SetColliderRole(ColliderRole.Body);
         }
 
         /// <summary>

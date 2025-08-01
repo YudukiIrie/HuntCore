@@ -55,12 +55,12 @@ namespace Stage.Enemies
             {
                 if (HitChecker.IsColliding(_enemy.Collider.RClaw, _enemy.Player.Collider.Colliders))
                 {
-                    HitCollider other = _enemy.Collider.RClaw.HitInfo.other;
+                    HitCollider other = _enemy.Collider.RClaw.Other;
                     _enemy.Player.HitReaction.ReactToHit(other);
                 }
                 else if (HitChecker.IsColliding(_enemy.Collider.LClaw, _enemy.Player.Collider.Colliders))
                 {
-                    HitCollider other = _enemy.Collider.LClaw.HitInfo.other;
+                    HitCollider other = _enemy.Collider.LClaw.Other;
                     _enemy.Player.HitReaction.ReactToHit(other);
                 }
             }

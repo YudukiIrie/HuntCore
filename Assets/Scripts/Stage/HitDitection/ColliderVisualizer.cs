@@ -58,7 +58,7 @@ namespace Stage.HitDetection
             foreach (var collider in _player.Collider.Colliders)
             {
                 GameObject visualGO;
-                if (collider.Shape == HitCollider.ColliderShape.OBB)
+                if (collider.Shape == ColliderShape.OBB)
                 {
                     _visualColliders.Add(visualGO = Instantiate(_visualOBB, transform));
                     collider.CreateVisualCollider(visualGO, _noHitImage, _hitImage);
@@ -74,17 +74,17 @@ namespace Stage.HitDetection
             foreach (var collider in _enemy.Collider.Colliders)
             {
                 GameObject visualCollider;
-                if (collider.Shape == HitCollider.ColliderShape.OBB)
+                if (collider.Shape == ColliderShape.OBB)
                 {
                     _visualColliders.Add(visualCollider = Instantiate(_visualOBB, transform));
                     collider.CreateVisualCollider(visualCollider, _noHitImage, _hitImage);
                 }
-                else if (collider.Shape == HitCollider.ColliderShape.Sphere)
+                else if (collider.Shape == ColliderShape.Sphere)
                 {
                     _visualColliders.Add(visualCollider = Instantiate(_visualSphere, transform));
                     collider.CreateVisualCollider(visualCollider, _noHitImage, _hitImage);
                 }
-                else if (collider.Shape == HitCollider.ColliderShape.Capsule)
+                else if (collider.Shape == ColliderShape.Capsule)
                 {
                     _visualColliders.Add(visualCollider = Instantiate(_visualCapsule, transform));
                     collider.CreateVisualCollider(visualCollider, _noHitImage, _hitImage);

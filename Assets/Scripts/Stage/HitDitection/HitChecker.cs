@@ -22,15 +22,15 @@ namespace Stage.HitDetection
                 // 受動側の所有者が判定済み、
                 // またはコライダーが武器・回避の場合は無視
                 if (b.Owner.WasHit ||
-                    b.Role == HitCollider.ColliderRole.Weapon ||
-                    b.Role == HitCollider.ColliderRole.Roll)
+                    b.Role == ColliderRole.Weapon ||
+                    b.Role == ColliderRole.Roll)
                     return false;
 
                 // === 自身がOBBの場合 ===
-                if (a.Shape == HitCollider.ColliderShape.OBB)
+                if (a.Shape == ColliderShape.OBB)
                 {
                     // 相手がOBBの場合
-                    if (b.Shape == HitCollider.ColliderShape.OBB)
+                    if (b.Shape == ColliderShape.OBB)
                     {
                         if (OBBHitChecker.IntersectOBBs((OBB)a, (OBB)b))
                         {
@@ -40,7 +40,7 @@ namespace Stage.HitDetection
                         }
                     }
                     // 相手が球体の場合
-                    else if (b.Shape == HitCollider.ColliderShape.Sphere)
+                    else if (b.Shape == ColliderShape.Sphere)
                     {
                         if (SphereOBBHitChecker.IntersectSphereOBB((HitSphere)b, (OBB)a))
                         {
@@ -50,7 +50,7 @@ namespace Stage.HitDetection
                         }
                     }
                     // 相手がカプセルの場合
-                    else if (b.Shape == HitCollider.ColliderShape.Capsule)
+                    else if (b.Shape == ColliderShape.Capsule)
                     {
                         if (CapsuleOBBHitChecker.IntersectCapsuleOBB((HitCapsule)b, (OBB)a))
                         {
@@ -62,10 +62,10 @@ namespace Stage.HitDetection
                 }
 
                 // === 自身が球体の場合 ===
-                else if (a.Shape == HitCollider.ColliderShape.Sphere)
+                else if (a.Shape == ColliderShape.Sphere)
                 {
                     // 相手がOBBの場合
-                    if (b.Shape == HitCollider.ColliderShape.OBB)
+                    if (b.Shape == ColliderShape.OBB)
                     {
                         if (SphereOBBHitChecker.IntersectSphereOBB((HitSphere)a, (OBB)b))
                         {
@@ -75,7 +75,7 @@ namespace Stage.HitDetection
                         }
                     }
                     // 相手がカプセルの場合
-                    if (b.Shape == HitCollider.ColliderShape.Capsule)
+                    if (b.Shape == ColliderShape.Capsule)
                     {
                         if (SphereCapsuleHitChecker.IntersectSphereCapsule((HitSphere)a, (HitCapsule)b))
                         {
@@ -87,10 +87,10 @@ namespace Stage.HitDetection
                 }
 
                 // === 自身がカプセルの場合 ===
-                else if (a.Shape == HitCollider.ColliderShape.Capsule)
+                else if (a.Shape == ColliderShape.Capsule)
                 {
                     // 相手がOBBの場合
-                    if (b.Shape == HitCollider.ColliderShape.OBB)
+                    if (b.Shape == ColliderShape.OBB)
                     {
                         if (CapsuleOBBHitChecker.IntersectCapsuleOBB((HitCapsule)a, (OBB)b))
                         {
@@ -100,7 +100,7 @@ namespace Stage.HitDetection
                         }
                     }
                     // 相手がカプセルの場合
-                    else if (b.Shape == HitCollider.ColliderShape.Capsule)
+                    else if (b.Shape == ColliderShape.Capsule)
                     {
                         if (CapsuleHitChecker.IntersectCapsules((HitCapsule)a, (HitCapsule)b))
                         {

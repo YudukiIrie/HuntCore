@@ -47,13 +47,13 @@ namespace Stage.Players
             // プレイヤーコライダー
             Colliders.Add(Player = new HitCapsule(this,
                 _playerTransform, PlayerData.Data.Size.y, PlayerData.Data.Size.x, 
-                HitCollider.ColliderShape.Capsule, HitCollider.ColliderRole.Body));
+                ColliderShape.Capsule, ColliderRole.Body));
             _transforms[Colliders.Count - 1] = _playerTransform;
 
             // 武器コライダー登録
             Colliders.Add(Weapon = new OBB(this,
                 _weaponTransform, WeaponData.Data.GreatSwordSize,
-                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Weapon));
+                ColliderShape.OBB, ColliderRole.Weapon));
             _transforms[Colliders.Count - 1] = _weaponTransform;
         }
 

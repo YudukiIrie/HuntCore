@@ -84,72 +84,72 @@ namespace Stage.enemies
             // 敵コライダー
             Colliders.Add(Enemy = new OBB(this,
                 _enemyTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).Size,
-                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
+                ColliderShape.OBB, ColliderRole.Body));
             _transforms[Colliders.Count - 1] = _enemyTransform;
 
             // 右翼脚コライダー
             Colliders.Add(RWing = new OBB(this,
                 _rWingTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).WingSize,
-                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
+                ColliderShape.OBB, ColliderRole.Body));
             _transforms[Colliders.Count - 1] = _rWingTransform;
 
             // 左翼脚コライダー
             Colliders.Add(LWing = new OBB(this,
                 _lWingTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).WingSize,
-                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
+                ColliderShape.OBB, ColliderRole.Body));
             _transforms[Colliders.Count - 1] = _lWingTransform;
 
             // 右翼脚付け根コライダー
             Colliders.Add(RWingRoot = new OBB(this,
                 _rWingRootTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).WingRootSize,
-                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
+                ColliderShape.OBB, ColliderRole.Body));
             _transforms[Colliders.Count - 1] = _rWingRootTransform;
 
             // 左翼脚付け根コライダー
             Colliders.Add(LWingRoot = new OBB(this,     
                 _lWingRootTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).WingRootSize,
-                HitCollider.ColliderShape.OBB, HitCollider.ColliderRole.Body));
+                ColliderShape.OBB, ColliderRole.Body));
             _transforms[Colliders.Count - 1] = _lWingRootTransform;
 
             // 頭コライダー
             Colliders.Add(Head = new HitSphere(this,
                 _headTransform.position, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).HeadRadius,
-                HitCollider.ColliderShape.Sphere, HitCollider.ColliderRole.Body));
+                ColliderShape.Sphere, ColliderRole.Body));
             _transforms[Colliders.Count - 1] = _headTransform;
 
             // 右爪コライダー
             Colliders.Add(RClaw = new HitCapsule(this,
                 _rClawTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).ClawSize.y, 
                 EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).ClawSize.x, 
-                HitCollider.ColliderShape.Capsule, HitCollider.ColliderRole.Body));
+                ColliderShape.Capsule, ColliderRole.Body));
             _transforms[Colliders.Count - 1] = _rClawTransform;
 
             // 左爪コライダー
             Colliders.Add(LClaw = new HitCapsule(this,
                 _lClawTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).ClawSize.y,
                 EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).ClawSize.x,
-                HitCollider.ColliderShape.Capsule, HitCollider.ColliderRole.Body));
+                ColliderShape.Capsule, ColliderRole.Body));
             _transforms[Colliders.Count - 1] = _lClawTransform;
 
             // 首コライダー
             Colliders.Add(Neck = new HitCapsule(this,
                 _neckTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).NeckSize.y,
                 EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).NeckSize.x,
-                HitCollider.ColliderShape.Capsule, HitCollider.ColliderRole.Body));
+                ColliderShape.Capsule, ColliderRole.Body));
             _transforms[Colliders.Count - 1] = _neckTransform;
 
             // 右前脚コライダー
             Colliders.Add(RLeg = new HitCapsule(this,
                 _rLegTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).LegSize.y,
                 EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).LegSize.x,
-                HitCollider.ColliderShape.Capsule, HitCollider.ColliderRole.Body));
+                ColliderShape.Capsule, ColliderRole.Body));
             _transforms[Colliders.Count - 1] = _rLegTransform;
 
             // 左前脚コライダー
             Colliders.Add(LLeg = new HitCapsule(this,
                 _lLegTransform, EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).LegSize.y,
                 EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).LegSize.x,
-                HitCollider.ColliderShape.Capsule, HitCollider.ColliderRole.Body));
+                ColliderShape.Capsule, ColliderRole.Body));
             _transforms[Colliders.Count - 1] = _lLegTransform;
         }
 

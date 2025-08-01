@@ -34,7 +34,7 @@ namespace Stage.HitDetection
             BottomPoint = transform.position - (transform.up * (_height / 2 - Radius));
             TopPoint = transform.position + (transform.up * (_height / 2 - Radius));
 
-            _visualCollider.UpdateInfo(transform, HitInfo.wasHit);
+            _visualCollider.UpdateInfo(transform, WasHit);
         }
     }
 }
