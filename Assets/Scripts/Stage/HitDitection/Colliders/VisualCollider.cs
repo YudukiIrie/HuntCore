@@ -8,17 +8,14 @@ namespace Stage.HitDetection
     public class VisualCollider
     {
         // 可視化ゲームオブジェクト
-        protected GameObject _visualGO;
-
-        // サイズ
-        //protected Vector3 _scale;
+       GameObject _visualGO;
 
         // メッシュレンダラー
-        protected MeshRenderer _renderer;
+        MeshRenderer _renderer;
 
         // マテリアル
-        protected Material _noHitImage;
-        protected Material _hitImage;
+        Material _noHitImage;
+        Material _hitImage;
 
         public VisualCollider(GameObject go, Vector3 scale, Material noHit, Material hit)
         {
@@ -44,9 +41,10 @@ namespace Stage.HitDetection
                 _visualGO.transform.rotation = transform.rotation;
 
                 // === マテリアル ===
-                Material[] mats = _renderer.materials;
+                Material[] mats = _renderer.sharedMaterials;
                 mats[0] = wasHit ? _hitImage : _noHitImage;
-                _renderer.materials = mats;
+                _renderer.sharedMaterials = mats;
+                
             }
         }
     }

@@ -12,7 +12,6 @@ namespace Stage.Enemies
         // データキャッシュ用
         float _actionkDist;
         float _limitAngle;
-        float _attackProb;
         float _attackDist;
 
         public EnemyAlertState(Enemy enemy)
@@ -21,7 +20,6 @@ namespace Stage.Enemies
 
             _actionkDist = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).ActionDist;
             _limitAngle = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).LimitAngle;
-            _attackProb = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackProb;
             _attackDist = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackDist;
         }
 
