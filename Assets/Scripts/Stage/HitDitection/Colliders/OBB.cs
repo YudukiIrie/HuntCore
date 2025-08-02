@@ -23,7 +23,7 @@ namespace Stage.HitDetection
 
         public OBB(HitInfo owner,
             Transform transform, Vector3 size,
-            ColliderShape shape, ColliderRole type) : base(owner, shape, type, size)
+            ColliderShape shape, ColliderRole type) : base(owner, shape, type, size, transform.position)
         {
             Center   = transform.position;
             Rotation = transform.rotation;
@@ -41,6 +41,8 @@ namespace Stage.HitDetection
             AxisX = transform.right;
             AxisY = transform.up;
             AxisZ = transform.forward;
+
+            _position = transform.position;
 
             _visualCollider.UpdateInfo(transform, WasHit);
         }

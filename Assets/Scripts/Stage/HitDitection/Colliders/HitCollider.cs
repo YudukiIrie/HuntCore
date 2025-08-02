@@ -47,7 +47,11 @@ namespace Stage.HitDetection
         // 可視化コライダーサイズ
         Vector3 _scale;
 
-        public HitCollider(HitInfo owner, ColliderShape shape, ColliderRole role, Vector3 scale)
+        // 座標(エフェクト生成時に使用)
+        public Vector3 Position { get { return _position; } }
+        protected Vector3 _position;
+
+        public HitCollider(HitInfo owner, ColliderShape shape, ColliderRole role, Vector3 scale, Vector3 pos)
         {
             Owner = owner;
             Shape = shape;
@@ -55,6 +59,7 @@ namespace Stage.HitDetection
             WasHit = false;
             Other  = null;
             _scale = scale;
+            _position = pos;
         }
 
         public void SetColliderRole(ColliderRole type)

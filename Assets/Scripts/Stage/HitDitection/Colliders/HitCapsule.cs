@@ -21,7 +21,7 @@ namespace Stage.HitDetection
         public HitCapsule(HitInfo owner,
             Transform transform, float height, float radius,
             ColliderShape shpae, ColliderRole role) 
-            : base(owner, shpae, role, new Vector3(radius * 2, height / 2, radius * 2))
+            : base(owner, shpae, role, new Vector3(radius * 2, height / 2, radius * 2), transform.position)
         {
             _height = height;
             BottomPoint = transform.position - (transform.up * (height / 2 - radius));
@@ -33,6 +33,8 @@ namespace Stage.HitDetection
         {
             BottomPoint = transform.position - (transform.up * (_height / 2 - Radius));
             TopPoint = transform.position + (transform.up * (_height / 2 - Radius));
+
+            _position = transform.position;
 
             _visualCollider.UpdateInfo(transform, WasHit);
         }

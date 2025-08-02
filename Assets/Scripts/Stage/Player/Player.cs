@@ -1,3 +1,4 @@
+using Stage.Effects;
 using Stage.Enemies;
 using UnityEngine;
 
@@ -12,7 +13,10 @@ namespace Stage.Players
         [field: SerializeField] public Enemy Enemy { get; private set; }
 
         [field: Header("武器残像生成クラス")]
-        [field: SerializeField] public WeaponAfterImageSpawner Spawner { get; private set; }
+        [field: SerializeField] public WeaponAfterImageSpawner AfterImageSpawner { get; private set; }
+
+        [field: Header("血しぶきエフェクト生成クラス")]
+        [field: SerializeField] public BloodFXSpawner BloodFXSpawner { get; private set; }
 
         [field: Header("コライダー管理クラス")]
         [field: SerializeField] public PlayerCollider Collider { get; private set; }

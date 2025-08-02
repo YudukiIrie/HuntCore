@@ -96,10 +96,12 @@ namespace Stage.Players
             var progress = _player.Animation.CheckRatio(PlayerAnimation.HashHeavyAttack);
             if (progress >= start && progress <= end)
             {
-                if (HitChecker.IsColliding(_player.Collider.Weapon, _player.Enemy.Collider.Colliders))
+                HitCollider weapon = _player.Collider.Weapon;
+                if (HitChecker.IsColliding(weapon, _player.Enemy.Collider.Colliders))
                 {
                     _player.FreezeFrame();
                     _player.Enemy.IncreaseHitNum();
+                    _player.BloodFXSpawner.Spawn(weapon.Other.Position);
                 }
             }
         }
@@ -111,7 +113,7 @@ namespace Stage.Players
         {
             if (!_player.Animation.CompareRatio(
                 PlayerAnimation.HashHeavyAttack, _afterImageEndRatio))
-                _player.Spawner.Spawn(_player.Weapon.transform);
+                _player.AfterImageSpawner.Spawn(_player.Weapon.transform);
         }
 
         /// <summary>

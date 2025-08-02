@@ -1,8 +1,8 @@
-Shader "Custom/OBBNoHitImage"
+Shader "Custom/HitImage"
 {
     Properties
     {
-        _MainColor("Main Color", Color) = (1.0, 1.0, 1.0, 0.5)
+        _MainColor("Main Color", Color) = (1.0, 0.0, 0.0, 0.5)
         _FadeAmount("Fade Amount", Range(0, 1)) = 0.5
     }
 
@@ -44,8 +44,8 @@ Shader "Custom/OBBNoHitImage"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float4 col = _MainColor;
-                col *= float4(0.5f, 0.5f, 0.5f, _FadeAmount);
+                fixed4 col = _MainColor;
+                col *= float4(0.5f, 0.2f, 0.2f, _FadeAmount);
                 return col;
             }
             ENDCG

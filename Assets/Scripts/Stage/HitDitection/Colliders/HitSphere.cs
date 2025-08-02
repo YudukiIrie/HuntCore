@@ -16,7 +16,7 @@ namespace Stage.HitDetection
         public HitSphere(HitInfo owner,
             Vector3 center, float radius, 
             ColliderShape shape, ColliderRole type) 
-            : base(owner, shape, type, new Vector3(radius,radius,radius) * 2)
+            : base(owner, shape, type, new Vector3(radius,radius,radius) * 2, center)
         {
             Center = center;
             Radius = radius;
@@ -25,6 +25,8 @@ namespace Stage.HitDetection
         public override void UpdateInfo(Transform transform)
         {
             Center = transform.position;
+
+            _position = transform.position;
 
             _visualCollider.UpdateInfo(transform, WasHit);
         }
