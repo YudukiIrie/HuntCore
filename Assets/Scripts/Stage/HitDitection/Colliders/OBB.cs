@@ -44,7 +44,7 @@ namespace Stage.HitDetection
 
             _position = transform.position;
 
-            _visualCollider.UpdateInfo(transform, WasHit);
+            _visualCollider?.UpdateInfo(transform, WasHit);
         }
     }
 }

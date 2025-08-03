@@ -8,7 +8,7 @@ namespace Stage.Enemies
         Enemy _enemy;   // 敵クラス
 
         // データキャッシュ用
-        float _actionkDist;
+        float _actionDist;
         float _limitAngle;
         float _attackDist;
 
@@ -16,9 +16,9 @@ namespace Stage.Enemies
         {
             _enemy = enemy;
 
-            _actionkDist = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).ActionDist;
-            _limitAngle = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).LimitAngle;
-            _attackDist = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackDist;
+            _actionDist = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).ActionDist;
+            _limitAngle  = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).LimitAngle;
+            _attackDist  = EnemyDataList.Data.GetData(EnemyData.Type.BossEnemy).AttackDist;
         }
 
         public void Enter()
@@ -47,7 +47,7 @@ namespace Stage.Enemies
         void Transition()
         {
             // 追跡
-            if (_enemy.GetDistanceToPlayer() > _actionkDist)
+            if (_enemy.GetDistanceToPlayer() > _actionDist)
                 _enemy.StateMachine.TransitionTo(EnemyState.Chase);
             // 方向転換
             else if (_enemy.GetAngleToPlayer() > _limitAngle)
