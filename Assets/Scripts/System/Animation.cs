@@ -48,6 +48,7 @@ public class Animation
 
     /// <summary>
     /// 指定したアニメーション再生時間を0～1の割合に変換した値を返却
+    /// アニメーションの中間に処理を入れたい際などに使用
     /// </summary>
     public float CheckRatio(int stateHash)
     {
@@ -56,10 +57,10 @@ public class Animation
 
         return 0.0f;
     }
-    
+
     /// <summary>
-    /// 再生中のアニメーション再生割合と
-    /// 指定した割合との比較
+    /// 再生中のアニメーション再生割合と指定した割合との比較
+    /// 単純な割合の比較のみ必要な場合に使用
     /// </summary>
     /// <param name="ratio">指定割合</param>
     /// <returns>true:指定割合以上, false:指定割合未満</returns>

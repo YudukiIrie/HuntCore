@@ -12,7 +12,7 @@ namespace Stage.Players
         float _elapsedTime; // 経過時間
         float _exitTime;    // 退出時間
         float _chainDuration;   // コンボ間猶予経過時間
-        bool _isAnimFinished = false;   // アニメーション終了フラグ
+        bool _isExitTimeSet;    // 退出時間設定フラグ
 
         // データキャッシュ用
         Vector2 _hitWindow;
@@ -40,8 +40,7 @@ namespace Stage.Players
 
         public void Update()
         {
-            if (!_isAnimFinished)
-                _elapsedTime += Time.deltaTime;
+            _elapsedTime += Time.deltaTime;
 
             DetectHit();
 
@@ -59,7 +58,6 @@ namespace Stage.Players
         {
             _elapsedTime = 0.0f;
             _chainDuration = 0.0f;
-            _isAnimFinished = false;
             HitChecker.ResetHitInfo(_player.Collider.Weapon, _player.Enemy.Collider.Colliders);
         }
 
@@ -117,12 +115,14 @@ namespace Stage.Players
             if (_player.Animation.CheckEnd(PlayerAnimation.HashLightAttack))
             {
                 // _elapsedTimeと_exitTimeの関係はPlayerRollStateを参照
+                if (!_isExitTimeSet)
+                {
+                    _isExitTimeSet = true;
+                    _exitTime = _elapsedTime;
+                }
+
                 if (_elapsedTime >= _exitTime)
                 {
-                    _isAnimFinished = true;
-                    // アニメーション終了時間を記録
-                    _exitTime = _elapsedTime;
-
                     _chainDuration += Time.deltaTime;
                     // ヘビー攻撃
                     if (_chainDuration <= _chainTime)

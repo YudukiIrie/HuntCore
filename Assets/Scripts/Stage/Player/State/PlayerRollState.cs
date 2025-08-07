@@ -12,17 +12,18 @@ namespace Stage.Players
         Vector3 _velocity;  // 移動方向と速度
         float _elapsedTime; // 経過時間
         float _exitTime;    // 退出時間
+        bool _isExitTimeSet = false;    // 退出時間設定フラグ
 
         // データキャッシュ用
         float _rollSpd;
-        float _iTime;
+        float _invincibleTime;
 
         public PlayerRollState(Player player)
         {
             _player = player;
 
             _rollSpd = PlayerData.Data.RollSpd;
-            _iTime   = PlayerData.Data.InvincibleTime;
+            _invincibleTime   = PlayerData.Data.InvincibleTime;
         }
 
         public void Enter()
@@ -84,7 +85,7 @@ namespace Stage.Players
         /// </summary>
         void SwitchColliderRole()
         {
-            if (_elapsedTime >= _iTime)
+            if (_elapsedTime >= _invincibleTime)
                 _player.Collider.Player.SetColliderRole(ColliderRole.Body);
         }
 
@@ -98,10 +99,14 @@ namespace Stage.Players
                 // Animatorの更新にラグがあるため
                 // 実際のアニメーション終了時間を計測し
                 // 条件を強固にすることで確実にアニメーション終了を待つ
+                if (!_isExitTimeSet)
+                {
+                    _isExitTimeSet = true;
+                    _exitTime = _elapsedTime;
+                }
+
                 if (_elapsedTime >= _exitTime)
                 {
-                    // アニメーション終了時間の記録
-                    _exitTime = _elapsedTime;
                     // 通常
                     _player.StateMachine.TransitionTo(PlayerState.Idle);
                 }
