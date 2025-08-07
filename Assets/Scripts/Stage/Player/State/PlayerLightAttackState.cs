@@ -12,7 +12,7 @@ namespace Stage.Players
         float _elapsedTime; // 経過時間
         float _exitTime;    // 退出時間
         float _chainDuration;   // コンボ間猶予経過時間
-        bool _isExitTimeSet;    // 退出時間設定フラグ
+        bool _isExitTimeSet = false;    // 退出時間設定フラグ
 
         // データキャッシュ用
         Vector2 _hitWindow;
