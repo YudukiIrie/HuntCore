@@ -12,8 +12,8 @@ namespace Stage.Enemies
         public static readonly int HashRoar = Animator.StringToHash("Base Layer.Roar");
         public static readonly int HashWalk = Animator.StringToHash("Base Layer.Walk");
         public static readonly int HashDown = Animator.StringToHash("Base Layer.Down");
-        public static readonly int HashAlert = Animator.StringToHash("Base Layer.Alert");
-        public static readonly int HashChase = Animator.StringToHash("Base Layer.Chase");
+        public static readonly int HashAlert  = Animator.StringToHash("Base Layer.Alert");
+        public static readonly int HashChase  = Animator.StringToHash("Base Layer.Chase");
         public static readonly int HashAttack = Animator.StringToHash("Base Layer.Attack");
         public static readonly int HashGetHit = Animator.StringToHash("Base Layer.GetHit");
         public static readonly int HashClawAttack = Animator.StringToHash("Base Layer.ClawAttack");       

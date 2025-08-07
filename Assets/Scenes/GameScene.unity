@@ -435,37 +435,6 @@ MonoBehaviour:
   _neckTransform: {fileID: 1339200985}
   _rLegTransform: {fileID: 1825551362}
   _lLegTransform: {fileID: 1645740972}
---- !u!1 &388103146
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 388103147}
-  m_Layer: 0
-  m_Name: Test
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &388103147
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 388103146}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 127.88, y: -1.6723037, z: -17.024889}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &551164814 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5465940246521907071, guid: 280420e3923e86b48a7bd5c1b58927a0, type: 3}
@@ -2956,7 +2925,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTransform: {fileID: 156331711}
   _weaponTransform: {fileID: 1899350449}
-  _test: {fileID: 388103147}
 --- !u!4 &1789839043 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 439658, guid: 5d1219916ca0de74492c508e9187db09, type: 3}
@@ -3521,4 +3489,3 @@ SceneRoots:
   - {fileID: 1435259287}
   - {fileID: 1957930456}
   - {fileID: 888530025}
-  - {fileID: 388103147}
