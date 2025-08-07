@@ -15,73 +15,35 @@ namespace Stage.HitDetection
         /// <returns>true:接触, false:非接触</returns>
         public static bool IntersectCapsuleOBB(HitCapsule capsule, OBB obb)
         {
-            // カプセル線分の作成
-            Vector3 segment = capsule.BottomPoint - capsule.TopPoint;
+            // OBBから、カプセル線分上の検証対象の点へのベクトルを取得
+            const int directionNum = 3;
+            Vector3[] direction = new Vector3[directionNum];
+            direction[0] = capsule.Center - obb.Center;
+            direction[1] = capsule.TopPoint - obb.Center;
+            direction[2] = capsule.BottomPoint - obb.Center;
 
-            // 各分離軸を列挙
-            const int axisNum = 7;
-            Vector3[] axes = new Vector3[axisNum];
-            axes[0] = obb.AxisX;
-            axes[1] = obb.AxisY;
-            axes[2] = obb.AxisZ;
-            axes[3] = segment;
-            axes[4] = Vector3.Cross(segment, axes[0]);
-            axes[5] = Vector3.Cross(segment, axes[1]);
-            axes[6] = Vector3.Cross(segment, axes[2]);
+            // 今回未使用の垂線関連の変数(カプセル同士の当たり判定参照)
+            Vector3 h;
+            float t;
 
-            // 各軸に対しての検証
-            foreach(Vector3 axis in axes)
+            // 各軸への検証
+            for (int i = 0; i < directionNum; ++i)
             {
-                Vector3 nAxis = axis.normalized;
+                // カプセル線分上のある一点とOBBとの最近接点をOBB内部に作成
+                Vector3 closestPoint = 
+                    SphereOBBHitChecker.CalcClosestPointInOBB(direction[i], obb);
 
-                // === カプセルの投影範囲の取得 ===
-                float minC, maxC;
-                ProjectCapsule(capsule, nAxis, out minC, out maxC);
+                // 上記の点とカプセル線分との最短距離を算出
+                float dist = 
+                    CapsuleHitChecker.CalcPointSegmentDist(
+                    closestPoint, capsule.TopPoint, capsule.BottomPoint, out h, out t);
 
-                // === OBB投影範囲の取得 ===
-                float minB, maxB;
-                ProjectOBB(obb, nAxis, out minB, out maxB);
-
-                // === 各投影範囲が重なっているか確認 ===
-                if (maxC < minB || maxB < minC)
-                    return false;
+                // 上記の距離とカプセル半径との比較
+                if (dist <= capsule.Radius)
+                    return true;
             }
 
-            return true;
-        }
-
-        /// <summary>
-        /// 検証軸に対してのカプセル投影
-        /// </summary>
-        /// <param name="capsule">投影カプセル</param>
-        /// <param name="axis">検証軸</param>
-        /// <param name="minC">投影最小値</param>
-        /// <param name="maxC">投影最大値</param>
-        static void ProjectCapsule(
-            HitCapsule capsule, Vector3 axis, out float minC, out float maxC)
-        {
-            // カプセル線分の端点を投影
-            float dotA = Vector3.Dot(capsule.TopPoint, axis);
-            float dotB = Vector3.Dot(capsule.BottomPoint, axis);
-
-            // 投影範囲の最大、最小値の取得
-            minC = Mathf.Min(dotA, dotB) - capsule.Radius;
-            maxC = Mathf.Max(dotA, dotB) + capsule.Radius;
-        }
-
-        static void ProjectOBB(OBB obb, Vector3 axis, out float minB, out float maxB)
-        {
-            float center = Vector3.Dot(obb.Center, axis);
-
-            // 軸に対してOBBの影を降ろした際の半径を取得
-            float r = 
-                Mathf.Abs(Vector3.Dot(obb.AxisX, axis)) * obb.Radius[0] + 
-                Mathf.Abs(Vector3.Dot(obb.AxisY, axis)) * obb.Radius[1] + 
-                Mathf.Abs(Vector3.Dot(obb.AxisZ, axis)) * obb.Radius[2];
-
-            // 投影範囲の最大、最小値の取得
-            minB = center - r;
-            maxB = center + r;
+            return false;
         }
     }
 }

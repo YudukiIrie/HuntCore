@@ -15,6 +15,9 @@ namespace Stage.HitDetection
         // ç≈è„à ì_
         public Vector3 TopPoint { get; private set; }
 
+        // íÜêSì_
+        public Vector3 Center {  get; private set; }
+
         // îºåa
         public float Radius { get; private set; }
 
@@ -26,6 +29,7 @@ namespace Stage.HitDetection
             _height = height;
             BottomPoint = transform.position - (transform.up * (height / 2 - radius));
             TopPoint = transform.position + (transform.up * (height / 2 - radius));
+            Center = transform.position;
             Radius = radius;
         }
 
@@ -33,6 +37,7 @@ namespace Stage.HitDetection
         {
             BottomPoint = transform.position - (transform.up * (_height / 2 - Radius));
             TopPoint = transform.position + (transform.up * (_height / 2 - Radius));
+            Center = transform.position;
 
             _position = transform.position;
 

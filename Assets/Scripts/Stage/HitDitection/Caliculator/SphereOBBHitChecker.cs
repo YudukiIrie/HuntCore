@@ -19,6 +19,24 @@ namespace Stage.HitDetection
             // 内積の際に使用するベクトルの取得
             Vector3 direction = sphere.Center - obb.Center;
 
+            // 最近接点の取得
+            Vector3 closestPoint = CalcClosestPointInOBB(direction, obb);
+
+            // 球体と最近接点の距離を取得
+            float distance = Vector3.Distance(closestPoint, sphere.Center);
+
+            // 上記で求めた距離が球体の半径より短い場合は接触
+            return distance <= sphere.Radius;
+        }
+
+        /// <summary>
+        /// 判定対象との最近接点をOBB内部に算出
+        /// </summary>
+        /// <param name="direction">OBBから、判定対象のある一点へのベクトル</param>
+        /// <param name="obb">OBB</param>
+        /// <returns>最近接点</returns>
+        public static Vector3 CalcClosestPointInOBB(Vector3 direction, OBB obb)
+        {
             // 最近接点の元となる点の取得
             Vector3 closestPoint = obb.Center;
 
@@ -39,7 +57,7 @@ namespace Stage.HitDetection
                 // OBB表面上に制限する際に使用する値の取得(各軸に対応する半径)
                 float extent = obb.Radius[i];
 
-                // OBBから球へのベクトルを各軸に射影した長さを取得
+                // OBBから点へのベクトルを各軸に射影した長さを取得
                 float projection = Vector3.Dot(direction, axis);
 
                 // 上記長さを制限
@@ -50,11 +68,7 @@ namespace Stage.HitDetection
                 closestPoint += axis * projection;
             }
 
-            // 球体と最近接点の距離を取得
-            float distance = Vector3.Distance(closestPoint, sphere.Center);
-
-            // 上記で求めた距離が球体の半径より短い場合は接触
-            return distance <= sphere.Radius;
+            return closestPoint;
         }
     }
 }
